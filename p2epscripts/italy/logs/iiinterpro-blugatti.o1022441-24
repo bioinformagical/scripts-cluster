@@ -1,0 +1,247 @@
+########################################################################
+PBS Prologue:	Fri Jul 21 14:16:27 EDT 2017
+Job ID:		1022441[24].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	iiinterpro-blugatti-24
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=8gb,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=248:30:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[1] 
+########################################################################
+/scratch/rreid2/italy/aa/interpro
+21/07/2017 14:16:32:808 Welcome to InterProScan-5.25-64.0
+21/07/2017 14:17:18:780 Running InterProScan v5 in STANDALONE mode... on Linux
+21/07/2017 14:18:06:498 Loading file /scratch/rreid2/italy/aa/originalTrinitycontigs.fna.transdecoder_dir/splitty/boo-ax
+21/07/2017 14:18:06:517 Running the following analyses:
+[CDD-3.16,Coils-2.2.1,Gene3D-4.1.0,Hamap-201701.18,MobiDBLite-1.0,Pfam-31.0,PIRSF-3.02,PRINTS-42.0,ProDom-2006.1,ProSitePatterns-20.132,ProSiteProfiles-20.132,SFLD-2,SMART-7.1,SUPERFAMILY-1.75,TIGRFAM-15.0]
+Available matches will be retrieved from the pre-calculated match lookup service.
+
+Matches for any sequences that are not represented in the lookup service will be calculated locally.
+2017-07-21 14:22:21,521 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 14:22:21,525 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:315] WARN - Problem with lookup service while on the step: Checking lookup client and server are in sync
+2017-07-21 14:22:21,526 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:317] WARN - 
+
+The following problem was encountered by the pre-calculated match lookup service:
+Connect to www.ebi.ac.uk:80 [www.ebi.ac.uk/193.62.193.80] failed: Connection timed out
+Pre-calculated match lookup service failed - analysis proceeding to run locally
+============================================================
+
+The pre-calculated match lookup service has been configured in the interproscan.properties file.  
+  precalculated match lookup service url : http://www.ebi.ac.uk/interpro/match-lookup
+  precalculated match lookup service proxy host :   proxy port : 3128
+
+Unfortunately the web service has failed. Check the configuration of this service
+in the interproscan.properties file and, if necessary, set the following property to look like this:
+
+precalculated.match.lookup.service.url=
+
+If the problem persists, check if this is a firewall or proxy issue. If it is a proxy issue, then setting 
+the following property in the interproscan.properties file should work:
+
+precalculated.match.lookup.service.proxy.host=
+precalculated.match.lookup.service.proxy.port=
+
+If this still does not work please inform the InterPro team of this error
+by sending an email to:
+
+interhelp@ebi.ac.uk
+
+In the meantime, the analysis will continue to run locally.
+
+
+2017-07-21 14:26:35,983 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 14:30:50,447 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 14:35:04,911 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 14:39:19,376 [amqEmbeddedWorkerJmsContainer-3] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+21/07/2017 14:42:51:151 25% completed
+2017-07-21 14:48:46,382 [amqEmbeddedWorkerJmsContainer-2] [org.hibernate.id.enhanced.TableGenerator$1$1:566] ERROR - HHH000351: Could not read or init a hi value
+org.h2.jdbc.JdbcSQLException: Unique index or primary key violation: "PRIMARY_KEY_FA ON PUBLIC.KEY_GEN(SEQUENCE_NAME) VALUES ('match', 33)"; SQL statement:
+insert into public.key_gen (sequence_name, next_val)  values (?,?) [23505-189]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.index.BaseIndex.getDuplicateKeyException(BaseIndex.java:102)
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:231)
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:190)
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:704)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:156)
+	at org.h2.command.dml.Insert.update(Insert.java:114)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:157)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:143)
+	at org.hibernate.id.enhanced.TableGenerator.executeUpdate(TableGenerator.java:633)
+	at org.hibernate.id.enhanced.TableGenerator.access$700(TableGenerator.java:128)
+	at org.hibernate.id.enhanced.TableGenerator$1$1.execute(TableGenerator.java:554)
+	at org.hibernate.id.enhanced.TableGenerator$1$1.execute(TableGenerator.java:536)
+	at org.hibernate.jdbc.WorkExecutor.executeReturningWork(WorkExecutor.java:55)
+	at org.hibernate.jdbc.AbstractReturningWork.accept(AbstractReturningWork.java:34)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:56)
+	at org.hibernate.id.enhanced.TableGenerator$1.getNextValue(TableGenerator.java:535)
+	at org.hibernate.id.enhanced.PooledOptimizer.generate(PooledOptimizer.java:73)
+	at org.hibernate.id.enhanced.TableGenerator.generate(TableGenerator.java:531)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:101)
+	at org.hibernate.jpa.event.internal.core.JpaPersistEventListener.saveWithGeneratedId(JpaPersistEventListener.java:67)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:189)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:132)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:58)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:774)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:747)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:752)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:1146)
+	at sun.reflect.GeneratedMethodAccessor74.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:293)
+	at com.sun.proxy.$Proxy48.persist(Unknown Source)
+	at uk.ac.ebi.interpro.scan.genericjpadao.GenericDAOImpl.insert(GenericDAOImpl.java:126)
+	at uk.ac.ebi.interpro.scan.persistence.raw.RawMatchDAOImpl.insertProteinMatches(RawMatchDAOImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy73.insertProteinMatches(Unknown Source)
+	at uk.ac.ebi.interpro.scan.management.model.implementations.prints.ParsePrintsOutputStep.execute(ParsePrintsOutputStep.java:95)
+	at uk.ac.ebi.interpro.scan.jms.activemq.StepExecutionTransactionImpl.executeInTransaction(StepExecutionTransactionImpl.java:86)
+	at sun.reflect.GeneratedMethodAccessor91.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy106.executeInTransaction(Unknown Source)
+	at uk.ac.ebi.interpro.scan.jms.worker.LocalJobQueueListener.onMessage(LocalJobQueueListener.java:189)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:746)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:684)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:651)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:315)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:253)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1150)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1142)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1039)
+	at java.lang.Thread.run(Thread.java:745)
+2017-07-21 14:48:46,572 [amqEmbeddedWorkerJmsContainer-2] [org.hibernate.engine.jdbc.spi.SqlExceptionHelper:127] WARN - SQL Error: 23505, SQLState: 23505
+2017-07-21 14:48:46,572 [amqEmbeddedWorkerJmsContainer-2] [org.hibernate.engine.jdbc.spi.SqlExceptionHelper:129] ERROR - Unique index or primary key violation: "PRIMARY_KEY_FA ON PUBLIC.KEY_GEN(SEQUENCE_NAME) VALUES ('match', 33)"; SQL statement:
+insert into public.key_gen (sequence_name, next_val)  values (?,?) [23505-189]
+2017-07-21 14:48:46,655 [amqEmbeddedWorkerJmsContainer-2] [uk.ac.ebi.interpro.scan.jms.worker.LocalJobQueueListener:199] ERROR - Execution thrown when attempting to executeInTransaction the StepExecution.  All database activity rolled back.
+javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: error performing isolated work
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1692)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1602)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1608)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:1152)
+	at sun.reflect.GeneratedMethodAccessor74.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:293)
+	at com.sun.proxy.$Proxy48.persist(Unknown Source)
+	at uk.ac.ebi.interpro.scan.genericjpadao.GenericDAOImpl.insert(GenericDAOImpl.java:126)
+	at uk.ac.ebi.interpro.scan.persistence.raw.RawMatchDAOImpl.insertProteinMatches(RawMatchDAOImpl.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy73.insertProteinMatches(Unknown Source)
+	at uk.ac.ebi.interpro.scan.management.model.implementations.prints.ParsePrintsOutputStep.execute(ParsePrintsOutputStep.java:95)
+	at uk.ac.ebi.interpro.scan.jms.activemq.StepExecutionTransactionImpl.executeInTransaction(StepExecutionTransactionImpl.java:86)
+	at sun.reflect.GeneratedMethodAccessor91.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at com.sun.proxy.$Proxy106.executeInTransaction(Unknown Source)
+	at uk.ac.ebi.interpro.scan.jms.worker.LocalJobQueueListener.onMessage(LocalJobQueueListener.java:189)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:746)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:684)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:651)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:315)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:253)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1150)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1142)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1039)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.exception.ConstraintViolationException: error performing isolated work
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:109)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:95)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:78)
+	at org.hibernate.id.enhanced.TableGenerator$1.getNextValue(TableGenerator.java:535)
+	at org.hibernate.id.enhanced.PooledOptimizer.generate(PooledOptimizer.java:73)
+	at org.hibernate.id.enhanced.TableGenerator.generate(TableGenerator.java:531)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:101)
+	at org.hibernate.jpa.event.internal.core.JpaPersistEventListener.saveWithGeneratedId(JpaPersistEventListener.java:67)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:189)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:132)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:58)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:774)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:747)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:752)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:1146)
+	... 44 more
+Caused by: org.h2.jdbc.JdbcSQLException: Unique index or primary key violation: "PRIMARY_KEY_FA ON PUBLIC.KEY_GEN(SEQUENCE_NAME) VALUES ('match', 33)"; SQL statement:
+insert into public.key_gen (sequence_name, next_val)  values (?,?) [23505-189]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.index.BaseIndex.getDuplicateKeyException(BaseIndex.java:102)
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:231)
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:190)
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:704)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:156)
+	at org.h2.command.dml.Insert.update(Insert.java:114)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:157)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:143)
+	at org.hibernate.id.enhanced.TableGenerator.executeUpdate(TableGenerator.java:633)
+	at org.hibernate.id.enhanced.TableGenerator.access$700(TableGenerator.java:128)
+	at org.hibernate.id.enhanced.TableGenerator$1$1.execute(TableGenerator.java:554)
+	at org.hibernate.id.enhanced.TableGenerator$1$1.execute(TableGenerator.java:536)
+	at org.hibernate.jdbc.WorkExecutor.executeReturningWork(WorkExecutor.java:55)
+	at org.hibernate.jdbc.AbstractReturningWork.accept(AbstractReturningWork.java:34)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:56)
+	... 56 more
+2017-07-21 14:48:46,656 [amqEmbeddedWorkerJmsContainer-2] [uk.ac.ebi.interpro.scan.jms.worker.LocalJobQueueListener:201] ERROR - StepExecution with errors - stepName: stepPrintsParseFingerPrintScanOutput
+2017-07-21 14:48:46,863 [main] [uk.ac.ebi.interpro.scan.jms.master.StandaloneBlackBoxMaster:137] WARN - StepInstance 67 is being re-run following a failure.
+21/07/2017 14:51:27:462 52% completed
+21/07/2017 15:06:56:068 75% completed
+21/07/2017 15:20:25:687 91% completed
+21/07/2017 15:20:29:095 97% completed
+21/07/2017 15:20:38:743 100% done:  InterProScan analyses completed
+FIN
+
+
+########################################################################
+PBS Epilogue:	Fri Jul 21 15:20:39 EDT 2017
+Job ID:		1022441[24].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=8gb,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=248:30:00
+Resources:	cput=00:41:43,energy_used=0,mem=3953760kb,vmem=15293460kb,walltime=01:04:12
+Exit Value:	0
+########################################################################

@@ -1,0 +1,20 @@
+########################################################################
+PBS Prologue:	Sat Jul  8 01:58:11 EDT 2017
+Job ID:		1010010[84].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	trrrans-blugatti-84
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=31gb,neednodes=1:ppn=4,nodes=1:ppn=4,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=48:30:00
+Queue:		cph_medium
+Nodes:		cph-c48.uncc.edu[4] 
+########################################################################
+/scratch/rreid2/italy/aa
+
+
+########################################################################
+PBS Epilogue:	Sat Jul  8 05:26:39 EDT 2017
+Job ID:		1010010[84].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=31gb,neednodes=1:ppn=4,nodes=1:ppn=4,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=48:30:00
+Resources:	cput=13:17:04,energy_used=0,mem=12763684kb,vmem=14170736kb,walltime=03:28:28
+Exit Value:	0
+########################################################################

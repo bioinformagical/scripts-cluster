@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=6gb
+
+#PBS -N iiinterproFilter
+##PBS -q bigiron
+#PBS -t 1-703
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/astersLikeFoltz/703list.txt)
+umask 007
+set eu
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching filter on Interpro ! "
+
+#cd $home
+#module load ncbi-blast+
+
+#cd /lustre/groups/janieslab/trinityRun2/orthomcl/
+#cd $TMPDIR
+cd /lustre/groups/janieslab/astersLikeFoltz/annot 
+
+#cp /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta* ./
+#makeDB
+# module load ncbi-blast+
+
+perl /home/rreid2/scripts/perl/filterInterpro-echino.pl ../final703/${ssid} ../justPfam-interpro.txt
+
+
+
+
+
+
+echo "fin"
+#mv outfast.blastp.txt /lustre/groups/janieslab/trinityRun2/orthomcl/outfast.blastp.txt

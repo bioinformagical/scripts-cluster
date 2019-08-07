@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=18gb
+
+#PBS -N paaarseSacco
+
+##PBS -t 1-274
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/file.txt)
+
+#home=/gpfs/fs3/home/rreid2
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Parsing BlastP XML Parser "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/home/rreid2/echinoderms/ortho/sacco
+
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+
+#mv ${ssid}.txt ${ssid}.xml
+
+perl ~/scripts/perl/parseOutgroupBlast.pl allbj.faa.blastp.xml
+
+	#lLustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/echinoderms/spurps/spurpsProteins.faa -dbtype prot
+
+	#/lustre/sw/ncbi-blast+/2.2.25/bin/blastp -db ~/echinoderms/spurps/spurpsProteins.faa -query ../15-18orthgroups/all${i}/${ssid}  -out ${i}-${ssid}.blastp.txt -num_threads 24  -evalue 1e-40 -soft_masking false  -outfmt 5
+
+
+
+

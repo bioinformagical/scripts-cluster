@@ -1,0 +1,183 @@
+########################################################################
+PBS Prologue:	Fri Feb  1 15:11:30 EST 2019
+Job ID:		759387[14].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	gggatk-mayote-14
+Limits:		pmem=2147483648b,walltime=468:30:00,nodes=1:ppn=8,mem=48gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=8
+Queue:		steelhead
+Nodes:		sth-c7.uncc.edu[8] 
+########################################################################
+Launching GATK haplotyper
+INFO  15:11:34,502 HelpFormatter - ---------------------------------------------------------------------------------- 
+INFO  15:11:34,504 HelpFormatter - The Genome Analysis Toolkit (GATK) v3.8-0-ge9d806836, Compiled 2017/07/28 21:26:50 
+INFO  15:11:34,504 HelpFormatter - Copyright (c) 2010-2016 The Broad Institute 
+INFO  15:11:34,504 HelpFormatter - For support and documentation go to https://software.broadinstitute.org/gatk 
+INFO  15:11:34,504 HelpFormatter - [Fri Feb 01 15:11:34 EST 2019] Executing on Linux 3.10.0-957.1.3.el7.x86_64 amd64 
+INFO  15:11:34,504 HelpFormatter - Java HotSpot(TM) 64-Bit Server VM 1.8.0_192-b12 
+INFO  15:11:34,506 HelpFormatter - Program Args: --analysis_type HaplotypeCaller -R /nobackup/rogers_research/rob/gatk/nick-gatk/dyak.ref.fna -I /nobackup/rogers_research/rob/mayotte/picard/readgrouped-14_S32.bam -o 14_S32-gatk.vcf --defaultBaseQualities 20 --min_base_quality_score 15 -nct 8 
+INFO  15:11:34,514 HelpFormatter - Executing as rreid2@sth-c7.uncc.edu on Linux 3.10.0-957.1.3.el7.x86_64 amd64; Java HotSpot(TM) 64-Bit Server VM 1.8.0_192-b12. 
+INFO  15:11:34,514 HelpFormatter - Date/Time: 2019/02/01 15:11:34 
+INFO  15:11:34,514 HelpFormatter - ---------------------------------------------------------------------------------- 
+INFO  15:11:34,514 HelpFormatter - ---------------------------------------------------------------------------------- 
+ERROR StatusLogger Unable to create class org.apache.logging.log4j.core.impl.Log4jContextFactory specified in jar:file:/apps/pkg/gatk-3.8/GenomeAnalysisTK.jar!/META-INF/log4j-provider.properties
+ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+INFO  15:11:34,605 GenomeAnalysisEngine - Deflater: IntelDeflater 
+INFO  15:11:34,605 GenomeAnalysisEngine - Inflater: IntelInflater 
+INFO  15:11:34,605 GenomeAnalysisEngine - Strictness is SILENT 
+INFO  15:11:39,067 GenomeAnalysisEngine - Downsampling Settings: Method: BY_SAMPLE, Target Coverage: 500 
+INFO  15:11:39,072 SAMDataSource$SAMReaders - Initializing SAMRecords in serial 
+INFO  15:11:39,232 SAMDataSource$SAMReaders - Done initializing BAM readers: total time 0.16 
+INFO  15:11:39,360 HCMappingQualityFilter - Filtering out reads with MAPQ < 20 
+INFO  15:11:39,386 MicroScheduler - Running the GATK in parallel mode with 8 total threads, 8 CPU thread(s) for each of 1 data thread(s), of 8 processors available on this machine 
+INFO  15:11:43,401 GenomeAnalysisEngine - Preparing for traversal over 1 BAM files 
+INFO  15:11:47,345 GenomeAnalysisEngine - Done preparing for traversal 
+INFO  15:11:47,345 ProgressMeter - [INITIALIZATION COMPLETE; STARTING PROCESSING] 
+INFO  15:11:47,345 ProgressMeter -                 |      processed |    time |         per 1M |           |   total | remaining 
+INFO  15:11:47,346 ProgressMeter -        Location | active regions | elapsed | active regions | completed | runtime |   runtime 
+INFO  15:11:47,346 HaplotypeCaller - Disabling physical phasing, which is supported only for reference-model confidence output 
+INFO  15:11:47,375 StrandBiasTest - SAM/BAM data was found. Attempting to use read data to calculate strand bias annotations values. 
+WARN  15:11:47,375 InbreedingCoeff - Annotation will not be calculated. InbreedingCoeff requires at least 10 unrelated samples. 
+INFO  15:11:47,376 StrandBiasTest - SAM/BAM data was found. Attempting to use read data to calculate strand bias annotations values. 
+INFO  15:11:47,883 HaplotypeCaller - Using global mismapping rate of 45 => -4.5 in log10 likelihood units 
+INFO  15:11:47,883 PairHMM - Performance profiling for PairHMM is disabled because the program is being run with multiple threads (-nct>1) option
+Profiling is enabled only when running in single thread mode
+ 
+INFO  15:11:48,785 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,786 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,831 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,832 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,869 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,877 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,877 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+WARN  15:11:48,890 HaplotypeScore - Annotation will not be calculated, must be called from UnifiedGenotyper, not HaplotypeCaller 
+INFO  15:11:48,896 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:12:17,356 ProgressMeter -      2L:1226147              0.0    30.0 s           49.6 w        0.7%    68.1 m      67.6 m 
+INFO  15:12:47,371 ProgressMeter -      2L:1904913              0.0    60.0 s           99.2 w        1.1%    87.6 m      86.6 m 
+INFO  15:13:17,390 ProgressMeter -      2L:2641980              0.0    90.0 s          148.9 w        1.6%    94.8 m      93.3 m 
+INFO  15:13:47,402 ProgressMeter -      2L:3039132              0.0   120.0 s          198.5 w        1.8%   109.9 m     107.9 m 
+INFO  15:14:17,416 ProgressMeter -      2L:3389072              0.0     2.5 m          248.1 w        2.0%     2.1 h       2.0 h 
+INFO  15:14:47,430 ProgressMeter -      2L:3664565              0.0     3.0 m          297.8 w        2.2%     2.3 h       2.2 h 
+INFO  15:15:17,444 ProgressMeter -      2L:4263241              0.0     3.5 m          347.4 w        2.6%     2.3 h       2.2 h 
+INFO  15:15:47,456 ProgressMeter -      2L:5092076              0.0     4.0 m          397.0 w        3.0%     2.2 h       2.1 h 
+INFO  15:16:17,466 ProgressMeter -      2L:5670963              0.0     4.5 m          446.6 w        3.4%     2.2 h       2.1 h 
+INFO  15:16:47,480 ProgressMeter -      2L:6328841              0.0     5.0 m          496.3 w        3.8%     2.2 h       2.1 h 
+INFO  15:17:17,493 ProgressMeter -      2L:6807804              0.0     5.5 m          545.9 w        4.1%     2.2 h       2.2 h 
+INFO  15:17:47,507 ProgressMeter -      2L:7087498              0.0     6.0 m          595.5 w        4.2%     2.4 h       2.3 h 
+INFO  15:18:17,518 ProgressMeter -      2L:7396428              0.0     6.5 m          645.1 w        4.4%     2.4 h       2.3 h 
+INFO  15:18:47,532 ProgressMeter -      2L:7689048              0.0     7.0 m          694.8 w        4.6%     2.5 h       2.4 h 
+INFO  15:19:17,544 ProgressMeter -      2L:7984632              0.0     7.5 m          744.4 w        4.8%     2.6 h       2.5 h 
+INFO  15:19:47,549 ProgressMeter -      2L:8291596              0.0     8.0 m          794.0 w        5.0%     2.7 h       2.6 h 
+INFO  15:20:17,567 ProgressMeter -      2L:8578113              0.0     8.5 m          843.6 w        5.1%     2.8 h       2.6 h 
+INFO  15:20:47,587 ProgressMeter -      2L:8909806              0.0     9.0 m          893.3 w        5.3%     2.8 h       2.7 h 
+INFO  15:21:17,601 ProgressMeter -      2L:9229419              0.0     9.5 m          942.9 w        5.5%     2.9 h       2.7 h 
+WARN  15:21:19,187 HaplotypeCallerGenotypingEngine - location 2L:9247182: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TTC. 
+INFO  15:21:47,615 ProgressMeter -      2L:9669422              0.0    10.0 m          992.5 w        5.8%     2.9 h       2.7 h 
+INFO  15:22:17,633 ProgressMeter -      2L:9996551              0.0    10.5 m         1042.1 w        6.0%     2.9 h       2.7 h 
+WARN  15:22:21,507 HaplotypeCallerGenotypingEngine - location 2L:10032971: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CCGCCCCCGCCCTA, CCGCCCCCGCCCTT. 
+WARN  15:22:29,607 HaplotypeCallerGenotypingEngine - location 2L:10090524: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: ACTAAGTATACATTTTTGGCTTTTGCTGGAATATAAAACTCGGAATGTGAAACATTTCATATTTCAGCAAATGAGTAATATACGCAAATTTACATAAAT, ACTAAGTATACATTTTTGGCTTTTGCTGGAATATAAAACTCGGAATGTGAAACATTTCATATTTCAGCAAATGAGTTATATACGCAAATTTACTTGTAATGTAT. 
+WARN  15:22:36,246 HaplotypeCallerGenotypingEngine - location 2L:10167044: too many alternative alleles found (16) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TGAGGGTACTGTGCGGTCTTAGACGAGTGACATGTATTATTATTCAAAATGTATTATCATACTTCGTCACAAAAAAC, TGAGGGTACTGTGCGGTCTTAGACGACTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAAAAAC, TGAGGGTACTATGCGGTCTTAGACGACTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAATATC, TGAGGGTACTATGCGGTCTTAGACGAGTGACATGTATTATTATTCAAAATGTATTATCATACTTCGTCACAAATATC, TGAGGGTACTGTGCGGTCTTAGACGAGTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAATATC, TGAGGGTACTGTGCGGTCTTAGACGACTGACATGTATTATTATTCAAAATGTATTATCATACTTCGTCACAAAAAAC, TGAGGGTACTATGCGGTCTTAGACGA... and 3 more. 
+INFO  15:22:47,637 ProgressMeter -     2L:10288818              0.0    11.0 m         1091.8 w        6.2%     3.0 h       2.8 h 
+INFO  15:23:17,648 ProgressMeter -     2L:10672184              0.0    11.5 m         1141.4 w        6.4%     3.0 h       2.8 h 
+WARN  15:23:25,553 HaplotypeCallerGenotypingEngine - location 2L:10765101: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CGGATGTTTGATAGTTTTACCCTTTATTCACCTTGATAAACAATCTATTATGAAAT, CCGGATGTTTGATGGTTTTACGCTTTATTCACCTTGATAAACAATCTATTATGAAAT. 
+INFO  15:23:47,659 ProgressMeter -     2L:11034746              0.0    12.0 m         1191.0 w        6.6%     3.0 h       2.8 h 
+INFO  15:24:17,671 ProgressMeter -     2L:11422022              0.0    12.5 m         1240.6 w        6.8%     3.0 h       2.8 h 
+INFO  15:24:47,682 ProgressMeter -     2L:11770097              0.0    13.0 m         1290.2 w        7.0%     3.1 h       2.9 h 
+INFO  15:25:17,688 ProgressMeter -     2L:12133597              0.0    13.5 m         1339.9 w        7.3%     3.1 h       2.9 h 
+INFO  15:25:47,692 ProgressMeter -     2L:12498241              0.0    14.0 m         1389.5 w        7.5%     3.1 h       2.9 h 
+INFO  15:26:17,706 ProgressMeter -     2L:12873853              0.0    14.5 m         1439.1 w        7.7%     3.1 h       2.9 h 
+INFO  15:26:47,720 ProgressMeter -     2L:13397937              0.0    15.0 m         1488.7 w        8.0%     3.1 h       2.9 h 
+INFO  15:27:17,728 ProgressMeter -     2L:13779093              0.0    15.5 m         1538.3 w        8.3%     3.1 h       2.9 h 
+INFO  15:27:47,732 ProgressMeter -     2L:14151648              0.0    16.0 m         1587.9 w        8.5%     3.1 h       2.9 h 
+INFO  15:28:17,741 ProgressMeter -     2L:14689909              0.0    16.5 m         1637.6 w        8.8%     3.1 h       2.9 h 
+INFO  15:28:47,745 ProgressMeter -     2L:15343991              0.0    17.0 m         1687.2 w        9.2%     3.1 h       2.8 h 
+INFO  15:29:17,749 ProgressMeter -     2L:15979877              0.0    17.5 m         1736.8 w        9.6%     3.0 h       2.8 h 
+INFO  15:29:47,754 ProgressMeter -     2L:16984403              0.0    18.0 m         1786.4 w       10.2%     2.9 h       2.6 h 
+INFO  15:30:17,767 ProgressMeter -     2L:19473811              0.0    18.5 m         1836.0 w       11.7%     2.6 h       2.3 h 
+INFO  15:30:47,769 ProgressMeter -      2R:2098435      2.2324452E7    19.0 m           51.0 s       14.6%     2.2 h     110.9 m 
+INFO  15:31:17,782 ProgressMeter -      2R:4800113      2.2324452E7    19.5 m           52.0 s       16.2%     2.0 h     100.5 m 
+INFO  15:31:47,791 ProgressMeter -      2R:6637604      2.2324452E7    20.0 m           53.0 s       17.3%   115.3 m      95.3 m 
+INFO  15:32:17,815 ProgressMeter -      2R:7538421      2.2324452E7    20.5 m           55.0 s       17.9%   114.6 m      94.1 m 
+INFO  15:32:47,825 ProgressMeter -      2R:7935424      2.2324452E7    21.0 m           56.0 s       18.1%   115.9 m      94.9 m 
+INFO  15:33:17,830 ProgressMeter -      2R:8267052      2.2324452E7    21.5 m           57.0 s       18.3%   117.3 m      95.8 m 
+INFO  15:33:47,844 ProgressMeter -      2R:8546446      2.2324452E7    22.0 m           59.0 s       18.5%   119.0 m      97.0 m 
+INFO  15:34:17,858 ProgressMeter -      2R:8793429      2.2324452E7    22.5 m           60.0 s       18.6%     2.0 h      98.2 m 
+INFO  15:34:47,872 ProgressMeter -      2R:8979595      2.2324452E7    23.0 m           61.0 s       18.7%     2.0 h      99.7 m 
+INFO  15:35:17,882 ProgressMeter -      2R:9181457      2.2324452E7    23.5 m           63.0 s       18.9%     2.1 h     101.0 m 
+INFO  15:35:47,893 ProgressMeter -      2R:9374398      2.2324452E7    24.0 m           64.0 s       19.0%     2.1 h     102.4 m 
+INFO  15:36:17,898 ProgressMeter -      2R:9560546      2.2324452E7    24.5 m           65.0 s       19.1%     2.1 h     103.8 m 
+INFO  15:36:47,901 ProgressMeter -      2R:9843496      2.2324452E7    25.0 m           67.0 s       19.3%     2.2 h     104.8 m 
+INFO  15:37:17,915 ProgressMeter -     2R:10148577      2.2324452E7    25.5 m           68.0 s       19.4%     2.2 h     105.6 m 
+INFO  15:37:47,932 ProgressMeter -     2R:10431264      2.2324452E7    26.0 m           69.0 s       19.6%     2.2 h     106.5 m 
+INFO  15:38:17,939 ProgressMeter -     2R:10706436      2.2324452E7    26.5 m           71.0 s       19.8%     2.2 h     107.4 m 
+INFO  15:38:47,943 ProgressMeter -     2R:11006008      2.2324452E7    27.0 m           72.0 s       20.0%     2.3 h     108.3 m 
+INFO  15:39:17,957 ProgressMeter -     2R:11260649      2.2324452E7    27.5 m           73.0 s       20.1%     2.3 h     109.2 m 
+INFO  15:39:47,962 ProgressMeter -     2R:11462177      2.2324452E7    28.0 m           75.0 s       20.2%     2.3 h     110.4 m 
+INFO  15:40:17,968 ProgressMeter -     2R:11697334      2.2324452E7    28.5 m           76.0 s       20.4%     2.3 h     111.4 m 
+INFO  15:40:47,982 ProgressMeter -     2R:12000024      2.2324452E7    29.0 m           77.0 s       20.6%     2.4 h     112.1 m 
+INFO  15:41:17,996 ProgressMeter -     2R:12220376      2.2324452E7    29.5 m           79.0 s       20.7%     2.4 h     113.1 m 
+INFO  15:41:48,007 ProgressMeter -     2R:12492289      2.2324452E7    30.0 m           80.0 s       20.9%     2.4 h     113.9 m 
+##### ERROR --
+##### ERROR stack trace 
+java.lang.ArrayIndexOutOfBoundsException: 35
+	at org.broadinstitute.gatk.tools.walkers.annotator.BaseQualityRankSumTest.getElementForRead(BaseQualityRankSumTest.java:96)
+	at org.broadinstitute.gatk.tools.walkers.annotator.RankSumTest.getElementForRead(RankSumTest.java:209)
+	at org.broadinstitute.gatk.tools.walkers.annotator.RankSumTest.fillQualsFromLikelihoodMap(RankSumTest.java:187)
+	at org.broadinstitute.gatk.tools.walkers.annotator.RankSumTest.annotate(RankSumTest.java:104)
+	at org.broadinstitute.gatk.tools.walkers.annotator.VariantAnnotatorEngine.annotateContextForActiveRegion(VariantAnnotatorEngine.java:315)
+	at org.broadinstitute.gatk.tools.walkers.annotator.VariantAnnotatorEngine.annotateContextForActiveRegion(VariantAnnotatorEngine.java:260)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCallerGenotypingEngine.annotateCall(HaplotypeCallerGenotypingEngine.java:328)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCallerGenotypingEngine.assignGenotypeLikelihoods(HaplotypeCallerGenotypingEngine.java:290)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCaller.map(HaplotypeCaller.java:970)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCaller.map(HaplotypeCaller.java:252)
+	at org.broadinstitute.gatk.engine.traversals.TraverseActiveRegions$TraverseActiveRegionMap.apply(TraverseActiveRegions.java:709)
+	at org.broadinstitute.gatk.engine.traversals.TraverseActiveRegions$TraverseActiveRegionMap.apply(TraverseActiveRegions.java:705)
+	at org.broadinstitute.gatk.utils.nanoScheduler.NanoScheduler$ReadMapReduceJob.run(NanoScheduler.java:471)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+##### ERROR ------------------------------------------------------------------------------------------
+##### ERROR A GATK RUNTIME ERROR has occurred (version 3.8-0-ge9d806836):
+##### ERROR
+##### ERROR This might be a bug. Please check the documentation guide to see if this is a known problem.
+##### ERROR If not, please post the error message, with stack trace, to the GATK forum.
+##### ERROR Visit our website and forum for extensive documentation and answers to 
+##### ERROR commonly asked questions https://software.broadinstitute.org/gatk
+##### ERROR
+##### ERROR MESSAGE: 35
+##### ERROR ------------------------------------------------------------------------------------------
+
+
+########################################################################
+PBS Epilogue:	Fri Feb  1 15:42:10 EST 2019
+Job ID:		759387[14].cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=468:30:00,nodes=1:ppn=8,mem=48gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=8
+Resources:	cput=04:01:44,vmem=16911084kb,walltime=00:30:40,mem=4882156kb,energy_used=0
+Exit Value:	1
+########################################################################

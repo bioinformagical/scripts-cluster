@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N deeekoder 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-18
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/ortho/files.txt)
+
+
+cd ~/blueberry/amino 
+
+#perl ~/sw/transdecoder_r2012-08-15/transcripts_to_best_scoring_ORFs.pl -t SOMETRANSCRIPT.fna -m 100 --CPU 15 --search_pfam ~/db/Pfam-B.hmm
+
+
+perl ~/sw/transdecoder_r2012-08-15/transcripts_to_best_scoring_ORFs.pl -t ../garron/454AllContigs.fna -m 100 --CPU 12 --search_pfam /lustre/home/rreid2/db/Pfam-B.hmm 
+
+

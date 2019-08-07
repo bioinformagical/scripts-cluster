@@ -1,0 +1,56 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=86600mb
+
+#PBS -N NoooooVaaa 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+
+
+#cd /lustre/groups/bioservices/boneym/
+#cd ~/mel/merge/
+#module load novoalign
+
+#novoindex  mus-m37.nix  ../db/Mus_musculus.NCBIM37.67.dna.toplevel.fa
+
+file="ceramic30"
+
+#novoalign -d ../db/Mus_musculus.NCBIM37.67.dna.toplevel.nix -f metal.fastq.dupNoShrink.adapt.fa -o SAM 2> $file.stats.txt  1> $file.sam
+
+#~/sw/novocraft/novoalign -d ../db/Mus_musculus.NCBIM37.67.dna.toplevel.nix -f ../$file.fastq.adapt.trimmed -o SAM 2> $file.stats.txt  1> $file.sam
+
+#~/sw/novocraft/novoalign -d ./db/Mus_musculus.NCBIM37.67.dna.toplevel.nix -f ./$file.fastq.adapt.trimmed -o SAM 2> $file.stats.txt  1> $file.sam
+
+
+#module load samtools
+
+#samtools import ../db/Mus_musculus.NCBIM37.67.dna.toplevel.fa.fai $file.sam $file.bam
+
+#samtools sort $file.bam $file.sorted.bam
+
+#cd ~/old/blueberry/chloro
+
+#/lustre/home/rreid2/sw/novocraft/novoindex  cranChloro130k  ../db/chloro130k.fasta
+
+#~/sw/novocraft/novoalign -d ./cranChloro130k -f ../mitochloro/allChloro130.fasta -o SAM 2> chloro130k.stats.txt  1> cranChloro130k.sam
+
+
+cd ~/old/blueberry/mito
+
+/lustre/home/rreid2/sw/novocraft/novoindex  cranMito  ../db/mitochondria-cranberry.fasta
+
+~/sw/novocraft/novoalign -d ./cranMito -f ../mitochloro/bigMito.fasta -o SAM 2> mito.stats.txt  1> mito.sam
+

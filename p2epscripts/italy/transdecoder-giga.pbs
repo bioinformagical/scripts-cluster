@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=48:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=64
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l mem=310gb
+#PBS -N trrrans-blugatti
+#PBS -j oe
+#PBS -q hammerhead
+#Number of times to run this script
+##PBS -t 1-424
+##PBS -t 1-399
+
+set eu
+umask 007
+#-j oe
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/italy/aa/Trinity.fasta.transdecoder_dir/splitty/file.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+
+#module load trinity/2.4.0
+#module load bowtie2/2.2.9 
+module load blast/2.5.0+  
+
+cd /scratch/rreid2/italy/aa
+echo `pwd`
+#########   0.   Run transdecoder Long ORFs    ############ 
+/users/rreid2/sw/transdecoder/TransDecoder-3.0.1/TransDecoder.LongOrfs -t ./originalTrinitycontigs.fna
+#########   1.   Run BLAST          ############
+#makeblastdb -in /nobackup/bisd/db/uniref90/uniref90.fasta -dbtype prot
+#blastp -query ./Trinity.fasta.transdecoder_dir/splitty/${file}  -db /nobackup/bisd/db/uniref90/uniref90.fasta  -max_target_seqs 1 -outfmt 6 -evalue 1e-5 -num_threads 4 > ${file}-blastp.outfmt6
+#########   2.   Run HMMscan        ############
+/users/rreid2/sw/hmmer/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan --cpu 64 --domtblout ./pfam.all.domtblout /nobackup/bisd/db/Pfam-A.hmm ./originalTrinitycontigs.fna.transdecoder_dir/longest_orfs.pep
+#########   3.   Run Transdecoder   ############
+/users/rreid2/sw/transdecoder/TransDecoder-3.0.1/TransDecoder.Predict -t ./originalTrinitycontigs.fna --cpu 64  --retain_pfam_hits ./pfamstuff/allpfam.out --single_best_orf 

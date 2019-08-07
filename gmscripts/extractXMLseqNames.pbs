@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+##PBS -q bigiron
+
+#PBS -N eggsXmlParserGM
+#PBS -t 1-33
+#set -eux
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching XML Parser "
+
+#cd  ~/old/gm/fiber1/
+cd ~/old/gm/assembly2/
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/fiber1/xmlNames.txt)
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+echo "${file}"
+cd ${file}/tmp/
+
+#for xmlfile in $(find ./ -iname "*.xml");
+#do
+
+	#mv ${file}.blastnt2.xml ${file}.blastnt.xml
+	perl ~/old/scripts/perl/xmlParseBlast3.pl oases.xml oases_asm.afg.readCounts.txt
+
+#done
+echo "fin"
+
+
+#done
+
+
+

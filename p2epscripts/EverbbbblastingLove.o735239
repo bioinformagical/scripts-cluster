@@ -1,0 +1,19 @@
+########################################################################
+PBS Prologue:	Tue Jul  3 08:25:21 EDT 2018
+Job ID:		735239.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	EverbbbblastingLove
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=6,nodes=1:ppn=6,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=40gb,walltime=68:30:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[6] 
+########################################################################
+
+
+########################################################################
+PBS Epilogue:	Tue Jul  3 08:44:16 EDT 2018
+Job ID:		735239.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=6,nodes=1:ppn=6,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=40gb,walltime=68:30:00
+Resources:	cput=01:06:55,energy_used=0,mem=89804kb,vmem=952384kb,walltime=00:18:55
+Exit Value:	0
+########################################################################

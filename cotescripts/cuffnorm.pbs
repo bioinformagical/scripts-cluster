@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N cccuffnorm-cote
+
+##PBS -t 1-18
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/file.txt)
+
+#echo "Launching tophat on ${file}"
+
+#cd $home
+module load tophat
+module load bowtie2
+module load cufflinks
+
+cd /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/
+
+cd cuffnorm
+
+cuffnorm -p 12 /lustre/home/rreid2/db/human/Homo_sapiens/UCSC/hg19/Annotation/Genes/genes.gtf \
+../sam12/accepted_hits.bam,../sam8/accepted_hits.bam,../sam1/accepted_hits.bam,../sam14/accepted_hits.bam,../sam2/accepted_hits.bam,../sam20/accepted_hits.bam,../sam23/accepted_hits.bam,../sam15/accepted_hits.bam,../sam19/accepted_hits.bam  ../sam5/accepted_hits.bam,../sam4/accepted_hits.bam,../sam24/accepted_hits.bam,../sam9/accepted_hits.bam,../sam16/accepted_hits.bam,../sam21/accepted_hits.bam,../sam6/accepted_hits.bam,../sam3/accepted_hits.bam,../sam10/accepted_hits.bam
+
+
+
+
+
+
+

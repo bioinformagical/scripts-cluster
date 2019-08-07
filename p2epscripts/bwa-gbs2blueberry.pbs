@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=75500mb
+
+#PBS -N Kaaahhhhhhn 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-2
+
+set eu
+umask 007
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/kohlmeier/5kregion/filtered/file7-14.txt)
+
+module load bwa
+
+cd /lustre/groups/p2ep/GBS_data/bwa/
+
+#create index of reference
+bwa index -p NEWBLER.idx -a bwtsw /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna
+
+module load samtools
+
+################   Success was part below #####
+#################################################		Removed the -I from bwa aln and this solves the alingment issue (casava 1.3+  vs 1.5+   #############
+bwa aln  -t 12 NEWBLER.idx /lustre/groups/p2ep/GBS_data/fromJessePoland/sftp_upload/GBS0385xFla4BxW85_C2AT0ACXX_s_5_fastq > Fla4BxW85-385.aln.sai
+bwa aln  -t 12 NEWBLER.idx /lustre/groups/p2ep/GBS_data/fromJessePoland/sftp_upload/GBS0383xFla4BxW85_C2AT0ACXX_s_3_fastq > Fla4BxW85-383.aln.sai
+bwa samse NEWBLER.idx Fla4BxW85-385.aln.sai /lustre/groups/p2ep/GBS_data/fromJessePoland/sftp_upload/GBS0385xFla4BxW85_C2AT0ACXX_s_5_fastq  >  Fla4BxW85-385vsnewbler.sam
+bwa samse NEWBLER.idx Fla4BxW85-383.aln.sai /lustre/groups/p2ep/GBS_data/fromJessePoland/sftp_upload/GBS0383xFla4BxW85_C2AT0ACXX_s_3_fastq  >  Fla4BxW85-383vsnewbler.sam
+
+#samtools import /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna Fla4BxW85-385vsnewbler.sam  Fla4BxW85-385vsnewbler.bam
+#samtools import /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna Fla4BxW85-383vsnewbler.sam  Fla4BxW85-383vsnewbler.bam
+
+#samtools view -F 0x04 -b Fla4BxW85-385vsnewbler.bam > Fla4BxW85-385vsnewbler.rmd.bam
+#samtools sort Fla4BxW85-385vsnewbler.rmd.bam  Fla4BxW85-385vsnewbler.rmd.bam.srt
+samtools view -bS Fla4BxW85-385vsnewbler.sam | samtools sort - Fla4BxW85-385vsnewbler-sort
+samtools view -bS Fla4BxW85-383vsnewbler.sam | samtools sort - Fla4BxW85-383vsnewbler-sort
+
+samtools index Fla4BxW85-385vsnewbler.rmd.bam.srt.bam
+
+samtools mpileup -ugf /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna Fla4BxW85-385vsnewbler-sort.bam | bcftools view -bvcg - > Fla4BxW85-385vsnewbler.bcf
+bcftools view Fla4BxW85-385vsnewbler.bcf > Fla4BxW85-385vsnewbler.vcf 
+
+#samtools view -F 0x04 -b Fla4BxW85-383vsnewbler.bam > Fla4BxW85-383vsnewbler.rmd.bam
+#samtools sort Fla4BxW85-383vsnewbler.rmd.bam  Fla4BxW85-383vsnewbler.rmd.bam.srt
+#samtools index Fla4BxW85-383vsnewbler.rmd.bam.srt.bam
+ 
+samtools mpileup -ugf /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna Fla4BxW85-383vsnewbler-sort.bam | bcftools view -bvcg - > Fla4BxW85-383vsnewbler.bcf
+bcftools view Fla4BxW85-383vsnewbler.bcf > Fla4BxW85-383vsnewbler.vcf

@@ -1,0 +1,22 @@
+########################################################################
+PBS Prologue:	Wed Feb 13 10:42:01 EST 2019
+Job ID:		813566.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	cccoverage-oat
+Limits:		pmem=2147483648b,walltime=336:00:00,nodes=1:ppn=64,mem=1024gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=64
+Queue:		hammerhead
+Nodes:		cph-bm4.uncc.edu[64] 
+########################################################################
+Getting Coverage 
+Done, took 74713 seconds
+
+
+
+########################################################################
+PBS Epilogue:	Thu Feb 14 07:27:16 EST 2019
+Job ID:		813566.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=336:00:00,nodes=1:ppn=64,mem=1024gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=64
+Resources:	cput=21:27:43,vmem=2986212kb,walltime=20:45:14,mem=1782424kb,energy_used=0
+Exit Value:	0
+########################################################################

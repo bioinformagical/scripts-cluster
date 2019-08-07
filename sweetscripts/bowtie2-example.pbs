@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 8800 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbbowtie-human
+#PBS -q copperhead    ### The nodes we connect to.
+
+
+##PBS -t 1-18
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/file2.txt)
+
+echo "Launching tophat on ${file}"
+
+#cd $home
+module load bowtie2
+
+cd /projects/areitze2_research/SOMEWHERE
+
+####  We bowtie index
+bowtie2-build ./Location/nameofTHAThumanReference.fasta human-index
+
+###  We align via Bowtie 2
+
+bowtie2 -x human-index  \
+         -U ./mg_reads/SRR1748536_1.fq.trim  \
+         -S ./YOUREsult.sam
+
+
+
+
+
+
+
+

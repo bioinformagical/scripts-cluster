@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90GB
+
+#PBS -N nucmerrrrrrrr 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+umask 007
+set -eu
+
+cd /lustre/groups/p2ep/blueberry/markers/floridaGBS
+module load mummer/3.22
+# ~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 400 -minmatch 40 --coords -prefix newblerVSmirarep2 garrons454Scaffolds.fna mirarep.fa 
+
+#for i in {1..12}
+#do
+
+#perl ~/scripts/fq2fa.pl -a ./kohl${i}_uniq2.fastq.adapt.dup
+
+#~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix markersOnAssembly ~/p2ep/masurca/run3/CA/9-terminator/genome.scf.fasta ./oat-est-sequence.fna 
+#nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix BacOnNextera ../bb-011215/all6.fna ../../genomic/masurca-nextera454.fna
+
+#nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix BacOnGarm ../bb-011215/all6.fna ../../genomic/garmAssembly.fna
+
+nucmer  -mincluster 30  -minmatch 30 --coords -prefix nucmer-flagbsOnGarm ./flamarkers.fna ../../genomic/garmAssembly.fna
+
+#done

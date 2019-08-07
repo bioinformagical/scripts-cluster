@@ -1,0 +1,37 @@
+#!/bin/bash
+#PBS -N OA_ac1
+#PBS -q bigiron
+#PBS -l walltime=150:00:00
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=250g
+
+#[[ -n "$PBS_O_WORKDIR" ]] && cd $PBS_O_WORKDIR
+
+cd ~/blueberry/blahblah
+
+module load velvet/1.2.07
+module load oases/0.2.08
+export PATH=/lustre/sw/oases/0.2.08/scripts:$PATH
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac01 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 1 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac02 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 2 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac03 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 3 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac04 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 4 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac05 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 5 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac06 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 6 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac07 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 7 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac08 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 8 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac09 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 9 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o chinese_srac10 -d " -fasta -shortPaired ac1.fasta.dup.trim20 " -p " -cov_cutoff 10 -min_trans_lgth 80 "
+
+
+

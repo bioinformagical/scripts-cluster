@@ -1,0 +1,47 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=880:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=499gb
+
+#PBS -N makinItRain-cat4
+#PBS -q bigiron
+#Number of times to run this script
+##PBS -t 1-21
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/Project_UNCC_Schlueter/file.txt)
+
+#mkdir ~/p2ep/masurca/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_060_AGTTCC_L003
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_061_CAGATC_L004/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_062_CCGTCC_L004/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_063_ATGTCA_L004/
+cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_064_GTCCGC_L005/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_070_GTCCGC_L006/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_071_CTTGTA_L006/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_075_AGTCAA_L005
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_076_AGTTCC_L006
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_077_CAGATC_L007/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_078_CCGTCC_L007/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_080_ATGTCA_L007/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_ACA_plate1_AGTCAA_L002/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_MN8_plate1_CAGATC_L002/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_MN8_plate2_CTTGTA_L002/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_F1BZ_NoIndex_L008/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_Fla_4b_GCCAAT_L001/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_W85_23_AGTTCC_L001/
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_065_CTTGTA_L005/
+
+#cd ~/p2ep/masurca/cat4/
+
+perl /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/runSRCA.pl config.txt
+./assemble.sh
+
+
+echo -n 'All done ';date;

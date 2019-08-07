@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+##PBS -q bigiron
+
+#PBS -N eeeSDabestEscore
+#PBS -t 1-121
+#set -eux
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching XML Parser "
+
+#cd  ~/old/gm/fiber1/
+#cd ~/echinoderms/ophio/
+#cd ~/echinoderms/strongyl/
+#cd ~/echinoderms/dl/first6/
+#cd ~/echinoderms/genes/ 
+cd ~/echinoderms/121fastas/longest/
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/fiber1/xmlNames.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/ophio/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/14up/file.txt)
+
+
+for i in  1 2 4 5 6 7 8 9 10 11 12 13 14 19 20 21 23 22
+do 
+	
+	echo "${file}"
+	#perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas121.pl ${file} bj${i} ../dl/tabbedtables/bj${i}.strongyl.tabbed ../dl/tabbedtables/bj${i}-transcripts.fa
+	#perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas121All.pl NM_001123497.1 bj${i} ../dl/tabbedtables/bj${i}.strongyl.tabbed ../dl/tabbedtables/bj${i}-transcripts.fa
+#	perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas121All.pl ${file} bj${i} ../dl/tabbedtables/bj${i}.strongyl.tabbed ../dl/tabbedtables/bj${i}-transcripts.fa
+#	perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas121BestEscore.pl ${file} bj${i} ../../dl/tabbedtables/bj${i}.strongyl.tabbed ../../dl/tabbedtables/bj${i}-transcripts.fa
+        perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas121Longest.pl ${file} bj${i} ../../dl/tabbedtables/bj${i}.strongyl.tabbed ../../dl/tabbedtables/bj${i}-transcripts.fa
+echo "fin" ${i}
+
+
+done
+
+
+

@@ -1,0 +1,52 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=28:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N FahhhhhhhhQ 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+
+
+
+
+
+
+#cd $HOME/blueberry/reads/454Sequences/all/
+
+# /sw/kent/bin/faToFastq 3kb_1.fasta 3kb1.fastq -qual=B
+#/sw/kent/bin/faToFastq 3kb_2.fasta 3kb2.fastq -qual=B
+#/sw/kent/bin/faToFastq 8kb_1.fasta 8kb1.fastq -qual=B
+#/sw/kent/bin/faToFastq 8kb_2.fasta 8kb2.fastq -qual=B
+#/sw/kent/bin/faToFastq 20kb_1.fasta 20kb1.fastq -qual=B
+#/sw/kent/bin/faToFastq 20kb_2.fasta 20kb2.fastq -qual=B
+
+#/sw/kent/bin/faToFastq 20kb.fa 20kb.fastq -qual=B
+#/sw/kent/bin/faToFastq 8kb.fa 8kb.fastq -qual=B
+#/sw/kent/bin/faToFastq 3kb.fa 3kb.fastq -qual=B
+#
+#
+
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane1_1.fastq
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane1_2.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane2_1.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane2_2.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane3_1.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane3_2.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane4_1.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane4_2.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane5_1.fasta
+aligned_filtered_HiSeq_reads_initial_lane1_1.fasta aligned_filtered_HiSeq_reads_initial_lane5_2.fasta
+

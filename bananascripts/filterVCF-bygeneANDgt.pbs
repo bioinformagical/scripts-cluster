@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=2
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=36gb
+#PBS -j oe
+#PBS -N fffilterVCF-banana
+#PBS -q copperhead
+#PBS -t 1-11
+umask 007
+set -eu
+
+chr=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/banana_genome/snppicker//file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching BWA alignment"
+
+#module load java8 
+#module load samtools
+#module load bwa
+#module load bcftools
+
+
+cd /nobackup/banana_genome/snppicker/GT-genotpye
+
+ python ~/scripts/python/snpPicker-venki-GT.py $chr ../${chr}.vcf /nobackup/banana_genome/snppicker/pahang-ref-just11chr.fna  331812599
+
+#python ~/scripts/python/genotype2visualize.py $chr ../${chr}.vcf /nobackup/banana_genome/snppicker/pahang-ref-just11chr.fna  331812599
+
+
+
+
+
+
+
+
+
+
+

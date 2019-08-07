@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=40GB
+
+#PBS -N EverbbbblastingLove 
+#PBS -q hammerhead
+
+
+#Number of times to run this script
+##PBS -t 1-12
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/blast/file.txt)
+
+cd /nobackup/banana_genome/genesOfInterest/hiskinase/ 
+module load blast/2.3.0+ 
+
+#makeblastdb -in /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_prot.faa -dbtype prot
+
+#blastn -db /nobackup/banana_genome/scratch/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna -out ./blastn-hiskinaseVSpahangV2.txt -query /nobackup/banana_genome/genesOfInterest/hiskinase/hiskanse-mrna-BAA13416.1.fna \
+#-num_threads 6 \
+#-evalue 1e-1 \
+#-soft_masking true  -outfmt 6
+
+makeblastdb -in /nobackup/banana_genome/scratch/db/bananagenomehub/pahang-v2/musa_acuminata_v2_cds.fna -dbtype nucl 
+
+#blastn -db /nobackup/banana_genome/scratch/db/bananagenomehub/pahang-v2/musa_acuminata_v2_cds.fna  -out ./blastn-hiskinaseVSpahangV2-CDS.txt -query /nobackup/banana_genome/genesOfInterest/hiskinase/hiskanse-mrna-BAA13416.1.fna \
+blastn -db /nobackup/banana_genome/scratch/db/bananagenomehub/pahang-v2/musa_acuminata_v2_cds.fna \
+-out ./tblastn-hiskinaseVSpahangV2-CDS.txt \
+-query /nobackup/banana_genome/genesOfInterest/hiskinase/hisKnase-uniprot-022267.faa \
+-num_threads 6 \
+-evalue 1e-1 \
+-soft_masking true  -outfmt 6
+
+echo "We are soooo C'est fin."

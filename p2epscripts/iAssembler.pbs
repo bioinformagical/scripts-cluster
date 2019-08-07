@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N iiiAvengersAssemble
+
+#PBS -t 1-20
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/oat/ests/filtered/files.txt)
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching iAssembler "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/groups/bioservices/p2ep/oat/ests/iAssembler/
+
+perl ~/sw/iAssembler-v1.3.2.x64/iAssembler.pl -i ../filtered/${ssid}.fna_filtered -q ../filtered/${ssid}.qual_filtered -a 12 -b 12 -d

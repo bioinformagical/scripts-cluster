@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+##PBS -q bigiron
+#PBS -N bbblat-bb
+
+##PBS -t 1-5
+umask 007
+set -eu
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/old/blueberry/reads/hiseq/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/filedir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load blat
+
+cd /lustre/groups/p2ep/blueberry/markers/blat/
+
+#blat -minIdentity=92  /lustre/groups/p2ep/brassica/annot/referenceGenome/boleracea.v1.genome.fasta /lustre/groups/p2ep/brassica/ncbi-est-brass.fna  blat-brass-est2ref.psl
+
+#~/scripts/perl/blat2gff.pl < blat-brass-est2ref.psl > blat-brass-est2ref.gff
+
+#blat -minIdentity=92  /lustre/groups/p2ep/brassica/annot/referenceGenome/boleracea.v1.genome.fasta /lustre/groups/p2ep/brassica/rnas/trinity/V012-trinity/Trinity.fasta  blat-brass-rnaseqV012ref.psl
+#~/scripts/perl/blat2gff.pl < blat-brass-rnaseqV012ref.psl > blat-brass-rnaseqv0122ref.gff
+
+#blat -minIdentity=92  /lustre/groups/p2ep/brassica/annot/referenceGenome/boleracea.v1.genome.fasta /lustre/groups/p2ep/brassica/rnas/trinity/V012-trinity/Trinity.fasta  blat-brass-rnaseqF007ref.psl
+#~/scripts/perl/blat2gff.pl < blat-brass-rnaseqF007ref.psl > blat-brass-rnaseqF007ref.gff
+
+#blat -minIdentity=92  /lustre/groups/p2ep/blueberry/genomic/masurca-nextera454.fna ../mahkah394.txt-mahkas.fna  blat-bb-mahkah2nexteta454.psl
+#~/scripts/perl/blat2gff.pl < blat-bb-mahkah2nexteta454.psl > blat-bb-mahkah2nexteta454.gff
+
+#blat -minIdentity=92  /lustre/groups/p2ep/blueberry/genomic/miraAssembly.fna ../mahkah394.txt-mahkas.fna  blat-bb-mahkah2Mira.psl
+#~/scripts/perl/blat2gff.pl < blat-bb-mahkah2Mira.psl > blat-bb-mahkah2Mira.gff
+
+blat -minIdentity=92  /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna ../mahkah394.txt-mahkas.fna  blat-bb-mahkah2newbler.psl
+~/scripts/perl/blat2gff.pl < blat-bb-mahkah2newbler.psl > blat-bb-mahkah2newbler.gff
+
+
+
+
+echo "FIN"
+
+

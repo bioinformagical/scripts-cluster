@@ -1,0 +1,23 @@
+########################################################################
+PBS Prologue:	Mon Dec 23 15:14:19 EST 2013
+Job ID:		211065[8].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	makinitRain3-8
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron02[24] 
+########################################################################
+
+
+
+
+########################################################################
+PBS Epilogue:	Mon Dec 23 15:14:25 EST 2013
+Job ID:		211065[8].login00.halcyon.local
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Resources:	cput=00:00:00,mem=0kb,vmem=0kb,walltime=00:00:01
+Account:	
+Exit Value:	2
+########################################################################

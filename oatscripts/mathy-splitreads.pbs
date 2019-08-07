@@ -1,0 +1,48 @@
+#!/bin/bash
+#PBS -l walltime=148:00:00
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=8gb
+#PBS -N sssplitREADS
+#PBS -j oe
+#PBS -q hammerhead
+##PBS -t 10
+
+IFS=$'\n'
+set -eu
+umask 007
+
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+ulimit -c 1024000
+ulimit -a
+
+
+#unalias seq
+#for PBS_ARRAYID in $(seq 11 175); do
+#for PBS_ARRAYID in $(seq 176 350); do
+#for PBS_ARRAYID in $(seq 351 525); do
+#for PBS_ARRAYID in $(seq 526 700); do
+#for PBS_ARRAYID in $(seq 682 700); do
+for PBS_ARRAYID in $(seq 314 350); do
+file=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/oat_genome/canu/oat.steelhead/trimming/3-overlapbasedtrimming/file20k.txt)
+
+#module load java8
+module load canu/v1.5-14-gde5eb04
+
+
+
+cd /nobackup/oat_genome/canu/oat.steelhead/trimming/3-overlapbasedtrimming
+echo ${file}
+
+#/projects/oat_genome/sw/packages/canu/v1.5-14-gde5eb04/bin/splitReads \
+/projects/oat_genome/jj-splitReads \
+  -G ../oat5.gkpStore \
+  -O ../oat5.ovlStore \
+  -t ${file}  \
+  -Ci ./oat5.1.trimReads.clear \
+  -Co ./oat5.2.splitReads.clear.${PBS_ARRAYID} \
+  -e 0.045 \
+  -minlength 1000 \
+  -o /dev/null/
+#  -o ./oat5.2.splitReads-${PBS_ARRAYID}
+
+done

@@ -1,0 +1,47 @@
+#!/bin/bash
+#PBS -N flanMerger
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=6:00:00
+#PBS -l vmem=95g
+##PBS -t 1-6
+
+cd $PBS_O_WORKDIR
+
+export PATH=/lustre/home/lheater/sw/metaphlan/1.7.6/metaphlan:$PATH
+
+
+module load bowtie2
+
+FILE=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/syn/concat_filtered/files.txt)
+
+
+cd /lustre/home/rreid2/syn/metaphlan/merge
+
+
+
+##### Species ########
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedSpecies_relabundance_table.txt --out images/relabundance_heatmap-spe25.png
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedSpecies_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-spe25.png
+
+
+
+
+######		Teenage Graphlan          #######
+
+#mkdir tmp
+
+for i in 1 2 3 4 6 7 
+do
+	for level in species genus order family all
+	do
+		~/sw/metaphlan/plotting_scripts/metaphlan2graphlan.py ../seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.txt --tree_file ./tmp/seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.tree.txt --annot_file ./tmp/seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.annot.txt
+
+		/lustre/home/rreid2/anaconda/bin/python /lustre/home/rreid2/sw/metaphlan/graphlan/graphlan_annotate.py --annot ./tmp/seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.annot.txt ./tmp/seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.tree.txt ./tmp/seq${i}-${level}.mtphln.rel_ab.tree.xml
+		
+		/lustre/home/rreid2/anaconda/bin/python /lustre/home/rreid2/sw/metaphlan/graphlan/graphlan.py --dpi 200 ./tmp/seq${i}-${level}.mtphln.rel_ab.tree.xml ./images/seq${i}-${level}.mtphln.rel_ab_annot.png
+	done
+done
+#graphlan_annotate.py --annot tmp/BM_SRS013506.annot.txt tmp/BM_SRS013506.tree.txt tmp/BM_SRS013506.xml
+#$ graphlan.py --dpi 200 tmp/BM_SRS013506.xml output_images/BM_SRS013506.png
+

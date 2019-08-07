@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=cph-bm2.uncc.edu:ppn=2
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=40GB
+
+#PBS -N rrrsyncing-35-39 
+#PBS -q hammerhead
+
+
+#Number of times to run this script
+##PBS -t 1-12
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/blast/file.txt)
+
+cd /nobackup/oat_genome/canu/oat6/trimming/1-overlapper/ 
+#module load blast/2.3.0+ 
+
+
+#time rsync -a 031 /nobackup/oat_genome_1/
+#time rsync -a 032 /nobackup/oat_genome_1/
+#time rsync -a 033 /nobackup/oat_genome_1/
+#time rsync -a 034 /nobackup/oat_genome_1/
+#time rsync -a 039 /nobackup/oat_genome_1/
+
+
+
+#rm -R 035 036 037 038 039
+
+
+## Restore 35-39
+cd /nobackup/oat_genome_1/
+
+time rsync -a 035 /nobackup/oat_genome/canu/oat6/trimming/1-overlapper/
+time rsync -a 036 /nobackup/oat_genome/canu/oat6/trimming/1-overlapper/
+time rsync -a 037 /nobackup/oat_genome/canu/oat6/trimming/1-overlapper/
+time rsync -a 038 /nobackup/oat_genome/canu/oat6/trimming/1-overlapper/
+time rsync -a 039 /nobackup/oat_genome/canu/oat6/trimming/1-overlapper/   

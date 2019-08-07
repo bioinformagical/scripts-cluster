@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7550mb
+
+#PBS -N iiinterpro-4greg
+
+#Number of times to run this script
+#PBS -t 1-902
+##PBS -t 1-1
+
+set -eu
+umask 007
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/interpro/forgreg/file.txt)
+
+module load java8
+
+cd /lustre/groups/janieslab/interpro/forgreg/x
+
+~/sw/interproscan/interproscan-5.21-60.0/interproscan.sh -i ${file}.phy.fasta -o ${file}-iprscan.out  -goterms -iprlookup -seqtype p -appl Pfam-30.0 -pa  -f tsv
+mv ${file}-iprscan.out ../results
+#clean1648
+#~/sw/interproscan/interproscan-5.21-60.0/interproscan.sh -i testX.faa -o testX-iprscan.out  -goterms -iprlookup -seqtype p -appl Pfam-30.0 -pa  -f tsv

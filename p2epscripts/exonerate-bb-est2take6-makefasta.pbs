@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=468:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=11g
+##PBS -q bigiron
+#PBS -N eeexoner8-est2take6
+
+#PBS -t 1-472
+umask 007
+set -eu
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/old/blueberry/reads/hiseq/file.txt)
+file=$(sed -n -e "${PBS_ARRAYID}p" /group/p2ep/blueberry/est/splits/file.txt)
+
+echo "Launching exonerate"
+
+#cd $home
+module load exonerate
+#mkdir /lustre/groups/p2ep/blueberry/markers/exonerate
+cd /group/p2ep/blueberry/annot/take6/exonerate/
+
+
+#exonerate --querytype dna --targettype dna --showtargetgff --model est2genome --percent 70 ../../../genomic/masked-take6.fna ../../../est/rowland-bb-ESTs.fasta   > est2take6-exo70.txt
+
+exonerate --querytype dna --targettype dna --showtargetgff --model est2genome --percent 70  --ryo ">%ti (%tab - %tae)\n%tas\n"  /group/p2ep/blueberry/est/splits/${file} ../../../genomic/masked-take6.fna    >> ${file}-take6-split-perc70.fasta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#exonerate --querytype protein --targettype dna --model protein2genome --percent 90  ../trinity/F007-trinity/aa/best_candidates.eclipsed_orfs_removed.pep ../../Boleracea.v1.genome.fasta > f007-trinityaa2brassRef-exo90.txt
+
+#exonerate --querytype protein --targettype dna --model protein2genome --percent 50  ../trinity/V012-trinity/aa/best_candidates.eclipsed_orfs_removed.pep ../../Boleracea.v1.genome.fasta  > v012-trinityaa2brassRef-exo50.txt
+#exonerate --querytype protein --targettype dna --model protein2genome --percent 50  ../trinity/F007-trinity/aa/best_candidates.eclipsed_orfs_removed.pep ../../Boleracea.v1.genome.fasta > f007-trinityaa2brassRef-exo50.txt
+
+#exonerate --querytype dna --targettype dna --model cdna2genome --percent 90  ../../genomic/masurca-nextera454.fna ../mahkah394.txt-mahkas.fna  > marker2nextera-exocdna.txt

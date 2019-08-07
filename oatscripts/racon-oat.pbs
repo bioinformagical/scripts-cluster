@@ -1,0 +1,73 @@
+#!/bin/bash
+#PBS -l walltime=336:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=64     # Number of nodes and processors per node requested by job
+#PBS -l mem=1024GB           # Maximum physical memory to use for jobi
+#PBS -N rrracon-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+##PBS -t 7
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+
+cd /nobackup/oat_genome/racon
+
+
+SEQUENCES=/nobackup/oat_genome/racon/allReads
+ALIGNMENT=/nobackup/oat_genome/racon/aligned
+GENOME_FASTA=/projects/oat_genome/dovetail-round2/oat_08Oct2018_80uBt.fasta
+POLISHED_CONTIGS=/nobackup/oat_genome/racon/oat_racon_polished_contigs
+THREADS=64
+
+
+###concatenate all sequence lists together
+printf "Starting concatenation of sequences\n"
+start=$(date +%s)
+if [ ! -f ${SEQUENCES}.fq ]; then
+	cat $(grep -e "" /nobackup/oat_genome/racon/file.txt) > ${SEQUENCES}.fq
+	printf "Concatenation written\n"
+else
+	printf "Concatenation detected, passing\n"
+fi
+end=$(date +%s)
+printf "Done, took $((${end}-${start})) seconds\n\n"
+
+
+###align sequences using minimap2
+printf "Building alignment using minimap2\n"
+start=$(date +%s)
+module load minimap2
+if [  ! -f ${ALIGNMENT}.sam ]; then
+	minimap -ax map-pb ${GENOME_FASTA} ${SEQUENCES}.fq > ${ALIGNMENT}.sam
+	printf "Alignment written\n"
+else
+	printf "Alignment detected, passing\n"
+fi
+end=$(date +%s)
+printf "Done, took $((${end}-${start})) seconds\n\n"
+
+
+###implement consensus polishing using racon
+printf "Starting racon\n"
+start=$(date +%s)
+module load racon
+if [ ! -f ${POLISHED_CONTIGS}.fa ]; then
+	racon -t ${THREADS} ${SEQUENCES}.fq ${ALIGNMENT}.sam ${GENOME_FASTA} > ${POLISHED_CONTIGS}.fa
+	printf "Consensus written\n"
+else
+	printf "Consensus detected, passing\n"
+fi
+end=$(date +%s)
+printf "Done, took $((${end}-${start})) seconds\n\n"

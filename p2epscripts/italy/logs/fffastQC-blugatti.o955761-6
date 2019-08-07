@@ -1,0 +1,41 @@
+########################################################################
+PBS Prologue:	Wed Jun 14 12:46:32 EDT 2017
+Job ID:		955761[6].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	fffastQC-blugatti-6
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=8gb,walltime=168:30:00
+Queue:		cph_cpu
+Nodes:		cph-c76.uncc.edu[1] 
+########################################################################
+Launching fastx
+Started analysis of Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 5% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 10% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 15% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 20% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 25% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 30% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 35% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 40% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 45% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 50% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 55% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 60% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 65% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 70% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 75% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 80% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 85% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 90% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Approx 95% complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+Analysis complete for Sample_M_B_F_R3_1.fastq_fastxqual.fastq
+
+
+########################################################################
+PBS Epilogue:	Wed Jun 14 12:53:25 EDT 2017
+Job ID:		955761[6].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=8gb,walltime=168:30:00
+Resources:	cput=00:02:46,energy_used=0,mem=218024kb,vmem=3121104kb,walltime=00:06:53
+Exit Value:	0
+########################################################################

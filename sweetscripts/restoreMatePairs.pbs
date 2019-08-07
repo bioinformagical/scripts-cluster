@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=18:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8gb
+
+#PBS -N pppairUp-swepot
+
+#PBS -t 1-24
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching Pair repair after Fastx"
+
+#cd $home
+module load fastx-toolkit
+
+cd /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/
+
+#python fastqcombinepairedend2.py "@HIS" " " ${file}_R1_fastx.fastq ${file}_R2_fastx.fastq
+######## This python script above has a bug in it still. Got it to work only once.
+
+
+perl /lustre/home/rreid2/scripts/filter/PE_FIX_POSTQC.pl --pe1 ${file}_R1_fastx.fastq --pe2 ${file}_R2_fastx.fastq
+
+
+
+
+#mv ${file}_R1_001.fastq_fastxqual_trimmed_clipped_stillpaired ${file}
+
+#fastx_quality_stats -Q33 -i ${file}_R1_fastx.fastq -o ${file}_R1_qualstats.txt
+#fastx_quality_stats -Q33 -i ${file}_R2_fastx.fastq -o ${file}_R2_qualstats.txt
+#done
+
+####  Validate Mate pairs   ######
+#perl ~/scripts/perl/validateHiseqPairs.pl ${ssid}_R1_trimmed_clipped.fastq ${ssid}_R2_trimmed_clipped.fastq
+perl /lustre/home/rreid2/scripts/perl/validateHiseqPairs.pl ${file}_R1_fastx_matched.fq ${file}_R2_fastx_matched.fq
+
+
+
+

@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=48:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=18
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=88gb
+#PBS -j oe
+#PBS -N fffiveStep-tomato
+#PBS -q steelhead
+##PBS -t 1-12
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/banana_genome/tomato/sra/srafiles.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching BWA alignment"
+
+#module load java8 
+module load samtools
+module load bwa
+module load bcftools
+
+
+cd /nobackup/banana_genome/tomato/m82/ 
+
+file=m82-genomic-SRR1572454
+#bwa index -p TOMATO3 -a bwtsw /nobackup/banana_genome/tomato/publicData/cornell-wholegenome/S_lycopersicum_chromosomes.3.00.fa 
+#bwa mem -t 18  -k 11 -B 2 -O 5 -U 5   \
+#	../align/TOMATO3 \
+#	${file}.fasta  > ${file}.sam
+#samtools view -bS ${file}.sam | samtools sort -T ${file} -o ${file}-sorted.bam
+#samtools index ${file}-sorted.bam
+#
+#### MAKE VCF     ######
+#samtools mpileup  --count-orphans --skip-indels --output ${file}.bcf  \
+#        -uf /nobackup/banana_genome/tomato/publicData/cornell-wholegenome/S_lycopersicum_chromosomes.3.00.fa ${file}-sorted.bam
+#bcftools view ${file}.bcf > ${file}.vcf
+
+
+
+###### Get reads map coverage #####
+#samtools view -c -F 4 ${file}-sorted.bam
+#samtools view -c -f 4 ${file}-sorted.bam
+
+#####  Replace some readgroups using PIcard ######
+module load picard
+
+#java -jar /users/rreid2/sw/picard/picard.jar AddOrReplaceReadGroups \
+#I=${file}-sorted.bam \
+#O=readgrouped-${file}-sorted.bam \
+#RGID=${file} \
+#RGLB=lib1 \
+#RGPL=illumina \
+#RGPU=unit1 \
+#RGSM=20 \
+#SORT_ORDER=coordinate \
+#CREATE_INDEX=true\
+
+####   Validate the SAM file so that is GATK happy #########
+#java -jar /users/rreid2/sw/picard/picard.jar ValidateSamFile I=readgrouped-${file}-sorted.bam O=val-${file}.txt MODE=SUMMARY
+
+#### Run GATK #########
+java -jar /apps/pkg/gatk-3.8/GenomeAnalysisTK.jar \
+ --analysis_type HaplotypeCaller \
+ -R /nobackup/banana_genome/tomato/publicData/cornell-wholegenome/S_lycopersicum_chromosomes.3.00.fa \
+ -I /nobackup/banana_genome/tomato/m82/readgrouped-${file}-sorted.bam \
+ -o ${file}-gatk.vcf \
+ --defaultBaseQualities 20 \
+ --min_base_quality_score 15 \
+ -nct 18
+
+
+
+

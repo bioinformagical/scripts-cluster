@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=510gb
+
+#PBS -N tttrinot-cephalo
+#PBS -q bigiron
+#PBS -t 1-4
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/cephalo/file.txt)
+
+#echo "Launching tophat on ${file}"
+
+function cleanup() {
+  if [[ "${1}" == "ERR" ]] || [[ ${1} -ne 0 ]]; then
+    printf "received signal %d, cleaning up...\n" ${1}
+  fi
+
+  [[ -n "${OUTDIR:-}" ]] && rm -r "${OUTDIR}"
+
+  if [[ ${2} -ne 0 ]]; then
+    printf "exiting on with code %d...\n" ${2}
+    exit ${2}
+  fi
+}
+
+for signal in 0 1 2 3 15 20 ERR; do
+    trap "cleanup ${signal} ${$?}" ${signal}
+done
+
+#cd $home
+#module load tophat
+#module load bowtie2
+#module load cufflinks
+module load bowtie
+
+cd /lustre/groups/janieslab/cephalo/
+
+#ln -s ../${file}-R1-clip.fq_matched.fq $file-R1-filtered.fastq
+#ln -s ../${file}-R2-clip.fq_matched.fq $file-R2-filtered.fastq
+
+#mkidir ${file}
+#cd ${file}
+#OUTDIR=$(mktemp -d)
+OUTDIR=$(mktemp -d --tmpdir=/dev/shm)
+cd ${OUTDIR}
+#~/sw/bam2fastq-1.1.0/bam2fastq -o s_${file}#_extracted_reads.fastq -f --no-aligned --unaligned --no-filter unmapped.bam
+#samples=" 3       4       5       6       8       9"
+#for file in ${samples}
+#do
+
+echo `pwd`
+echo " ${file} is the subjecy number"
+
+perl ~/sw/trinityrnaseq_r2013-02-25/Trinity.pl --seqType fq --JM 250G --output ${OUTDIR} \
+--single /lustre/groups/janieslab/cephalo/${file}.fastq_fastxqual.fastq \
+--CPU 12 --full_cleanup
+
+mv ${OUTDIR}/Trinity.fasta /lustre/janieslab/cephalo/Trinity${file}.fasta
+
+cd
+rm -r "${OUTDIR}"
+#done

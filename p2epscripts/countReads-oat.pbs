@@ -1,0 +1,78 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=380:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=480gb
+
+#PBS -N mmmeraculous-IfItWorks 
+#PBS -q bigiron
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+set -eu
+umask 007
+
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+#file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/fileheader.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+#mkdir /lustre/groups/p2ep/masurca/round3/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#rm -r ~/p2ep/masurca/$file/*
+cd /group/p2ep/dhmri/
+
+#### Test Test data set
+#cd ~/sw/release-2.1.0/test/pipeline
+
+#for kmer in 31 41 51 61 71 81 91;
+#do
+
+#	bash ~/sw/release-2.1.0/bin/run_meraculous.sh -c meraculous.config -cleanup_level 1 -dir kmer51 -restart -start meraculous_bubble 
+
+#done
+
+#cd  run2-oat-brass-oct25-2013/rawreads
+#for file in *fastq ; do echo ${file};wc -l ${file} >> ../../readcount.txt ; done
+#cd ../../
+
+#cd run3-nov25-13/rawreads
+#for file in *fastq ; do echo ${file};wc -l ${file} >> ../../readcount.txt ; done
+#cd ../../
+
+#cd run1-oat-blue-oct-2013/raw_reads
+#for file in *.fastq ; do echo ${file};wc -l ${file} >> ../../readcount.txt ; done
+#cd ../../
+
+#cd run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/nextclip/
+#for file in *fastq ; do echo ${file};wc -l ${file} >> ../../../readcount.txt ; done
+#cd ../../../
+
+cd run5-Duke-Jan27-2014/fastx/
+for file in *_matched.fq;do echo ${file};wc -l ${file} >> ../../readcount.txt ; done
+cd ../../
+
+cd run6-Project_UNCC_803/nextclip
+for file in *fastq ; do echo ${file};wc -l ${file} >> ../../readcount.txt ; done
+cd ../../
+
+cd run7-feb17-14/rawreads
+for file in *fastq ; do echo ${file};wc -l ${file} >> ../../readcount.txt ; done
+cd ../../
+
+cd run8-Oct2014
+for file in 140926HiSeq_Run_Sample_GS7*fastq;do echo ${file};wc -l ${file} >> ../readcount.txt ; done
+cd ..
+
+
+
+
+
+echo -n 'All done ';date;

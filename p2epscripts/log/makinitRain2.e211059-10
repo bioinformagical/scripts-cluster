@@ -1,0 +1,15 @@
++ umask 007
+++ sed -n -e 10p /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/fastx/filefq.txt
++ file=oat88
++ cd /lustre/groups/p2ep/masurca/round2/
++ mkdir oat88
++ cd oat88
++ cp ../config-run2.txt ./
++ sed -i.orig -e s/foo/oat88/g config-run2.txt
++ perl /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/runSRCA.pl config-run2.txt
++ ./assemble.sh
+cat: write error: Broken pipe
+INSERTING unitig 659
+MultiAlignStore::dumpMASRfile()-- Writing '../genome.tigStore/seqDB.v001.p001.utg' partitioned.
++ echo -n 'All done '
++ date

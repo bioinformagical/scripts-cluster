@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=38gb
+
+#PBS -N bbblast2newbs
+
+##PBS -t 1-9
+
+set -eux
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/brassica/map/chromosome/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching Blastn ";
+module load ncbi-blast+
+
+#cd $home
+
+cd /lustre/groups/bioservices/p2ep/blueberry/blast/
+
+#makeblastdb -in ../genomic/newblerAssembly.fna -dbtype nucl
+#makeblastdb -in ../genomic/miraAssembly.fna -dbtype nucl
+echo `pwd`
+echo ${file}
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fasta  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/brassica/130924HiSeq_Run_Sample_V_158_NoIndex_L002_R2_001-clip.fasta -query ../chromosome/${file}.fna  -out ./blastn-${file}vsv158-r2.out -num_threads 12  -evalue 1 -soft_masking false  -outfmt 6
+blastn -db ../genomic/newblerAssembly.fna -query ../genomic/masurca-run1.fasta  -out ./blastn-masVsNewbler.out -num_threads 12  -evalue 1e-10 -soft_masking false  -outfmt 6
+
+
+blastn -db ../genomic/miraAssembly.fna -query ../genomic/masurca-run1.fasta  -out ./blastn-masVsMira.out -num_threads 12  -evalue 1e-10 -soft_masking false  -outfmt 6
+echo "Fin"

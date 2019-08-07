@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=85500mb
+
+#PBS -N ssskewer-ga2 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-25
+
+set eu
+umask 007
+
+cd /group/bioservices/hockeypuck/old/blueberry/reads/illumina/skewer/
+
+#~/sw/skewer/run-skewer/skewer -Q 15 \
+#-x GATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG \
+#-x AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA \
+#-x ACACTCTTTCCCTACACGACGCTCTTCCGATCT \
+#-x AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA \
+#-m mp \
+#-f solexa \
+#-o all-ga2-skewered \
+#-t 12 \
+#../allreads-1.fq ../allreads-2.fq 
+
+
+for dir in 090702 091005; do echo ${dir};
+	for file in {1..8}; 
+	do echo ${file}; 
+	~/sw/skewer/run-skewer/skewer -Q 15 \
+	-x GATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG \
+	-x AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA \
+	-x ACACTCTTTCCCTACACGACGCTCTTCCGATCT \
+	-x AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA \
+	-m mp \
+	-u \
+	-f solexa \
+	 -o ${dir}-${file}-ga2-skewered \
+	-t 12 \
+	../${dir}Sequence${file}/s_${file}_1_sequence.txt ../${dir}Sequence${file}/s_${file}_2_sequence.txt
+	done; 
+done

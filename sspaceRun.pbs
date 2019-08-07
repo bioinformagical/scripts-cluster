@@ -1,0 +1,74 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N Sspaced 
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+export PATH=/sw/velvet/bin:$PATH
+
+#cd $HOME/bin/sspace/SSPACE-1.1_linux-x86_64//
+#cd $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/small2/
+#cd $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/descafContigs
+#cd /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb
+cd $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/2mira7/
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s 454Scaffolds.fna -k 5 -a 0.7 -x 1 -b big8KBAndSE -u GAII_SE_trimmed_screened_reads.fa 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s 454LargeContigs.fna -k 5 -a 0.7 -x 1 -b big8KLargeContigsAndSE -u GAII_SE_trimmed_screened_reads.fa 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s 454LargeContigs.fna -k 5 -a 0.7 -x 1 -b big8KLargeContigsAndIlluminaContigs -u $HOME/blueberry/reads/illumina/peCombinedVelvet.fna
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s 454Scaffolds.fna -k 5 -a 0.7 -x 1 -b big8KBAndIlluminaContigs -u $HOME/blueberry/reads/illumina/peCombinedVelvet.fna 
+
+#perl $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s mira7.fasta -k 5 -a 0.7 -x 0 -b hiseqAndMira7 
+
+#perl $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s mira7.fasta -k 1 -a 0.7 -m 16 -o 10 -x 1 -b pairedInfoHiseqAndMira7take2 -u /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb/GAII_SE_trimmed_screened_reads.fa 
+
+perl $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s mira7.fasta -k 1 -a 0.5 -m 11 -o 10 -x 0 -b pairedInfom11
+
+
+
+
+
+
+#perl $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s mira7.fasta -k 1 -a 0.7 -m 16 -o 10 -x 0 -b pairedInfoHiseqAndMira7NoExtend  
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s $HOME/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa -k 5 -a 0.7 -x 1 -b smallAndSE -u /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb/GAII_SE_trimmed_screened_reads.fa 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s $HOME/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa -k 9 -a 0.7 -x 1 -b smallAndSEk9 -u /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb/GAII_SE_trimmed_screened_reads.fa 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s $HOME/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa -k 5 -a 0.7 -x 1 -b smallAndHiseq -u $HOME/blueberry/reads/hiseq/s_4_1_sequence.txt.trimmedkmer7520 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s $HOME/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa -k 3 -a 0.7 -x 1 -b smallSEk3 -u $HOME/blueberry/reads/hiseq/s_4_1_sequence.txt.trimmedkmer7520 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s $HOME/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa -k 5 -a 0.5 -x 1 -b smallSEAratio5 -u $HOME/blueberry/reads/hiseq/s_4_1_sequence.txt.trimmedkmer7520 
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s descafContigs.fna 5 -a 0.7 -x 1 -b big8kbDescafContigs -u sub300.fast
+
+#perl /gpfs/fs3/home/rreid2/bin/sspace/SSPACE-1.1_linux-x86_64/SSPACE_v1-1.pl -l libraries.txt -s descafContigs.fna 5 -a 0.7 -x 1 -b descafContigsAndSE -u ../big8kb/GAII_SE_trimmed_screened_reads.fa 
+
+#-x 1 (extend the contigs, using the paired reads)
+#-u fasta file of unpaired reads
+
+#a-k 3 (min # of links to compute scaffold)
+
+  
+
+
+
+

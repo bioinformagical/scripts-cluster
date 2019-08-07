@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=64gb
+#PBS -j oe
+#PBS -N mmmakeBigTable
+#PBS -q copperhead
+##PBS -t 1-20
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/banana/filter/trimgalore/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching GATK haplotyper"
+
+#module load java8 
+#module load samtools
+#module load bwa
+#module load bcftools
+#module load gatk
+
+
+cd /nobackup/banana_genome/snppicker/final/heatmap
+while read file;
+do
+	python ~/scripts/python/makeMasterSNPFile.py  /nobackup/banana_genome/scratch/align/run3/byDP/${file} dpmaster.txt
+	cp dpmaster.txt-new.txt dpmaster.txt
+	echo ${file}
+done < filedp.txt

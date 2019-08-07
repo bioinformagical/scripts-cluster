@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=2:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8500mb
+
+#PBS -N sssomeStats
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-228
+
+set eu
+umask 007
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/oat/badassay/fastq/file.txt)
+
+module load bwa
+
+cd /lustre/groups/p2ep/oat/badassay/bwa/
+
+#create index of reference
+#bwa index -p NEWBLER.idx -a bwtsw /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna
+
+module load samtools
+
+################   Success was part below #####
+#################################################		Removed the -I from bwa aln and this solves the alingment issue (casava 1.3+  vs 1.5+   #############
+#bwa aln  -t 12 oatsnparray.idx /lustre/groups/p2ep/oat/badassay/fastq/${file}.fastq > ${file}.aln.sai
+#bwa samse oatsnparray.idx ${file}.aln.sai /lustre/groups/p2ep/oat/badassay//fastq/${file}.fastq  >  ${file}.sam
+
+#samtools import /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna Fla4BxW85-385vsnewbler.sam  Fla4BxW85-385vsnewbler.bam
+
+#samtools view -F 0x04 -b Fla4BxW85-385vsnewbler.bam > Fla4BxW85-385vsnewbler.rmd.bam
+#samtools sort Fla4BxW85-385vsnewbler.rmd.bam  Fla4BxW85-385vsnewbler.rmd.bam.srt
+#samtools view -bS ${file}.sam | samtools sort - ${file}-sort
+
+#samtools index ${file}-sort.bam
+
+#samtools mpileup -ugf /lustre/groups/p2ep/oat/badassay/WG00014_OAT.targetSeq.fa ${file}-sort.bam | bcftools view -bvcg - > ${file}.bcf
+#bcftools view ${file}.bcf > ${file}.vcf 
+
+
+samtools flagstat ${file}-sort.bam > ${file}.stat
+perl /lustre/home/rreid2/scripts/perl/getSAMmapped.pl ${file} 
+
+#perl /lustre/home/rreid2/scripts/perl/parseVCF4GoodQual.pl ${file} 

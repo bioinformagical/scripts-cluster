@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=cph-bm3.uncc.edu:ppn=2
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=40GB
+
+#PBS -N rrrsyncing-0-5 
+#PBS -q hammerhead
+
+
+#Number of times to run this script
+##PBS -t 1-12
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/blast/file.txt)
+
+cd /nobackup/oat_genome/canu/oat6/trimming/oat6.ovlStore.BUILDING/ 
+#module load blast/2.3.0+ 
+
+
+#time rsync -a bucket0??? /nobackup/oat_genome_2/
+#time rsync -a bucket1??? /nobackup/oat_genome_2/
+#time rsync -a bucket2??? /nobackup/oat_genome_2/
+
+#time rsync -a bucket4??? /nobackup/oat_genome_2/
+#time rsync -a bucket5??? /nobackup/oat_genome_2/
+time rsync -a bucket6??? /nobackup/oat_genome_2/
+
+time rsync -a bucket7??? /nobackup/oat_genome_2/
+time rsync -a bucket8??? /nobackup/oat_genome_2/
+time rsync -a bucket9??? /nobackup/oat_genome_2/
+time rsync -a bucket10?? /nobackup/oat_genome_2/
+
+rm -R bucket6* bucket7*

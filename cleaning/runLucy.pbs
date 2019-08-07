@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=98:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+
+
+#PBS -N SeqcleanChloro
+#PBS -q bigiron
+
+##home=/gpfs/fs3/home/rreid2
+
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+#echo "Launching Repeat Masker"
+export PATH=$HOME/bin:$PATH
+
+cd $HOME/blueberry/reads/454Sequences/all/  
+
+
+for file in $(find ./ -name "*.fasta");
+do
+        echo   ${file};
+	  /gpfs/fs3/home/rreid2/bin/seqclean/seqclean $file -c 4  -v $HOME/blueberry/db/gSe13andUnivec.fasta -s $HOME/blueberry/db/vitisMito.fasta, $HOME/blueberry/db/vitisViniChloro.fasta  -o ${file}".clean"	
+	  /gpfs/fs3/home/rreid2/bin/seqclean/cln2qual ${file}".cln" ${file%fasta}"qual"
+
+	  lucy -o ${file}.clean.lucy ${file%fasta}qual.clean.lucy ${file}".clean" ${file%fasta}qual.clean
+
+
+done
+
+#file=/gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/OLDseqclean/level2/FQ55CRL01.fasta;
+#/gpfs/fs3/home/rreid2/bin/seqclean/seqclean $file -c 8 -s /gpfs/fs3/home/rreid2/db/vitis/chloroplast/vitisviniferisChloroplastgenome.fna 
+
+
+
+#./seqclean  ~/blueberry/reads/454Sequences/mira9/split_1.fasta -n 10 -v ~/blueberry/db/vitisViniChloro.fasta, $HOME/blueberry/db/gSe13andUnivec.fasta  -l 40  -o test -r rtest
+
+#/gpfs/fs3/home/rreid2/bin/seqclean/seqclean $file -c 16  -v $HOME/blueberry/db/gSe13andUnivec.fasta -s $HOME/blueberry/db/vitisMito.fasta, $HOME/blueberry/db/vitisViniChloro.fasta  -l 40  -o ${file%fasta}"clean"
+
+
+

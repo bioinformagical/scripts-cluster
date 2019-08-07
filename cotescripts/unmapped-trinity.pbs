@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=200gb
+
+#PBS -N tttrinot-cote
+#PBS -q bigiron
+##PBS -t 1-18
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/file2.txt)
+
+#echo "Launching tophat on ${file}"
+
+#cd $home
+#module load tophat
+#module load bowtie2
+#module load cufflinks
+module load bowtie
+
+cd /lustre/groups/bioservices/gregory/HSMS_104_Cote/trinity/
+
+#ln -s ../${file}-R1-clip.fq_matched.fq $file-R1-filtered.fastq
+#ln -s ../${file}-R2-clip.fq_matched.fq $file-R2-filtered.fastq
+
+#mkidir ${file}
+#cd ${file}
+
+
+#~/sw/bam2fastq-1.1.0/bam2fastq -o s_${file}#_extracted_reads.fastq -f --no-aligned --unaligned --no-filter unmapped.bam
+samples=" 10      12      14      15      16      19      1       20      21      23      24      2       3       4       5       6       8       9"
+for file in ${samples}
+do
+
+perl ~/sw/trinityrnaseq_r2013-02-25/Trinity.pl --seqType fq --JM 200G --output tri${file} \
+--left /lustre/groups/bioservices/gregory/HSMS_104_Cote/filter/sam${file}-R1-clip.fq_matched.fq \
+--right /lustre/groups/bioservices/gregory/HSMS_104_Cote/filter/sam${file}-R2-clip.fq_matched.fq --CPU 8
+
+
+done
+
+
+

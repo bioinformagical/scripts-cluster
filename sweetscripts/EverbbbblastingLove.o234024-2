@@ -1,0 +1,23 @@
+########################################################################
+PBS Prologue:	Mon Feb 15 08:44:58 EST 2016
+Job ID:		234024[2].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	EverbbbblastingLove-2
+Limits:		neednodes=1:ppn=12,nodes=1:ppn=12,vmem=90gb,walltime=168:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron00[12] 
+########################################################################
+
+
+
+
+########################################################################
+PBS Epilogue:	Mon Feb 15 08:57:59 EST 2016
+Job ID:		234024[2].login00.halcyon.local
+Limits:		neednodes=1:ppn=12,nodes=1:ppn=12,vmem=90gb,walltime=168:30:00
+Resources:	cput=00:37:11,mem=115864kb,vmem=1194612kb,walltime=00:12:56
+Account:	
+Exit Value:	0
+########################################################################

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=668:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=38gb
+
+#PBS -N bbblastxBT
+
+#PBS -t 1-6
+
+set -eux
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project2/flashmerged/file-ext.txt )
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project2/fileclip.txt )
+module load ncbi-blast+
+echo "Launching BlastN  on NT";
+
+#cd $home
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/project2/bt
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ../../genes/bt.faa -dbtype prot
+
+
+echo `pwd`
+blastx -db ../../genes/bt.faa -query ../${file} -out ./${file}vsbt.out -num_threads 12  -evalue 0.0001 -soft_masking true  -outfmt 6 
+
+
+echo ${file}
+
+
+echo "Fin"

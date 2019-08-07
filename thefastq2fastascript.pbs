@@ -1,0 +1,13 @@
+
+
+perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl std2qual ~/old/gm/data/454reads/rl1 ~/old/gm/data/454reads/rl1Clipped.fastq
+perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl std2qual ~/old/gm/data/454reads/rl2 ~/old/gm/data/454reads/rl2Clipped.fastq
+perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl std2qual ~/old/gm/data/454reads/rl3 ~/old/gm/data/454reads/rl3Clipped.fastq
+perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl std2qual ~/old/gm/data/454reads/rl4 ~/old/gm/data/454reads/rl4Clipped.fastq
+perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl std2qual ~/old/gm/data/454reads/rl5 ~/old/gm/data/454reads/rl5Clipped.fastq
+perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl std2qual ~/old/gm/data/454reads/rl6 ~/old/gm/data/454reads/rl6Clipped.fastq
+
+
+
+# AND to convert from Illumina quality scores to standard sanger scores, use
+#     perl /lustre/home/rreid2/sw/maq-0.7.1/scripts/fq_all2std.pl sol2std input.fastq > output.fastq

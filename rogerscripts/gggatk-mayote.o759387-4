@@ -1,0 +1,282 @@
+########################################################################
+PBS Prologue:	Fri Feb  1 15:11:29 EST 2019
+Job ID:		759387[4].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	gggatk-mayote-4
+Limits:		pmem=2147483648b,walltime=468:30:00,nodes=1:ppn=8,mem=48gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=8
+Queue:		steelhead
+Nodes:		sth-c2.uncc.edu[8] 
+########################################################################
+Launching GATK haplotyper
+INFO  15:11:34,493 HelpFormatter - ---------------------------------------------------------------------------------- 
+INFO  15:11:34,519 HelpFormatter - The Genome Analysis Toolkit (GATK) v3.8-0-ge9d806836, Compiled 2017/07/28 21:26:50 
+INFO  15:11:34,519 HelpFormatter - Copyright (c) 2010-2016 The Broad Institute 
+INFO  15:11:34,519 HelpFormatter - For support and documentation go to https://software.broadinstitute.org/gatk 
+INFO  15:11:34,519 HelpFormatter - [Fri Feb 01 15:11:34 EST 2019] Executing on Linux 3.10.0-957.1.3.el7.x86_64 amd64 
+INFO  15:11:34,519 HelpFormatter - Java HotSpot(TM) 64-Bit Server VM 1.8.0_192-b12 
+INFO  15:11:34,521 HelpFormatter - Program Args: --analysis_type HaplotypeCaller -R /nobackup/rogers_research/rob/gatk/nick-gatk/dyak.ref.fna -I /nobackup/rogers_research/rob/mayotte/picard/readgrouped-04_S22.bam -o 04_S22-gatk.vcf --defaultBaseQualities 20 --min_base_quality_score 15 -nct 8 
+INFO  15:11:34,547 HelpFormatter - Executing as rreid2@sth-c2.uncc.edu on Linux 3.10.0-957.1.3.el7.x86_64 amd64; Java HotSpot(TM) 64-Bit Server VM 1.8.0_192-b12. 
+INFO  15:11:34,548 HelpFormatter - Date/Time: 2019/02/01 15:11:34 
+INFO  15:11:34,548 HelpFormatter - ---------------------------------------------------------------------------------- 
+INFO  15:11:34,548 HelpFormatter - ---------------------------------------------------------------------------------- 
+ERROR StatusLogger Unable to create class org.apache.logging.log4j.core.impl.Log4jContextFactory specified in jar:file:/apps/pkg/gatk-3.8/GenomeAnalysisTK.jar!/META-INF/log4j-provider.properties
+ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+INFO  15:11:34,670 GenomeAnalysisEngine - Deflater: IntelDeflater 
+INFO  15:11:34,670 GenomeAnalysisEngine - Inflater: IntelInflater 
+INFO  15:11:34,670 GenomeAnalysisEngine - Strictness is SILENT 
+INFO  15:11:39,001 GenomeAnalysisEngine - Downsampling Settings: Method: BY_SAMPLE, Target Coverage: 500 
+INFO  15:11:39,006 SAMDataSource$SAMReaders - Initializing SAMRecords in serial 
+INFO  15:11:39,142 SAMDataSource$SAMReaders - Done initializing BAM readers: total time 0.14 
+INFO  15:11:39,291 HCMappingQualityFilter - Filtering out reads with MAPQ < 20 
+INFO  15:11:39,316 MicroScheduler - Running the GATK in parallel mode with 8 total threads, 8 CPU thread(s) for each of 1 data thread(s), of 8 processors available on this machine 
+INFO  15:11:43,165 GenomeAnalysisEngine - Preparing for traversal over 1 BAM files 
+INFO  15:11:47,028 GenomeAnalysisEngine - Done preparing for traversal 
+INFO  15:11:47,029 ProgressMeter - [INITIALIZATION COMPLETE; STARTING PROCESSING] 
+INFO  15:11:47,029 ProgressMeter -                 |      processed |    time |         per 1M |           |   total | remaining 
+INFO  15:11:47,029 ProgressMeter -        Location | active regions | elapsed | active regions | completed | runtime |   runtime 
+INFO  15:11:47,029 HaplotypeCaller - Disabling physical phasing, which is supported only for reference-model confidence output 
+INFO  15:11:47,058 StrandBiasTest - SAM/BAM data was found. Attempting to use read data to calculate strand bias annotations values. 
+WARN  15:11:47,058 InbreedingCoeff - Annotation will not be calculated. InbreedingCoeff requires at least 10 unrelated samples. 
+INFO  15:11:47,058 StrandBiasTest - SAM/BAM data was found. Attempting to use read data to calculate strand bias annotations values. 
+INFO  15:11:47,578 HaplotypeCaller - Using global mismapping rate of 45 => -4.5 in log10 likelihood units 
+INFO  15:11:47,579 PairHMM - Performance profiling for PairHMM is disabled because the program is being run with multiple threads (-nct>1) option
+Profiling is enabled only when running in single thread mode
+ 
+INFO  15:11:48,479 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+INFO  15:11:48,479 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,480 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,480 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,479 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,507 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:11:48,527 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+WARN  15:11:48,574 HaplotypeScore - Annotation will not be calculated, must be called from UnifiedGenotyper, not HaplotypeCaller 
+INFO  15:11:48,716 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 8
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:12:17,044 ProgressMeter -       2L:790248              0.0    30.0 s           49.6 w        0.5%   105.6 m     105.1 m 
+INFO  15:12:47,052 ProgressMeter -      2L:1203416              0.0    60.0 s           99.2 w        0.7%     2.3 h       2.3 h 
+INFO  15:13:17,066 ProgressMeter -      2L:1478980              0.0    90.0 s          148.9 w        0.9%     2.8 h       2.8 h 
+INFO  15:13:47,080 ProgressMeter -      2L:2013592              0.0   120.0 s          198.5 w        1.2%     2.8 h       2.7 h 
+INFO  15:14:17,088 ProgressMeter -      2L:2505916              0.0     2.5 m          248.1 w        1.5%     2.8 h       2.7 h 
+WARN  15:14:39,631 HaplotypeCallerGenotypingEngine - location 2L:2660134: too many alternative alleles found (9) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TGCTGAGGAAATAAGTAGCTTTTAAGCTGTAATTATAGTTAATTTATACATGAATCAATGTCAAGTGTAAAGTACTA, TGCTGAAGAAATAAGTAGCTTTTAAGCTGTAATTATAGTTAATTTATACATGAATCAATGTCAAGTGTAAAGTACTA, TGCTGAAGAAATAAGTAGTAGTTAATTTATACATGAATCAATGTCAAGTGTAAAGTACTA. 
+INFO  15:14:47,117 ProgressMeter -      2L:2754046              0.0     3.0 m          297.8 w        1.6%     3.0 h       3.0 h 
+INFO  15:15:17,127 ProgressMeter -      2L:3065394              0.0     3.5 m          347.4 w        1.8%     3.2 h       3.1 h 
+INFO  15:15:47,141 ProgressMeter -      2L:3301176              0.0     4.0 m          397.0 w        2.0%     3.4 h       3.3 h 
+INFO  15:16:17,147 ProgressMeter -      2L:3562831              0.0     4.5 m          446.6 w        2.1%     3.5 h       3.4 h 
+INFO  15:16:47,161 ProgressMeter -      2L:3820549              0.0     5.0 m          496.3 w        2.3%     3.6 h       3.6 h 
+INFO  15:17:17,171 ProgressMeter -      2L:4112051              0.0     5.5 m          545.9 w        2.5%     3.7 h       3.6 h 
+INFO  15:17:47,193 ProgressMeter -      2L:4410950              0.0     6.0 m          595.5 w        2.6%     3.8 h       3.7 h 
+INFO  15:18:17,207 ProgressMeter -      2L:4766519              0.0     6.5 m          645.1 w        2.9%     3.8 h       3.7 h 
+INFO  15:18:47,221 ProgressMeter -      2L:5072169              0.0     7.0 m          694.8 w        3.0%     3.8 h       3.7 h 
+INFO  15:19:17,241 ProgressMeter -      2L:5312202              0.0     7.5 m          744.4 w        3.2%     3.9 h       3.8 h 
+WARN  15:19:41,439 HaplotypeCallerGenotypingEngine - location 2L:5501584: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: GCCTTTTCTTTTCTTATTATTGTATATA, GTAGAACACTTTGCTTTTTCTTTTCTTATTATTGTATATA. 
+INFO  15:19:47,253 ProgressMeter -      2L:5554932              0.0     8.0 m          794.0 w        3.3%     4.0 h       3.9 h 
+INFO  15:20:17,256 ProgressMeter -      2L:5797779              0.0     8.5 m          843.6 w        3.5%     4.1 h       3.9 h 
+INFO  15:20:47,265 ProgressMeter -      2L:6073560              0.0     9.0 m          893.2 w        3.6%     4.1 h       4.0 h 
+INFO  15:21:17,273 ProgressMeter -      2L:6337290              0.0     9.5 m          942.9 w        3.8%     4.2 h       4.0 h 
+INFO  15:21:47,287 ProgressMeter -      2L:6589245              0.0    10.0 m          992.5 w        3.9%     4.2 h       4.1 h 
+WARN  15:22:17,205 HaplotypeCallerGenotypingEngine - location 2L:6819180: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TCATAGTAGATGGTCTGATGCTGTTGGTTTCCGGAGCAC. 
+INFO  15:22:17,296 ProgressMeter -      2L:6840625              0.0    10.5 m         1042.1 w        4.1%     4.3 h       4.1 h 
+INFO  15:22:47,299 ProgressMeter -      2L:7086037              0.0    11.0 m         1091.7 w        4.2%     4.3 h       4.1 h 
+INFO  15:23:17,313 ProgressMeter -      2L:7347039              0.0    11.5 m         1141.3 w        4.4%     4.4 h       4.2 h 
+INFO  15:23:47,322 ProgressMeter -      2L:7723540              0.0    12.0 m         1191.0 w        4.6%     4.3 h       4.1 h 
+WARN  15:24:13,482 HaplotypeCallerGenotypingEngine - location 2L:7960515: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: A. 
+INFO  15:24:17,341 ProgressMeter -      2L:7998786              0.0    12.5 m         1240.6 w        4.8%     4.3 h       4.1 h 
+INFO  15:24:47,344 ProgressMeter -      2L:8265648              0.0    13.0 m         1290.2 w        5.0%     4.4 h       4.2 h 
+INFO  15:25:17,355 ProgressMeter -      2L:8562494              0.0    13.5 m         1339.8 w        5.1%     4.4 h       4.2 h 
+INFO  15:25:47,369 ProgressMeter -      2L:8956178              0.0    14.0 m         1389.5 w        5.4%     4.3 h       4.1 h 
+INFO  15:26:17,381 ProgressMeter -      2L:9256610              0.0    14.5 m         1439.1 w        5.5%     4.4 h       4.1 h 
+INFO  15:26:47,395 ProgressMeter -      2L:9545922              0.0    15.0 m         1488.7 w        5.7%     4.4 h       4.1 h 
+INFO  15:27:17,413 ProgressMeter -      2L:9909824              0.0    15.5 m         1538.3 w        5.9%     4.4 h       4.1 h 
+INFO  15:27:47,427 ProgressMeter -     2L:10165310              0.0    16.0 m         1588.0 w        6.1%     4.4 h       4.1 h 
+WARN  15:27:48,936 HaplotypeCallerGenotypingEngine - location 2L:10167044: too many alternative alleles found (12) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TGAGGGTACTGTGCGGTCTTAGACGAGTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAAAATC, TGAGGGTACTATGCGGTCTTAGACGACTGACATGTATTATTATTCGAAATGTATTATCATACTTCGTCACAAAAAAC, TGAGGGTACTATGCGGTCTTAGACGAGTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAAAATC, TGAGGGTACTGTGCGGTCTTAGACGACTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAAAATC, TGAGGGTACTATGCGGTCTTAGACGAGTGACATGTATTATTATTCGAAATGTATTATCATACTTCGTCACAAAAAAC, TGAGGGTACTATGCGGTCTTAGACGACTGACATGTATTACTATTCGAAATGTATTATCATACTTCGTCACAAAAATC. 
+INFO  15:28:17,441 ProgressMeter -     2L:10464300              0.0    16.5 m         1637.6 w        6.3%     4.4 h       4.1 h 
+INFO  15:28:47,455 ProgressMeter -     2L:10804867              0.0    17.0 m         1687.2 w        6.5%     4.4 h       4.1 h 
+INFO  15:29:17,469 ProgressMeter -     2L:11352299              0.0    17.5 m         1736.8 w        6.8%     4.3 h       4.0 h 
+INFO  15:29:47,479 ProgressMeter -     2L:11711525              0.0    18.0 m         1786.5 w        7.0%     4.3 h       4.0 h 
+INFO  15:30:17,497 ProgressMeter -     2L:11992869              0.0    18.5 m         1836.1 w        7.2%     4.3 h       4.0 h 
+INFO  15:30:47,510 ProgressMeter -     2L:12279195              0.0    19.0 m         1885.7 w        7.4%     4.3 h       4.0 h 
+INFO  15:31:17,524 ProgressMeter -     2L:12620597              0.0    19.5 m         1935.3 w        7.6%     4.3 h       4.0 h 
+INFO  15:31:47,538 ProgressMeter -     2L:12914372              0.0    20.0 m         1985.0 w        7.7%     4.3 h       4.0 h 
+INFO  15:32:17,544 ProgressMeter -     2L:13319596              0.0    20.5 m         2034.6 w        8.0%     4.3 h       3.9 h 
+INFO  15:32:47,558 ProgressMeter -     2L:13657466              0.0    21.0 m         2084.2 w        8.2%     4.3 h       3.9 h 
+WARN  15:33:12,387 HaplotypeCallerGenotypingEngine - location 2L:13946913: too many alternative alleles found (32) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: GGCTTCCCCTTTCATGCGTTTAATAGATCTGGCTACAGTGTAATTCATATGATCAAGGTTGAAACTAAAATTATTAAGCTGGTAAAAAGCGCTAATTCTGGTACATTTTTTAATAATGAAATAATATAATAATAAGCTCATAAAACACAAAATTAAACCTACAATTTTAATTTGTATTTTTATA, GGCTTCCTCTTTCATGCGTTTAATAGATCTGGCTACAGTGTAATTCATATGATTATGGTTGAAACTAAAATTATTAAGCTGGTAAAAAGCGCTCATTCTGGTAAAATTTTTAATAATGAAATAATATAATAATAAGCTCATAAAACACAAAATTAAACCTACAATTTTAATTTATATTTTTATA, GGCTTCCTCTTTCATGCGTTTAATAGATCTGGCTACAGTGTAATTCATATGATCAAGGTTGAAACTAAAATTATTAAGCTGGTAAAAAGCGCTAATTCTGGTACATTTTTTAATAATGAAATAATATA... and 23 more. 
+INFO  15:33:17,572 ProgressMeter -     2L:14016991              0.0    21.5 m         2133.8 w        8.4%     4.3 h       3.9 h 
+INFO  15:33:47,575 ProgressMeter -     2L:14349886              0.0    22.0 m         2183.4 w        8.6%     4.3 h       3.9 h 
+INFO  15:34:17,595 ProgressMeter -     2L:14646229              0.0    22.5 m         2233.1 w        8.8%     4.3 h       3.9 h 
+INFO  15:34:47,609 ProgressMeter -     2L:14949343              0.0    23.0 m         2282.7 w        9.0%     4.3 h       3.9 h 
+INFO  15:35:17,623 ProgressMeter -     2L:15243038              0.0    23.5 m         2332.3 w        9.1%     4.3 h       3.9 h 
+INFO  15:35:47,635 ProgressMeter -     2L:15540771              0.0    24.0 m         2382.0 w        9.3%     4.3 h       3.9 h 
+WARN  15:36:06,349 HaplotypeCallerGenotypingEngine - location 2L:15686080: too many alternative alleles found (12) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CAACAGTCTTAATAATCTTAATACCCTTTATGTTGCGCATTATTTGCTTTTGTAGACCATATAATTTCAATTTCAACAAAATAGAAAATACCATTTAATAATATAACCTCAAACCCCCCCCTTTTCCGTTAATTTTTTAGGCTGACCAAGTACCAA, CAACAGTCTTAATAATCTTAATACCCTTTATGTTGCGCATTATTTGCTTTTGTAGACCATATAATTTCAATTTCAACAAAATAGAAAATACCATTTAATAATATAACCTCCAACCCCCTCTTTTACGTTAATTTTTTAGGCTGACCAAGTACCAA, CAACAGTCTTAATAATCTTAATACCCTTTATGTTGCGAATTATTTGCTTTTGTAGACCATATAATTTCAATTTCAACCAAATAGAAAATACCATTTAATAATATAACCTCCAACCCCCTCTTTTACGTTAATTTTTTAGGCTGACCAAGTACCAA, CAACAGTCTTAATAATCTTAATACCCTT... and 2 more. 
+WARN  15:36:06,359 HaplotypeCallerGenotypingEngine - location 2L:15686081: too many alternative alleles found (12) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AACAGTCTTAATAATCTTAATACCCTTTATGTTGCGAATTATTTGCTTTTGTAGACCATATAATTTCAATTTCAACAAAATAGAAAATACCATTTAATAATATAACCTCAAACCCCCCCCTTTTCCGTTAATTTTTTAGGCTGACCAAGTACCAAC, AACAGTCTTCATATTCTTAATACCCTTTATGTTGCGCATTATTTGCTTTTGTAGACCATATAATTTCAATTTCAACAAAATAGAAAATACCATTTAATAATATAACCTCAAACCCCCCCCTTTTCCGTTAATTTTTTAGGCTGACCAAGTACCAAC, AACAGTCTTAATAATCTTAATACCCTTTATGTTGCGCATTATTTGCTTTTGTAGACCATATAATTTCAATTTCAACAAAATAGAAAATACCATTTAATAATATAACCTCAAACCCCCCCCTTTTCCGTTAATTTTTTAGGCTGACCAAGTACCAAC, AACAGTCTTAATAATCTTAATACCCT... and 2 more. 
+INFO  15:36:17,649 ProgressMeter -     2L:15819976              0.0    24.5 m         2431.6 w        9.5%     4.3 h       3.9 h 
+INFO  15:36:47,654 ProgressMeter -     2L:16118485              0.0    25.0 m         2481.2 w        9.7%     4.3 h       3.9 h 
+INFO  15:37:17,668 ProgressMeter -     2L:16634346              0.0    25.5 m         2530.8 w       10.0%     4.3 h       3.8 h 
+INFO  15:37:47,672 ProgressMeter -     2L:17111086              0.0    26.0 m         2580.4 w       10.2%     4.2 h       3.8 h 
+INFO  15:38:17,695 ProgressMeter -     2L:17838129              0.0    26.5 m         2630.1 w       10.7%     4.1 h       3.7 h 
+INFO  15:38:47,710 ProgressMeter -     2L:19637133              0.0    27.0 m         2679.7 w       11.8%     3.8 h       3.4 h 
+INFO  15:39:17,711 ProgressMeter -       2R:920951      2.2324452E7    27.5 m           73.0 s       13.9%     3.3 h       2.8 h 
+WARN  15:39:22,955 HaplotypeCallerGenotypingEngine - location 2R:1538363: too many alternative alleles found (12) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TTTAACGTCGTTCTTATTGAAAATTTCGATACTATCTAAAATAATTATTTTTTAATGTTTATTTTTTTAGTCATTAGCTTGTTGTTACTAACTATTCGAATATTGTATATATTTAATTTTTTTCTTATAGTTTTCCACACGATTGGTCATGTGCGAATCGCCCCGCTGCAGTATAGATTTCGTTGAAACATGTC, TTTAACGTCGTTCTTATTGAAAATTTCGATACTATCTAAAATAATTATTTTTTAATGTTTATTTTTTTAGTCATTAGCTTGTTGTTACTAACTATTTGAATATTGTATATATTTAATTTTTTTCTTATAGTTTTCCACACGATTGGTCATGTGCTAATCGCCCCGCTGCAGTATAGATTTCGTTGAAACATGTC, TTTTAACGTCGTTCTTATTGAAAATTTCGATACTATCTAAAATAATTATTTTTTAATGTTTATTTTTTTAGTCATTAGCTTGTTGTTACTAACTATTTGAATATTGTA... and 3 more. 
+INFO  15:39:47,717 ProgressMeter -      2R:2924387      2.2324452E7    28.0 m           75.0 s       15.1%     3.1 h       2.6 h 
+INFO  15:40:17,720 ProgressMeter -      2R:4263658      2.2324452E7    28.5 m           76.0 s       15.9%     3.0 h       2.5 h 
+INFO  15:40:47,730 ProgressMeter -      2R:5403742      2.2324452E7    29.0 m           77.0 s       16.6%     2.9 h       2.4 h 
+INFO  15:41:17,744 ProgressMeter -      2R:6355053      2.2324452E7    29.5 m           79.0 s       17.2%     2.9 h       2.4 h 
+INFO  15:41:47,752 ProgressMeter -      2R:6889127      2.2324452E7    30.0 m           80.0 s       17.5%     2.9 h       2.4 h 
+INFO  15:42:17,758 ProgressMeter -      2R:7458998      2.2324452E7    30.5 m           82.0 s       17.8%     2.8 h       2.3 h 
+INFO  15:42:47,765 ProgressMeter -      2R:7961459      2.2324452E7    31.0 m           83.0 s       18.1%     2.8 h       2.3 h 
+INFO  15:43:17,772 ProgressMeter -      2R:8413893      2.2324452E7    31.5 m           84.0 s       18.4%     2.9 h       2.3 h 
+INFO  15:43:47,789 ProgressMeter -      2R:8776512      2.2324452E7    32.0 m           86.0 s       18.6%     2.9 h       2.3 h 
+INFO  15:44:17,794 ProgressMeter -      2R:8935256      2.2324452E7    32.5 m           87.0 s       18.7%     2.9 h       2.4 h 
+INFO  15:44:47,806 ProgressMeter -      2R:9088555      2.2324452E7    33.0 m           88.0 s       18.8%     2.9 h       2.4 h 
+WARN  15:45:16,006 HaplotypeCallerGenotypingEngine - location 2R:9264661: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CCGAATTTTGTTGGATTTTTTATTTTTTTTTTTT. 
+INFO  15:45:17,821 ProgressMeter -      2R:9273969      2.2324452E7    33.5 m           90.0 s       18.9%     3.0 h       2.4 h 
+INFO  15:45:47,824 ProgressMeter -      2R:9426356      2.2324452E7    34.0 m           91.0 s       19.0%     3.0 h       2.4 h 
+INFO  15:46:17,836 ProgressMeter -      2R:9597119      2.2324452E7    34.5 m           92.0 s       19.1%     3.0 h       2.4 h 
+INFO  15:46:47,850 ProgressMeter -      2R:9753558      2.2324452E7    35.0 m           94.0 s       19.2%     3.0 h       2.5 h 
+INFO  15:47:17,872 ProgressMeter -      2R:9909045      2.2324452E7    35.5 m           95.0 s       19.3%     3.1 h       2.5 h 
+INFO  15:47:47,889 ProgressMeter -     2R:10097223      2.2324452E7    36.0 m           96.0 s       19.4%     3.1 h       2.5 h 
+INFO  15:48:17,900 ProgressMeter -     2R:10269506      2.2324452E7    36.5 m           98.0 s       19.5%     3.1 h       2.5 h 
+WARN  15:48:19,631 HaplotypeCallerGenotypingEngine - location 2R:10273313: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TTTTTTTTTTTTGTGG. 
+INFO  15:48:47,914 ProgressMeter -     2R:10444200      2.2324452E7    37.0 m           99.0 s       19.6%     3.1 h       2.5 h 
+WARN  15:49:10,089 HaplotypeCallerGenotypingEngine - location 2R:10556052: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AACCTTTTTGAATGCAATTTACATTATGTTAACAAAC. 
+INFO  15:49:17,926 ProgressMeter -     2R:10610456      2.2324452E7    37.5 m          100.0 s       19.7%     3.2 h       2.5 h 
+INFO  15:49:47,930 ProgressMeter -     2R:10789951      2.2324452E7    38.0 m          102.0 s       19.8%     3.2 h       2.6 h 
+WARN  15:49:56,028 HaplotypeCallerGenotypingEngine - location 2R:10827883-10827889: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CCAGGCTGA. 
+INFO  15:50:17,938 ProgressMeter -     2R:10978746      2.2324452E7    38.5 m          103.0 s       19.9%     3.2 h       2.6 h 
+INFO  15:50:47,950 ProgressMeter -     2R:11155232      2.2324452E7    39.0 m          104.0 s       20.1%     3.2 h       2.6 h 
+INFO  15:51:17,970 ProgressMeter -     2R:11412664      2.2324452E7    39.5 m          106.0 s       20.2%     3.3 h       2.6 h 
+INFO  15:51:47,986 ProgressMeter -     2R:11679571      2.2324452E7    40.0 m          107.0 s       20.4%     3.3 h       2.6 h 
+INFO  15:52:17,998 ProgressMeter -     2R:11983837      2.2324452E7    40.5 m          108.0 s       20.5%     3.3 h       2.6 h 
+INFO  15:52:48,012 ProgressMeter -     2R:12246266      2.2324452E7    41.0 m          110.0 s       20.7%     3.3 h       2.6 h 
+INFO  15:53:18,019 ProgressMeter -     2R:12562508      2.2324452E7    41.5 m          111.0 s       20.9%     3.3 h       2.6 h 
+INFO  15:53:48,038 ProgressMeter -     2R:12925369      2.2324452E7    42.0 m          112.0 s       21.1%     3.3 h       2.6 h 
+INFO  15:54:18,046 ProgressMeter -     2R:13299898      2.2324452E7    42.5 m          114.0 s       21.3%     3.3 h       2.6 h 
+INFO  15:54:48,053 ProgressMeter -     2R:13716138      2.2324452E7    43.0 m          115.0 s       21.6%     3.3 h       2.6 h 
+INFO  15:55:18,067 ProgressMeter -     2R:14018118      2.2324452E7    43.5 m          116.0 s       21.8%     3.3 h       2.6 h 
+INFO  15:55:48,092 ProgressMeter -     2R:14406788      2.2324452E7    44.0 m          118.0 s       22.0%     3.3 h       2.6 h 
+INFO  15:56:18,098 ProgressMeter -     2R:14763934      2.2324452E7    44.5 m          119.0 s       22.2%     3.3 h       2.6 h 
+INFO  15:56:48,110 ProgressMeter -     2R:15133765      2.2324452E7    45.0 m          120.0 s       22.4%     3.3 h       2.6 h 
+INFO  15:57:18,134 ProgressMeter -     2R:15538607      2.2324452E7    45.5 m            2.0 m       22.7%     3.3 h       2.6 h 
+INFO  15:57:48,146 ProgressMeter -     2R:15943311      2.2324452E7    46.0 m            2.1 m       22.9%     3.3 h       2.6 h 
+INFO  15:58:18,159 ProgressMeter -     2R:16291852      2.2324452E7    46.5 m            2.1 m       23.1%     3.4 h       2.6 h 
+INFO  15:58:48,170 ProgressMeter -     2R:16610508      2.2324452E7    47.0 m            2.1 m       23.3%     3.4 h       2.6 h 
+INFO  15:59:18,184 ProgressMeter -     2R:16922831      2.2324452E7    47.5 m            2.1 m       23.5%     3.4 h       2.6 h 
+INFO  15:59:48,197 ProgressMeter -     2R:17215627      2.2324452E7    48.0 m            2.2 m       23.7%     3.4 h       2.6 h 
+INFO  16:00:18,203 ProgressMeter -     2R:17542216      2.2324452E7    48.5 m            2.2 m       23.9%     3.4 h       2.6 h 
+INFO  16:00:48,219 ProgressMeter -     2R:17801443      2.2324452E7    49.0 m            2.2 m       24.0%     3.4 h       2.6 h 
+INFO  16:01:18,226 ProgressMeter -     2R:18043407      2.2324452E7    49.5 m            2.2 m       24.2%     3.4 h       2.6 h 
+INFO  16:01:48,240 ProgressMeter -     2R:18237375      2.2324452E7    50.0 m            2.2 m       24.3%     3.4 h       2.6 h 
+INFO  16:02:18,254 ProgressMeter -     2R:18473786      2.2324452E7    50.5 m            2.3 m       24.4%     3.4 h       2.6 h 
+INFO  16:02:48,268 ProgressMeter -     2R:18726656      2.2324452E7    51.0 m            2.3 m       24.6%     3.5 h       2.6 h 
+INFO  16:03:18,282 ProgressMeter -     2R:19023340      2.2324452E7    51.5 m            2.3 m       24.8%     3.5 h       2.6 h 
+INFO  16:03:48,296 ProgressMeter -     2R:19280472      2.2324452E7    52.0 m            2.3 m       24.9%     3.5 h       2.6 h 
+INFO  16:04:18,319 ProgressMeter -     2R:19623794      2.2324452E7    52.5 m            2.4 m       25.1%     3.5 h       2.6 h 
+INFO  16:04:48,327 ProgressMeter -     2R:20432190      2.2324452E7    53.0 m            2.4 m       25.6%     3.5 h       2.6 h 
+INFO  16:05:18,337 ProgressMeter -       3L:134999      4.3463669E7    53.5 m           73.0 s       26.1%     3.4 h       2.5 h 
+INFO  16:05:48,342 ProgressMeter -       3L:479490      4.3463669E7    54.0 m           74.0 s       26.3%     3.4 h       2.5 h 
+INFO  16:06:18,356 ProgressMeter -       3L:760242      4.3463669E7    54.5 m           75.0 s       26.5%     3.4 h       2.5 h 
+INFO  16:06:48,376 ProgressMeter -      3L:1180741      4.3463669E7    55.0 m           75.0 s       26.7%     3.4 h       2.5 h 
+INFO  16:07:18,381 ProgressMeter -      3L:1753699      4.3463669E7    55.5 m           76.0 s       27.1%     3.4 h       2.5 h 
+INFO  16:07:48,388 ProgressMeter -      3L:2426098      4.3463669E7    56.0 m           77.0 s       27.5%     3.4 h       2.5 h 
+INFO  16:08:18,411 ProgressMeter -      3L:2728745      4.3463669E7    56.5 m           78.0 s       27.7%     3.4 h       2.5 h 
+WARN  16:08:41,798 HaplotypeCallerGenotypingEngine - location 3L:2951993: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TTATACATTAATATATATGTTTACATATTTAGTCGAATAGTTTTGTAATTAAAGATCAACTTTTAAATTACTTTACGTCCTATTAAACTATATTGGCCAAACATTTTTAAGTACAATAAATAAAATGGGTAACTTCTGTTATAAACTAACAGAATGCTCCTCCTTATGATTTACAAAAC, TTTTTATGCATTAATTTATATGTTTACATATTTAGTCGAATAGTTTTGTAAGTAAAGATCAACTTTTAAATTACTTTACGTCCTATTAAACTATATTGGCCAAACATTTTTAAGTACAATAAATAAAATGGGTAACTTCTGTTATAAACTAACAGAATGCTCCTCCTTATGATTTACAAAAC. 
+INFO  16:08:48,421 ProgressMeter -      3L:3011603      4.3463669E7    57.0 m           78.0 s       27.8%     3.4 h       2.5 h 
+INFO  16:09:18,435 ProgressMeter -      3L:3276078      4.3463669E7    57.5 m           79.0 s       28.0%     3.4 h       2.5 h 
+INFO  16:09:48,450 ProgressMeter -      3L:3553804      4.3463669E7    58.0 m           80.0 s       28.2%     3.4 h       2.5 h 
+INFO  16:10:18,464 ProgressMeter -      3L:3832766      4.3463669E7    58.5 m           80.0 s       28.3%     3.4 h       2.5 h 
+INFO  16:10:48,480 ProgressMeter -      3L:4090394      4.3463669E7    59.0 m           81.0 s       28.5%     3.5 h       2.5 h 
+INFO  16:11:18,486 ProgressMeter -      3L:4334339      4.3463669E7    59.5 m           82.0 s       28.6%     3.5 h       2.5 h 
+INFO  16:11:48,500 ProgressMeter -      3L:4576414      4.3463669E7    60.0 m           82.0 s       28.8%     3.5 h       2.5 h 
+INFO  16:12:18,508 ProgressMeter -      3L:4834660      4.3463669E7    60.5 m           83.0 s       28.9%     3.5 h       2.5 h 
+INFO  16:12:48,522 ProgressMeter -      3L:5087410      4.3463669E7    61.0 m           84.0 s       29.1%     3.5 h       2.5 h 
+WARN  16:13:09,299 HaplotypeCallerGenotypingEngine - location 3L:5289861: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: ATCAATCATGAAACATACTGAGTTAATATTTATTTCTTGCAATGCCACAAAGTTAGTTTTTTTTAAGGCATATTTTAAAAGTAAAGAATTAAAG, ATCAATCATGAAACATACTGAGTTAATATTTATTTCTTGCAATGCTACAATGTTAGTTTTTTTTAAGGCATATTTTATAAGTGAAGATTTATAG. 
+INFO  16:13:18,530 ProgressMeter -      3L:5372011      4.3463669E7    61.5 m           84.0 s       29.2%     3.5 h       2.5 h 
+INFO  16:13:48,544 ProgressMeter -      3L:5626289      4.3463669E7    62.0 m           85.0 s       29.4%     3.5 h       2.5 h 
+INFO  16:14:18,552 ProgressMeter -      3L:5937446      4.3463669E7    62.5 m           86.0 s       29.6%     3.5 h       2.5 h 
+INFO  16:14:48,557 ProgressMeter -      3L:6207930      4.3463669E7    63.0 m           87.0 s       29.8%     3.5 h       2.5 h 
+INFO  16:15:18,564 ProgressMeter -      3L:6517131      4.3463669E7    63.5 m           87.0 s       29.9%     3.5 h       2.5 h 
+WARN  16:15:45,029 HaplotypeCallerGenotypingEngine - location 3L:6728994: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TGCAGATCTTTATTTCATTCAAAATATCTTTATCTATATAATTAAAACTATTATTAGTTGTAAGTATCTTACTAAAACTTGGTTAGATTTCCGTGGCATTCCTGAACTGTAAAGAAAACCATTTTGAGC, TACAGATCTTTATTTCATTCAAAATATCTTTATCTATATAATTAAAACTATTATTAGTTGTAAGTATCTTACTAAAACTTGGTTAGATTTCCGTGGCATTCCTGAACTGTAAAGAAAACCATTTTGAGC. 
+INFO  16:15:48,644 ProgressMeter -      3L:6792858      4.3463669E7    64.0 m           88.0 s       30.1%     3.5 h       2.5 h 
+INFO  16:16:18,647 ProgressMeter -      3L:7056400      4.3463669E7    64.5 m           89.0 s       30.3%     3.6 h       2.5 h 
+INFO  16:16:48,661 ProgressMeter -      3L:7330580      4.3463669E7    65.0 m           89.0 s       30.4%     3.6 h       2.5 h 
+INFO  16:17:18,675 ProgressMeter -      3L:7586093      4.3463669E7    65.5 m           90.0 s       30.6%     3.6 h       2.5 h 
+INFO  16:17:48,692 ProgressMeter -      3L:7839065      4.3463669E7    66.0 m           91.0 s       30.7%     3.6 h       2.5 h 
+INFO  16:18:18,703 ProgressMeter -      3L:8117021      4.3463669E7    66.5 m           91.0 s       30.9%     3.6 h       2.5 h 
+INFO  16:18:48,717 ProgressMeter -      3L:8380838      4.3463669E7    67.0 m           92.0 s       31.1%     3.6 h       2.5 h 
+INFO  16:19:18,729 ProgressMeter -      3L:8658487      4.3463669E7    67.5 m           93.0 s       31.2%     3.6 h       2.5 h 
+INFO  16:19:48,737 ProgressMeter -      3L:8926032      4.3463669E7    68.0 m           93.0 s       31.4%     3.6 h       2.5 h 
+INFO  16:20:18,744 ProgressMeter -      3L:9210020      4.3463669E7    68.5 m           94.0 s       31.5%     3.6 h       2.5 h 
+INFO  16:20:48,758 ProgressMeter -      3L:9468895      4.3463669E7    69.0 m           95.0 s       31.7%     3.6 h       2.5 h 
+INFO  16:21:18,770 ProgressMeter -      3L:9689739      4.3463669E7    69.5 m           95.0 s       31.8%     3.6 h       2.5 h 
+INFO  16:21:48,774 ProgressMeter -      3L:9972874      4.3463669E7    70.0 m           96.0 s       32.0%     3.6 h       2.5 h 
+INFO  16:22:18,787 ProgressMeter -     3L:10240554      4.3463669E7    70.5 m           97.0 s       32.2%     3.7 h       2.5 h 
+INFO  16:22:48,800 ProgressMeter -     3L:10559849      4.3463669E7    71.0 m           98.0 s       32.4%     3.7 h       2.5 h 
+INFO  16:23:18,803 ProgressMeter -     3L:10842664      4.3463669E7    71.5 m           98.0 s       32.5%     3.7 h       2.5 h 
+INFO  16:23:48,817 ProgressMeter -     3L:11101719      4.3463669E7    72.0 m           99.0 s       32.7%     3.7 h       2.5 h 
+INFO  16:24:18,822 ProgressMeter -     3L:11370296      4.3463669E7    72.5 m          100.0 s       32.8%     3.7 h       2.5 h 
+INFO  16:24:48,836 ProgressMeter -     3L:11633865      4.3463669E7    73.0 m          100.0 s       33.0%     3.7 h       2.5 h 
+INFO  16:25:18,844 ProgressMeter -     3L:12161222      4.3463669E7    73.5 m          101.0 s       33.3%     3.7 h       2.5 h 
+INFO  16:25:48,866 ProgressMeter -     3L:12687864      4.3463669E7    74.0 m          102.0 s       33.6%     3.7 h       2.4 h 
+##### ERROR --
+##### ERROR stack trace 
+java.lang.ArrayIndexOutOfBoundsException: 43
+	at org.broadinstitute.gatk.tools.walkers.annotator.BaseQualityRankSumTest.getElementForRead(BaseQualityRankSumTest.java:96)
+	at org.broadinstitute.gatk.tools.walkers.annotator.RankSumTest.getElementForRead(RankSumTest.java:209)
+	at org.broadinstitute.gatk.tools.walkers.annotator.RankSumTest.fillQualsFromLikelihoodMap(RankSumTest.java:187)
+	at org.broadinstitute.gatk.tools.walkers.annotator.RankSumTest.annotate(RankSumTest.java:104)
+	at org.broadinstitute.gatk.tools.walkers.annotator.VariantAnnotatorEngine.annotateContextForActiveRegion(VariantAnnotatorEngine.java:315)
+	at org.broadinstitute.gatk.tools.walkers.annotator.VariantAnnotatorEngine.annotateContextForActiveRegion(VariantAnnotatorEngine.java:260)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCallerGenotypingEngine.annotateCall(HaplotypeCallerGenotypingEngine.java:328)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCallerGenotypingEngine.assignGenotypeLikelihoods(HaplotypeCallerGenotypingEngine.java:290)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCaller.map(HaplotypeCaller.java:970)
+	at org.broadinstitute.gatk.tools.walkers.haplotypecaller.HaplotypeCaller.map(HaplotypeCaller.java:252)
+	at org.broadinstitute.gatk.engine.traversals.TraverseActiveRegions$TraverseActiveRegionMap.apply(TraverseActiveRegions.java:709)
+	at org.broadinstitute.gatk.engine.traversals.TraverseActiveRegions$TraverseActiveRegionMap.apply(TraverseActiveRegions.java:705)
+	at org.broadinstitute.gatk.utils.nanoScheduler.NanoScheduler$ReadMapReduceJob.run(NanoScheduler.java:471)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+##### ERROR ------------------------------------------------------------------------------------------
+##### ERROR A GATK RUNTIME ERROR has occurred (version 3.8-0-ge9d806836):
+##### ERROR
+##### ERROR This might be a bug. Please check the documentation guide to see if this is a known problem.
+##### ERROR If not, please post the error message, with stack trace, to the GATK forum.
+##### ERROR Visit our website and forum for extensive documentation and answers to 
+##### ERROR commonly asked questions https://software.broadinstitute.org/gatk
+##### ERROR
+##### ERROR MESSAGE: 43
+##### ERROR ------------------------------------------------------------------------------------------
+
+
+########################################################################
+PBS Epilogue:	Fri Feb  1 16:26:15 EST 2019
+Job ID:		759387[4].cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=468:30:00,nodes=1:ppn=8,mem=48gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=8
+Resources:	cput=09:53:17,vmem=16911084kb,walltime=01:14:46,mem=4917856kb,energy_used=0
+Exit Value:	1
+########################################################################

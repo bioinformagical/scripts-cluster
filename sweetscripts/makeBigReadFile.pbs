@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=400gb
+
+#PBS -N gggiga-big 
+#PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-24
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+
+
+
+cd /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/
+
+while read p; do
+	echo $p
+	cat ${p}_R1_fastx-cliptrim.fq_matched.fq >> giga_R1-trimmed.fq
+	cat ${p}_R2_fastx-cliptrim.fq_matched.fq >> giga_R2-trimmed.fq
+done <file.txt
+echo `pwd`
+
+perl ~/scripts/perl/validateHiseqPairs.pl  giga_R1-trimmed.fq  giga_R2-trimmed.fq
+
+
+echo "FIN"
+
+

@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=468:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=64
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=464gb
+#PBS -j oe
+#PBS -N gggatk-indie
+#PBS -q hammerhead
+#PBS -t 18
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/banana_genome/indieVCF/fileprefix.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching GATK haplotyper"
+
+#module load java8 
+#module load samtools
+#module load bwa
+#module load bcftools
+module load gatk
+
+cd /nobackup/banana_genome/indieVCF
+
+java -jar /apps/pkg/gatk-3.8/GenomeAnalysisTK.jar \
+ --analysis_type HaplotypeCaller \
+ -R /nobackup/banana_genome/scratch/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna \
+ -I /nobackup/banana_genome/scratch/align/run3/readgrouped-${file}-sorted.bam \
+ -o ${file}-sorted.raw.vcf \
+ -stand_call_conf 50 \
+ -ploidy 40 \
+ --min_base_quality_score 15 \
+ -nct 64 
+ #--select_expressions "AF>0.1"
+
+
+###### Removed Plantains !!!   #########
+#-I /scratch/rreid2/banana/align/run3/readgrouped-109_S36_L008-sorted.bam \
+# 35  -I /scratch/rreid2/banana/align/run3/readgrouped-111_S37_L008-sorted.bam \
+
+
+
+
+#python /users/rreid2/scripts/python/filterVCF-bygene-banana.py ${file}-filth-byDP.vcf musa_acuminata_v2-mRNA.gff3
+
+#awk '{print $1 "\t" $2 "\t" $5 }' ${file}-filth-byDP-byGeneLocation-v2.vcf > ${file}-just3cols.txt
+
+#-I /scratch/rreid2/banana/align/run3/readgrouped-1187_S15_L004-sorted.bam \
+# 36  -I /scratch/rreid2/banana/align/run3/readgrouped-1254_S16_L004-sorted.bam \
+# 37  -I /scratch/rreid2/banana/align/run3/readgrouped-1354_S7_L002-sorted.bam \
+# 38  -I /scratch/rreid2/banana/align/run3/readgrouped-1437_S38_L008-sorted.bam \
+# 39  -I /scratch/rreid2/banana/align/run3/readgrouped-1466_S2_L001-sorted.bam \
+# 40  -I /scratch/rreid2/banana/align/run3/readgrouped-1468_S3_L001-sorted.bam \
+# 41  -I /scratch/rreid2/banana/align/run3/readgrouped-249_S39_L008-sorted.bam \
+# 42  -I /scratch/rreid2/banana/align/run3/readgrouped-253_S5_L002-sorted.bam \
+# 43  -I /scratch/rreid2/banana/align/run3/readgrouped-281_S6_L002-sorted.bam \
+# 44  -I /scratch/rreid2/banana/align/run3/readgrouped-299_S8_L002-sorted.bam \
+# 45  -I /scratch/rreid2/banana/align/run3/readgrouped-425_S1_L001-sorted.bam \
+# 46  -I /scratch/rreid2/banana/align/run3/readgrouped-591_S4_L001-sorted.bam \
+# 47  -I /scratch/rreid2/banana/align/run3/readgrouped-653_S9_L003-sorted.bam \
+# 48  -I /scratch/rreid2/banana/align/run3/readgrouped-654_S10_L003-sorted.bam \
+# 49  -I /scratch/rreid2/banana/align/run3/readgrouped-712_S11_L003-sorted.bam \
+# 50  -I /scratch/rreid2/banana/align/run3/readgrouped-766_S12_L003-sorted.bam \
+# 51  -I /scratch/rreid2/banana/align/run3/readgrouped-966_S13_L004-sorted.bam \
+
+
+
+
+

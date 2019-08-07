@@ -1,0 +1,47 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=380:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90gb
+
+#PBS -N sssabatoged
+##PBS -q bigiron
+#Number of times to run this script
+#PBS -t 1-24
+##PBS -t 12-22
+
+set -eu
+umask 007
+
+
+dir=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/p2ep/blueberry/bac/raw/trimmed/trimmedseq-2-BVC004-027/dir.txt)
+#file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/fileheader.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+#mkdir /lustre/groups/p2ep/masurca/round3/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#rm -r ~/p2ep/masurca/$file/*
+cd /lustre/groups/p2ep/blueberry/bac/raw/trimmed/trimmedseq-2-BVC004-027/${dir}
+#mkdir ${file}
+#cd ${file}
+#cp ../config-run3.txt ./
+
+#sed -i.orig -e "s/foo/${file}/g" config-run3.txt
+#perl /lustre/home/rreid2/sw/MaSuRCA-2.3.2/bin/runSRCA.pl config.txt
+#./assemble.sh
+
+#module load soapdenovo2/2.04-r240
+
+cd trimmed.seq
+
+cat *F.trimmed.seq >> ../../../bvc-f.fna
+cat *R.trimmed.seq >> ../../../bvc-r.fna
+
+
+echo -n 'All done ';date;

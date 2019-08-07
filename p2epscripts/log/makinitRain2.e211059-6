@@ -1,0 +1,12 @@
++ umask 007
+++ sed -n -e 6p /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/fastx/filefq.txt
++ file=oat83
++ cd /lustre/groups/p2ep/masurca/round2/
++ mkdir oat83
++ cd oat83
++ cp ../config-run2.txt ./
++ sed -i.orig -e s/foo/oat83/g config-run2.txt
++ perl /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/runSRCA.pl config-run2.txt
++ ./assemble.sh
++ echo -n 'All done '
++ date

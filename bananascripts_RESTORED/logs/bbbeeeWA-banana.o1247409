@@ -1,0 +1,47 @@
+########################################################################
+PBS Prologue:	Thu Oct 19 11:19:01 EDT 2017
+Job ID:		1247409.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	bbbeeeWA-banana
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=168:30:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[12] 
+########################################################################
+Launching BWA alignment
+[bwa_index] Pack FASTA... 4.91 sec
+[bwa_index] Construct BWT for the packed sequence...
+[BWTIncCreate] textLength=944462578, availableWord=78455656
+[BWTIncConstructFromPacked] 10 iterations done. 99999986 characters processed.
+[BWTIncConstructFromPacked] 20 iterations done. 199999986 characters processed.
+[BWTIncConstructFromPacked] 30 iterations done. 299385074 characters processed.
+[BWTIncConstructFromPacked] 40 iterations done. 390155698 characters processed.
+[BWTIncConstructFromPacked] 50 iterations done. 470828866 characters processed.
+[BWTIncConstructFromPacked] 60 iterations done. 542527410 characters processed.
+[BWTIncConstructFromPacked] 70 iterations done. 606249234 characters processed.
+[BWTIncConstructFromPacked] 80 iterations done. 662881314 characters processed.
+[BWTIncConstructFromPacked] 90 iterations done. 713212050 characters processed.
+[BWTIncConstructFromPacked] 100 iterations done. 757942114 characters processed.
+[BWTIncConstructFromPacked] 110 iterations done. 797694274 characters processed.
+[BWTIncConstructFromPacked] 120 iterations done. 833022098 characters processed.
+[BWTIncConstructFromPacked] 130 iterations done. 864417506 characters processed.
+[BWTIncConstructFromPacked] 140 iterations done. 892317794 characters processed.
+[BWTIncConstructFromPacked] 150 iterations done. 917111586 characters processed.
+[BWTIncConstructFromPacked] 160 iterations done. 939144386 characters processed.
+[bwa_index] 365.22 seconds elapse.
+[bwa_index] Update BWT... 2.73 sec
+[bwa_index] Pack forward-only FASTA... 2.97 sec
+[bwa_index] Construct SA from BWT and Occ... 151.63 sec
+[bwt_gen] Finished constructing BWT in 163 iterations.
+[main] Version: 0.7.15-r1140
+[main] CMD: bwa index -p PAHANG.idx -a bwtsw /scratch/rreid2/banana/db/acuminata/GCA_000313855.2_ASM31385v2_genomic.fna
+[main] Real time: 528.353 sec; CPU: 527.477 sec
+
+
+########################################################################
+PBS Epilogue:	Thu Oct 19 11:27:50 EDT 2017
+Job ID:		1247409.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=168:30:00
+Resources:	cput=00:08:38,energy_used=0,mem=700984kb,vmem=941336kb,walltime=00:08:49
+Exit Value:	0
+########################################################################

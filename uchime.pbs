@@ -1,0 +1,119 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=96600mb
+
+#PBS -N uuuuuuchime 
+##PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+cd ~/mel/uchime/
+#cd ~/mel/merge/
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../max450/lucymax450.fasta \
+#-db /lustre/home/rreid2/mel/uchime/rRNA16S.gold.NAST_ALIGNED.fasta 	\
+#-chimeras 450-db-chimeras.fa 	\
+#-nonchimeras 450-db-nonchim.fa 	\
+#-uchimeout results450db.uchime
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../merge/mergemax280.fasta \    
+#-db /lustre/home/rreid2/mel/uchime/rRNA16S.gold.NAST_ALIGNED.fasta	\
+#-chimeras 280-db-chimeras.fa	\
+#-nonchimeras 280-db-nonchim.fa	\
+#-uchimeout results280db.uchime
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../max450/lucymax450.fasta \
+#-chimeras 450-novo-chimeras.fa    \
+#-nonchimeras 450-novo-nonchim.fa  \
+#-uchimeout results450Novo.uchime
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../merge/mergemax280.fasta \    
+#-chimeras 280-novo-chimeras.fa   \
+#-nonchimeras 280-novo-nonchim.fa \
+#-uchimeout results280novo.uchime
+
+# Trying the OTU pipeline method......
+#/lustre/home/rreid2/sw/otupipe1.1.9/otupipe.bash lucymax450.fasta ./test2-450
+
+#u=/lustre/home/rreid2/sw/usearch5.1.221_i86linux32
+#UCHIME_REFDB=/lustre/home/rreid2/mel/rRNA16S.gold.NAST_ALIGNED.fasta
+
+#t=~/mel/uchime
+
+#$u --uchime $t/lucymax450.fasta --chimeras $t/chimeras_denovo.fa --nonchimeras $t/nonchimeras_denovo.fa --uchimeout $t/denovo.uchime --log $t/uchimedn.log
+#if [ $? != 0 ] ; then
+#       	exit 1
+#fi
+#ls -l $t/nonchimeras_denovo.fa
+
+#/lustre/home/rreid2/sw/otupipe1.1.9/otupipe.bash lucymax450.fasta ./otupipeline450
+#/lustre/home/rreid2/sw/usearch5.1.221_i86linux32 --uchime ./lucymax450Headed.fasta --chimeras ./chimeras_denovo.fa --nonchimeras ./tmp1.fa --uchimeout ./denovo.uchime --log ./uchimedn.log
+
+
+
+#/lustre/home/rreid2/sw/usearch5.1.221_i86linux32 --uchime ./mergemax280.fasta --chimeras ./chimeras280_denovo.fa --nonchimeras ./nonchimeras280.fa --uchimeout ./denovo280.uchime --log ./uchimedn280.log
+u=/lustre/home/rreid2/sw/usearch5.1.221_i86linux32
+input=./mergemax280.fasta
+
+nseqs_input=`grep ">" $input | wc -l`
+echo $nseqs_input reads
+
+echo
+echo =========================================================================
+echo "Sort by length, $nseqs_input sequences"
+echo =========================================================================
+$u --sort $input --output ./input.sortlen --log ./sortlen.log
+if [ $? != 0 ] ; then
+	exit 1
+fi
+	ls -l ./input.sortlen
+
+	echo
+	echo =========================================================================
+	echo "Dereplicate exact sub-sequences"
+	echo =========================================================================
+$u --cluster ./input.sortlen --derep_subseq --uc ./derep.uc --seedsout ./derep.fa --minlen 64 --w 64 --slots 16769023 --log ./derep.log --sizeout --maxrejects 64
+if [ $? != 0 ] ; then
+	exit 1
+fi
+ls -l derep.fa
+
+nseqs_derep=`grep -c ">" ./derep.fa`
+echo $nseqs_derep seqs after derep
+
+echo
+echo =========================================================================
+echo "Sort by abundance, output to derep.fas."
+echo =========================================================================
+$u --sortsize ./derep.fa --output ./derep.fas --log ./sortsize1.log --sizein --sizeout
+if [ $? != 0 ] ; then
+        exit 1
+fi
+ls -l $t/derep.fas
+
+echo
+echo =========================================================================
+echo "Cluster for err. corr. at $PCTID_ERR pct, output consensus to cons.fa."
+echo =========================================================================
+$u --cluster ./derep.fas --consout ./cons.fa --id 0.$PCTID_ERR --log ./cluster_err.log --w 20 --slots 16769023 --maxrejects 64 --sizein --sizeout --usersort
+if [ $? != 0 ] ; then
+        exit 1
+fi
+ls -l $t/cons.fa
+nseqs_cons=`grep ">" ./cons.fa | wc -l`
+echo $nseqs_cons consensus seqs
+
+/lustre/home/rreid2/sw/usearch5.1.221_i86linux32 --uchime ./cons.fa --db /lustre/home/rreid2/mel/rRNA16S.gold.NAST_ALIGNED.fasta  --chimeras ./chimeras280_db.fa --nonchimeras ./nonchimerasdb-280.fa --uchimeout ./db280.uchime --log ./uchimedb280.log --minh 0.1 --mindiv 2
+
+#/lustre/home/rreid2/sw/usearch5.1.221_i86linux32 --uchime ./lucymax450.fasta --db /lustre/home/rreid2/mel/rRNA16S.gold.NAST_ALIGNED.fasta  --chimeras ./chimeras450_db.fa --nonchimeras ./nonchimerasdb-450.fa --uchimeout ./db450.uchime --log ./uchimedb450.log
+
+

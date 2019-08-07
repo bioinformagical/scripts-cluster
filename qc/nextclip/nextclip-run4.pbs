@@ -1,0 +1,40 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=180:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=300gb
+
+#PBS -N nnnextclip-run4
+#PBS -q bigiron
+#Number of times to run this script
+##PBS -t 1-22
+#PBS -t 1
+
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+#mkdir /lustre/groups/p2ep/assemblers/masurca/run2/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#rm -r ~/p2ep/masurca/$file/*
+cd /lustre/groups/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/nextclip/
+
+/lustre/groups/bioservices/p2ep/sw/nextclip-master/bin/nextclip \
+--input_one ../${file}_R1.fastq \
+--input_two ../${file}_R2.fastq \
+ --output_prefix ${file} --log log.txt --min_length 25 --number_of_reads 52109199  --trim_ends 0 --remove_duplicates
+
+cat ${file}_A_R1.fastq ${file}_B_R1.fastq ${file}_C_R1.fastq > ${file}_all_R1.fastq
+cat ${file}_A_R2.fastq ${file}_B_R2.fastq ${file}_C_R2.fastq > ${file}_all_R2.fastq
+cat ${file}_D_R1.fastq ${file}_D_R1.fastq > ${file}-Dcombined.fastq
+rm log.txt
+
+echo -n 'All done ';date;

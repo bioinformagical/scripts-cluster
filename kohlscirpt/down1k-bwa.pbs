@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N Kaaahhhhhhn 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-12
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa/filenum.txt)
+
+module load bwa
+
+cd /lustre/groups/bioservices/kohlmeier/rawReads/down1k/
+
+#create index of reference
+bwa index -p 1kbBWAidx -a bwtsw /lustre/groups/bioservices/kohlmeier/rawReads/down1k/chr5-1kbPiece.fna
+bwa index -p 3kbBWAidx -a bwtsw /lustre/groups/bioservices/kohlmeier/rawReads/down1k/chr5-3kbPiece.fna
+
+#create index of RNA Seqs
+#bwa index -p ${ssid}BWAidx -a bwtsw ./$ssid
+
+#run alignment
+#bwa aln -t 4 1kbBWAidx $ssid >  $ssid.downstream.bwa
+
+#convert to SAM
+#bwa samse 1kbBWAidx $ssid.downstream.bwa $ssid > $ssid-downstream-bwa.sam
+
+module load samtools
+#Convert to Bam
+#samtools faidx /lustre/groups/bioservices/kohlmeier/projectInfo/downstream6-10kRegion.fna                # creates index file wg.fa.fai
+
+#samtools import /lustre/groups/bioservices/kohlmeier/projectInfo/downstream6-10kRegion.fna $ssid-downstream-bwa.sam $ssid-downstream-bwa.bam   # bam= binary alignment/map format
+#samtools sort $ssid-downstream-bwa.bam $ssid-downstream-bwa.srt       # sort by coordinate to streamline data processing
+#samtools index $ssid-downstream-bwa.srt  
+
+## First the 1KB
+
+bwa aln -I -t 4 1kbBWAidx ../dup/kohl${ssid}_uniq1.fastq.adapt.dup > k${ssid}-1.aln.sai
+bwa aln -I -t 4 1kbBWAidx ../dup/kohl${ssid}_uniq2.fastq.adapt.dup > k${ssid}-2.aln.sai
+bwa sampe 1kbBWAidx k${ssid}-1.aln.sai k${ssid}-2.aln.sai ../dup/kohl${ssid}_uniq1.fastq.adapt.dup ../dup/kohl${ssid}_uniq2.fastq.adapt.dup   > k${ssid}.downstream.sam
+
+samtools import /lustre/groups/bioservices/kohlmeier/rawReads/down1k/chr5-1kbPiece.fna k${ssid}.downstream.sam k${ssid}.downstream.bam
+samtools view -F 0x04 -b k${ssid}.downstream.bam > k${ssid}.rmd.downstream.bam
+samtools sort k${ssid}.rmd.downstream.bam k${ssid}.rmd.downstream.bam.srt
+samtools index k${ssid}.rmd.downstream.bam.srt.bam
+
+samtools mpileup -ugf chr5-1kbPiece.fna k${ssid}.rmd.downstream.bam.srt.bam | bcftools view -bvcg - > k${ssid}.rmd.downstream.srt.bcf
+bcftools view k${ssid}.rmd.downstream.srt.bcf > k${ssid}.rmd.downstream.srt.vcf 
+
+
+####  Then the 2nd 3kb piece
+
+bwa aln -I -t 4 3kbBWAidx ../dup/kohl${ssid}_uniq1.fastq.adapt.dup > k${ssid}-1.aln.sai
+bwa aln -I -t 4 3kbBWAidx ../dup/kohl${ssid}_uniq2.fastq.adapt.dup > k${ssid}-2.aln.sai
+bwa sampe 3kbBWAidx k${ssid}-1.aln.sai k${ssid}-2.aln.sai ../dup/kohl${ssid}_uniq1.fastq.adapt.dup ../dup/kohl${ssid}_uniq2.fastq.adapt.dup   > k${ssid}.downstream.sam
+
+samtools import /lustre/groups/bioservices/kohlmeier/rawReads/down1k/chr5-3kbPiece.fna k${ssid}.downstream.sam k${ssid}.downstream.bam
+samtools view -F 0x04 -b k${ssid}.downstream.bam > k${ssid}.rmd.downstream.bam
+samtools sort k${ssid}.rmd.downstream.bam k${ssid}.rmd.downstream.bam.srt
+samtools index k${ssid}.rmd.downstream.bam.srt.bam
+
+samtools mpileup -ugf chr5-1kbPiece.fna k${ssid}.rmd.downstream.bam.srt.bam | bcftools view -bvcg - > k${ssid}.rmd.downstream.srt.bcf
+bcftools view k${ssid}.rmd.downstream.srt.bcf > k${ssid}.rmd.downstream.srt.vcf
+
+
+

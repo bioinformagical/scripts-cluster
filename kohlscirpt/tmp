@@ -1,0 +1,176 @@
+Usage: cutadapt [options] <FASTA/FASTQ FILE> [<QUALITY FILE>]
+
+Reads a FASTA or FASTQ file, finds and removes adapters,
+and writes the changed sequence to standard output.
+When finished, statistics are printed to standard error.
+
+Use a dash "-" as file name to read from standard input
+(FASTA/FASTQ is autodetected).
+
+If two file names are given, the first must be a .fasta or .csfasta
+file and the second must be a .qual file. This is the file format
+used by some 454 software and by the SOLiD sequencer.
+If you have color space data, you still need to provide the -c option
+to correctly deal with color space!
+
+If the name of any input or output file ends with '.gz', it is
+assumed to be gzip-compressed.
+
+If you want to search for the reverse complement of an adapter, you must
+provide an additional adapter sequence using another -a, -b or -g parameter.
+
+If the input sequences are in color space, the adapter
+can be given in either color space (as a string of digits 0, 1, 2, 3) or in
+nucleotide space.
+
+EXAMPLE
+
+Assuming your sequencing data is available as a FASTQ file, use this
+command line:
+$ cutadapt -e ERROR-RATE -a ADAPTER-SEQUENCE input.fastq > output.fastq
+
+See the README file for more help and examples.
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -f FORMAT, --format=FORMAT
+                        Input file format; can be either 'fasta', 'fastq' or
+                        'sra-fastq'. Ignored when reading csfasta/qual files
+                        (default: auto-detect from file name extension).
+
+  Options that influence how the adapters are found:
+    Each of the following three parameters (-a, -b, -g) can be used
+    multiple times and in any combination to search for an entire set of
+    adapters of possibly different types. All of the given adapters will
+    be searched for in each read, but only the best matching one will be
+    trimmed (but see the --times option).
+
+    -a ADAPTER, --adapter=ADAPTER
+                        Sequence of an adapter that was ligated to the 3' end.
+                        The adapter itself and anything that follows is
+                        trimmed.
+    -b ADAPTER, --anywhere=ADAPTER
+                        Sequence of an adapter that was ligated to the 5' or
+                        3' end. If the adapter is found within the read or
+                        overlapping the 3' end of the read, the behavior is
+                        the same as for the -a option. If the adapter overlaps
+                        the 5' end (beginning of the read), the initial
+                        portion of the read matching the adapter is trimmed,
+                        but anything that follows is kept.
+    -g ADAPTER, --front=ADAPTER
+                        Sequence of an adapter that was ligated to the 5' end.
+                        If the adapter sequence starts with the character '^',
+                        the adapter is 'anchored'. An anchored adapter must
+                        appear in its entirety at the 5' end of the read (it
+                        is a prefix of the read). A non-anchored adapter may
+                        appear partially at the 5' end, or it may occur within
+                        the read. If it is found within a read, the sequence
+                        preceding the adapter is also trimmed. In all cases,
+                        the adapter itself is trimmed.
+    -e ERROR_RATE, --error-rate=ERROR_RATE
+                        Maximum allowed error rate (no. of errors divided by
+                        the length of the matching region) (default: 0.1)
+    -n COUNT, --times=COUNT
+                        Try to remove adapters at most COUNT times. Useful
+                        when an adapter gets appended multiple times (default:
+                        1).
+    -O LENGTH, --overlap=LENGTH
+                        Minimum overlap length. If the overlap between the
+                        read and the adapter is shorter than LENGTH, the read
+                        is not modified.This reduces the no. of bases trimmed
+                        purely due to short random adapter matches (default:
+                        3).
+    --match-read-wildcards
+                        Allow 'N's in the read as matches to the adapter
+                        (default: False).
+    -N, --no-match-adapter-wildcards
+                        Do not treat 'N' in the adapter sequence as wildcards.
+                        This is needed when you want to search for literal 'N'
+                        characters.
+
+  Options for filtering of processed reads:
+    --discard-trimmed, --discard
+                        Discard reads that contain the adapter instead of
+                        trimming them. Also use -O in order to avoid throwing
+                        away too many randomly matching reads!
+    --discard-untrimmed, --trimmed-only
+                        Discard reads that do not contain the adapter.
+    -m LENGTH, --minimum-length=LENGTH
+                        Discard trimmed reads that are shorter than LENGTH.
+                        Reads that are too short even before adapter removal
+                        are also discarded. In colorspace, an initial primer
+                        is not counted (default: 0).
+    -M LENGTH, --maximum-length=LENGTH
+                        Discard trimmed reads that are longer than LENGTH.
+                        Reads that are too long even before adapter removal
+                        are also discarded. In colorspace, an initial primer
+                        is not counted (default: no limit).
+
+  Options that influence what gets output to where:
+    -o FILE, --output=FILE
+                        Write the modified sequences to this file instead of
+                        standard output and send the summary report to
+                        standard output. The format is FASTQ if qualities are
+                        available, FASTA otherwise. (default: standard output)
+    --info-file=FILE    Write information about each read and its adapter
+                        matches into FILE. Currently experimental: Expect the
+                        file format to change!
+    -r FILE, --rest-file=FILE
+                        When the adapter matches in the middle of a read,
+                        write the rest (after the adapter) into a file. Use -
+                        for standard output.
+    --wildcard-file=FILE
+                        When the adapter has wildcard bases ('N's) write
+                        adapter bases matching wildcard positions to FILE. Use
+                        - for standard output. When there are indels in the
+                        alignment, this may occasionally not be quite
+                        accurate.
+    --too-short-output=FILE
+                        Write reads that are too short (according to length
+                        specified by -m) to FILE. (default: discard reads)
+    --untrimmed-output=FILE
+                        Write reads that do not contain the adapter to FILE,
+                        instead of writing them to the regular output file.
+                        (default: output to same file as trimmed)
+
+  Additional modifications to the reads:
+    -q CUTOFF, --quality-cutoff=CUTOFF
+                        Trim low-quality ends from reads before adapter
+                        removal. The algorithm is the same as the one used by
+                        BWA (Subtract CUTOFF from all qualities; compute
+                        partial sums from all indices to the end of the
+                        sequence; cut sequence at the index at which the sum
+                        is minimal) (default: 0)
+    --quality-base=QUALITY_BASE
+                        Assume that quality values are encoded as
+                        ascii(quality + QUALITY_BASE). The default (33) is
+                        usually correct, except for reads produced by some
+                        versions of the Illumina pipeline, where this should
+                        be set to 64. (default: 33)
+    -x PREFIX, --prefix=PREFIX
+                        Add this prefix to read names
+    -y SUFFIX, --suffix=SUFFIX
+                        Add this suffix to read names
+    --strip-suffix=STRIP_SUFFIX
+                        Remove this suffix from read names if present. Can be
+                        given multiple times.
+    -c, --colorspace    Colorspace mode: Also trim the color that is adjacent
+                        to the found adapter.
+    -d, --double-encode
+                        When in color space, double-encode colors (map
+                        0,1,2,3,4 to A,C,G,T,N).
+    -t, --trim-primer   When in color space, trim primer base and the first
+                        color (which is the transition to the first
+                        nucleotide)
+    --strip-f3          For color space: Strip the _F3 suffix of read names
+    --maq, --bwa        MAQ- and BWA-compatible color space output. This
+                        enables -c, -d, -t, --strip-f3, -y '/1' and -z.
+    --length-tag=TAG    Search for TAG followed by a decimal number in the
+                        name of the read (description/comment field of the
+                        FASTA or FASTQ file). Replace the decimal number with
+                        the correct length of the trimmed read. For example,
+                        use --length-tag 'length=' to correct fields like
+                        'length=123'.
+    -z, --zero-cap      Change negative quality values to zero (workaround to
+                        avoid segmentation faults in BWA)

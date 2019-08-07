@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of x hours and x minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request x  megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=195gb
+
+#PBS -N nnnextclip-5
+#PBS -q bigiron
+#PBS -t 1-9
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /group/p2ep/dhmri/run8-Oct2014/file2.txt)
+
+echo "Launching fastx"
+
+#cd $home
+
+cd /lustre/groups/p2ep/dhmri/run8-Oct2014/nextclip/
+	
+
+/lustre/groups/bioservices/p2ep/sw/nextclip-master/bin/nextclip \
+--input_one ../${file}_R1_001.fastq \
+--input_two ../${file}_R2_001.fastq \
+ --output_prefix ${file} --log log.txt --min_length 25 --number_of_reads 52109199  --trim_ends 0 --remove_duplicates
+
+cat ${file}_A_R1.fastq ${file}_B_R1.fastq ${file}_C_R1.fastq > ${file}_all_R1.fastq
+cat ${file}_A_R2.fastq ${file}_B_R2.fastq ${file}_C_R2.fastq > ${file}_all_R2.fastq
+cat ${file}_D_R1.fastq ${file}_D_R1.fastq > ${file}-Dcombined.fastq
+rm log.txt
+
+echo -n 'All done ';date;
+
+
+echo "fin"
+

@@ -1,0 +1,141 @@
+########################################################################
+PBS Prologue:	Fri Sep 23 14:36:39 EDT 2011
+Job ID:		980.login00.halycon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	GMOases
+Limits:		neednodes=compute,walltime=168:30:00
+Queue:		compute
+Account:	
+Nodes:		compute18[1] 
+########################################################################
+
+
+[0.000000] Reading graph file /lustre/home/rreid2/old/gm/assembly2/jb3/Graph2
+[0.022159] Graph has 207097 nodes and 41805116 sequences
+[11.131833] Reading read set file /lustre/home/rreid2/old/gm/assembly2/jb3/Sequences;
+[20.202919] 41805116 sequences found
+[54.733002] Done
+[64.157901] Removing contigs with coverage < 8.000000...
+[64.334325] Concatenation...
+[65.400284] Renumbering nodes
+[65.400288] Initial node count 207097
+[65.405027] Removed 174665 null nodes
+[65.410244] Concatenation over!
+[65.413361] Concatenation...
+[65.416218] Renumbering nodes
+[65.416220] Initial node count 32432
+[65.416283] Removed 0 null nodes
+[65.416283] Concatenation over!
+Clipping short tips off graph, drastic
+[65.453343] Concatenation...
+[65.478376] Renumbering nodes
+[65.478379] Initial node count 32432
+[65.481170] Removed 3011 null nodes
+[65.481173] Concatenation over!
+29421 nodes left
+Correcting graph with cutoff 0.200000
+Determining eligible starting points
+Done listing starting nodes
+Initializing todo lists
+Done with initilization
+[65.528395] Activating arc lookup table
+[65.533601] Done activating arc lookup table
+1000 nodes visited
+2000 nodes visited
+3000 nodes visited
+4000 nodes visited
+5000 nodes visited
+6000 nodes visited
+7000 nodes visited
+8000 nodes visited
+9000 nodes visited
+10000 nodes visited
+11000 nodes visited
+12000 nodes visited
+13000 nodes visited
+14000 nodes visited
+15000 nodes visited
+16000 nodes visited
+17000 nodes visited
+18000 nodes visited
+19000 nodes visited
+20000 nodes visited
+21000 nodes visited
+22000 nodes visited
+23000 nodes visited
+24000 nodes visited
+25000 nodes visited
+26000 nodes visited
+27000 nodes visited
+28000 nodes visited
+29000 nodes visited
+30000 nodes visited
+31000 nodes visited
+32000 nodes visited
+33000 nodes visited
+34000 nodes visited
+35000 nodes visited
+36000 nodes visited
+37000 nodes visited
+38000 nodes visited
+39000 nodes visited
+40000 nodes visited
+41000 nodes visited
+42000 nodes visited
+43000 nodes visited
+44000 nodes visited
+45000 nodes visited
+46000 nodes visited
+47000 nodes visited
+48000 nodes visited
+49000 nodes visited
+50000 nodes visited
+51000 nodes visited
+52000 nodes visited
+53000 nodes visited
+54000 nodes visited
+55000 nodes visited
+56000 nodes visited
+[65.736348] Concatenation...
+[65.801223] Renumbering nodes
+[65.801226] Initial node count 29421
+[65.803987] Removed 3589 null nodes
+[65.803989] Concatenation over!
+Clipping short tips off graph, drastic
+[65.806448] Concatenation...
+[65.807900] Renumbering nodes
+[65.807901] Initial node count 25832
+[65.807948] Removed 0 null nodes
+[65.807949] Concatenation over!
+25832 nodes left
+[66.712214] Writing into stats file /lustre/home/rreid2/old/gm/assembly2/jb3/stats.txt...
+[67.447558] Writing into graph file /lustre/home/rreid2/old/gm/assembly2/jb3/LastGraph...
+Computing local connections
+[80.287254] Activating arc lookup table
+[80.293177] Done activating arc lookup table
+Extracting loci from connection graph...
+Counted 16387 mRNA loci
+Transitive reduction of graph
+Preparing to correct graph with cutoff 0.200000
+Deactivating local correction settings
+Preparing to correct graph with cutoff 0.200000
+Deactivating local correction settings
+Exporting transcripts to /lustre/home/rreid2/old/gm/assembly2/jb3/transcripts.fa
+Exporting transcript contigs to /lustre/home/rreid2/old/gm/assembly2/jb3/contig-ordering.txt
+Finished heuristic approach, used 12798997/41805116 reads
+Writing into AMOS file /lustre/home/rreid2/old/gm/assembly2/jb3/oases_asm.afg...
+Extracting identifiable AS events
+Exporting AS events to /lustre/home/rreid2/old/gm/assembly2/jb3/splicing_events.txt
+
+/lustre/home/rreid2/old/gm/assembly2
+
+
+########################################################################
+PBS Epilogue:	Fri Sep 23 14:39:11 EDT 2011
+Job ID:		980.login00.halycon.local
+Limits:		neednodes=compute,walltime=168:30:00
+Resources:	cput=00:02:24,mem=2604996kb,vmem=2746984kb,walltime=00:02:27
+Account:	
+Exit Value:	0
+########################################################################

@@ -1,0 +1,32 @@
+#!/bin/bash
+#PBS -N superrStarFish
+##PBS -q bigiron
+#PBS -l walltime=150:00:00
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=90g
+
+#[[ -n "$PBS_O_WORKDIR" ]] && cd $PBS_O_WORKDIR
+
+cd ~/echinoderms/try4/
+
+module load velvet/1.2.07
+module load oases/0.2.08
+export PATH=/lustre/sw/oases/0.2.08/scripts:$PATH
+
+
+num=3;
+while [ $num -le 10 ]
+do
+        #/sw/oases-0.1.16/bin/oases  $HOME/br49 -cov_cutoff ${num} 
+        oases_pipeline.py -m 61 -M 93 -s 2 -o bj7 -d " -fastq -shortPaired ../dl/first6/bj4.fastq.adapt.trimmed.shuffled.fastq " -p " -cov_cutoff ${num} -min_trans_lgth 100 -amos_file yes -unused_reads yes -alignments yes "
+
+        num=`expr $num + 2`;
+        
+done
+
+
+echo   ${file};
+
+echo `pwd`
+
+

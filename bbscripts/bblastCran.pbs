@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+
+#PBS -N blassstCran
+
+##PBS -t 1-12
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastN "
+
+#cd $home
+
+cd /lustre/home/rreid2/old/blueberry/mito/
+
+#makeDB
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/old/blueberry/db/mitochondria-cranberry.fasta -dbtype nucl
+/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/old/blueberry/db/plastid-cranberry.fasta -dbtype nucl
+
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/blueberry/mira/bbrep_assembly/bbrep_d_results/bbrep_out.unpadded.fasta -db ~/old/blueberry/db/mitochondria-cranberry.fasta  -out ./miraVScranmito.tab -num_threads 12 -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/blueberry/mira/bbrep_assembly/bbrep_d_results/bbrep_out.unpadded.fasta -db ~/old/blueberry/db/plastid-cranberry.fasta  -out ./miraVScranChloroplast.tab -num_threads 12 -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+

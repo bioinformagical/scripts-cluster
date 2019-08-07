@@ -1,0 +1,35 @@
+########################################################################
+PBS Prologue:	Fri Jun 15 16:06:17 EDT 2018
+Job ID:		655108.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	qqquickmerge-brittle
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=60,nodes=1:ppn=60,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=96:00:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[60] 
+########################################################################
+WTF
+1: PREPARING DATA
+2,3: RUNNING mummer AND CREATING CLUSTERS
+# reading input file "brittle-smrt-masurca-merged.ntref" of length 3635091856
+# construct suffix tree for sequence of length 3635091856
+# (maximum reference length is 2305843009213693948)
+# (maximum query length is 18446744073709551615)
+# process 36350918 characters per dot
+#....................................................................................................
+# CONSTRUCTIONTIME /users/rreid2/sw/quickmerge/quickmerge/MUMmer3.23/mummer brittle-smrt-masurca-merged.ntref 1852.02
+# reading input file "/nobackup/echinotol/genome/quickmerge/hybrid_oneline.fa" of length 3896050581
+# matching query-file "/nobackup/echinotol/genome/quickmerge/hybrid_oneline.fa"
+# against subject-file "brittle-smrt-masurca-merged.ntref"
+# COMPLETETIME /users/rreid2/sw/quickmerge/quickmerge/MUMmer3.23/mummer brittle-smrt-masurca-merged.ntref 8721.26
+# SPACE /users/rreid2/sw/quickmerge/quickmerge/MUMmer3.23/mummer brittle-smrt-masurca-merged.ntref 7242.23
+4: FINISHING DATA
+
+
+########################################################################
+PBS Epilogue:	Fri Jun 15 18:40:14 EDT 2018
+Job ID:		655108.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=60,nodes=1:ppn=60,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=96:00:00
+Resources:	cput=02:33:17,energy_used=0,mem=113280984kb,vmem=117584904kb,walltime=02:33:57
+Exit Value:	0
+########################################################################

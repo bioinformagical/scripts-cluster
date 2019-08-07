@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=32
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=488gb
+#PBS -j oe
+#PBS -N aaabyss-banana
+#PBS -q hammerhead
+#PBS -t 1-20
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/banana/filter/trimgalore/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching BWA alignment"
+
+#module load java8 
+module load abyss
+
+cd /scratch/rreid2/banana/denovo/
+
+abyss-pe k=21 np=32  name=${file}-abyss \
+in="/scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R1_paired.fq /scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R2_paired.fq"
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=196:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=79gb
+#PBS -N ahhhh-TABERNAC 
+##PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+#PBS -t 1-259
+
+
+cd ~/p2ep/Fla4BxW85
+
+file=$(sed -n -e "${PBS_ARRAYID}p" files.txt)
+
+echo   ${file} > ${file}-name.txt;
+
+rm ${file}-adapt.txt
+grep "GGAGTCAAGTGCA" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GGAGTCAAG" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "AATAACCAAT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GCGTGCCAGAT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "AATAACCAAT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GCGTGCCAGA" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "ACACTCTTTCCCTACACGACGCTCTTCCGATCT " ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "CAAGCAGAAGACGGCATACGAGCTCTTCCGATCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GATCGGAAGAGCACACGTCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "ACACTCTTTCCCTACACGACGCTCTTCCGATCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "ACACTCTTTCCCTACACGACGCTCTTCCGATCT" ${file}.fastq | wc -l >> ${file}-adapt.txt
+grep "GATCGGAAGAGCACACGTCTGAACTCCAGTCAC" ${file}.fastq | wc -l >> ${file}-adapt.txt
+
+
+paste ${file}-name.txt ${file}-adapt.txt > ${file}-occurences.txt
+
+
+
+echo "finished job"
+
+#done
+
+#mv ${file}.fastq.adapt.dup ${file}/
+

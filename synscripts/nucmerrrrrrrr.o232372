@@ -1,0 +1,24 @@
+########################################################################
+PBS Prologue:	Fri Oct  2 11:25:17 EDT 2015
+Job ID:		232372.login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	nucmerrrrrrrr
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=90gb,walltime=168:30:00
+Queue:		compute
+Account:	
+Nodes:		compute05[1] 
+########################################################################
+
+
+
+
+########################################################################
+PBS Epilogue:	Fri Oct  2 11:43:52 EDT 2015
+Job ID:		232372.login00.halcyon.local
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=90gb,walltime=168:30:00
+Resources:	cput=00:19:11,mem=3845548kb,vmem=3948092kb,walltime=00:18:30
+Account:	
+Exit Value:	0
+########################################################################
+compute05: ignoring orphans (shared node)...11803 12023 

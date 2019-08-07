@@ -1,0 +1,44 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N BfastNFurious 
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+export PATH=/sw/velvet/bin:$PATH
+
+cd $HOME/bin/bfast/
+
+
+  
+#Convert the reads:
+perl bfast-0.6.5a/scripts/qseq2fastq.pl -q s <N>
+
+#Convert the reference:
+bfast-0.6.5a/bfast/bfast fasta2brg -f hg18.fa
+
+#Create the indexes:
+bfast-0.6.5a/bfast index -f hg18.fa -m <mask> -w 14 -i <index number>
+
+#Search the indexes:
+bfast-0.6.5a/bfast match -f hg18.fa -r reads.s <N>.fastq > bfast.matches.file.s <N>.bmf Perform local alignment: $bfast-0.6.5a/bfast localalign -f hg18.fa -m bfast.matches.file.s <N>.bmf > bfast.aligned.file.s <N>.baf Filter alignments:
+
+bfast-0.6.5a/bfast postprocess -f hg18.fa -i bfast.aligned.file.s <N>.baf > bfast.reported.file.s <N>.sam
+
+
+
+

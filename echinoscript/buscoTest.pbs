@@ -1,0 +1,53 @@
+#!/bin/bash
+#PBS -l walltime=696:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=1     # Number of nodes and processors per node requested by job
+#PBS -l mem=400GB           # Maximum physical memory to use for jobi
+#PBS -N bbbusco-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+##PBS -t 1-10
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /nobackup/oat_genome/wtdbg/fastas.txt)
+
+#module list
+echo "WTF"
+
+cd /nobackup/echinotol/busco
+
+
+module load bamtools
+module load augustus
+module load blast/2.2.29+
+module load busco/3.0.2
+
+#export PATH=/users/rreid2/sw/augustus.2.5.5/bin
+export AUGUSTUS_CONFIG_PATH=/users/rreid2/sw/augustus.2.5.5/config
+
+file=testrun
+
+run_BUSCO.py -o ${file} \
+ -i /users/rreid2/sw/busco-master/sample_data/target.fa \
+ -l /users/rreid2/sw/busco-master/sample_data/example \
+ -m geno \
+ -c 1 \
+ -r \
+ --tmp /scratch/rreid2/temp
+
+
+
+ 
+

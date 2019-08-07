@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=75500mb
+
+#PBS -N tttritties-qc 
+#PBS -q bigiron
+
+umask 007
+set eu
+
+#Number of times to run this script
+##PBS -t 2-24
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#ssid=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/janieslab/trinityRun2/file.txt)
+
+module load bowtie
+#cd ~/echinoderms/ortho/test 
+
+for ssid in BJ31 BJ34 BJ35 BJ36 BJ37 BJ38 BJ41 BJ44 BJ39 BJ40 BJ42 BJ46 BJ43 BJ45 BJ47 BJ48 BJ32 BJ33 BJ25 BJ26 BJ27 BJ28 BJ29 
+do
+cd /lustre/groups/janieslab/trinityRun2/bam/
+
+#mkdir ${ssid}
+
+
+cd ${ssid}
+echo `pwd`
+
+ ~/sw/trinityrnaseq_r2013-02-25/util/alignReads.pl \
+ --left  /lustre/groups/janieslab/trimmed/2013runs/${ssid}_R1_trimmed_clipped.fastq --right /lustre/groups/janieslab/trimmed/2013runs/${ssid}_R2_trimmed_clipped.fastq  \
+ --seqType fq --target /lustre/groups/janieslab/trinityRun2/${ssid}tri/Trinity.fasta --aligner bowtie --retain_intermediate_files
+
+done
+
+
+echo "fin"
+

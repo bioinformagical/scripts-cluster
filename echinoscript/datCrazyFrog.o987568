@@ -1,0 +1,54 @@
+########################################################################
+PBS Prologue:	Thu Jun 29 13:34:35 EDT 2017
+Job ID:		987568.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	datCrazyFrog
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=3800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=60gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Queue:		hammerhead
+Nodes:		cph-bm4.uncc.edu[64] 
+########################################################################
+core file size          (blocks, -c) unlimited
+data seg size           (kbytes, -d) 62914560
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 16511461
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) 62914560
+open files                      (-n) 65535
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 16511461
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+Starting Thu Jun 29 13:34:35 EDT 2017
+Verifying PATHS...
+jellyfish OK
+runCA OK
+createSuperReadsForDirectory.perl OK
+creating script file for the actions...done.
+execute assemble.sh to run assembly
+[Thu Jun 29 13:34:36 EDT 2017] Processing pe library reads
+[Thu Jun 29 13:34:36 EDT 2017] Processing sj library reads
+Average PE read length 105
+choosing kmer size of 53 for the graph
+cat: write error: Broken pipe
+MIN_Q_CHAR: 33
+[Thu Jun 29 13:34:37 EDT 2017] Estimating genome size.
+Estimated genome size: 3095304933
+[Thu Jun 29 13:37:17 EDT 2017] Computing super reads from PE 
+Using linking mates
+[Thu Jun 29 13:40:27 EDT 2017] Celera Assembler
+[Thu Jun 29 16:41:29 EDT 2017] CA failed, check output under CA/ and runCA3.out
+
+
+########################################################################
+PBS Epilogue:	Thu Jun 29 16:41:30 EDT 2017
+Job ID:		987568.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=3800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=60gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Resources:	cput=02:57:37,energy_used=0,mem=457113968kb,vmem=472694336kb,walltime=03:06:55
+Exit Value:	1
+########################################################################

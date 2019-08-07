@@ -1,0 +1,25 @@
+----------------------------------------
+Begin PBS Prologue Tue Jun  7 14:15:52 EDT 2011 1307470552
+Job ID:		801140.mn
+Username:	rreid2
+Group:		brc
+Nodes:		b15
+End PBS Prologue Tue Jun  7 14:15:52 EDT 2011 1307470552
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Tue Jun  7 14:26:28 EDT 2011 1307471188
+Job ID:		801140.mn
+Username:	rreid2
+Group:		brc
+Job Name:	Q2fna
+Session:	8248
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=168:30:00
+Resources:	cput=00:07:50,mem=4552kb,vmem=210372kb,walltime=00:10:30
+Queue:		default
+Account:		
+Nodes:	b15
+Killing leftovers...
+Killed by signal 15.
+
+End PBS Epilogue Tue Jun  7 14:26:28 EDT 2011 1307471188
+----------------------------------------

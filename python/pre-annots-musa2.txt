@@ -1,0 +1,21 @@
+file	name	title	description	url	load_hint	label_field	background	foreground	max_depth	name_size	connected	show2tracks	direction_type	positive_strand_color	negative_strand_color
+readgrouped-109_S36_L008-sorted.bam	ITC0109 ploidy-AAB      plantain (french)		ITC0109 ploidy-AAB      plantain (french)			id	FFFFFF	A5A5A5				TRUE			
+readgrouped-111_S37_L008-sorted.bam	ITC0111 ploidy-AAB      plantain (false horn)		ITC0111 ploidy-AAB      plantain (false horn)				FFFFFF	A5A5A5							
+readgrouped-1121_S14_L004-sorted.bam	ITC1121 ploidy-AA       ISEA 1		ITC1121 ploidy-AA       ISEA 1			score	FFFFFF	4DA719				FALSE	none		
+readgrouped-1187_S15_L004-sorted.bam	ITC1187 ploidy-AA       subssp. Banksii		ITC1187 ploidy-AA       subssp. Banksii			id	FFFFFF	366C15				TRUE			
+readgrouped-1254_S16_L004-sorted.bam	ITC1254 ploidy-AA       ?		ITC1254 ploidy-AA       ?				FFFFFF	366C15							
+readgrouped-1354_S7_L002-sorted.bam	ITC1354 ploidy-AAA      matoke		ITC1354 ploidy-AAA      matoke			id	FFFFFF	4DA719				TRUE			
+readgrouped-1437_S38_L008-sorted.bam	ITC1437 ploidy-AA       hybrid		ITC1437 ploidy-AA       hybrid				FFFFFF	4DA719							
+readgrouped-1466_S2_L001-sorted.bam	ITC1466 ploidy-AA       Mchare		ITC1466 ploidy-AA       Mchare			score	FFFFFF	0055FF 				FALSE	none		
+readgrouped-1468_S3_L001-sorted.bam	ITC1468 ploidy-AA       Mchare		ITC1468 ploidy-AA       Mchare			id	FFFFFF	000BB8				TRUE			
+readgrouped-249_S39_L008-sorted.bam	ITC0249 ploidy-AA       subsp. burmannicoides		ITC0249 ploidy-AA       subsp. burmannicoides				FFFFFF	000BB8							
+readgrouped-253_S5_L002-sorted.bam	ITC0253 ploidy-AA       subssp. microcarpa		ITC0253 ploidy-AA       subssp. microcarpa			id	FFFFFF	0055FF 				TRUE			
+readgrouped-281_S6_L002-sorted.bam	ITC0281 ploidy-AA       Mchare		ITC0281 ploidy-AA       Mchare				FFFFFF	0055FF 							
+readgrouped-299_S8_L002-sorted.bam	ITC0299 ploidy-AA       IndonTriPh		ITC0299 ploidy-AA       IndonTriPh			id	FFFFFF	6FC8F0				TRUE			
+readgrouped-425_S1_L001-sorted.bam	ITC0425 ploidy-AA       hybrid		ITC0425 ploidy-AA       hybrid				FFFFFF	6FC8F0							
+readgrouped-591_S4_L001-sorted.bam	ITC0591 ploidy-AA       subssp. microcarpa		ITC0591 ploidy-AA       subssp. microcarpa			id	FFFFFF	800080				TRUE			
+readgrouped-653_S9_L003-sorted.bam	ITC0653 ploidy    Pisang mas - sucrier		ITC0653 ploidy    Pisang mas - sucrier				FFFFFF	800080							
+readgrouped-654_S10_L003-sorted.bam	ITC0654 ploidy-AAA      Cavendish		ITC0654 ploidy-AAA      Cavendish				FFFFFF								
+readgrouped-712_S11_L003-sorted.bam	ITC0712 ploidy-AA       subssp. malaccensis		ITC0712 ploidy-AA       subssp. malaccensis				FFFFFF								
+readgrouped-766_S12_L003-sorted.bam	ITC0766 ploidy-AA       subssp. Banksii		ITC0766 ploidy-AA       subssp. Banksii				FFFFFF								
+readgrouped-966_S13_L004-sorted.bam	ITC0966 ploidy-AA       subssp. Zebrina		ITC0966 ploidy-AA       subssp. Zebrina				FFFFFF								

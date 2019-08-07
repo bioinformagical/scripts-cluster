@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=9gb
+
+#PBS -N tttableMable-gigaS12
+##PBS -q bigiron
+
+##PBS -t 1-9
+umask 007
+set -eux
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/brassica/map/chromosome/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching Blastn "
+#module load ncbi-blast+
+
+#cd $home
+
+cd /lustre/groups/lorainelab/data/illumina/sweet_potato/cdhit/gigaS10/
+cd rc
+awk '{ print $1 }' master-s10-table.txt > mastertable-S10.txt
+
+for file in  S10_L1 S10_L2  S10_L3  S10_LC1 S10_LC2 S10_LC3 S10_R1  S10_R2  S10_R3  S10_RC1 S10_RC2 S10_RC3
+do
+
+	#cp readcount-${file}/readspercontig-${file}.txt ./rc
+	perl ~/scripts/perl/makeBigExpressionTable-swe.pl readspercontig-${file}.txt mastertable-S10.txt  
+	mv mastertable-S10.txt-merged.txt mastertable-S10.txt
+done
+
+#/home/rreid2/sw/cd-hit-v4.6.1-2012-08-27/cd-hit -i ../gigaS12/giga/Trinity.fasta -T 24 -M 0 -o S12-cdhit  
+#########         NOTE:   DATA HAS BEEN MOVED AFTER COMPLETION SO MAY NOT BE WHERE EXPECTED     ##########
+echo `pwd`
+#echo ${file}
+
+echo "Fin"

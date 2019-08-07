@@ -1,0 +1,45 @@
+########################################################################
+PBS Prologue:	Wed Apr 11 15:32:16 EDT 2018
+Job ID:		485128[1].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	fffilterVCF-banana-1
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=2,nodes=1:ppn=2,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=36gb,walltime=168:30:00
+Queue:		cph_cpu
+Nodes:		cph-c23.uncc.edu[2] 
+########################################################################
+Launching BWA alignment
+chr01
+The number of sys.argv given were;  5 
+
+chr01
+chr01
+chr02
+chr03
+chr04
+chr05
+chr06
+chr07
+chr08
+chr09
+chr10
+chr11
+chr01
+27573629
+The Fasta size is  27573629
+The genome size is  331812599.0
+The percent is  0.0831000060971
+the num of snps is  1246
+the interval is  22129
+The size of the Interval array is  1247  and the 6th array element is  110645
+0
+Length of SNP sequence was wrong for startfas:
+
+
+########################################################################
+PBS Epilogue:	Wed Apr 11 15:33:06 EDT 2018
+Job ID:		485128[1].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=2,nodes=1:ppn=2,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=36gb,walltime=168:30:00
+Resources:	cput=00:00:01,energy_used=0,mem=390884kb,vmem=743160kb,walltime=00:00:50
+Exit Value:	1
+########################################################################

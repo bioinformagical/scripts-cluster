@@ -1,0 +1,79 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=50:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600000mb
+#PBS -l vmem=64gb
+
+#PBS -N nuckleeeEchino 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-24
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/velvet/bin:$PATH
+
+
+#cd /lustre/home/rreid2/echinoderms/ophio/
+#cd /lustre/home/rreid2/echinoderms/dl/denovo/
+cd /lustre/home/rreid2/echinoderms/db
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/old/blueberry/reads/454Sequences/all/24files.txt)
+
+
+echo `pwd`
+
+#for i in 1 2 3 4 5 6 7 8 9 10 
+#do
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix ophio-kmer21-$i ../covTemp/velvet21-$i/transcripts.fa ../db/ophioAll.fasta    
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix ophio-kmer55-$i ../covTemp/velvet55-$i/transcripts.fa ../db/ophioAll.fasta
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix ophio-kmer85-$i ../covTemp/kmer85-$i/transcripts.fa ../db/ophioAll.fasta
+
+#done
+
+#for i in 4 5 6 9
+#do
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix denovo-$i ./BJ${i}_denovo.fasta ../../db/ophioAll.fasta
+
+#done
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix list18vsSelf ./list18SpeciesHits.txt.fa ./list18SpeciesHits.txt.fa
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix 18listvsSelf ./list18SpeciesHits.txt.fa ./list18SpeciesHits.txt.fa
+
+#for i in 1 2 3 4
+#do
+#	for j in 1 2 3 4
+#	do
+#		~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix 18list${i}kvs${j}k ./18surv${i}k.fa ./18surv${j}k.fa
+#	done
+#done
+
+# ~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix 18list2kvs4k ./18surv2k.fa ./18surv4k.fa
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix 18list3kvs4k ./18surv3k.fa ./18surv4k.fa
+~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix 18list4kvs4k ./18surv4k.fa ./18surv4k.fa
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix 18list3kvs3k ./18surv3k.fa ./18surv3k.fa
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix $ssid.oatq /lustre/home/rreid2/old/gm/genes/eric1/oatq.fasta /lustre/home/rreid2/old/gm/assembly2/$ssid/tmp/oases_asm.afg.contigSeq.fasta
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix $ssid.chloro /lustre/home/rreid2/old/blueberry/reads/454Sequences/all/$ssid /lustre/home/rreid2/old/blueberry/db/plastid-cranberry.fasta
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix $ssid.mito /lustre/home/rreid2/old/blueberry/reads/454Sequences/all/$ssid /lustre/home/rreid2/old/blueberry/db/mitochondria-cranberry.fasta
+
+
+#~/sw/MUMmer3.22/nucmer --mumreference --minmatch 8 --coords -prefix $ssid.chloro130 /lustre/home/rreid2/old/blueberry/reads/454Sequences/all/$ssid /lustre/home/rreid2/old/blueberry/db/chloro130k.fasta
+
+echo $ssid
+

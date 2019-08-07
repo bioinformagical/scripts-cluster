@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+##PBS -q bigiron
+
+#PBS -N grayyyRPKMBigTable
+##PBS -t 1-33
+#set -eux
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching XML Parser "
+
+#cd  ~/old/gm/fiber1/
+cd ~/old/gm/assembly2/
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/fiber1/xmlNames.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+#echo "${file}"
+
+count=1;
+
+for i in rh1    rh2     rh3     js1     js2     js3     km1     km2     km3     ll1     ll2     ll3     sp1     sp2     sp3     br1     br2     br3     tk1     tk2     tk3	he1     he2     he3     dr1     dr2     dr3     ac1     ac2     ac3     jb1     jb2     jb3
+do	
+	
+	echo "${i} ${count}"
+
+#	perl /lustre/home/rreid2/old/scripts/perl/tableMaker.pl /lustre/home/rreid2/old/gm/tables/blastnt-raw-reads.table ~/old/gm/assembly2/${i}/nt/${i}.blastnt.xml.parsed.table `expr $count`
+
+#perl /lustre/home/rreid2/old/scripts/perl/rpkmBigTable.pl /lustre/home/rreid2/old/gm/tables/rpkm/blastnt-rpkm.e50.table ~/old/gm/assembly2/${i}/nt/${i}.blastnt.xml.parsede-50.table.rpkm `expr $count`
+
+perl /lustre/home/rreid2/old/scripts/perl/rpkmBigTable.pl /lustre/home/rreid2/old/gm/tables/rpkm/blastx-rpkm.e1.table ~/old/gm/assembly2/${i}/tmp/oases.xml.parsedE1.table `expr $count`
+
+#oases.xml.parsedE50.table.rpkm
+
+
+count=`expr $count + 1`
+done
+
+	#perl /lustre/home/rreid2/old/scripts/perl/tableMaker.pl /lustre/home/rreid2/old/scripts/perl/master.table ~/old/gm/assembly2/
+
+echo "fin"
+#done
+
+
+

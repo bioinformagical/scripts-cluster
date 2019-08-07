@@ -1,0 +1,27 @@
+########################################################################
+PBS Prologue:	Thu Oct 23 08:45:58 EDT 2014
+Job ID:		217624[4].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	pppairUp-swepot-4
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=8gb,walltime=18:30:00
+Queue:		compute
+Account:	
+Nodes:		compute00[1] 
+########################################################################
+
+
+Launching Pair repair after Fastx
+ Validating S10_LC1_R1_fastx_matched.fq and S10_LC1_R2_fastx_matched.fq 
+Total validated mates: 3711760 and 3711760: Read-pairs are properly ordered
+
+
+########################################################################
+PBS Epilogue:	Thu Oct 23 08:48:54 EDT 2014
+Job ID:		217624[4].login00.halcyon.local
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=8gb,walltime=18:30:00
+Resources:	cput=00:01:21,mem=969072kb,vmem=999124kb,walltime=00:02:51
+Account:	
+Exit Value:	0
+########################################################################
+compute00: ignoring orphans (shared node)...7759 7832 7939 8101 8175 8420 8509 8702 8703 8718 

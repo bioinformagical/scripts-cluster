@@ -1,0 +1,47 @@
+#!/bin/bash
+#PBS -l walltime=48:00:00
+#PBS -l nodes=1:ppn=48
+#PBS -l vmem=1800gb
+#PBS -N cccanudhmri
+#PBS -j oe
+#PBS -q hammerhead
+
+IFS=$'\n'
+set -eu
+umask 007
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+ulimit -c 10240
+ulimit -a
+
+
+
+#module load java8
+module load canu
+
+cd /nobackup/oat_genome/testecoli
+
+# generate array of input files
+FILES=( $(< "/nobackup/oat_genome/testecoli/TestData.locate") )
+
+# initial canu command
+CANU=( 
+	"canu"
+	"-correct"
+	"-p" "eco1"
+	"-d" "eco1"
+	"genomeSize=1g"
+	"useGrid=false"
+	"-pacbio-raw"
+)
+
+# add input files to canu command
+for file in "${FILES[@]}"; do
+	# this only needs to be declared once, not per file
+	#CANU[${#CANU[*]}]="-pacbio-raw"
+	CANU[${#CANU[*]}]="${file}"
+done
+
+# execute canu
+"${CANU[@]}"
+
+#canu -trim -p oat4 -d oat4 gridOptions="-q copperhead -l walltime=120:00:00 -l prologue=/users/jehalter/torque/prologue.sh,epilogue=/users/jehalter/torque/epilogue.sh" gridOptionsExecutive="-l nodes=1:ppn=1 -l feature=canu" genomeSize=13g useGrid=true -pacbio-corrected /scratch/jehalter/work/canu-1.4/pacbio/oat4.correctedReads.fasta.gz

@@ -1,0 +1,45 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l pmem=7600mb
+
+#PBS -N moses2aces2 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-33
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/velvet/bin:$PATH
+#/sw/velvet/bin/velveth velvet31 31 -fastq -long s_1_sequence.txt.trimmedkmer7520 
+
+#/sw/velvet/bin/velvetg velvet31 -exp_cov auto -min_contig_lgth 100 -unused_reads yes -cov_cutoff auto 
+
+#/sw/velvet/bin/velvetg velvet17 -exp_cov auto -min_contig_lgth 100 -unused_reads yes -cov_cutoff auto
+
+cd ~/old/gm/assembly2/
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ./filedir.txt)
+
+#file="velvet"${num};
+echo   ${file};
+
+	cd ${file}
+	mkdir tmp
+	cd tmp
+	cp ../oases_asm.afg ./
+	/lustre/sw/amos/3.0.1/bin/amos2ace oases_asm.afg
+
+
+
+echo `pwd`
+

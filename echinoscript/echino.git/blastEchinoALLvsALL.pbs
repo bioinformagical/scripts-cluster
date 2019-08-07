@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblastEchino
+
+##PBS -t 1-306
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/old/blueberry/reads/hiseq/split/files.txt)
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastP "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/home/rreid2/echinoderms/ortho/aa
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+#cd /lustre/home/rreid2/blueberry/4-4exons/
+#cd /lustre/home/rreid2/blueberry/cbf1/
+#makeDB
+
+#Blasting cbf1 gene against Gaarron scaffolds. Blastx
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in cbf1.faa -dbtype prot
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db cbf1.faa -query /lustre/home/rreid2/blueberry/garron/454Scaffolds.fna  -out ./garronVScbf1.blastx.xml -num_threads 1  -evalue 1e-10 -soft_masking false  -outfmt 5
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in allbj.header.faa -dbtype prot
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastp -db allbj.header.faa -query allbj.header.faa  -out test.blastp.txt -num_threads 24  -evalue 1e-5 -soft_masking false  -outfmt 6
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db 4exons.faa -query /lustre/home/rreid2/blueberry/mira/bbrep_assembly/bbrep_d_results/bbrep_out.unpadded.fasta  -out ./mira.blastx.xml -num_threads 1  -evalue 1e-10 -soft_masking false  -outfmt 5
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in otherExon.fna -dbtype nucl
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db otherExon.fna -query /lustre/home/rreid2/blueberry/garron/454Scaffolds.fna  -out ./garron.otherExon.xml -num_threads 12 -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+

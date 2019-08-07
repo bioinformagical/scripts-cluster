@@ -1,0 +1,94 @@
+#!/bin/bash
+#PBS -N Res_Mosaik
+#PBS -q bigiron
+#PBS -l nodes=1:ppn=30
+#PBS -l walltime=24:00:00
+
+cd $PBS_O_WORKDIR
+export MOSAIK_TMP=/scratch:$MOSAIK_TMP
+export PATH=/sw/mosaik-1.0.1388/bin:$PATH
+
+#MosaikBuild -fr $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.fna -oa $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat 
+#MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP101.fasta.lucy -fq $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP101.qual.lucy -out $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP.dat -st 454 -tn 100
+#MosaikBuild  -q $HOME/blueberry/reads/hiseq/s_1_1_sequence.txt.trimmedAdaptKmer20 -q2 $HOME/blueberry/reads/hiseq/s_1_2_sequence.txt.trimmedAdaptKmer20 -out $HOME/blueberry/reads/hiseq/s_1.Mbuild.dat -st illumina -tn 20 -mfl 400
+
+#MosaikBuild  -q $HOME/blueberry/reads/hiseq/s_2_1_sequence.txt.trimmedAdaptKmer20 -q2 $HOME/blueberry/reads/hiseq/s_2_2_sequence.txt.trimmedAdaptKmer20 -out $HOME/blueberry/reads/hiseq/s_2.Mbuild.dat -st illumina -tn 20 -mfl 400
+
+#MosaikBuild  -q $HOME/blueberry/reads/hiseq/s_3_1_sequence.txt.trimmedAdaptKmer20 -q2 $HOME/blueberry/reads/hiseq/s_3_2_sequence.txt.trimmedAdaptKmer20 -out $HOME/blueberry/reads/hiseq/s_3.Mbuild.dat -st illumina -tn 20 -mfl 400
+
+#MosaikBuild  -q $HOME/blueberry/reads/hiseq/s_4_1_sequence.txt.trimmedAdaptKmer20 -q2 $HOME/blueberry/reads/hiseq/s_4_2_sequence.txt.trimmedAdaptKmer20 -out $HOME/blueberry/reads/hiseq/s_4.Mbuild.dat -st illumina -tn 20 -mfl 400
+
+#MosaikBuild  -q $HOME/blueberry/reads/hiseq/s_5_1_sequence.txt.trimmedAdaptKmer20 -q2 $HOME/blueberry/reads/hiseq/s_5_2_sequence.txt.trimmedAdaptKmer20 -out $HOME/blueberry/reads/hiseq/s_5.Mbuild.dat -st illumina -tn 20 -mfl 400
+
+
+#MosaikBuild  -q $HOME/blueberry/reads//illumina/090702Seqeunce4/s_4_1_sequence.txt.trimmedAdapt220 -q2 $HOME/blueberry/reads/illumina/090702Seqeunce4/s_4_2_sequence.txt.trimmedAdapt220 -out $HOME/blueberry/reads/illumina/s_4.Mbuild.dat -st illumina -tn 50
+
+
+#454
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/GSIMZP101.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/GSIMZP.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/GP69GPQ01.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/GP69GPQ.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/GQW7E7G01.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/GQW7E7G.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/GS2YPEZ01.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/GS2YPEZ.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/GS6N4JD01.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/GS6N4JD.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/GSC3R5O01.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/GSC3R5O.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/FUORSTX03.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/FUORSTX.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/FTNE8KX01.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/FTNE8KX1.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/FTNE8KX03.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/FTNE8KX2.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/FTNFHLF01.fasta.lucy.clean   -out $HOME/blueberry/reads/454Sequences/mosaik/FTNFHLF1.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+MosaikBuild  -fr $HOME/blueberry/reads/454Sequences/OLDseqclean/FTNFHLF03.fasta.lucy.clean  -out $HOME/blueberry/reads/454Sequences/mosaik/FTNFHLF2.Mbuild.dat -st 454 -tn 100 -assignQual 25
+
+
+
+
+#MosaikAligner -in $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP.dat -out $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP.Malign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 55 -act 55 -p 30 
+#MosaikAligner -in $HOME/blueberry/reads/illumina/s_2.Mbuild.dat -out $HOME/blueberry/reads/illumina/s_2.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 12 -act 35 -p 30 
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/GSIMZP.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/GSIMZP.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/GP69GPQ.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/GP69GPQ.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/GQW7E7G.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/GQW7E7G.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/GS2YPEZ.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/GS2YPEZ.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/GS6N4JD.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/GS6N4JD.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/GSC3R5O.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/GSC3R5O.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/FUORSTX.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/FUORSTX.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/FTNE8KX1.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/FTNE8KX1.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/FTNE8KX2.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/FTNE8KX2.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/FTNFHLF1.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/FTNFHLF1.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+MosaikAligner -in $HOME/blueberry/reads/454Sequences/mosaik/FTNFHLF2.Mbuild.dat -out $HOME/blueberry/reads/454Sequences/mosaik/FTNFHLF2.MAlign.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 0.05 -act 26 -p 30
+
+#MosaikAligner -in $HOME/blueberry/reads/hiseq/s_1.Mbuild.dat -out $HOME/blueberry/reads/hiseq/s_1.MalignMFL.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 30 -act 35 -p 30 -bw 31 -ls 200
+
+#MosaikAligner -in $HOME/blueberry/reads/hiseq/s_2.Mbuild.dat -out $HOME/blueberry/reads/hiseq/s_2.MalignMFL.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 30 -act 35 -p 30 -bw 31 -ls 200
+
+#MosaikAligner -in $HOME/blueberry/reads/hiseq/s_3.Mbuild.dat -out $HOME/blueberry/reads/hiseq/s_3.MalignMFL.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 30 -act 35 -p 30 -bw 31 -ls 200
+
+#MosaikAligner -in $HOME/blueberry/reads/hiseq/s_4.Mbuild.dat -out $HOME/blueberry/reads/hiseq/s_4.MalignMFL.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 30 -act 35 -p 30 -bw 31 -ls 200
+
+#MosaikAligner -in $HOME/blueberry/reads/hiseq/s_5.Mbuild.dat -out $HOME/blueberry/reads/hiseq/s_5.MalignMFL.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 15 -mm 30 -act 35 -p 30 -bw 31 -ls 200
+
+#MosaikAligner -in $HOME/blueberry/reads/hiseq/s_5.Mbuild.dat -out $HOME/blueberry/reads/hiseq/s_5.MalignOdd.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat -hs 12 -mm 30 -act 20 -p 30 -bw 31
+
+
+#MosaikSort -in $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP.Malign.dat -out $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP.Malign.sorted.dat
+
+#MosaikAssembler -in $HOME/blueberry/reads/454Sequences/combinedSeqclean/GSIMZP.Malign.sorted.dat -ia $HOME/db/vitis/chloroplast/vitisviniferisChloroplastgenome.dat  -out $HOME/blueberry/reads/454Sequences/combinedSeqclean/vvChloroplastBB

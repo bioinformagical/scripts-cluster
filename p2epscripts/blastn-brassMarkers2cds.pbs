@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90GB
+
+#PBS -N EverbbbblastingLove 
+#PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-4
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/blast/file.txt)
+
+cd /lustre/groups/bioservices/p2ep/brassica/blast/marker/
+module load ncbi-blast+/2.2.27
+#module load blat
+# ~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 400 -minmatch 40 --coords -prefix newblerVSmirarep2 garrons454Scaffolds.fna mirarep.fa 
+
+
+#blat -minIdentity=92  /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/all6.fna  blat-bb-bac2garm.psl
+#~/scripts/perl/blat2gff.pl < blat-bb-bac2garm.psl > blat-bb-bac2garm.gff
+
+#blastn -db /lustre/groups/p2ep/brassica/Boleracea.v1.genome.fasta  -query ${file}  -out ./blastn-${file}_vs_genome.xml -num_threads 12  -evalue 1e-10  -soft_masking true  -outfmt 5
+blastn -db /group/p2ep/brassica/Boleracea.v1.cds.fasta  -query ${file}  -out ./blastn-${file}_vs_cds.xml -num_threads 12  -evalue 1e-10  -soft_masking true  -outfmt 5 
+
+#blastx -db /lustre/groups/p2ep/brassica/rnas/trinity/F007-trinity/aa/best_candidates.eclipsed_orfs_removed.pep -query ${file}  -out ./blastx-${file}_vs_F007.xml -num_threads 12  -evalue 1e-10  -soft_masking true  -outfmt 5
+#blastx -db /lustre/groups/p2ep/brassica/rnas/trinity/V012-trinity/aa/best_candidates.eclipsed_orfs_removed.pep -query ${file}  -out ./blastx-${file}_vs_V012.xml -num_threads 12  -evalue 1e-10  -soft_masking true  -outfmt 5
+
+#blat -minIdentity=92  -tileSize=12 -extendThroughN -t=dna -q=dna /lustre/groups/p2ep/blueberry/genomic/sspace-take6.fna newblerScafsOnMap.txt-filtered.fna blat-newb2take6.psl
+#~/scripts/perl/blat2gff.pl < blat-newb2take6.psl > blat-newb2take6.gff
+
+#for i in {1..12}
+#do
+
+#perl ~/scripts/fq2fa.pl -a ./kohl${i}_uniq2.fastq.adapt.dup
+
+#~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix markersOnAssembly ~/p2ep/masurca/run3/CA/9-terminator/genome.scf.fasta ./oat-est-sequence.fna 
+#nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix BacOnNextera ../bb-011215/all6.fna ../../genomic/masurca-nextera454.fna
+
+#nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix BacOnGarm ../bb-011215/all6.fna ../../genomic/garmAssembly.fna
+
+
+#perl ~/scripts/fq2fa.pl -a ./kohl${i}_uniq1.fastq.adapt.dup
+
+#~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix 19ntVSreads${i} ./19nt.fa ./kohl${i}_uniq1.fastq.adapt.dup.fa
+
+#done

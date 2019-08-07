@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#PBS -N cccanu-cant
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=60G
+#PBS -l walltime=120:00:00
+#PBS -j oe -o /group/jschlueterlab/canu/oat4/correction/1-overlapper/mhap-sgb.$PBS_ARRAYID.out
+#PBS -t 21,23,25,26,27,30,79,81,83,85,87,89,90,91,93,94,119,121,125,145,146,203,205,206,207,213,214,215,217,221,222,223,225,226,330,331,333,334,348,349,351,352,354,357,358,384,420,421,423,424,427,430,432,441,442,510,523,551,557,559,561,573,585,587,593,599,611,615,617,619,627,629,635,637,639
+
+set -eux
+IFS=$'\n'
+umask 022
+
+cd "/group/jschlueterlab/canu/oat4/correction/1-overlapper"
+
+export PBS_ARRAYID
+./mhap.sh

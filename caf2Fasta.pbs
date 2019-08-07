@@ -1,0 +1,36 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=48:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N caf2ace
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+cd /sw/mira/bin/
+
+#/sw/mira/bin/convert_project  -f caf -t ace /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira7big/BB_assembly/BB_d_log/BB_out_pass.1.caf  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira7big/BB_assembly/BB_d_log/bigace
+
+#/sw/mira/bin/convert_project  -f caf -t ace /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira9/mira2/oldBassembly/BB_d_log/BB_out_pass.1.caf  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira9/mira2/oldBassembly/BB_d_log/bigace
+
+#/sw/mira/bin/convert_project  -f caf -t fasta /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira9/mira2/oldBassembly/BB_d_log/BB_out_pass.1.caf  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira9/mira2/oldBassembly/BB_d_log/bigfasta
+
+#/sw/mira/bin/convert_project  -f caf -t fasta $HOME/blueberry/reads/454Sequences/mira7/BB_assembly/BB_d_log/BB_out_pass.1.caf  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira7/BB_assembly/BB_d_log/fasta1
+
+#/sw/mira/bin/convert_project  -f caf -t fasta $HOME/blueberry/reads/454Sequences/mira7/BB_assembly/BB_d_log/BB_out_pass.2.caf  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira7/BB_assembly/BB_d_log/fasta2
+
+/sw/mira/bin/convert_project  -f caf -t ace $HOME/blueberry/reads/454Sequences/mira7/BB_assembly/BB_d_log/BB_out_pass.2.caf  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/mira7/BB_assembly/BB_d_log/fasta2
+
+

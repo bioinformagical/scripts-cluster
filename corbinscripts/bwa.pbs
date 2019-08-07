@@ -1,0 +1,64 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N Bwaaaaacholine 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-37
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/corbin/filepair2.txt)
+
+module load bwa
+module load samtools
+
+#mkdir ${ssid}
+
+cd /lustre/groups/bioservices/hockeypuck/corbin/${ssid}/
+
+#create index of reference
+#bwa index -p allBWAidx -a bwtsw ../humandb/all.fna
+bwa index -p allBWAidx -a bwtsw ~/db/hg19.fna
+#create index of RNA Seqs
+bwa index -p ${ssid}BWAidx -a bwtsw ${ssid}.fastq.adapt.dup
+
+#convert to SAM
+
+echo "Starting  BWA, and then samtools"
+####
+#
+# The following 6 commands worked and are temporarily blocked out for mipleup purposes.....
+###
+#
+bwa aln -I -t 4 allBWAidx ./${ssid}_1_filtered.fastq > ${ssid}-1.aln.sai
+bwa aln -I -t 4 allBWAidx ./${ssid}_2_filtered.fastq > ${ssid}-2.aln.sai
+bwa sampe allBWAidx ${ssid}-1.aln.sai ${ssid}-2.aln.sai ./${ssid}_1_filtered.fastq ./${ssid}_2_filtered.fastq   > ${ssid}.sam
+
+samtools import ../humandb/all.fna ${ssid}.sam ${ssid}.bam
+samtools sort ${ssid}.bam ${ssid}.srt
+samtools index ${ssid}.srt.bam
+
+#samtools mpileup -vcf ./humandb/all.fna ${ssid}.srt.bam > ${ssid}.raw.pileup 
+#perl samtools.pl varFilter ${ssid}.raw.pileup | awk '$6>=20' > ${ssid}.final.pileup
+samtools mpileup -E -ugf ../humandb/all.fna ${ssid}.srt.bam | bcftools view -bvcg - > ${ssid}.srt.bam.bcf
+bcftools view ${ssid}.srt.bam.bcf > ${ssid}.srt.bam.vcf 
+
+samtools flagstat ${ssid}.srt.bam > ${ssid}.srt.bam.stats
+
+samtools view -ub ${ssid}.srt.bam | ~/sw/samstat/src/samstat -f bam -n ${ssid}.srt.bam.samstat
+
+

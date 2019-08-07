@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N nnnumber-cote
+
+#PBS -t 1-18
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/file2.txt)
+
+echo "Launching tophat on ${file}"
+
+#cd $home
+module load htslib/1.1-1 
+module load samtools
+
+
+cd /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/
+
+echo $file  > NumbersAligned-${file}.txt
+samtools view -c -F 4 ./${file}/accepted_hits.bam >> NumbersAligned-${file}.txt
+samtools view -c -f 4 ./${file}/accepted_hits.bam >> NumbersAligned-${file}.txt
+
+
+
+
+
+

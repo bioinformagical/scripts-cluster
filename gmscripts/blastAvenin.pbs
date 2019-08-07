@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblastAvenin
+
+##PBS -t 1-19
+
+#i=18
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/trinityRun2/file.txt)
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Blastx "
+
+#cd $home
+module load ncbi-blast+
+
+cd /lustre/groups/bioservices/hockeypuck/gm/genes/avenin/
+
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+####    #makeDB#####
+for i in 1 2 3;
+do
+	#makeblastdb -in ../../trinity/he${i}_trimmed_clipped.fastqtri/Trinity.forBlast.fasta -dbtype nucl
+#blastx -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query  /lustre/groups/janieslab/otherData/PMAR1.fna  -out ./pmarVSALL.blastx.txt -num_threads 1  -evalue 1e-10 -soft_masking false  -outfmt 6
+	#makeblastdb -in  ../../contigs/he${i}.contigs.fasta -dbtype nucl
+
+	blastn -query ../2more/2moregenes.fasta -db ../../trinity/he${i}_trimmed_clipped.fastqtri/Trinity.forBlast.fasta  -out ./aveninVSbAvenaMag${i}.blastn.txt -num_threads 12  -evalue 10 -soft_masking false  -outfmt 6
+	
+	perl /lustre/groups/janieslab/scripts/convertBlast2Sequence.pl ../../trinity/he${i}_trimmed_clipped.fastqtri/Trinity.forBlast.fasta ./aveninVSbAvenaMag${i}.blastn.txt
+
+done
+
+#perl ~/scripts/perl/parseOutgroupBlast.pl allbjVSsacco-blastp.xml

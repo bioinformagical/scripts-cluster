@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Request a run time of x hours and x minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request x  megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=95gb
+
+#PBS -N followthewhiterabbit
+##PBS -q bigiron
+#PBS -t 1-3
+umask 007
+set -eu
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run7-feb17-14/file.txt)
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run7-feb17-14/rawreads/file.txt)
+echo "Launching fastx"
+
+#cd $home
+module load fastx-toolkit
+
+cd /lustre/groups/bioservices/p2ep/dhmri/run7-feb17-14/trimmed/
+
+#mv ${ssid}/*.fastq.gz ./rawreads/
+#gunzip *.gz
+
+#Copy the following line as many times as the number of samples you are analyzing, then
+#replace "YOURFILE" with the names of your samples e.g. "1_Hot":
+#mkdir ${dir}
+#cd fastx 
+for i in 2 1;
+do 
+	echo "${ssid}"
+	#gunzip ../${ssid}_R${i}_001.fastq.gz
+	fastq_quality_trimmer -Q33 -v -t 20 -l 20 -i ../rawreads/${ssid}_R${i}_001.fastq -o ${ssid}_${i}trimmed.fastq
+	fastx_clipper -Q33 -a ATTGGCTTTGGGCAT -a AGTCAA -a CTTGTA -a CAGATC -a GCCAAT -a TGACCA -a ACAGTG -l 40 -n -v -i ${ssid}_${i}trimmed.fastq -o ${ssid}_R${i}_trimmed_clipped.fastq
+	#mv ${ssid}_trimmed_clipped.fastq ../trimmed_clipped/
+       # fastx_collapser -Q33 -v -i  ${ssid}_trimmed_clipped.fastq -o ${ssid}_collapsed.txt
+        #/lustre/home/rreid2/scripts/stan/Scripts for SFG/fastqduplicatecounter.py ${ssid}_collapsed.txt ${ssid}_collapsed_headers.txt >> ${ssid}_R${i}_duplicateCount.txt
+        #fastx_quality_stats -Q33 -i ${ssid}_R${i}_trimmed_clipped.fastq -o ${ssid}_R${i}_qualstats.txt
+
+done
+
+
+#####  Need perl correction script here
+perl /lustre/groups/p2ep/scripts/qc/PE_FIX_POSTQC.pl --pe1 ${ssid}_R1_trimmed_clipped.fastq --pe2 ${ssid}_R2_trimmed_clipped.fastq
+
+
+
+
+####  Validate Mate pairs   ######
+###  This will not work with the script as currently configured.  Because we need to 2 files.
+perl ~/scripts/perl/validateHiseqPairs.pl ${ssid}_R1_trimmed_clipped.fastq_matched.fq ${ssid}_R2_trimmed_clipped.fastq_matched.fq
+
+
+echo "fin"
+

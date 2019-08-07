@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=328:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=75500mb
+
+#PBS -N ooorthoPolo-tri 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-18
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/ortho/files.txt)
+
+
+cd /lustre/groups/janieslab/trinityRun2/orthomcl/
+
+### woroking as of 06/13
+#perl ~/sw/orthomcl/orthomcl.pl --mode=4 --usr_bpo_file=/lustre/groups/janieslab/contigs-trinity/aa/aa-ortho/adjusted/convertedblastp2bpo.txt --usr_gg_file=/lustre/groups/janieslab/contigs-trinity/aa/aa-ortho/adjusted/all.gg
+
+
+
+
+
+We had to use the MYSQL version of orthomcl.
+
+See Lara's script.
+
+
+
+
+
+
+
+
+
+
+
+
+#######   e-25 #########
+#perl ~/scripts/perl/ortho-bpo.pl blastp-e25.format0.out convertBlastp2bpo-e25.txt
+
+#perl ~/sw/orthomcl/orthomcl.pl --mode=4 --usr_bpo_file=/lustre/groups/janieslab/contigs-trinity/aa/aa-ortho/adjusted/convertBlastp2bpo-e25.txt --usr_gg_file=/lustre/groups/janieslab/contigs-trinity/aa/aa-ortho/adjusted/all.gg
+
+######### e-40  #############
+
+####3 Changed  ortho-bpo.pl, now need to feed a evalue cutoff score as part of the prcess.
+
+
+#### work it does NOT 
+#perl ~/scripts/perl/ortho-bpo.pl blastp-e25.format0.out convertBlastp2bpo-e40.txt 1e-40
+
+perl ~/sw/orthomcl/orthomcl.pl --mode=3 --inflation=2.0  --usr_blast_file=/lustre/groups/janieslab/trinityRun2/orthomcl/outblast-filtered.txt --usr_gg_file=/lustre/groups/janieslab/trinityRun2/orthomcl/ind/all.gg
+#perl ~/sw/orthomcl/orthomcl.pl --mode=4 --usr_bpo_file=/lustre/groups/janieslab/trinityRun2/orthomcl/out.blastp.txt --usr_gg_file=/lustre/groups/janieslab/trinityRun2/orthomcl/ind/all.gg
+
+#perl ~/sw/orthomcl/orthomcl.pl --mode=3 \
+#--usr_blast_file=/lustre/groups/janieslab/trinityRun2/orthomcl/out.blastp.txt \
+#--usr_gg_file=/lustre/groups/janieslab/trinityRun2/orthomcl/ind/all.gg \
+#--inflation=1.0 \
+
+

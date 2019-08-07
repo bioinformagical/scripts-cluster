@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=4gb
+
+#PBS -N ooortho4AddingOutgroups
+
+#PBS -t 1-263
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/process4ptp/file.txt)
+
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Making Fatso files "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/home/rreid2/echinoderms/ortho/process4ptp/outgroup
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+
+#perl /lustre/home/rreid2/scripts/perl/outgroupAdder.pl  /lustre/home/rreid2/echinoderms/ortho/process4ptp/${ssid} /lustre/home/rreid2/echinoderms/db/big3outgroup.faa /lustre/home/rreid2/echinoderms/ortho/otherOutgroups/allbj.faa.blastp.xml.tabbed
+
+perl /lustre/home/rreid2/scripts/perl/outgroupAdder.pl  /lustre/home/rreid2/echinoderms/ortho/process4ptp/${ssid} /lustre/home/rreid2/echinoderms/db/sacco-protein-ncbi.faa /lustre/home/rreid2/echinoderms/ortho/sacco/allbj.faa.blastp.xml.tabbed
+
+mv /lustre/home/rreid2/echinoderms/ortho/process4ptp/${ssid}.outgrouped.fasta ./

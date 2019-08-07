@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N cccuffdiff-cote
+
+##PBS -t 1-9
+#PBS -t 1
+umask 007
+set -eu
+
+file1=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/file1.txt)
+file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/file2.txt)
+echo "Launching tophat on ${file1}"
+
+#cd $home
+module load tophat
+module load bowtie2
+module load cufflinks
+
+cd /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/
+
+#ln -s ../${file}-R1-clip.fq_matched.fq $file-R1-filtered.fastq
+#ln -s ../${file}-R2-clip.fq_matched.fq $file-R2-filtered.fastq
+
+### This script was build from this site suggestions:   http://cufflinks.cbcb.umd.edu/tutorial.html
+
+
+##Step 1
+#tophat --output-dir ${file} -p 12  ~/db/human/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome ../filter/${file}-R1-clip.fq_matched.fq ../filter/${file}-R2-clip.fq_matched.fq
+
+##Step2
+#cufflinks -o cufflinks_${file} ${file}/accepted_hits.bam
+
+##Step 3 Merge Assemblies
+#find ./ -name "transcripts.gtf" > assemblies.txt
+#cuffmerge -s ~/db/human/Homo_sapiens/UCSC/hg19/Sequence/WholeGenomeFasta/genome.fa assemblies.txt
+
+##Step 4 Differential Expression
+##cuffdiff /lustre/home/rreid2/db/human/Homo_sapiens/UCSC/hg19/Annotation/Genes/genes.gtf \ 
+#mkdir ${file1}VERSUS${file2}
+#cd ${file1}VERSUS${file2}
+
+cuffdiff -p 12 -o ${file1}VERSUS${file2}-bam -L Expt-${file1},Control-${file2} /lustre/home/rreid2/db/human/Homo_sapiens/UCSC/hg19/Annotation/Genes/genes.gtf  sam${file1}/accepted_hits.bam sam${file2}/accepted_hits.bam
+#cuffdiff -p 12 -o  ../merged_asm/merged.gtf /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/sam${file1}/accepted_hits.bam    /lustre/groups/bioservices/gregory/HSMS_104_Cote/tophat/sam${file2}/accepted_hits.bam
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=12gb
+
+#PBS -N cccutDaTreeDown
+
+#PBS -t 1-26
+##PBS -t 1-283
+##PBS -t 1-620
+##PBS -t 1-802
+##PBS -t 1-747
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/fruit/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/18tab/file.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/17tab/file.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/16tab/file.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/15tab/file.txt)
+
+
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Making Fatso files "
+
+module load mafft 
+
+#cd /lustre/home/rreid2/echinoderms/ortho/blastdir/18tab
+cd ~/echinoderms/ortho/fruit
+
+FILENAME=${ssid}
+'
+## Run MAFFT for alignement
+linsi --localpair --maxiterate 1000 ${FILENAME}.tabbed.fasta > ${FILENAME}.aln
+
+## Run GBLocks
+sequences=`grep -c \> ${FILENAME}.aln`
+half_of_sequences=`expr $sequences / 2`
+b1=`expr $half_of_sequences + 1` #Sets b1 as the floating point calculation (# of sequences)/2 + 1. If (# of sequences)/2 is not a whole number, the output is truncated so that is why 1 is added to each value.
+b2=$b1 #Sets b2 = b1
+b3=8 #default is 8
+b4=10 #default is 10
+b5=h #default is none
+/lustre/home/rreid2/sw/gblocks/Gblocks_0.91b/Gblocks ${FILENAME}.aln -t=p -p=n -b1=$b1 -b2=$b2 -b3=$b3 -b4=$b4 -b5=$b5 # Executes Gblocks
+
+
+## Run FastTreee Builder
+/lustre/home/rreid2/sw/fasttree/FastTreeMP -slow -gamma ${FILENAME}.aln-gb > ${FILENAME}.tre #If you are using FastTree instead of FastTreeMP, you will have to fix this line
+'
+## Run PhyloTreePruner
+echo "Starting PTP for ${FILENAME}"
+
+sequences=`grep -c \> ${FILENAME}.aln`
+half_of_sequences=`expr $sequences * 10`
+echo " Number of halfseq id ${half_of_sequences} "
+
+CLASS_PATH=~/sw/phyloTreePruner/
+cp ${FILENAME}.tabbed.fasta ${FILENAME}.fa
+java -Xmx4000M -cp $CLASS_PATH PhyloTreePruner ${FILENAME}.tre 3 ${FILENAME}.fa 0.5 r

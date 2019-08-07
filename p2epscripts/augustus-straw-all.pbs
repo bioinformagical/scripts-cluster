@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N aaagust-straw
+#PBS -q bigiron
+##PBS -t 1-5
+umask 007
+set -eu
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/old/blueberry/reads/hiseq/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/filedir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load augustus
+module load blat
+
+cd /lustre/groups/p2ep/strawberry/annot/augustus/
+
+blat -minIdentity=92  /lustre/groups/p2ep/strawberry/fromGDR/fvesca_v1.1_FC-all.fna /lustre/groups/p2ep/strawberry/fromGDR/ncbi-ests-fvesca.fna  cdna.psl
+#/lustre/sw/augustus/2.6.1/scripts/filterPSL.pl --uniq cdna.psl cdna.f.psl
+
+cat cdna.psl | sort -n -k 16,16 | sort -s -k 14,14 > cdna2.psl
+/lustre/sw/augustus/2.6.1/scripts/blat2hints.pl --in=cdna2.psl --out=hints.E.gff
+
+#--hintsfile=hints.EE.gff \
+#--extrinsicCfgFile=./myextrinsic.cfg \
+
+augustus  --species=arabidopsis \
+ /lustre/groups/p2ep/strawberry/fromGDR/fvesca_v1.1_FC-all.fna  \
+--outfile=aug-straw-all \
+--hintsfile=hints.E.gff \
+--extrinsicCfgFile=./myextrinsic.cfg \
+--genemodel=partial \
+--singlestrand=true \
+--protein=on \
+--introns=on \
+--start=on \
+--stop=on \
+--cds=on \
+--UTR=off \
+--codingseq=on \
+--gff3=on \
+--noInFrameStop=true
+
+
+echo "FIN"
+
+

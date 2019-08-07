@@ -1,0 +1,75 @@
+########################################################################
+PBS Prologue:	Mon Jun 26 16:08:40 EDT 2017
+Job ID:		976182.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	GeeSseven-masooca
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[64] 
+########################################################################
+core file size          (blocks, -c) 10240
+data seg size           (kbytes, -d) 8388608
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 8254442
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) 8388608
+open files                      (-n) 65535
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 8254442
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+Starting Mon Jun 26 16:08:40 EDT 2017
+Verifying PATHS...
+jellyfish OK
+runCA OK
+createSuperReadsForDirectory.perl OK
+nucmer OK
+mega_reads_assemble_nomatch.sh OK
+creating script file for the actions...done.
+execute assemble.sh to run assembly
+[Mon Jun 26 16:08:41 EDT 2017] Processing pe library reads
+[Mon Jun 26 16:08:41 EDT 2017] Processing sj library reads
+Average PE read length 99
+choosing kmer size of 71 for the graph
+cat: write error: Broken pipe
+MIN_Q_CHAR: 33
+[Mon Jun 26 16:08:44 EDT 2017] Estimating genome size.
+Estimated genome size: 4639150983
+[Mon Jun 26 16:12:39 EDT 2017] Filtering JUMP.
+Chimeric/Redundant jump reads:
+    18228 chimeric_sj.txt
+ 57494520 redundant_sj.txt
+ 57512748 total
+[Mon Jun 26 16:17:04 EDT 2017] Creating FRG files
+Invalid fasta file: no header found at beginning
+Invalid fasta file: no header found at beginning
+[Mon Jun 26 16:19:46 EDT 2017] Computing super reads from PE 
+Using linking mates
+Running mega-reads correction/assembly
+Using mer size 15 for mapping, B=17, d=0.029
+Using MaSuRCA files from work1, k-unitig mer 41
+Estimated Genome Size 4639150983
+Estimated Ploidy 2
+Using CA installation from /projects/bisd/sw/packages/masurca/3.2.2/bin/../CA8/Linux-amd64/bin
+Using 64 threads
+Output prefix mr.41.15.17.0.029
+Pacbio coverage <30x, using the longest subreads
+Reducing super-read k-mer size
+Mega-reads pass 1
+compute_psa 152630807 26653954759
+Terminated
+
+
+########################################################################
+PBS Epilogue:	Mon Jul 17 09:55:18 EDT 2017
+Job ID:		976182.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Resources:	cput=31357:52:45,energy_used=0,mem=684920112kb,vmem=710863528kb,walltime=497:46:38
+Exit Value:	271
+########################################################################

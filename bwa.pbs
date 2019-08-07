@@ -1,0 +1,62 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N Bwaaaaaht? 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-12
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa/filenum.txt)
+
+module load bwa
+
+cd /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa/
+
+#create index of reference
+#bwa index -p dhfrBWAidx -a bwtsw /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa
+
+#create index of RNA Seqs
+#bwa index -p ${ssid}BWAidx -a bwtsw ./$ssid
+
+#run alignment
+#bwa aln -t 4 dhfrBWAidx $ssid >  $ssid.bwa
+
+#convert to SAM
+#bwa samse dhfrBWAidx $ssid.bwa $ssid > $ssid-bwa.sam
+
+module load samtools
+#Convert to Bam
+#samtools faidx /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa                # creates index file wg.fa.fai
+
+#samtools import /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa $ssid-bwa.sam $ssid-bwa.bam   # bam= binary alignment/map format
+#samtools sort $ssid-bwa.bam $ssid-bwa.srt       # sort by coordinate to streamline data processing
+#samtools index $ssid-bwa.srt  
+
+
+#bwa aln -I -t 4 dhfrBWAidx ../kohl${ssid}_uniq1.fastq.adapt.dup > k${ssid}-1.aln.sai
+#bwa aln -I -t 4 dhfrBWAidx ../kohl${ssid}_uniq2.fastq.adapt.dup > k${ssid}-2.aln.sai
+#bwa sampe dhfrBWAidx k${ssid}-1.aln.sai k${ssid}-2.aln.sai ../kohl${ssid}_uniq1.fastq.adapt.dup ../kohl${ssid}_uniq2.fastq.adapt.dup   > k${ssid}.sam
+
+#samtools import /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa k${ssid}.sam k${ssid}.bam
+#samtools view -F 0x04 -b k${ssid}.bam > k${ssid}.rmd.bam
+#samtools sort k${ssid}.rmd.bam k${ssid}.rmd.bam.srt
+#samtools index k${ssid}.rmd.bam.srt.bam
+
+samtools mpileup -ugf DHFR.fa k${ssid}.rmd.bam.srt.bam | bcftools view -bvcg - > k${ssid}.rmd.srt.bcf
+bcftools view k${ssid}.rmd.srt.bcf > k${ssid}.rmd.srt.vcf 
+

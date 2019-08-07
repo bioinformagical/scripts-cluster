@@ -1,0 +1,26 @@
+########################################################################
+PBS Prologue:	Thu Oct 23 08:46:09 EDT 2014
+Job ID:		217624[17].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	pppairUp-swepot-17
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=8gb,walltime=18:30:00
+Queue:		compute
+Account:	
+Nodes:		compute01[1] 
+########################################################################
+
+
+Launching Pair repair after Fastx
+ Validating S12_LC2_R1_fastx_matched.fq and S12_LC2_R2_fastx_matched.fq 
+Total validated mates: 5415487 and 5415487: Read-pairs are properly ordered
+
+
+########################################################################
+PBS Epilogue:	Thu Oct 23 08:49:11 EDT 2014
+Job ID:		217624[17].login00.halcyon.local
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=8gb,walltime=18:30:00
+Resources:	cput=00:01:46,mem=1246392kb,vmem=1276508kb,walltime=00:02:57
+Account:	
+Exit Value:	0
+########################################################################

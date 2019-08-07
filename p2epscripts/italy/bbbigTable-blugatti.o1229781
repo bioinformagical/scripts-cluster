@@ -1,0 +1,52 @@
+########################################################################
+PBS Prologue:	Fri Oct  6 15:07:14 EDT 2017
+Job ID:		1229781.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	bbbigTable-blugatti
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=64gb,neednodes=1:ppn=8,nodes=1:ppn=8,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=148:30:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[8] 
+########################################################################
+/scratch/rreid2/italy/align
+-reading file: Sample_M_B_CA_R1_1-results.xprs
+-reading file: Sample_M_B_CA_R2_1-results.xprs
+-reading file: Sample_M_B_CA_R3_1-results.xprs
+-reading file: Sample_M_B_F_R1_1-results.xprs
+-reading file: Sample_M_B_F_R2_1-results.xprs
+-reading file: Sample_M_B_F_R3_1-results.xprs
+-reading file: Sample_M_C_CA_R1_1-results.xprs
+-reading file: Sample_M_C_CA_R2_1-results.xprs
+-reading file: Sample_M_C_CA_R3_1-results.xprs
+-reading file: Sample_M_C_F_R1_1-results.xprs
+-reading file: Sample_M_C_F_R2_1-results.xprs
+-reading file: Sample_M_C_F_R3_1-results.xprs
+-reading file: Sample_M_G_R1_1-results.xprs
+-reading file: Sample_M_G_R2_1-results.xprs
+-reading file: Sample_M_G_R3_1-results.xprs
+-reading file: Sample_M_M_R1_1-results.xprs
+-reading file: Sample_M_M_R2_1-results.xprs
+-reading file: Sample_M_M_R3_1-results.xprs
+-reading file: Sample_M_O_R1_1-results.xprs
+-reading file: Sample_M_O_R2_1-results.xprs
+-reading file: Sample_M_O_R3_1-results.xprs
+-reading file: Sample_M_V_R1_1-results.xprs
+-reading file: Sample_M_V_R2_1-results.xprs
+-reading file: Sample_M_V_R3_1-results.xprs
+
+
+* Outputting combined matrix.
+
+/apps/pkg/trinity-2.4.0/util/support_scripts/run_TMM_scale_matrix.pl --matrix matrix.TPM.not_cross_norm > matrix.TMM.EXPR.matrixCMD: R --vanilla -q < __tmp_runTMM.R 1>&2 
+sh: R: command not found
+Error, cmd: R --vanilla -q < __tmp_runTMM.R 1>&2  died with ret (32512)  at /apps/pkg/trinity-2.4.0/util/support_scripts/run_TMM_scale_matrix.pl line 99.
+Error, CMD: /apps/pkg/trinity-2.4.0/util/support_scripts/run_TMM_scale_matrix.pl --matrix matrix.TPM.not_cross_norm > matrix.TMM.EXPR.matrix died with ret 6400 at /apps/pkg/trinity-2.4.0/util/abundance_estimates_to_matrix.pl line 297.
+
+
+########################################################################
+PBS Epilogue:	Fri Oct  6 15:08:30 EDT 2017
+Job ID:		1229781.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=64gb,neednodes=1:ppn=8,nodes=1:ppn=8,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=148:30:00
+Resources:	cput=00:01:08,energy_used=0,mem=3891664kb,vmem=4247036kb,walltime=00:01:16
+Exit Value:	12
+########################################################################

@@ -1,0 +1,19 @@
+########################################################################
+PBS Prologue:	Thu Feb 28 13:26:57 EST 2019
+Job ID:		844961.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	sssnp-rogers
+Limits:		pmem=2147483648b,walltime=20:00:00,nodes=1:ppn=1,mem=50gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[1] 
+########################################################################
+
+
+########################################################################
+PBS Epilogue:	Thu Feb 28 13:27:31 EST 2019
+Job ID:		844961.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=20:00:00,nodes=1:ppn=1,mem=50gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1
+Resources:	cput=00:00:25,vmem=350380kb,walltime=00:00:33,mem=4852kb,energy_used=0
+Exit Value:	0
+########################################################################

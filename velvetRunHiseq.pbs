@@ -1,0 +1,84 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=268:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N blackvelvet76ers
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/velvet/bin:$PATH
+#/sw/velvet/bin/velveth velvet31 31 -fastq -long s_1_sequence.txt.trimmedkmer7520 
+
+#/sw/velvet/bin/velvetg velvet31 -exp_cov auto -min_contig_lgth 100 -unused_reads yes -cov_cutoff auto 
+
+#/sw/velvet/bin/velvetg velvet17 -exp_cov auto -min_contig_lgth 100 -unused_reads yes -cov_cutoff auto
+
+#cd $HOME/blueberry/reads/illumina/091005Sequence1/
+
+#/sw/velvet/bin/shuffleSequences_fastq.pl s_1_1_sequence.txt.trimmedkmer75v120 s_1_2_sequence.txt.trimmedkmer75v120 sequencev2.shuffled
+
+echo Starting velvet stuff
+#/sw/velvet/contrib/VelvetOptimiser-2.1.7/VelvetOptimiser.pl -s 45 -e 65 -f ' -fastq -shortPaired /gpfs/fs3/home/rreid2/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled'
+#/sw/velvet-1.1.03/bin/velveth velvet63trimmed 63 -fastq -shortPaired $HOME/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled
+
+#/sw/velvet-1.1.03/bin/velveth velvet63trimmed 63 -fastq -shortPaired $HOME/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled
+
+#/sw/velvet-1.1.03/bin/velveth velvet63trimmed 63 -fastq -shortPaired $HOME/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled
+source /lustre/sw/Modules/default/init/$(basename $SHELL)
+
+module load velvet
+
+cd ~/blueberry/celera1/
+
+i = 1
+
+perl /lustre/sw/velvet/1.1.05/bin/shuffleSequences_fastq.pl aligned_filtered_HiSeq_reads_initial_lane5_1.fastq aligned_filtered_HiSeq_reads_initial_lane5_2.fastq hiseq5.shuffle
+
+velveth v63hiseq5 63 -fastq -shortPaired hiseq5.shuffle
+
+#echo Starting VelvetG
+velvetg  v63hiseq5 -exp_cov auto -min_contig_lgth 100 -cov_cutoff auto -ins_length 100 
+
+#/observed-insert-length.pl/observed-insert-length.pl $HOME/blueberry/reads/illumina/091005Sequence1/auto_data_63
+
+#echo Starting VelvetG
+#/sw/velvet-1.1.03/bin/velvetg velvet31trimmed -exp_cov auto -min_contig_lgth 100 -cov_cutoff auto -ins_length 94 
+
+
+#Hiseq    *****  HISEQ and VELVET created a big ol ANANKE crash.
+
+#cd $HOME/blueberry/reads/hiseq
+
+#/sw/velvet/bin/shuffleSequences_fastq.pl s_1_1_sequence.txt.trimmedkmer7520 s_1_2_sequence.txt.trimmedkmer7520 sequenceHiseq1.shuffled
+
+#/sw/velvet/contrib/VelvetOptimiser-2.1.7/VelvetOptimiser.pl -s 45 -e 75 -f ' -fastq -shortPaired /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/sequenceHiseq1.shuffled'
+
+
+#Test 36BP
+#cd $HOME/blueberry/reads/illumina/090702Seqeunce1
+#cd /gpfs/fs3/home/rreid2/gm/assembly/
+echo `pwd`
+
+#/sw/velvet/contrib/VelvetOptimiser-2.1.7/VelvetOptimiser.pl -s 25 -e 85 -f ' -fastq -short /gpfs/fs3/home/rreid2/gm/sp2.fastq.dup.trim20'
+
+
+
+#/sw/velvet/bin/shuffleSequences_fastq.pl s_1_1_sequence.txt.trimmedkmer7520 s_1_2_sequence.txt.trimmedkmer7520 sequence.shuffled
+
+#/sw/velvet/contrib/VelvetOptimiser-2.1.7/VelvetOptimiser.pl -s 13 -e 33 -f ' -fastq -shortPaired /gpfs/fs3/home/rreid2/blueberry/reads/illumina/090702Seqeunce1/sequence.shuffled'
+
+
+

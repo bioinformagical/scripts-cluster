@@ -1,0 +1,41 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=28:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=6:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N fastq2CA
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-32
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=$HOME/bin/velvet_1.1.04:$PATH
+#file=$(sed -n -e "${PBS_ARRAYID}p" ./filedir.txt)
+# source /lustre/sw/Modules/default/init/$(basename $SHELL)
+# module load celera
+
+cd ~/blueberry/celera1/bowtiereads
+
+echo `pwd`
+
+/lustre/sw/wgs/6.1/bin/fastqToCA -insertsize 200 100 -libraryname hiseq1  -fastq aligned_filtered_HiSeq_reads_initial_lane1_1.fastq,aligned_filtered_HiSeq_reads_initial_lane1_2.fastq > hiseq1.frg 
+
+/lustre/sw/wgs/6.1/bin/fastqToCA -insertsize 200 100 -libraryname hiseq1  -fastq aligned_filtered_HiSeq_reads_initial_lane2_1.fastq,aligned_filtered_HiSeq_reads_initial_lane2_2.fastq > hiseq2.frg
+
+/lustre/sw/wgs/6.1/bin/fastqToCA -insertsize 200 100 -libraryname hiseq1  -fastq aligned_filtered_HiSeq_reads_initial_lane3_1.fastq,aligned_filtered_HiSeq_reads_initial_lane3_2.fastq > hiseq3.frg
+
+/lustre/sw/wgs/6.1/bin/fastqToCA -insertsize 200 100 -libraryname hiseq1  -fastq aligned_filtered_HiSeq_reads_initial_lane4_1.fastq,aligned_filtered_HiSeq_reads_initial_lane4_2.fastq > hiseq4.frg
+
+/lustre/sw/wgs/6.1/bin/fastqToCA -insertsize 200 100 -libraryname hiseq1  -fastq aligned_filtered_HiSeq_reads_initial_lane5_1.fastq,aligned_filtered_HiSeq_reads_initial_lane5_2.fastq > hiseq5.frg
+
+#perl  ~/sw/celera6.1/wgs-6.1/Linux-amd64/bin/runCA-OBT.pl -d $HOME/blueberry/celera1 -p bb3 -s $HOME/blueberry/celera1/2nogrid.spec

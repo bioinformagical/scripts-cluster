@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=38gb
+
+#PBS -N bbblastnreads
+
+#PBS -t 1-3
+
+set -eux
+umask 007
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project2/metaphlan2megan/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+module load ncbi-blast+
+echo "Launching BlastN  on NT";
+
+#cd $home
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/project2/metaphlan2megan/
+#cd /lustre/groups/bioservices/secure/syngenta/working/rob/project2/tmp/
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in spurpsTranscripts-29K-trim.fasta -dbtype nucl
+#makeblastdb -in ~/db/nt.fna -dbtype nucl
+echo `pwd`
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fasta  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+#######  Converted from fastq to fasta using seqtk
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -a ../flashmerged/${file}.fastq > ../flashmerged/${file}.fna
+#file=s3-extended
+sed -i.orig 's/^$/N/' ${file}-uniqcount.txt-metaphlanhits.fna
+
+echo ${file}
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db ~/db/nt.fna -query ../flashmerged/${file}.fna  -out ./blastn-${file}Extendedvsnt.out -num_threads 12  -evalue 0.0001 -soft_masking true  -outfmt 0
+#blastn -db ~/db/nt.fna -query ../flashmerged/${file}.fna  -out ./blastn-${file}Extendedvsnt.out -num_threads 12  -evalue 0.0001 -soft_masking true  -outfmt 0
+
+#blastn -db ~/db/nt.fna -query ./${file}  -out ./${file}vsnt.out -num_threads 12  -evalue 0.0001 -soft_masking     true  -outfmt 0
+
+#blastn -db ~/db/nt.fna -query ./${file}-uniqcount.txt-metaphlanhits.fna  -out ./${file}vsnt.out -num_threads 12  -evalue 0.00001 -soft_masking true  -outfmt 0
+
+blastx -db ~/db/nr/nr.faa -query ./${file}-uniqcount.txt-metaphlanhits.fna  -out ./${file}vsNR.out -num_threads 12  -evalue 0.00001 -soft_masking true  -outfmt 0
+echo "Fin"

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=95gb
+
+#PBS -N rrrap2NR
+##PBS -q bigiron
+#PBS -t 1-3
+
+set -eux
+umask 007
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project2/metaphlan2megan/file2.txt )
+
+#module load ncbi-blast+
+echo "Launching RAPsearch  on NR";
+
+#cd $home
+
+######  Need to index the DB file first prior to using   ######
+# /lustre/home/rreid2/sw/RAPSearch2.14_64bits/bin/prerapsearch -d  ~/db/nr/nr.faa -n nrappa
+#
+######
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/project2/metaphlan2megan/${file}/
+
+/lustre/home/rreid2/sw/RAPSearch2.14_64bits/bin/rapsearch -q ./longest_orfs.pep -d ../nrappa -o ./${file}vsnr-rapped.txt -z 12  -t a 
+
+echo `pwd`
+
+echo ${file}
+
+echo "Fin"

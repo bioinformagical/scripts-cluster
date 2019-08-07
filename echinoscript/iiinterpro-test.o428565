@@ -1,0 +1,67 @@
+########################################################################
+PBS Prologue:	Wed Oct 31 09:37:06 EDT 2018
+Job ID:		428565.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	iiinterpro-test
+Limits:		pmem=2147483648b,walltime=75:00:00,nodes=1:ppn=1,mem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[1] 
+########################################################################
+31/10/2018 09:37:07:169 Welcome to InterProScan-5.31-70.0
+31/10/2018 09:37:21:706 Running InterProScan v5 in STANDALONE mode... on Linux
+31/10/2018 09:37:55:144 Loading file /scratch/rreid2/bugatti-dp
+31/10/2018 09:37:55:158 Running the following analyses:
+[CDD-3.16,Coils-2.2.1,Gene3D-4.2.0,Hamap-2018_03,MobiDBLite-2.0,Pfam-31.0,PIRSF-3.02,PRINTS-42.0,ProDom-2006.1,ProSitePatterns-2018_02,ProSiteProfiles-2018_02,SFLD-4,SMART-7.1,SUPERFAMILY-1.75,TIGRFAM-15.0]
+Available matches will be retrieved from the pre-calculated match lookup service.
+
+Matches for any sequences that are not represented in the lookup service will be calculated locally.
+2018-10-31 09:37:56,008 [amqEmbeddedWorkerJmsContainer-6] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:423] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, IOException : www.ebi.ac.uk,  using proxy: false
+2018-10-31 09:37:56,022 [amqEmbeddedWorkerJmsContainer-6] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:317] WARN - Problem with lookup service while on the step: Checking lookup client and server are in sync
+2018-10-31 09:37:56,022 [amqEmbeddedWorkerJmsContainer-6] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:319] WARN - 
+
+The following problem was encountered by the pre-calculated match lookup service:
+www.ebi.ac.uk: Temporary failure in name resolution
+Pre-calculated match lookup service failed - analysis proceeding to run locally
+============================================================
+
+The pre-calculated match lookup service has been configured in the interproscan.properties file.  
+  precalculated match lookup service url : http://www.ebi.ac.uk/interpro/match-lookup
+  precalculated match lookup service proxy host :   proxy port : 3128
+
+Unfortunately the web service has failed. Check the configuration of this service
+in the interproscan.properties file and, if necessary, set the following property to look like this:
+
+precalculated.match.lookup.service.url=
+
+If the problem persists, check if this is a firewall or proxy issue. If it is a proxy issue, then setting 
+the following property in the interproscan.properties file should work:
+
+precalculated.match.lookup.service.proxy.host=
+precalculated.match.lookup.service.proxy.port=
+
+If this still does not work please inform the InterPro team of this error
+by sending an email to:
+
+interhelp@ebi.ac.uk
+
+In the meantime, the analysis will continue to run locally.
+
+
+2018-10-31 09:37:56,027 [amqEmbeddedWorkerJmsContainer-6] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:423] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, IOException : www.ebi.ac.uk,  using proxy: false
+2018-10-31 09:37:56,062 [amqEmbeddedWorkerJmsContainer-6] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:423] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, IOException : www.ebi.ac.uk,  using proxy: false
+2018-10-31 09:37:56,066 [amqEmbeddedWorkerJmsContainer-6] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:423] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, IOException : www.ebi.ac.uk,  using proxy: false
+31/10/2018 09:44:45:987 25% completed
+31/10/2018 09:57:42:530 50% completed
+31/10/2018 10:13:58:351 75% completed
+31/10/2018 10:16:16:091 90% completed
+31/10/2018 10:16:40:156 100% done:  InterProScan analyses completed
+
+
+########################################################################
+PBS Epilogue:	Wed Oct 31 10:16:40 EDT 2018
+Job ID:		428565.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=75:00:00,nodes=1:ppn=1,mem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1
+Resources:	cput=00:39:02,vmem=14752312kb,walltime=00:39:34,mem=3037588kb,energy_used=0
+Exit Value:	0
+########################################################################

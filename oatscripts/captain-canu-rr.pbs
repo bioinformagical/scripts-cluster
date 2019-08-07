@@ -1,0 +1,52 @@
+#!/bin/bash
+#PBS -l walltime=48:00:00
+#PBS -l nodes=1:ppn=4
+#PBS -l vmem=32gb
+#PBS -N cccaptain-canu
+#PBS -j oe
+
+IFS=$'\n'
+set -eu
+umask 007
+
+#module load java8
+
+cd /group/jschlueterlab/canu/
+
+# generate array of input files
+FILES=( $(< "/group/jschlueterlab/canu/input-fastq.fofn") )
+
+# initial canu command
+CANU=( 
+	"canu"
+	"-correct"
+	"-p" "oat4"
+	"-d" "oat4"
+	"shell=/bin/bash"
+	"maxThreads=24"
+	"maxMemory=504g"
+	"ovbMemory=8g"
+	"gridOptions='-l walltime=120:00:00'"
+	"gridOptionsbat='-l walltime=120:00:00 -q bigiron'"
+	"cormhapThreads=12"
+	"cormhapMemory=95g"
+	"merylThreads=12"
+	"java=/sw/packages/java8/jdk-1.8.0_102-oracle/bin/java"
+	"genomeSize=13g"
+	"useGrid=true"
+	"minReadLength=2200"
+	"minOverlapLength=1000"
+	"utgOvlErrorRate=0.01"
+	"corMaxEvidenceErate=0.15"
+	"-pacbio-raw"
+)
+
+# add input files to canu command
+for file in "${FILES[@]}"; do
+	# this only needs to be declared once, not per file
+	#CANU[${#CANU[*]}]="-pacbio-raw"
+	CANU[${#CANU[*]}]="${file}"
+done
+
+# execute canu
+"${CANU[@]}"

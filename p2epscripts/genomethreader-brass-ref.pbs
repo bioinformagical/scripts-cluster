@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7gb
+##PBS -q bigiron
+#PBS -N ggggth-brass
+
+#PBS -t 1-120
+umask 007
+#set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/annot/split/cdna/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/filedir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+#module load augustus
+#module load blat
+
+dir="/dev/shm/${PBS_JOBID}"
+
+cd /lustre/groups/p2ep/brassica/annot/genomethreader
+
+mkdir ${dir}
+cd "${dir}"
+
+for i in 1 2 3 4 5 6 7 8 9
+do
+	cp /lustre/groups/p2ep/brassica/annot/split/reference/C${i}-brass-genome.fna ./
+	cp /lustre/groups/p2ep/brassica/annot/split/cdna/${file} ./
+
+#-intermediate \
+#-gff3out \
+#-maskpolyatails \
+	~/sw/genomethreader/gth-1.6.2-Linux_x86_64-64bit/bin/gth \
+	-paralogs \
+	-species arabidopsis \
+	-cdna ${file} \
+	-genomic C${i}-brass-genome.fna   -o  /lustre/groups/p2ep/brassica/annot/genomethreader/cdna/${file}-C${i}-cdna-gthreader.txt 
+
+done
+rsync -aP "${dir}"/ /lustre/groups/p2ep/brassica/annot/genomethreader/tmpdir/${PBS_JOBID}/
+rm -rf "${dir}"
+
+
+# ~/sw/genomethreader/gth-1.6.2-Linux_x86_64-64bit/bin/gth \
+#-gff3out \
+#-maskpolyatails \
+#-paralogs \
+#-intermediate \
+#-species arabidopsis \
+#-protein /lustre/groups/p2ep/brassica/Boleracea.v1.pep.fasta \
+#-cdna /lustre/groups/p2ep/brassica/Boleracea.v1.cds.fasta \
+#-genomic /lustre/groups/p2ep/brassica/Boleracea.v1.genome.fasta \
+
+
+
+echo "FIN"
+
+

@@ -1,0 +1,42 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=28:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N FahhhhhhhhQ 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-18
+
+##home=/gpfs/fs3/home/rreid2
+
+cd $HOME/blueberry/celera1/
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ./20kbfiles.txt)
+
+#for file in $(find ./ -name "*.fastq");
+#do
+        echo   ${file};
+
+
+#-mean 8000 -stddev 3000
+
+
+
+#~/sw/celera6.1/wgs-6.1/Linux-amd64/bin/convert-fasta-to-v2.pl -454 -mean 20000 -stddev 5000 -l 20kb -s ${file} -q ${file%.clean.lucy}.qual.clean.lucy  > ${file%.clean.lucy}.frg
+
+#~/sw/celera6.1/wgs-6.1/Linux-amd64/bin/convert-fasta-to-v2.pl -454 -mean 8000 -stddev 3000 -l 8kb -s ${file} -q ${file%.clean.lucy}.qual.clean.lucy  > ${file%.clean.lucy}.frg
+
+#~/sw/celera6.1/wgs-6.1/Linux-amd64/bin/convert-fasta-to-v2.pl -454 -mean 3000 -stddev 1500 -l 3kb -s ${file} -q ${file%.clean.lucy}.qual.clean.lucy  > ${file%.clean.lucy}.frg
+
+~/sw/celera6.1/wgs-6.1/Linux-amd64/bin/convert-fasta-to-v2.pl -454 -mean 20000 -stddev 5000 -l 20kb -s ${file} -q ${file%.clean.lucy}.qual.clean.lucy -m 20kbPairs.txt > ${file%.clean.lucy}.MATEPAIRS.frg
+

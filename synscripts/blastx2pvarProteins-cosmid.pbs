@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblastxreads
+
+##PBS -t 1-6
+
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project2/fileclip.txt )
+#home=/gpfs/fs3/home/rreid2
+
+module load ncbi-blast+
+echo "Launching BlastN  on NT";
+
+#cd $home
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/cosmid/pvirg/
+#cd /lustre/groups/bioservices/secure/syngenta/working/rob/project2/tmp/
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in spurpsTranscripts-29K-trim.fasta -dbtype nucl
+makeblastdb -in Pvirgatum_273_v1.1.protein.faa -dbtype prot
+echo `pwd`
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fasta  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+#######  Converted from fastq to fasta using seqtk
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -a ../flashmerged/${file}.fastq > ../flashmerged/${file}.fna
+#file=s3-extended
+#sed -i.orig 's/^$/N/' ${file}
+
+#echo ${file}
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db ~/db/nt.fna -query ../flashmerged/${file}.fna  -out ./blastn-${file}Extendedvsnt.out -num_threads 12  -evalue 0.0001 -soft_masking true  -outfmt 0
+#blastn -db ~/db/nt.fna -query ../flashmerged/${file}.fna  -out ./blastn-${file}Extendedvsnt.out -num_threads 12  -evalue 0.0001 -soft_masking true  -outfmt 0
+
+#blastn -db ~/db/nt.fna -query ./${file}  -out ./${file}vsnt.out -num_threads 12  -evalue 0.0001 -soft_masking     true  -outfmt 0
+#mkdir blastn
+
+
+blastx -db Pvirgatum_273_v1.1.protein.faa -query ../HF050.fna  -out ./HF050vsPvirg.out -num_threads 12  -evalue 1e-30 -soft_masking true  -outfmt 6
+
+blastx -db Pvirgatum_273_v1.1.protein.faa -query ../HF051.fna  -out ./HF051vsPvirg.out -num_threads 12  -evalue 1e-30 -soft_masking true  -outfmt 6
+
+echo "Fin"

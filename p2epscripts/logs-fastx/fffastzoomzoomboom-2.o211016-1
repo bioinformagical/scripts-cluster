@@ -1,0 +1,48 @@
+########################################################################
+PBS Prologue:	Tue Dec 10 10:08:49 EST 2013
+Job ID:		211016[1].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	fffastzoomzoomboom-2-1
+Limits:		neednodes=1:ppn=12,nodes=1:ppn=12,vmem=88gb,walltime=168:30:00
+Queue:		compute
+Account:	
+Nodes:		compute01[12] 
+########################################################################
+
+
+Launching fastx
+130924HiSeq_Run_Sample_106_GCCAAT_L007-R1.fastq
+Minimum Quality Threshold: 20
+Minimum Length: 20
+Input: 53300279 reads.
+Output: 53294814 reads.
+discarded 5465 (0%) too-short reads.
+Clipping Adapter: ACAGTG
+Min. Length: 40
+Input: 53294814 reads.
+Output: 48454011 reads.
+discarded 4705185 too-short reads.
+discarded 135618 adapter-only reads.
+130924HiSeq_Run_Sample_106_GCCAAT_L007-R2.fastq
+Minimum Quality Threshold: 20
+Minimum Length: 20
+Input: 53300279 reads.
+Output: 43941663 reads.
+discarded 9358616 (17%) too-short reads.
+Clipping Adapter: ACAGTG
+Min. Length: 40
+Input: 43941663 reads.
+Output: 39768036 reads.
+discarded 4060827 too-short reads.
+discarded 112800 adapter-only reads.
+
+
+########################################################################
+PBS Epilogue:	Tue Dec 10 11:39:53 EST 2013
+Job ID:		211016[1].login00.halcyon.local
+Limits:		neednodes=1:ppn=12,nodes=1:ppn=12,vmem=88gb,walltime=168:30:00
+Resources:	cput=01:27:10,mem=8320kb,vmem=34536kb,walltime=01:30:59
+Account:	
+Exit Value:	9
+########################################################################

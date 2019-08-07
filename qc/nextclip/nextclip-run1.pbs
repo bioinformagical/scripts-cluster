@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of x hours and x minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request x  megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90gb
+
+#PBS -N nnnextclip-run1
+
+#PBS -t 1-20
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run1-oat-blue-oct-2013/raw_reads/file2.txt)
+
+echo "Launching nextclip"
+
+#cd $home
+
+cd /lustre/groups/bioservices/p2ep/dhmri/run1-oat-blue-oct-2013/nextclip/
+
+/lustre/groups/bioservices/p2ep/sw/nextclip-master/bin/nextclip --input_one ../raw_reads/UNCC_Schlueter_130909HiSeq_Run_Sample_${file}_R1_001.fastq \
+ --input_two ../raw_reads/UNCC_Schlueter_130909HiSeq_Run_Sample_${file}_R2_001.fastq \
+ --output_prefix ${file} --log log.txt --min_length 25 --number_of_reads 52109199  --trim_ends 0 --remove_duplicates
+
+cat ${file}_A_R1.fastq ${file}_B_R1.fastq ${file}_C_R1.fastq > ${file}_all_R1.fastq
+cat ${file}_A_R2.fastq ${file}_B_R2.fastq ${file}_C_R2.fastq > ${file}_all_R2.fastq
+cat ${file}_D_R1.fastq ${file}_D_R1.fastq > ${file}-Dcombined.fastq
+rm log.txt
+
+
+echo "fin"
+

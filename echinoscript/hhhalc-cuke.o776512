@@ -1,0 +1,31 @@
+########################################################################
+PBS Prologue:	Fri Jul  6 15:23:14 EDT 2018
+Job ID:		776512.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	hhhalc-cuke
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=296:00:00
+Queue:		hammerhead
+Nodes:		cph-bm4.uncc.edu[64] 
+########################################################################
+WTF
+2018-07-06 15:23:15.390099
+
+/////STEP 1 STARTED//////////////////////////////////////////////////////////////////////////////////////////////////
+Running command: Chunker -s 200M -o ./temp/step1/pb-%03d.fa /nobackup/echinotol/smartDenovo/cuke/all.fna-header.fasta 1>./temp/step1/SeqChunker.out 2>./temp/step1/SeqChunker.err
+425 files created
+
+/////STEP 1 DONE/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////STEP 2 STARTED//////////////////////////////////////////////////////////////////////////////////////////////////
+Running command: blasr ./temp/step1/pb-001.fa /projects/echinotol/testrun/CA/10-gapclose/genome.scf.fasta -m 5 --out ./temp/step2/blasrresult-001.m5 --maxScore 2000 --minMatch 8 --minAlnLength 15 --nCandidates 30 --bestn 20 --nproc 64 1>./temp/step2/blasr_1.out 2>./temp/step2/blasr_1.err
+ERROR: Failed to run BLASR:Unknown error 32512
+
+
+########################################################################
+PBS Epilogue:	Fri Jul  6 15:55:13 EDT 2018
+Job ID:		776512.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=296:00:00
+Resources:	cput=00:05:17,energy_used=0,mem=224960kb,vmem=944180kb,walltime=00:31:59
+Exit Value:	255
+########################################################################

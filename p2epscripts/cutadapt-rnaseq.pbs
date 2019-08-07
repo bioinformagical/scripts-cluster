@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=196:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=79gb
+#PBS -N cccutsLikeAKnife
+##PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+#PBS -t 1-5
+
+
+cd ~/p2ep/rnaseq/merge
+
+file=$(sed -n -e "${PBS_ARRAYID}p" file.txt)
+
+echo   ${file};
+
+~/sw/cutadapt/cutadapt-1.2.1/bin/cutadapt -q 30 ${file}  > ${file}.cutadapt.fastq
+
+
+#cut adapter
+#for i in 8 
+#do
+
+
+#~/sw/cutadapt-1.0/cutadapt -b AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -O 5 -f fastq /lustre/groups/bioservices/p2ep/fromJessePoland/188.180.77.18/A2094_FastQ/Sample_GBS0381_38${i}/GBS0381_38${i}_NoIndex_L00${i}_R1_001.fastq.gz > GBS0381_38${i}.cutadapt.fastq
+#~/sw/cutadapt-1.0/cutadapt -b AATGCAG -b AATAACC -b CGTGCCAGATGCAG -O 5 -f fastq ~/p2ep/Fla4BxW85_3_299pt76.fna > Fla4BxW85_3_299pt76.cutadapt.fastq
+
+#~/sw/cutadapt-1.0/cutadapt -b GGAGTCAAGTGCAGAACCGAAATCATTGCCCCCTGGGTGACTAAAGAAAT \
+# -b GGAGTCAAGTGCAGTAGCATTCAAGTAATGCCCTTTGATTTCACCGAGAT \
+# -b GGAGTCAAGTGCAGACGATTTGACCGACCCTGCTCCTGCTACGACATTTG \
+# -b GGAGTCAAGTGCAGGCCCGACTCGACAAGACAACGATCTAGAGTTAGATC \
+# -b GGAGTCAAGTGCAGACTAAAGGTTTCACTTTTCATATTCTCGAAAGACAT \
+# -b GGAGTCAAGTGCAGCAAACAAGGATGGTTTCGGTCCCACATTTCGTTAAT \
+# -b GGAGTCAAGTGCAGCTTCACCGTCTGAGTAGCTTTCTGGCTTTTCTTACT \
+# -b GGAGTCAAGTGCAGCTACAAACAACTCCTTACTAGCTACCAACTCCTTAA \
+ #-O 5 -f fastq ~/p2ep/Fla4BxW85_3_299pt76.fna > Fla4BxW85_3_299pt76.cutadapt.fastq
+
+##  --quality-base=64
+echo "finished job"
+
+#done
+
+#mv ${file}.fastq.adapt.dup ${file}/
+

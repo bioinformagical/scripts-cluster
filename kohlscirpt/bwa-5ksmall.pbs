@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N Kaaahhhhhhn 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-2
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/kohlmeier/5kregion/filtered/file7-14.txt)
+
+module load bwa
+
+cd /lustre/groups/bioservices/secure/kohlmeier/5kregion/bwa/
+
+#create index of reference
+#bwa index -p DHFR.idx -a bwtsw /lustre/groups/bioservices/secure/kohlmeier/projectInfo/DHFR.fa
+
+module load samtools
+
+################   Success was part below #####
+bwa aln -I -t 4 DHFR.idx ../filtered/${ssid}_R1_001.fastq.adapt.trimmed > k${ssid}-1.aln.sai
+bwa aln -I -t 4 DHFR.idx ../filtered/${ssid}_R2_001.fastq.adapt.trimmed > k${ssid}-2.aln.sai
+bwa sampe DHFR.idx k${ssid}-1.aln.sai k${ssid}-2.aln.sai ../filtered/${ssid}_R1_001.fastq.adapt.trimmed ../filtered/${ssid}_R2_001.fastq.adapt.trimmed   > k${ssid}.5kregion.sam
+
+samtools import /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa k${ssid}.5kregion.sam k${ssid}.5kregion.bam
+
+samtools view -F 0x04 -b k${ssid}.5kregion.bam > k${ssid}.rmd.5kregion.bam
+samtools sort k${ssid}.rmd.5kregion.bam k${ssid}.rmd.5kregion.bam.srt
+samtools index k${ssid}.rmd.5kregion.bam.srt.bam
+
+samtools mpileup -ugf /lustre/groups/bioservices/secure/kohlmeier/projectInfo/DHFR.fa k${ssid}.rmd.5kregion.bam.srt.bam | bcftools view -bvcg - > k${ssid}.5kregion.bcf
+bcftools view k${ssid}.5kregion.bcf > k${ssid}.5kregion.vcf 
+

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=88gb
+#PBS -j oe
+#PBS -N gggalore-banana
+#PBS -q hammerhead
+#PBS -t 1-12
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/banana_genome/tomato/nagheat/raw/pairs.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load cutadapt/1.14
+module load fastqc/0.11.5
+module load trim_galore/0.4.4  
+
+cd /nobackup/banana_genome/tomato/nagheat/trimmed
+
+#~/sw/ExpressionAnalysis-ea-utils-bd148d4/clipper/
+
+ echo "Working on ${file}"
+trim_galore --paired --quality 20 --fastqc  \
+/nobackup/banana_genome/tomato/nagheat/raw/${file}_R1_001.fastq \
+/nobackup/banana_genome/tomato/nagheat/raw/${file}_R2_001.fastq 
+
+### Check if pairs are intact and they should be.
+#perl ~/scripts/perl/validateHiseqPairs.pl ${file}-R1-clip.fq ${file}-R2-clip.fq
+
+
+

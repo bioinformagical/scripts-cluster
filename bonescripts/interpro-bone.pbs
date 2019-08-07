@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=296:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7g
+
+#PBS -N wooorkDamnU 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-27
+##PBS -t 1-25
+
+##home=/gpfs/fs3/home/rreid2
+
+cd /lustre/groups/bioservices/boneym/ 
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/old/gm/emir/ind/leggett2/file.txt)
+module load iprscan
+module load samtools
+
+file=metal
+samtools view ${file}.sorted.bam | awk '{OFS="\t"; print ">"$1"\n"$10}' - > ${file}-postbam.fna
+
+
+
+
+#echo "We are in a split ${ssid}"
+
+#for file in ./allhitsplit*; do
+	 echo ${file}
+#	iprscan -cli -i ./${file} -o ${file}.iprscan.out \
+#	-format raw \
+#	-goterms -iprlookup \
+#	-seqtype n \
+#	-appl hmmpanther profilescan hmmpfam superfamily
+#	-appl profilescan \
+#	-appl hmmpfam \
+#	-appl superfamily
+#done
+
+
+#module load iprscan
+#iprscan -cli -i ./${ssid}.fna -o ${ssid}.iprscan.out -format raw -goterms -iprlookup
+
+echo `pwd`
+

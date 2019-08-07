@@ -1,0 +1,61 @@
+#!/bin/sh
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+
+#PBS -N bbblastNtee
+
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-17
+
+
+home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastN "
+
+#cd ~/old/gm/assembly2/
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ./filedirLess.txt)
+
+cd ~/old/gm/assembly2/tk1
+
+#mkdir nt
+#cd nt
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/old/gm/db/Brachypodium_distachyon_Bd21.main_genome.scaffolds.fasta  -dbtype nucl
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -query ~/old/gm/assembly2/tk1/tmp/oases_asm.afg.contigSeq.fasta -db ~/old/gm/db/Brachypodium_distachyon_Bd21.main_genome.scaffolds.fasta  -out ~/old/gm/assembly2/tk1/tmp/tk1vsbrachy.blastx.xml -num_threads 6  -evalue 1e-50 -soft_masking false  -outfmt 1
+
+#mv ~/old/gm/assembly2/tk1/nt/tk1.blastnt2.xml ~/old/gm/assembly2/tk1/nt/tk1.blastnt.xml
+
+#echo `${fiile}`
+echo "fin"
+
+
+#/sw/ncbi-blast/bin/blastn -outfmt 6 -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitisgenome-mega.out -task megablast -evalue 0.00001 -soft_masking false
+
+
+
+# blasting against REPBASE
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/repbase/bigRepeats.fasta -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedRepbase/bbRscoutVSrepbase-blastncut05.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+
+
+# Blasting against grape
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitis-blastncut05.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+

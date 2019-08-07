@@ -1,0 +1,118 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:00:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+##PBS -q bigiron
+
+#PBS -N splitRicky
+#PBS -t 1-33
+
+#set -eux
+
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastX "
+
+cd ~/old/gm/assembly2/
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+
+
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+echo "${file}"
+
+/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/makeblastdb -in ${file}/tmp/oases_asm.afg.contigSeq.fasta -dbtype nucl 
+
+/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastx -db ~/old/db/swissprot/uniprot_sprot.fasta -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/oases.xml -num_threads 6 -evalue 0.0000000001 -outfmt 5
+
+echo `pwd`
+
+#done
+
+
+
+
+#/sw/ncbi-blast/bin/blastn -outfmt 6 -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitisgenome-mega.out -task megablast -evalue 0.00001 -soft_masking false
+
+# blasting against REPBASE
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/repbase/bigRepeats.fasta -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedRepbase/bbRscoutVSrepbase-blastncut05.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+
+# Blasting against grape
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitis-blastncut05.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitis-megablastcut05nomask.out -task megablast -evalue 0.05 -soft_masking true  -outfmt 6
+
+#Blasting against NT
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/nt/nt.00  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastNT/bbRscoutVSnt00-blastncut05nomask.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/nt/nt.01  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastNT/bbRscoutVSnt01-blastncut05nomask.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+#/sw/ncbi-blast/bin/makeblastdb -in /old/blueberry/soap/run3/graph3scaf.fa -dbtype nucl     
+#/sw/ncbi-blast/bin/makeblastdb -in /old/db/nt/nt.fa  -dbtype nucl
+#/sw/ncbi-blast/bin/makeblastdb -in /old/blueberry/bbBlastNT/temp.fa  -dbtype nucl
+#/sw/ncbi-blast/bin/makeblastdb -in /old/blueberry/reads/454Sequences/all/split/3kb_1.fasta
+#/sw/ncbi-blast/bin/makeblastdb -in /old/blueberry/reads/454Sequences/all/split/8kb_1.fasta
+#/sw/ncbi-blast/bin/makeblastdb -in /old/blueberry/reads/454Sequences/all/split/20kb_1.fasta
+#/sw/ncbi-blast/bin/makeblastdb -in /old/gm/assembly2/${file}/transcripts.fa -dbtype nucl
+
+#for i in 1 2 3
+#do
+#name = "he"
+
+ #	mkdir ${file}
+#	/sw/ncbi-blast/bin/blastx -query /old/gm/assembly2/${file}/transcripts.fa -db ~/db/swissprot/uniprot_sprot.fasta  -out /old/gm/blastx/${file}/blastx.xml  -soft_masking false  -outfmt 5
+
+#done
+
+
+#/sw/ncbi-blast/bin/blastx -query /old/gm/assembly2/${file}/transcripts.fa -db ~/db/swissprot/uniprot_sprot.fasta  -out /old/gm/blastx/${file}blastx.out  -soft_masking false  -outfmt 5
+
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/reads/454Sequences/all/split/3kb_1.fasta -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/3kb5.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 5
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/reads/454Sequences/all/split/8kb_1.fasta -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/8kb5.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 5
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/reads/454Sequences/all/split/20kb_1.fasta -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/20kb5.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 5
+
+
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/soap/run3/graph3scaf.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/soapRun3.out -task blastn -evalue 0.0000000000005 -soft_masking false  -outfmt 5
+#
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp2.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 2
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp3.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 3
+
+#4/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp4.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 4
+
+#/#sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp5.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 5
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp6.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 6
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp7.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 7
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp8.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 8
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp9.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 9
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/bbBlastNT/temp.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/temp10.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 10
+
+
+
+#/sw/ncbi-blast/bin/blastn -query /old/blueberry/soap/run3/graph3scaf.fa -db ~/db/nt/nt.fa  -out /old/blueberry/bbBlastNT/ -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 6
+
+
+
+

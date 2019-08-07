@@ -1,0 +1,20 @@
+########################################################################
+PBS Prologue:	Thu Oct 19 11:11:18 EDT 2017
+Job ID:		1247405.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	bbbeeeWA-banana
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=168:30:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[12] 
+########################################################################
+/var/spool/torque/mom_priv/jobs/1247405.cph-m1.uncc.edu.SC: line 18: PBS_ARRAYID: unbound variable
+
+
+########################################################################
+PBS Epilogue:	Thu Oct 19 11:11:19 EDT 2017
+Job ID:		1247405.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=168:30:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:01
+Exit Value:	1
+########################################################################

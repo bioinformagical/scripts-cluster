@@ -1,0 +1,104 @@
+#!/bin/bash
+#PBS -l walltime=696:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=1     # Number of nodes and processors per node requested by job
+#PBS -l mem=100GB           # Maximum physical memory to use for jobi
+#PBS -N bbbusco-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+#PBS -t 1-10
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+file=$(sed -n -e "${PBS_ARRAYID}p"  /nobackup/oat_genome/wtdbg/fastas.txt)
+
+#module list
+echo "WTF"
+
+cd /nobackup/oat_genome/busco
+
+
+module load bamtools
+module load augustus
+module load blast
+module load busco/3.0.2
+
+export AUGUSTUS_CONFIG_PATH=/users/rreid2/sw/augustus.2.5.5/config
+
+run_BUSCO.py -o ${file} \
+ -i /nobackup/oat_genome/wtdbg/${file}.ctg.lay.fa \
+ -l /users/rreid2/db/buscoLineages/embryophyta_odb9 \
+ -m geno \
+ -c 1 \
+ -r \
+ --tmp /scratch/rreid2/temp
+
+
+
+ 
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --rescue-low-cov-edges --tidy-reads 5000 -fo oat6 2>&1 | tee log.wtdbg
+
+#name=oat6
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+#/users/rreid2/sw/smartdenovo/smartdenovo/smartdenovo.pl /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz  > oat6-corrected.mak 
+
+
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat.steelhead/oat5.trimmedReads.fasta --aln-noskip --rescue-low-cov-edges --tidy-reads 5000 -fo oat5 2>&1 | tee log.wtdbg
+#name=oat5
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+#####
+#name=oat6-notidy
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --rescue-low-cov-edges --tidy-reads 000 -fo ${name} 2>&1 | tee log.wtdbg
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+###
+#name=oat6-nodeoverlap100
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --rescue-low-cov-edges --tidy-reads 5000  --node-ovl 100 -fo ${name} 2>&1 | tee log.wtdbg
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+###
+#name=oat6-noRescueEdges
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --tidy-reads 5000  --node-ovl 100 -fo ${name} 2>&1 | tee log.wtdbg
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+### Adding our error free contgs from CANU!
+#name=oat6-ErrorFReeCANUContigs
+#--err-free-seq your_ctg.fa
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --tidy-reads 5000 --err-free-seq /projects/oat_genome/dovetail/oat_hexaploid_06Jun2018_KpOLV.fasta.gz -fo ${name} 2>&1 | tee log.wtdbg
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+
+####Test high error rate
+#Decrease -p. Try -p 19 or -p 17 
+#Decrease -S. Try -S 2 or -S 1
+#name=oat6-highErrorRate
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip -p 17 -S 1 --tidy-reads 5000 --err-free-seq /projects/oat_genome/dovetail/oat_hexaploid_06Jun2018_KpOLV.fasta.gz -fo ${name} 2>&1 | tee log.wtdbg
+#wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+####High Coverage
+#Increase --edge-min. Try --edge-min 4, or higher.
+#name=oat6-highCoverage
+#wtdbg-1.2.8 -t 63 -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --edge-min 5 --tidy-reads 5000 --err-free-seq /projects/oat_genome/dovetail/oat_hexaploid_06Jun2018_KpOLV.fasta.gz -fo ${name} 2>&1| tee log.wtdbg
+# wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+
+#### Default settings suggested by htme work best. But we will add in our dove tail too.
+#name=oat6-dovetail-masurcacontigs
+#wtdbg-1.2.8 -t 63 --err-free-seq /nobackup/oat_genome/illumina/Assembly-masurca/genome.ctg.fasta -i /nobackup/oat_genome/canu/oat6/oat6.correctedReads.fasta.gz --aln-noskip --rescue-low-cov-edges --tidy-reads 1000 --err-free-seq /projects/oat_genome/dovetail/oat_hexaploid_06Jun2018_KpOLV.fasta.gz  -fo ${name} 2>&1 | tee log.wtdbg
+# wtdbg-cns -t 63 -i ${name}.ctg.lay -o ${name}.ctg.lay.fa
+
+
+#/nobackup/oat_genome/illumina/Assembly-masurca/genome.ctg.fasta
+

@@ -1,0 +1,9 @@
+<files>
+<file name="file"
+title="name"
+description="name"
+background="FFFFFF"
+foreground="0000FF"
+max_depth="15"
+name_size="12"/>
+</files>

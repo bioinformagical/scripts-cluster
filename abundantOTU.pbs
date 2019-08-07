@@ -1,0 +1,30 @@
+
+
+#!/bin/sh
+
+
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N AbbinduntOTTTTTUs 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+
+
+cd ~/mel
+
+
+~/sw/AbundantOTU2.0/bin/AbundantOTU -i LucyQCFastaForRDPTrim1Max280.fasta -o test1 

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=38gb
+
+#PBS -N bbblast2exon11or12
+
+##PBS -t 1-9
+umask 007
+set -eux
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/brassica/map/chromosome/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching Blastn "
+module load ncbi-blast+
+
+#cd $home
+
+cd /lustre/groups/bioservices/p2ep/brassica/glucosil/bacB19N3/
+
+#makeblastdb -in ../genomic/newblerAssembly.fna -dbtype nucl
+#makeblastdb -in ../genomic/miraAssembly.fna -dbtype nucl
+echo `pwd`
+#echo ${file}
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fasta  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/brassica/130924HiSeq_Run_Sample_V_158_NoIndex_L002_R2_001-clip.fasta -query ../chromosome/${file}.fna  -out ./blastn-${file}vsv158-r2.out -num_threads 12  -evalue 1 -soft_masking false  -outfmt 6
+
+
+
+#blastn -db /lustre/groups/p2ep/brassica/Boleracea.v1.genome.fasta -query ./bacB19N3.fna  -out ./blastn-bacb19n3Vsgenome.out -num_threads 12  -evalue 1e-90 -soft_masking true  -outfmt 6 -word_size 78 
+
+#bac-b21f5
+#blastn -db /lustre/groups/p2ep/brassica/Boleracea.v1.genome.fasta -query ../bac-b21f5.fna  -out ./blastn-bac-b21f5Vsgenome.out -num_threads 12  -evalue 1e-90 -soft_masking true  -outfmt 6 -word_size 78
+
+#bac-b21h13
+blastn -db /lustre/groups/p2ep/brassica/Boleracea.v1.genome.fasta -query ../bac-b21h13.fna  -out ./blastn-bac-b21h13Vsgenome.out -num_threads 12  -evalue 1e-90 -soft_masking true  -outfmt 6 -word_size 78
+
+echo "Fin"

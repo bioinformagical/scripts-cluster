@@ -1,0 +1,41 @@
+
+#!/bin/sh
+
+
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l pmem=76000mb
+#PBS -l vmem=90gb
+#PBS -N ssssamaSort 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+
+
+cd /lustre/groups/bioservices/boneym/
+
+file="ceramic30"
+
+
+#samtools sort $file.dupped.bam $file.dupped.sorted
+#samtools index $file.dupped.sorted.bam
+#samtools view $file.dupped.sorted.bam > $file.dupped.sorted.sam
+
+
+module load samtools
+samtools view -bS $file.sam > $file.bam
+samtools sort $file.bam $file.sorted
+samtools index $file.sorted.bam
+samtools view $file.sorted.bam > $file.sorted.sam
+

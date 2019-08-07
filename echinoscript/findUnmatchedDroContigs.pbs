@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N ppparselTongue-venom
+
+#PBS -t 1-25
+umask 007
+set -eux
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /group/janieslab/venom/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching  getRemaining...... "
+#module load ncbi-blast+
+
+#cd $home
+
+cd /group/janieslab/venom/blastdro
+
+#makeblastdb -in ../genomic/newblerAssembly.fna -dbtype nucl
+#makeblastdb -in ../garm/mas2newb/bothScafBin.fna -dbtype nucl
+echo `pwd`
+perl /home/rreid2/scripts/perl/filterOutGoodHits-GetRemainingSeq.pl ../aa/${file}/best_candidates.eclipsed_orfs_removed.pep top_hits-${file}
+
+
+echo ${file}
+
+
+echo "Fin"

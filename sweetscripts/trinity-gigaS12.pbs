@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=400gb
+
+#PBS -N triiiS12
+#PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-12
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+
+module load bowtie
+#module load oases
+
+cd /lustre/groups/lorainelab/data/illumina/sweet_potato/gigaS12/
+echo `pwd`
+
+#perl ~/sw/trinityrnaseq_r2013-02-25/Trinity.pl --seqType fq --JM 400G --output V012-trinity \
+# --left /lustre/groups/p2ep/rnaseq/raw/merge-V012_CTTGTA_L002_R1.fastq \
+# --right /lustre/groups/p2ep/rnaseq/raw/merge-V012_CTTGTA_L002_R2.fastq --CPU 8
+
+perl ~/sw/trinityrnaseq_r2013-02-25/Trinity.pl --seqType fq --JM 400G --output giga\
+ --left /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/gigaS12_R1-trimmed.fq \
+ --right /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/gigaS12_R1-trimmed.fq --CPU 8
+

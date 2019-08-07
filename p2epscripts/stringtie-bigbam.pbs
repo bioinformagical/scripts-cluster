@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=85500mb
+
+#PBS -N ssstrings-bigbam
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-25
+##PBS -t 10
+
+set eu
+umask 007
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/blueberry/rnaseq/sra-srr118/fileHiseq.txt)
+
+module load bwa
+module load htslib/1.1-1 samtools
+cd /group/p2ep/blueberry/rnaseq/bigbamtheory 
+
+
+RM=/home/rreid2/sw/hisat-0.1.4-beta
+export PATH="${RM}:${PATH}"
+
+
+
+ 
+#samtools view -bS bigbam.sam | samtools sort - bigbam-sort
+
+~/sw/stringtie/stringtie-1.1.2.Linux_x86_64/stringtie /group/p2ep/blueberry/rnaseq/bigbamtheory/bigbam-sort.bam -p 12 -C coveredReads_refs.gtf  -G /group/p2ep/blueberry/bac/augustus/aug-bb-alltri.gff -v -o bigbam2take6-aug2015.gtf
+#~/sw/stringtie/stringtie-1.1.2.Linux_x86_64/stringtie /group/p2ep/blueberry/rnaseq/bigbamtheory/bigbam-sort.bam -p 12  -v -o bigbam2take6-aug2015.gtf
+
+ 

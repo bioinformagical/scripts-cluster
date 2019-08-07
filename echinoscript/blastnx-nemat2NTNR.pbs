@@ -1,0 +1,54 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=91gb
+
+#PBS -N bbblastrollypolly
+#PBS -q bigiron
+##PBS -t 1-306
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/old/blueberry/reads/hiseq/split/files.txt)
+umask 007
+set eu
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastP and blastx"
+
+#cd $home
+#module load ncbi-blast+
+
+#cd /lustre/groups/janieslab/trinityRun2/orthomcl/
+#cd $TMPDIR
+cd /lustre/groups/janieslab/MinION/2015-1-15-Nematostella/
+
+#cp /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta* ./
+#makeDB
+
+#~/sw/seqtk-master/seqtk seq -a ../../minion2/all-2D.fastq > ../../minion2/all-2D.fna
+#~/sw/seqtk-master/seqtk seq -a ../../minion2/all-template.fastq > ../../minion2/all-template.fna
+#~/sw/seqtk-master/seqtk seq -a ../../minion2/all-complement.fastq > ../../minion2/all-complement.fna
+
+#cat ../minion2/all-2D.fna ../minion2/all-template.fna ../minion2/all-complement.fna > rolly.fna
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in all1-48.fasta -dbtype prot
+#module load ncbi-blast+
+#blastn -db ~/db/nt.fna    -query pass_2D/Galaxy7-[FASTQ_to_FASTA_on_data_6].fasta  -out ../../blasted/nematVSNT-blastn.txt -num_threads 24  -evalue 1e-25 -soft_masking false  -outfmt 6
+
+#blastn -db /lustre/groups/janieslab/blasted/nem-47k-ncbi.fna    -query pass_2D/Galaxy7-[FASTQ_to_FASTA_on_data_6].fasta  -out ../../blasted/nematVSNema47K-blastn.txt -num_threads 24  -evalue 1e-25 -soft_masking false  -outfmt 6
+
+#/lustre/sw/ncbi-blast+/2.2.27/bin/makeblastdb -in /lustre/groups/janieslab/blasted/nem-47k-ncbi.fna -dbtype nucl
+/lustre/sw/ncbi-blast+/2.2.27/bin/blastn -db /lustre/groups/janieslab/blasted/tmp-header.fna    -query pass_2D/Galaxy7-[FASTQ_to_FASTA_on_data_6].fasta  -out ../../blasted/nematVSNema47K-blastn-e1.txt -num_threads 24  -evalue 1 -soft_masking false  -outfmt 6
+
+#blastp -db ~/db/nr/nr.faa -query rolly.fna  -out rollyVSNR.blastp.txt -num_threads 24  -evalue 1 -soft_masking false  -outfmt 6
+echo "fin"
+
+#perl ~/scripts/perl/justACC-protein.pl test.txt
+#perl ~/scripts/perl/justACC.pl rollyVSNR.blastp.txt 
+#mv outfast.blastp.txt /lustre/groups/janieslab/trinityRun2/orthomcl/outfast.blastp.txt

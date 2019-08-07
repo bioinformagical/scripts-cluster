@@ -1,0 +1,30 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7500mb
+
+#PBS -N Bwaaaaaht? 
+##PBS -q bigiron
+
+#Number of times to run this script
+#PBS -t 11-12
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa/files.txt)
+
+
+cd /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa
+
+perl /lustre/home/rreid2/old/scripts/perl/filterSmallContigs.pl ${ssid}
+
+
+#cat ${ssid}.adapt.dup.fa.filtered.fna ${ssid}.adapt.dup.fa.filtered.fna > ./smaller/${ssid}.filtered.fna 
+
+

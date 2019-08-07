@@ -1,0 +1,47 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N ssaHaHaHa
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+
+
+#cd $HOME/blueberry/reads/454Sequences/bowtie/
+
+#~/sw/bin/ssaha2Build -save shotguntest ~/gm/db/PGSC_DM_v3_superscaffolds.fasta 
+
+
+#~/sw/bin/ssaha2 -save shotguntest -454 \
+#-outfile testOut.txt -kmer 13 -skip 13 \
+#GMRBSO102new.fasta
+
+#~/sw/bin/ssaha2 -save shotguntest -454 -kmer 13 -skip 13 -outfile testOut.txt GMRBSO102new.fasta
+#~/sw/bin/ssaha2Build -454 -save shotgungrape ~/blueberry/db/vitisscaffolds.fa
+
+#~/sw/bin/ssaha2Build -454 -save shotgunpotato ~/gm/db/PGSC_DM_v3_superscaffolds.fasta
+
+#~/sw/bin/ssaha2 -save shotgungrape -454  -output sam -outfile grapeOut.sam GMRBSO102new.fasta
+
+#~/sw/bin/ssaha2 -save shotgunpotato -454 -output sam -outfile potOut.sam GMRBSO102new.fasta
+
+cd $HOME/gm/genes/
+
+~/sw/bin/ssaha2Build -454 -save he25 ~/gm/assembly/he25/transcripts.fa
+~/sw/bin/ssaha2 -save he25 -454 -output sam -outfile he25Out.sam clsf6.fa
+
+

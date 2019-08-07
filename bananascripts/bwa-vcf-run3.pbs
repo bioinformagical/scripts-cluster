@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=9
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+#PBS -j oe
+#PBS -N bbbeeeWA-banana
+#PBS -q hammerhead
+#PBS -t 1-20
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/banana/filter/trimgalore/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching BWA alignment"
+
+#module load java8 
+module load samtools
+module load bwa
+module load bcftools
+
+
+cd /scratch/rreid2/banana/align/run3 
+
+#bwa index -p PAHANGJAN2016.idx -a bwtsw /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna 
+bwa mem -t 9 -P -k 11 -B 2 -O 5 -U 5   \
+	./PAHANGJAN2016.idx \
+	/scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R1_paired.fq \
+	/scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R2_paired.fq  > ${file}.sam
+samtools view -bS ${file}.sam | samtools sort -T ${file} -o ${file}-sorted.bam
+samtools index ${file}-sorted.bam
+
+#### MAKE VCF     ######
+samtools mpileup  --count-orphans --skip-indels --output ${file}.bcf  \
+        -uf /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna ${file}-sorted.bam
+bcftools view ${file}.bcf > ${file}.vcf
+
+
+
+#bwa aln  -t 12 PAHANG.idx /scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R1_paired.fq > ${file}-1.aln.sai
+#bwa aln  -t 12 PAHANG.idx /scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R2_paired.fq > ${file}-2.aln.sai
+#bwa sampe PAHANG.idx ${file}-1.aln.sai ${file}-2.aln.sai -P \
+# /scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R1_paired.fq \
+# /scratch/rreid2/banana/filter/trimmomatic/trimgalored/output_${file}-R2_paired.fq  >  ${file}.sam
+
+#samtools view -bS ${file}.sam | samtools sort -T ${file} -o ${file}-sorted.bam
+#samtools mpileup -ugf /scratch/rreid2/banana/db/acuminata/GCA_000313855.2_ASM31385v2_genomic.fna ${file}-sorted.bam | bcftools view -vcg - > ${file}.bcf
+#bcftools view ${file}.bcf > ${file}.vcf
+
+
+#java -jar ~/sw/trimmomatic/Trimmomatic-0.36/trimmomatic-0.36.jar PE -threads 24 ../../trimgalore/${file}_R1_001_val_1.fq ../../trimgalore/${file}_R2_001_val_1.fq output_${file}-R1_paired.fq output_${file}-R1_unpaired.fq output_${file}-R2_paired.fq output_${file}-R2_unpaired.fq ILLUMINACLIP:TruSeq2-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50
+
+
+
+
+
+
+
+

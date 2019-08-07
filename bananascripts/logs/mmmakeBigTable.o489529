@@ -1,0 +1,240 @@
+########################################################################
+PBS Prologue:	Fri Apr 13 12:04:05 EDT 2018
+Job ID:		489529.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	mmmakeBigTable
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=4,nodes=1:ppn=4,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=64gb,walltime=168:30:00
+Queue:		cph_cpu
+Nodes:		cph-c14.uncc.edu[4] 
+########################################################################
+Launching GATK haplotyper
+/scratch/rreid2/banana/align/run3/bygenelocation/109_S36_L008-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/109_S36_L008-filth-byDP-byGeneLocation-v2.vcf
+109_S36_L008-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008
+Done loading master file !!
+Done loading Master File , FIN.
+109_S36_L008-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/111_S37_L008-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/111_S37_L008-filth-byDP-byGeneLocation-v2.vcf
+111_S37_L008-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008
+Done loading master file !!
+Done loading Master File , FIN.
+111_S37_L008-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1121_S14_L004-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1121_S14_L004-filth-byDP-byGeneLocation-v2.vcf
+1121_S14_L004-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004
+Done loading master file !!
+Done loading Master File , FIN.
+1121_S14_L004-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1187_S15_L004-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1187_S15_L004-filth-byDP-byGeneLocation-v2.vcf
+1187_S15_L004-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004
+Done loading master file !!
+Done loading Master File , FIN.
+1187_S15_L004-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1254_S16_L004-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1254_S16_L004-filth-byDP-byGeneLocation-v2.vcf
+1254_S16_L004-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004
+Done loading master file !!
+Done loading Master File , FIN.
+1254_S16_L004-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1354_S7_L002-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1354_S7_L002-filth-byDP-byGeneLocation-v2.vcf
+1354_S7_L002-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002
+Done loading master file !!
+Done loading Master File , FIN.
+1354_S7_L002-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1437_S38_L008-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1437_S38_L008-filth-byDP-byGeneLocation-v2.vcf
+1437_S38_L008-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008
+Done loading master file !!
+Done loading Master File , FIN.
+1437_S38_L008-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1466_S2_L001-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1466_S2_L001-filth-byDP-byGeneLocation-v2.vcf
+1466_S2_L001-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001
+Done loading master file !!
+Done loading Master File , FIN.
+1466_S2_L001-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/1468_S3_L001-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/1468_S3_L001-filth-byDP-byGeneLocation-v2.vcf
+1468_S3_L001-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001
+Done loading master file !!
+Done loading Master File , FIN.
+1468_S3_L001-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/249_S39_L008-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/249_S39_L008-filth-byDP-byGeneLocation-v2.vcf
+249_S39_L008-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008
+Done loading master file !!
+Done loading Master File , FIN.
+249_S39_L008-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/253_S5_L002-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/253_S5_L002-filth-byDP-byGeneLocation-v2.vcf
+253_S5_L002-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002
+Done loading master file !!
+Done loading Master File , FIN.
+253_S5_L002-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/281_S6_L002-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/281_S6_L002-filth-byDP-byGeneLocation-v2.vcf
+281_S6_L002-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002
+Done loading master file !!
+Done loading Master File , FIN.
+281_S6_L002-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/299_S8_L002-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/299_S8_L002-filth-byDP-byGeneLocation-v2.vcf
+299_S8_L002-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002
+Done loading master file !!
+Done loading Master File , FIN.
+299_S8_L002-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/425_S1_L001-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/425_S1_L001-filth-byDP-byGeneLocation-v2.vcf
+425_S1_L001-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001
+Done loading master file !!
+Done loading Master File , FIN.
+425_S1_L001-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/591_S4_L001-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/591_S4_L001-filth-byDP-byGeneLocation-v2.vcf
+591_S4_L001-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001	591_S4_L001
+Done loading master file !!
+Done loading Master File , FIN.
+591_S4_L001-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/653_S9_L003-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/653_S9_L003-filth-byDP-byGeneLocation-v2.vcf
+653_S9_L003-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001	591_S4_L001	653_S9_L003
+Done loading master file !!
+Done loading Master File , FIN.
+653_S9_L003-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/654_S10_L003-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/654_S10_L003-filth-byDP-byGeneLocation-v2.vcf
+654_S10_L003-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001	591_S4_L001	653_S9_L003	654_S10_L003
+Done loading master file !!
+Done loading Master File , FIN.
+654_S10_L003-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/712_S11_L003-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/712_S11_L003-filth-byDP-byGeneLocation-v2.vcf
+712_S11_L003-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001	591_S4_L001	653_S9_L003	654_S10_L003	712_S11_L003
+Done loading master file !!
+Done loading Master File , FIN.
+712_S11_L003-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/766_S12_L003-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/766_S12_L003-filth-byDP-byGeneLocation-v2.vcf
+766_S12_L003-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001	591_S4_L001	653_S9_L003	654_S10_L003	712_S11_L003	766_S12_L003
+Done loading master file !!
+Done loading Master File , FIN.
+766_S12_L003-filth-byDP-byGeneLocation-v2.vcf
+/scratch/rreid2/banana/align/run3/bygenelocation/966_S13_L004-filth-byDP-byGeneLocation-v2.vcf
+The number of sys.argv given were;  3 
+
+/scratch/rreid2/banana/align/run3/bygenelocation/966_S13_L004-filth-byDP-byGeneLocation-v2.vcf
+966_S13_L004-filth-byDP-byGeneLocation-v2.vcf
+Done loading VCF file !!
+megamaster.txt
+chr01-100003	109_S36_L008	111_S37_L008	1121_S14_L004	1187_S15_L004	1254_S16_L004	1354_S7_L002	1437_S38_L008	1466_S2_L001	1468_S3_L001	249_S39_L008	253_S5_L002	281_S6_L002	299_S8_L002	425_S1_L001	591_S4_L001	653_S9_L003	654_S10_L003	712_S11_L003	766_S12_L003	966_S13_L004
+Done loading master file !!
+Done loading Master File , FIN.
+966_S13_L004-filth-byDP-byGeneLocation-v2.vcf
+
+
+########################################################################
+PBS Epilogue:	Fri Apr 13 12:14:00 EDT 2018
+Job ID:		489529.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=4,nodes=1:ppn=4,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=64gb,walltime=168:30:00
+Resources:	cput=00:08:52,energy_used=0,mem=263204kb,vmem=607396kb,walltime=00:09:55
+Exit Value:	0
+########################################################################

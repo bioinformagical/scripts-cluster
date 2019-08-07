@@ -1,0 +1,71 @@
+########################################################################
+PBS Prologue:	Mon Dec 23 07:53:18 EST 2013
+Job ID:		211065[3].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	makinitRain3-3
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron02[24] 
+########################################################################
+
+
+PATHS:
+CA_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/CA/Linux-amd64/bin/
+JELLYFISH_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+SR_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+
+Verifying PATHS...
+jellyfish ok
+runCA ok
+createSuperReadsForDirectory.perl ok
+
+PARAMETERS:
+GRAPH_KMER_SIZE = auto
+USE_LINKING_MATES = 1
+KMER_COUNT_THRESHOLD = 1
+LIMIT_JUMP_COVERAGE = 1000
+NUM_THREADS = 24
+JF_SIZE = 10000000000
+EXTEND_JUMP_READS = 0
+CA_PARAMETERS =  ovlMerSize=87 cgwErrorRate=0.1 ovlMemory=8GB 
+DO_HOMOPOLYMER_TRIM = 0
+
+DATA:
+PE:
+pe 7000 2500 /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/Sample_131029HiSeq_Run_UNCC_Schlueter_Sample_114/114-R1.fq /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/Sample_131029HiSeq_Run_UNCC_Schlueter_Sample_114/114-R2.fq 
+JUMP:
+OTHER:
+
+creating script file for the actions...done.
+execute assemble.sh to run the assembly
+processing PE library reads Mon Dec 23 07:53:19 EST 2013
+Average PE read length 100
+choosing kmer size of 31 for the graph
+running Jellyfish Mon Dec 23 08:01:45 EST 2013
+MIN_Q_CHAR: 33
+Error correction Poisson cutoff = 4
+error correct PE Mon Dec 23 09:16:27 EST 2013
+Estimated genome size: 335525063
+computing super reads from PE Mon Dec 23 10:25:29 EST 2013
+Linking PE reads 316570
+Celera Assembler Mon Dec 23 14:14:04 EST 2013
+ovlMerThreshold=75
+Overlap/unitig success
+Overlap/unitig success
+Unitig consensus success
+CA success
+Gap closing Mon Dec 23 14:54:16 EST 2013
+Gap close failed, you can still use pre-gap close files under CA/9-terminator/. Check gapClose.err for problems.
+All done Mon Dec 23 15:03:30 EST 2013
+
+
+########################################################################
+PBS Epilogue:	Mon Dec 23 15:03:35 EST 2013
+Job ID:		211065[3].login00.halcyon.local
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Resources:	cput=102:47:50,mem=126180004kb,vmem=126818700kb,walltime=07:10:12
+Account:	
+Exit Value:	0
+########################################################################

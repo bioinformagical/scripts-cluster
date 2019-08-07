@@ -1,0 +1,1 @@
+fastq_quality_trimmer: input file (./140509HiSeq_Run_Sample_Plate1_UNCC_Schlueter_NoIndex_L006_R1_001.fastq.gz) has unknown file format (not FASTA or FASTQ), first character =  (31)

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=20gb
+#PBS -N ssshopAtKohls
+##PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+#PBS -t 1-12
+
+##home=/gpfs/fs3/home/rreid2
+
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+#echo "Launching Repeat Masker"
+#source /sw/functions.sh
+#prepend_dir PATH $HOME/bin
+
+#export PATH=$HOME/bin:$PATH
+
+
+cd /lustre/groups/bioservices/kohlmeier/rawReads
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ./files.txt)
+
+perl ~/scripts/perl/filterPCRdupl.pl -fastq1=UNC_Martin_120727HiSeq_Run_Sample_${file}_Read1.fastq.gz -fastq2=UNC_Martin_120727HiSeq_Run_Sample_${file}_Read2.fastq.gz -prefix=kohl${file} 
+
+
+#for file in $(find ./ -name "*.fastq");
+#do
+
+echo "finished dup job"
+#done
+

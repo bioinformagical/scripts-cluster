@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=296:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7g
+
+#PBS -N interproDoingStuff 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-27
+
+cd ~/path/toyour/splitfiles/ 
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/pathtosomeplace/file.txt)
+module load iprscan
+module load samtools
+
+#echo "We are in a split ${ssid}"
+
+for file in ./allhitsplit*; do
+	 echo ${file}
+	iprscan -cli -i ./${file} -o ${file}.iprscan.out \
+	-format raw \
+	-goterms -iprlookup \
+	-seqtype n \
+	-appl hmmpanther profilescan hmmpfam superfamily
+	-appl profilescan \
+	-appl hmmpfam \
+	-appl superfamily
+done
+
+
+#module load iprscan
+#iprscan -cli -i ./${ssid}.fna -o ${ssid}.iprscan.out -format raw -goterms -iprlookup
+
+echo `pwd`
+

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=91gb
+
+#PBS -N bbblastNeuro
+##PBS -q bigiron
+##PBS -t 1-306
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/old/blueberry/reads/hiseq/split/files.txt)
+umask 007
+set eu
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastP "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/groups/janieslab/otherData/johnGeorgia
+
+#cp /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta* ./
+#makeDB
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in all1-48.fasta -dbtype prot
+module load ncbi-blast+
+#blastp -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query ncbi-EF1-alpha-spurp.faa  -out e1falphaVSall.blastp.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+
+blastx -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query 18S-human.fna  -out 18SVSall.blastx.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+blastp -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query actinbeta-human.faa  -out actinbetaVSall.blastp.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+blastp -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query glyc3ph-human.faa  -out glyc3VSall.blastp.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+blastp -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query pgk1-human.faa  -out pgk1VSall.blastp.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+blastp -db /lustre/groups/janieslab/trinityRun2/orthomcl/all1-48.fasta -query ppia-human.faa  -out ppiaVSall.blastp.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+
+echo "fin"

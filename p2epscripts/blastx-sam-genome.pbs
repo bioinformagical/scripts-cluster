@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=40GB
+
+#PBS -N EverbbbblastingLove 
+#PBS -q copperhead
+
+
+#Number of times to run this script
+##PBS -t 1-12
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/blast/file.txt)
+
+cd ~/blueberry/sam/ 
+module load blast/2.3.0+ 
+
+
+
+#makeblastdb -in ~/blueberry/sam/2018-03-21-qtl-condidate-regions.fasta -dbtype prot
+makeblastdb -in ./efetchedProteins.faa -dbtype prot 
+
+blastx -query ~/blueberry/sam/2018-04-16-Condidate-Regions-3rd.fasta -out ./blastx-samBatch22ncbiProteins.txt -db ./efetchedProteins.faa \
+-num_threads 6 \
+-evalue 1e-5 \
+-soft_masking false  -outfmt 6
+
+

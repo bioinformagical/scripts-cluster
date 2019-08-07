@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=85500mb
+
+#PBS -N colllapseGBS 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-79
+
+set eu
+umask 007
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/GBS_data/barcodeSplit/Fla4BxW85/goodfiles.txt)
+
+
+cd /lustre/groups/p2ep/GBS_data/barcodeSplit/Fla4BxW85/good/
+
+module load fastx-toolkit/0.0.13.2
+
+#fastx_collapser -Q33 -i ${file}.fastq -o ${file}-collapsed.fastq
+
+LINES=`cat ${file}-collapsed.fastq | wc -l`
+READS=`expr $LINES / 4`
+echo "${file} $READS" >> stat-collapse.txt

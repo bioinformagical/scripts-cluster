@@ -1,0 +1,723 @@
+########################################################################
+PBS Prologue:	Tue Oct 18 13:47:22 EDT 2011
+Job ID:		1480.login00.halycon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	repeats2BigMira
+Limits:		neednodes=1:ppn=20,nodes=1:ppn=20,walltime=480:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron00[20] 
+########################################################################
+
+
+This is MIRA V3.4.0 (production version).
+
+Please cite: Chevreux, B., Wetter, T. and Suhai, S. (1999), Genome Sequence
+Assembly Using Trace Signals and Additional Sequence Information.
+Computer Science and Biology: Proceedings of the German Conference on
+Bioinformatics (GCB) 99, pp. 45-56.
+
+To (un-)subscribe the MIRA mailing lists, see:
+	http://www.chevreux.org/mira_mailinglists.html
+
+After subscribing, mail general questions to the MIRA talk mailing list:
+	mira_talk@freelists.org
+
+To report bugs or ask for features, please use the new ticketing system at:
+	http://sourceforge.net/apps/trac/mira-assembler/
+This ensures that requests don't get lost.
+
+
+Compiled by: bach
+Sun Aug 21 17:50:30 CEST 2011
+On: Linux arcadia 2.6.38-11-generic #48-Ubuntu SMP Fri Jul 29 19:02:55 UTC 2011 x86_64 x86_64 x86_64 GNU/Linux
+Compiled in boundtracking mode.
+Compiled in bugtracking mode.
+Compiled with ENABLE64 activated.
+Runtime settings (sorry, for debug):
+	Size of size_t  : 8
+	Size of uint32  : 4
+	Size of uint32_t: 4
+	Size of uint64  : 8
+	Size of uint64_t: 8
+Current system: Linux bigiron00 2.6.32-5-amd64 #1 SMP Fri Sep 9 20:23:16 UTC 2011 x86_64 GNU/Linux
+
+
+
+Parsing parameters: --project=bbrep2 --job=denovo,genome,accurate,454,solexa -GE:not=15 -highlyrepetitive SOLEXA_SETTINGS -AS:bdq=33
+
+
+Changing some parameters for highly repetitive data ...
+  - fixed settings
+  - increassing number of passes (-AS:nop) by one.
+Done
+
+
+Parameters parsed without error, perfect.
+
+-CL:pec and -CO:emeas1clpec are set, setting -CO:emea values to 1.
+------------------------------------------------------------------------------
+Parameter settings seen for:
+Sanger data (also common parameters), 454 data, Solexa data
+
+Used parameter settings:
+  General (-GE):
+	Project name in (proin)                     : bbrep2
+	Project name out (proout)                   : bbrep2
+	Number of threads (not)                     : 15
+	Automatic memory management (amm)           : yes
+	    Keep percent memory free (kpmf)         : 15
+	    Max. process size (mps)                 : 0
+	EST SNP pipeline step (esps)                : 0
+	Use template information (uti)              :  [san]  yes
+	                                               [454]  yes
+	                                               [sxa]  yes
+	    Template insert size minimum (tismin)   :  [san]  -1
+	                                               [454]  -1
+	                                               [sxa]  -1
+	    Template insert size maximum (tismax)   :  [san]  -1
+	                                               [454]  -1
+	                                               [sxa]  -1
+	    Template partner build direction (tpbd) :  [san]  -1
+	                                               [454]  -1
+	                                               [sxa]  -1
+	Colour reads by hash frequency (crhf)       : yes
+
+  Load reads options (-LR):
+	Load sequence data (lsd)                    :  [san]  no
+	                                               [454]  yes
+	                                               [sxa]  yes
+	    File type (ft)                          :  [san]  fasta
+	                                               [454]  fastq
+	                                               [sxa]  fastq
+	    External quality (eq)                   : from SCF (scf)
+	        Ext. qual. override (eqo)           : no
+	        Discard reads on e.q. error (droeqe): no
+	    Solexa scores in qual file (ssiqf)      : no
+	    FASTQ qual offset (fqqo)                :  [san]  0
+	                                               [454]  0
+	                                               [sxa]  0
+
+	Wants quality file (wqf)                    :  [san]  yes
+	                                               [454]  yes
+	                                               [sxa]  yes
+
+	Read naming scheme (rns)                    :  [san] Sanger Institute (sanger)
+	                                               [454] forward/reverse (fr)
+	                                               [sxa] Solexa (solexa)
+
+	Merge with XML trace info (mxti)            :  [san]  no
+	                                               [454]  yes
+	                                               [sxa]  no
+
+	Filecheck only (fo)                         : no
+
+  Assembly options (-AS):
+	Number of passes (nop)                      : 6
+	    Skim each pass (sep)                    : yes
+	Maximum number of RMB break loops (rbl)     : 3
+	Maximum contigs per pass (mcpp)             : 0
+
+	Minimum read length (mrl)                   :  [san]  80
+	                                               [454]  40
+	                                               [sxa]  20
+	Minimum reads per contig (mrpc)             :  [san]  2
+	                                               [454]  5
+	                                               [sxa]  10
+	Base default quality (bdq)                  :  [san]  10
+	                                               [454]  10
+	                                               [sxa]  33
+	Enforce presence of qualities (epoq)        :  [san]  yes
+	                                               [454]  yes
+	                                               [sxa]  yes
+
+	Automatic repeat detection (ard)            : yes
+	    Coverage threshold (ardct)              :  [san]  2
+	                                               [454]  2
+	                                               [sxa]  2.5
+	    Minimum length (ardml)                  :  [san]  400
+	                                               [454]  200
+	                                               [sxa]  300
+	    Grace length (ardgl)                    :  [san]  40
+	                                               [454]  20
+	                                               [sxa]  20
+	    Use uniform read distribution (urd)     : no
+	      Start in pass (urdsip)                : 4
+	      Cutoff multiplier (urdcm)             :  [san]  1.2
+	                                               [454]  1.4
+	                                               [sxa]  1.9
+	Keep long repeats separated (klrs)          : no
+
+	Spoiler detection (sd)                      : yes
+	    Last pass only (sdlpo)                  : yes
+
+	Use genomic pathfinder (ugpf)               : yes
+
+	Use emergency search stop (uess)            : yes
+	    ESS partner depth (esspd)               : 500
+	Use emergency blacklist (uebl)              : yes
+	Use max. contig build time (umcbt)          : no
+	    Build time in seconds (bts)             : 10000
+
+  Strain and backbone options (-SB):
+	Load straindata (lsd)                       : no
+	Assign default strain (ads)                 :  [san]  no
+	                                               [454]  no
+	                                               [sxa]  no
+	    Default strain name (dsn)               :  [san]  StrainX
+	                                               [454]  StrainX
+	                                               [sxa]  StrainX
+	Load backbone (lb)                          : no
+	    Start backbone usage in pass (sbuip)    : 3
+	    Backbone file type (bft)                : fasta
+	    Backbone base quality (bbq)             : 30
+	    Backbone strain name (bsn)              : ReferenceStrain
+	        Force for all (bsnffa)              : no
+	    Backbone rail from strain (brfs)        : 
+	    Backbone rail length (brl)              : 0
+	    Backbone rail overlap (bro)             : 0
+	    Also build new contigs (abnc)           : yes
+
+  Dataprocessing options (-DP):
+	Use read extensions (ure)                   :  [san]  yes
+	                                               [454]  no
+	                                               [sxa]  no
+	    Read extension window length (rewl)     :  [san]  30
+	                                               [454]  15
+	                                               [sxa]  30
+	    Read extension w. maxerrors (rewme)     :  [san]  2
+	                                               [454]  2
+	                                               [sxa]  2
+	    First extension in pass (feip)          :  [san]  0
+	                                               [454]  0
+	                                               [sxa]  0
+	    Last extension in pass (leip)           :  [san]  0
+	                                               [454]  0
+	                                               [sxa]  0
+
+  Clipping options (-CL):
+	Merge with SSAHA2/SMALT vector screen (msvs):  [san]  no
+	                                               [454]  no
+	                                               [sxa]  no
+	    Gap size (msvsgs)                       :  [san]  10
+	                                               [454]  8
+	                                               [sxa]  1
+	    Max front gap (msvsmfg)                 :  [san]  60
+	                                               [454]  8
+	                                               [sxa]  2
+	    Max end gap (msvsmeg)                   :  [san]  120
+	                                               [454]  12
+	                                               [sxa]  2
+	    Strict front clip (msvssfc)             :  [san]  0
+	                                               [454]  0
+	                                               [sxa]  0
+	    Strict end clip (msvssec)               :  [san]  0
+	                                               [454]  0
+	                                               [sxa]  0
+	Possible vector leftover clip (pvlc)        :  [san]  yes
+	                                               [454]  yes
+	                                               [sxa]  no
+	    maximum len allowed (pvcmla)            :  [san]  10
+	                                               [454]  10
+	                                               [sxa]  18
+	Min qual. threshold for entire read (mqtfer):  [san]  0
+	                                               [454]  0
+	                                               [sxa]  5
+	    Number of bases (mqtfernob)             :  [san]  0
+	                                               [454]  0
+	                                               [sxa]  15
+	Quality clip (qc)                           :  [san]  no
+	                                               [454]  no
+	                                               [sxa]  no
+	    Minimum quality (qcmq)                  :  [san]  20
+	                                               [454]  20
+	                                               [sxa]  20
+	    Window length (qcwl)                    :  [san]  30
+	                                               [454]  30
+	                                               [sxa]  30
+	Bad stretch quality clip (bsqc)             :  [san]  yes
+	                                               [454]  no
+	                                               [sxa]  no
+	    Minimum quality (bsqcmq)                :  [san]  20
+	                                               [454]  5
+	                                               [sxa]  5
+	    Window length (bsqcwl)                  :  [san]  30
+	                                               [454]  20
+	                                               [sxa]  20
+	Masked bases clip (mbc)                     :  [san]  yes
+	                                               [454]  yes
+	                                               [sxa]  no
+	    Gap size (mbcgs)                        :  [san]  20
+	                                               [454]  5
+	                                               [sxa]  5
+	    Max front gap (mbcmfg)                  :  [san]  40
+	                                               [454]  12
+	                                               [sxa]  12
+	    Max end gap (mbcmeg)                    :  [san]  60
+	                                               [454]  12
+	                                               [sxa]  12
+	Lower case clip (lcc)                       :  [san]  no
+	                                               [454]  yes
+	                                               [sxa]  no
+	Clip poly A/T at ends (cpat)                :  [san]  no
+	                                               [454]  no
+	                                               [sxa]  no
+	    Keep poly-a signal (cpkps)              :  [san]  no
+	                                               [454]  no
+	                                               [sxa]  no
+	    Minimum signal length (cpmsl)           :  [san]  12
+	                                               [454]  12
+	                                               [sxa]  12
+	    Max errors allowed (cpmea)              :  [san]  1
+	                                               [454]  1
+	                                               [sxa]  1
+	    Max gap from ends (cpmgfe)              :  [san]  9
+	                                               [454]  9
+	                                               [sxa]  9
+	Clip 3 prime polybase (c3pp)                :  [san]  no
+	                                               [454]  no
+	                                               [sxa]  yes
+	    Minimum signal length (c3ppmsl)         :  [san]  12
+	                                               [454]  12
+	                                               [sxa]  12
+	    Max errors allowed (c3ppmea)            :  [san]  2
+	                                               [454]  2
+	                                               [sxa]  2
+	    Max gap from ends (c3ppmgfe)            :  [san]  9
+	                                               [454]  9
+	                                               [sxa]  9
+	Clip known adaptors right (ckar)            :  [san]  no
+	                                               [454]  yes
+	                                               [sxa]  yes
+	Ensure minimum left clip (emlc)             :  [san]  yes
+	                                               [454]  no
+	                                               [sxa]  no
+	    Minimum left clip req. (mlcr)           :  [san]  25
+	                                               [454]  4
+	                                               [sxa]  0
+	    Set minimum left clip to (smlc)         :  [san]  30
+	                                               [454]  4
+	                                               [sxa]  0
+	Ensure minimum right clip (emrc)            :  [san]  no
+	                                               [454]  no
+	                                               [sxa]  no
+	    Minimum right clip req. (mrcr)          :  [san]  10
+	                                               [454]  10
+	                                               [sxa]  10
+	    Set minimum right clip to (smrc)        :  [san]  20
+	                                               [454]  15
+	                                               [sxa]  20
+
+	Apply SKIM chimera detection clip (ascdc)   : yes
+	Apply SKIM junk detection clip (asjdc)      : no
+
+	Propose end clips (pec)                     : yes
+	    Bases per hash (pecbph)                 : 27
+	    Handle Solexa GGCxG problem (pechsgp)   : yes
+
+	Clip bad solexa ends (cbse)                 : yes
+
+  Parameters for SKIM algorithm (-SK):
+	Number of threads (not)                     : 15
+
+	Also compute reverse complements (acrc)     : yes
+	Bases per hash (bph)                        : 19
+	Hash save stepping (hss)                    : 1
+	Percent required (pr)                       :  [san]  85
+	                                               [454]  85
+	                                               [sxa]  90
+
+	Max hits per read (mhpr)                    : 2000
+	Max megahub ratio (mmhr)                    : 0
+
+	SW check on backbones (swcob)               : no
+
+	Freq. est. min normal (fenn)                : 0.4
+	Freq. est. max normal (fexn)                : 1.6
+	Freq. est. repeat (fer)                     : 1.9
+	Freq. est. heavy repeat (fehr)              : 8
+	Freq. est. crazy (fecr)                     : 20
+	Mask nasty repeats (mnr)                    : yes
+	    Nasty repeat ratio (nrr)                : 10
+	Repeat level in info file (rliif)           : 6
+
+	Max hashes in memory (mhim)                 : 15000000
+	MemCap: hit reduction (mchr)                : 4096
+
+  Pathfinder options (-PF):
+	Use quick rule (uqr)                        :  [san]  yes
+	                                               [454]  yes
+	                                               [sxa]  yes
+	    Quick rule min len 1 (qrml1)            :  [san]  200
+	                                               [454]  80
+	                                               [sxa]  -95
+	    Quick rule min sim 1 (qrms1)            :  [san]  90
+	                                               [454]  90
+	                                               [sxa]  100
+	    Quick rule min len 2 (qrml2)            :  [san]  100
+	                                               [454]  60
+	                                               [sxa]  -85
+	    Quick rule min sim 2 (qrms2)            :  [san]  95
+	                                               [454]  95
+	                                               [sxa]  100
+	Backbone quick overlap min len (bqoml)      :  [san]  150
+	                                               [454]  80
+	                                               [sxa]  20
+	Max. start cache fill time (mscft)          : 5
+
+  Align parameters for Smith-Waterman align (-AL):
+	Bandwidth in percent (bip)             :  [san]  20
+	                                          [454]  20
+	                                          [sxa]  20
+	Bandwidth max (bmax)                   :  [san]  130
+	                                          [454]  80
+	                                          [sxa]  80
+	Bandwidth min (bmin)                   :  [san]  25
+	                                          [454]  20
+	                                          [sxa]  20
+	Minimum score (ms)                     :  [san]  30
+	                                          [454]  15
+	                                          [sxa]  15
+	Minimum overlap (mo)                   :  [san]  17
+	                                          [454]  20
+	                                          [sxa]  25
+	Minimum relative score in % (mrs)      :  [san]  70
+	                                          [454]  70
+	                                          [sxa]  90
+	Solexa_hack_max_errors (shme)          :  [san]  0
+	                                          [454]  0
+	                                          [sxa]  0
+	Extra gap penalty (egp)                :  [san]  no
+	                                          [454]  yes
+	                                          [sxa]  no
+	    extra gap penalty level (egpl)     :  [san] low
+	                                          [454] reject_codongaps
+	                                          [sxa] low
+	    Max. egp in percent (megpp)        :  [san]  100
+	                                          [454]  100
+	                                          [sxa]  100
+
+  Contig parameters (-CO):
+	Name prefix (np)                                         : bbrep2
+	Reject on drop in relative alignment score in % (rodirs) :  [san]  25
+	                                                            [454]  30
+	                                                            [sxa]  30
+	Mark repeats (mr)                                        : yes
+	    Only in result (mroir)                               : no
+	    Assume SNP instead of repeats (asir)                 : no
+	    Minimum reads per group needed for tagging (mrpg)    :  [san]  2
+	                                                            [454]  4
+	                                                            [sxa]  4
+	    Minimum neighbour quality needed for tagging (mnq)   :  [san]  20
+	                                                            [454]  20
+	                                                            [sxa]  20
+	    Minimum Group Quality needed for RMB Tagging (mgqrt) :  [san]  30
+	                                                            [454]  25
+	                                                            [sxa]  30
+	    End-read Marking Exclusion Area in bases (emea)      :  [san]  1
+	                                                            [454]  1
+	                                                            [sxa]  1
+	        Set to 1 on clipping PEC (emeas1clpec)           : yes
+	    Also mark gap bases (amgb)                           :  [san]  yes
+	                                                            [454]  no
+	                                                            [sxa]  yes
+	        Also mark gap bases - even multicolumn (amgbemc) :  [san]  yes
+	                                                            [454]  yes
+	                                                            [sxa]  yes
+	        Also mark gap bases - need both strands (amgbnbs):  [san]  yes
+	                                                            [454]  yes
+	                                                            [sxa]  yes
+	Force non-IUPAC consensus per sequencing type (fnicpst)  :  [san]  no
+	                                                            [454]  no
+	                                                            [sxa]  no
+	Merge short reads (msr)                                  :  [san]  no
+	                                                            [454]  no
+	                                                            [sxa]  yes
+	    Keep ends unmerged (msrkeu)                          :  [san]  -1
+	                                                            [454]  -1
+	                                                            [sxa]  -1
+	Gap override ratio (gor)                                 :  [san]  66
+	                                                            [454]  66
+	                                                            [sxa]  66
+
+  Edit options (-ED):
+	Automatic contig editing (ace)              :  [san]  no
+	                                               [454]  yes
+	                                               [sxa]  no
+     Sanger only:
+	Strict editing mode (sem)                   : no
+	Confirmation threshold in percent (ct)      : 50
+
+  Misc (-MI):
+	Stop on NFS (sonfs)                         : yes
+	Extended log (el)                           : no
+	Large contig size (lcs)                     : 500
+	Large contig size for stats(lcs4s)          : 5000
+	Stop on max read name length (somrnl)       : 40
+
+  Directories (-DI):
+	Working directory                 : 
+	When loading EXP files            : 
+	When loading SCF files            : 
+	Top directory for writing files   : bbrep2_assembly
+	For writing result files          : bbrep2_assembly/bbrep2_d_results
+	For writing result info files     : bbrep2_assembly/bbrep2_d_info
+	For writing tmp files             : bbrep2_assembly/bbrep2_d_tmp
+	Tmp redirected to (trt)           : 
+	For writing checkpoint files      : bbrep2_assembly/bbrep2_d_chkpt
+
+  File names (-FN):
+	When loading sequences from FASTA            :  [san]  bbrep2_in.sanger.fasta
+	                                                [454]  bbrep2_in.454.fasta
+	                                                [sxa]  bbrep2_in.solexa.fasta
+	When loading qualities from FASTA quality    :  [san]  bbrep2_in.sanger.fasta.qual
+	                                                [454]  bbrep2_in.454.fasta.qual
+	                                                [sxa]  bbrep2_in.solexa.fasta.qual
+	When loading sequences from FASTQ            :  [san]  bbrep2_in.sanger.fastq
+	                                                [454]  bbrep2_in.454.fastq
+	                                                [sxa]  bbrep2_in.solexa.fastq
+	When loading project from CAF                : bbrep2_in.sanger.caf
+	When loading project from MAF (disabled)     : bbrep2_in.sanger.maf
+	When loading EXP fofn                        : bbrep2_in.sanger.fofn
+	When loading project from PHD                : bbrep2_in.phd.1
+	When loading strain data                     : bbrep2_straindata_in.txt
+	When loading XML trace info files            :  [san]  bbrep2_traceinfo_in.sanger.xml
+	                                                [454]  bbrep2_traceinfo_in.454.xml
+	                                                [sxa]  bbrep2_traceinfo_in.solexa.xml
+	When loading SSAHA2 vector screen results    : bbrep2_ssaha2vectorscreen_in.txt
+	When loading SMALT vector screen results     : bbrep2_smaltvectorscreen_in.txt
+
+	When loading backbone from MAF               : bbrep2_backbone_in.maf
+	When loading backbone from CAF               : bbrep2_backbone_in.caf
+	When loading backbone from GenBank           : bbrep2_backbone_in.gbf
+	When loading backbone from GFF3              : bbrep2_backbone_in.gff3
+	When loading backbone from FASTA             : bbrep2_backbone_in.fasta
+
+
+  Output files (-OUTPUT/-OUT):
+	Save simple singlets in project (sssip)      :  [san]  no
+	                                                [454]  no
+	                                                [sxa]  no
+	Save tagged singlets in project (stsip)      :  [san]  yes
+	                                                [454]  yes
+	                                                [sxa]  yes
+
+	Remove rollover tmps (rrot)                  : yes
+	Remove tmp directory (rtd)                   : no
+
+    Result files:
+	Saved as CAF                       (orc)     : yes
+	Saved as MAF                       (orm)     : yes
+	Saved as FASTA                     (orf)     : yes
+	Saved as GAP4 (directed assembly)  (org)     : no
+	Saved as phrap ACE                 (ora)     : yes
+	Saved as GFF3                     (org3)     : no
+	Saved as HTML                      (orh)     : no
+	Saved as Transposed Contig Summary (ors)     : yes
+	Saved as simple text format        (ort)     : no
+	Saved as wiggle                    (orw)     : yes
+
+    Temporary result files:
+	Saved as CAF                       (otc)     : yes
+	Saved as MAF                       (otm)     : no
+	Saved as FASTA                     (otf)     : no
+	Saved as GAP4 (directed assembly)  (otg)     : no
+	Saved as phrap ACE                 (ota)     : no
+	Saved as HTML                      (oth)     : no
+	Saved as Transposed Contig Summary (ots)     : no
+	Saved as simple text format        (ott)     : no
+
+    Extended temporary result files:
+	Saved as CAF                      (oetc)     : no
+	Saved as FASTA                    (oetf)     : no
+	Saved as GAP4 (directed assembly) (oetg)     : no
+	Saved as phrap ACE                (oeta)     : no
+	Saved as HTML                     (oeth)     : no
+	Save also singlets               (oetas)     : no
+
+    Alignment output customisation:
+	TEXT characters per line (tcpl)              : 60
+	HTML characters per line (hcpl)              : 60
+	TEXT end gap fill character (tegfc)          :  
+	HTML end gap fill character (hegfc)          :  
+
+    File / directory output names:
+	CAF             : bbrep2_out.caf
+	MAF             : bbrep2_out.maf
+	FASTA           : bbrep2_out.unpadded.fasta
+	FASTA quality   : bbrep2_out.unpadded.fasta.qual
+	FASTA (padded)  : bbrep2_out.padded.fasta
+	FASTA qual.(pad): bbrep2_out.padded.fasta.qual
+	GAP4 (directory): bbrep2_out.gap4da
+	ACE             : bbrep2_out.ace
+	HTML            : bbrep2_out.html
+	Simple text     : bbrep2_out.txt
+	TCS overview    : bbrep2_out.tcs
+	Wiggle          : bbrep2_out.wig
+------------------------------------------------------------------------------
+Deleting old directory bbrep2_assembly ... done.
+Creating directory bbrep2_assembly ... done.
+Creating directory bbrep2_assembly/bbrep2_d_tmp ... done.
+Creating directory bbrep2_assembly/bbrep2_d_results ... done.
+Creating directory bbrep2_assembly/bbrep2_d_info ... done.
+Creating directory bbrep2_assembly/bbrep2_d_chkpt ... done.
+
+Tmp directory is not on a NFS mount, good.
+
+Localtime: Tue Oct 18 13:47:23 2011
+
+Loading data (454) from FASTQ files,
+Localtime: Tue Oct 18 13:47:23 2011
+Counting sequences in FASTQ file: found 9212931 sequences.
+Localtime: Tue Oct 18 13:47:51 2011
+454 will load 9212931 reads.
+Loading data (Solexa) from FASTQ files,
+Localtime: Tue Oct 18 13:47:51 2011
+Counting sequences in FASTQ file: found 36923248 sequences.
+Localtime: Tue Oct 18 13:48:42 2011
+Solexa will load 36923248 reads.
+Longest Sanger: 0
+Longest 454: 1196
+Longest IonTor: 0
+Longest PacBio: 0
+Longest Solexa: 100
+Longest Solid: 0
+Longest overall: 1196
+Total reads to load: 46136179
+Reserving space for reads (this may take a while)
+Reserved space for 46136189 reads.
+Loading data (454) from FASTQ files,
+Localtime: Tue Oct 18 13:48:42 2011
+Counting sequences in FASTQ file: found 9212931 sequences.
+Localtime: Tue Oct 18 13:49:08 2011
+Using calculated FASTQ quality offset: 60
+Localtime: Tue Oct 18 13:49:08 2011
+Loading data from FASTQ file:
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] 
+
+Done.
+Loaded 9212931 reads, Localtime: Tue Oct 18 13:50:22 2011
+Loaded 9212931 454 reads.
+Loading data (Solexa) from FASTQ files,
+Localtime: Tue Oct 18 13:50:22 2011
+Counting sequences in FASTQ file: found 36923248 sequences.
+Localtime: Tue Oct 18 13:51:08 2011
+Using calculated FASTQ quality offset: 73
+Localtime: Tue Oct 18 13:51:08 2011
+Loading data from FASTQ file:
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] 
+
+Done.
+Loaded 36923248 reads, Localtime: Tue Oct 18 13:53:23 2011
+Loaded 36923248 Solexa reads.
+Total reads loaded: 46136179
+Localtime: Tue Oct 18 13:53:26 2011
+
+Localtime: Tue Oct 18 13:53:26 2011
+Merging data from XML trace info file bbrep2_traceinfo_in.454.xml ...Num reads: 15402471
+Building hash table ... done.
+Localtime: Tue Oct 18 13:56:31 2011
+
+Generated 25665410 unique template ids for 46136179 valid reads.
+Done merging XML data, matched 9212931 reads.
+Localtime: Tue Oct 18 13:58:04 2011
+
+
+Checking reads for trace data:
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] 
+No SCF data present in any read, automatic contig editing for Sanger data is now switched off.
+46136179 reads with valid data for assembly.
+Localtime: Tue Oct 18 13:59:22 2011
+
+Generated 25665410 unique template ids for 46136179 valid reads.
+Localtime: Tue Oct 18 14:00:58 2011
+
+Generated 0 unique strain ids for 46136179 reads.
+Strain "default" has 46136179 reads.
+Have read pool with 46136179 reads.
+
+===========================================================================
+Pool statistics:
+Backbones: 0	Backbone rails: 0
+
+		Sanger	454	IonTor	PacBio	Solexa	SOLiD
+		----------------------------------------
+Total reads	0	9212931	0	0	36923248	0
+Reads wo qual	0	0	0	0	0	0
+Used reads	0	9212931	0	0	36923248	0
+Avg tot rlen	0	254	0	0	98	0
+Avg rlen used	0	254	0	0	97	0
+
+With strain	0	0	0	0	0	0
+W/o clips	0	9212931	0	0	36923248	0
+
+Sanger	total bases:0	used bases in used reads: 0
+454	total bases:2341974150	used bases in used reads: 2341974150
+IonTor	total bases:0	used bases in used reads: 0
+PacBio	total bases:0	used bases in used reads: 0
+Solexa	total bases:3649372253	used bases in used reads: 3612449005
+Solid	total bases:0	used bases in used reads: 0
+===========================================================================
+
+
+Starting 454 known adaptor right clip ... Localtime: Tue Oct 18 14:02:30 2011
+Searching multithread now ... 
+15
+Searching for 454 partial end adaptors ... 
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] done. Clipped 11845 reads.
+Starting Solexa known adaptor right clip ... Localtime: Tue Oct 18 14:02:38 2011
+Searching multithread now ... 
+15
+Searching for Solexa partial end adaptors ... 
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] done. Clipped 2670 reads.
+Starting minimum quality threshold clip ... done. Killed 36923248 reads.
+Starting clips:  done.
+Clipping dubious poly-base stretches at end of reads ... done.
+
+===========================================================================
+Pool statistics:
+Backbones: 0	Backbone rails: 0
+
+		Sanger	454	IonTor	PacBio	Solexa	SOLiD
+		----------------------------------------
+Total reads	0	9212931	0	0	36923248	0
+Reads wo qual	0	0	0	0	0	0
+Used reads	0	9212902	0	0	0	0
+Avg tot rlen	0	254	0	0	98	0
+Avg rlen used	0	253	0	0	0	0
+
+With strain	0	0	0	0	0	0
+W/o clips	0	8911947	0	0	0	0
+
+Sanger	total bases:0	used bases in used reads: 0
+454	total bases:2341974150	used bases in used reads: 2331945413
+IonTor	total bases:0	used bases in used reads: 0
+PacBio	total bases:0	used bases in used reads: 0
+Solexa	total bases:3649372253	used bases in used reads: 0
+Solid	total bases:0	used bases in used reads: 0
+===========================================================================
+
+
+
+Tmp directory is not on a NFS mount, good.
+
+Hash analysis for proposed cutbacks:Localtime: Tue Oct 18 14:18:29 2011
+Writing temporary hstat files:
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] done
+Localtime: Tue Oct 18 14:24:40 2011
+
+Analysing hstat files:
+ [0%] ....|.... [10%] ....|.... [20%] ....|.... [30%] ....|.... [40%] ....|.... [50%] ....|.... [60%] ....|.... [70%] ....|.... [80%] ....|.... [90%] ....|.... [100%] 
+Localtime: Tue Oct 18 14:41:52 2011
+clean up temporary stat files...Localtime: Tue Oct 18 14:42:36 2011
+
+
+########################################################################
+PBS Epilogue:	Tue Oct 18 14:45:35 EDT 2011
+Job ID:		1480.login00.halycon.local
+Limits:		neednodes=1:ppn=20,nodes=1:ppn=20,walltime=480:30:00
+Resources:	cput=01:04:02,mem=91230140kb,vmem=91635436kb,walltime=00:58:03
+Account:	
+Exit Value:	271
+########################################################################

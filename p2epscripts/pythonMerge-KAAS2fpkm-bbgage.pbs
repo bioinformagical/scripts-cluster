@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=18:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=85500mb
+
+#PBS -N mmmerge-kaas2fpkm
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-21
+
+set eu
+umask 007
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/oat/badassay/fastq/file.txt)
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/blueberry/rnaseq/sra-srr118/gage/file.txt)
+
+
+
+cd /lustre/groups/p2ep/blueberry/rnaseq/sra-srr118/gage/mergedBigTable
+
+#create index of reference
+#bwa index -p ${file}.idx -a bwtsw /group/p2ep/blueberry/rnaseq/sra-srr118/cdhit/${file}-cdhit
+
+################   Success was part below #####
+
+
+ python /home/rreid2/scripts/python/connectKASS2ReadCounts-bbgage.py ../../aa/${file}/best_candidates.eclipsed_orfs_removed.pep ../trinity2.2/${file}/RSEM.genes.results ../kaas/justK-${file}-kaas.txt ${file}

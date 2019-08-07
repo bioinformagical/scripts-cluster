@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=40GB
+
+#PBS -N EverbbbblastingLove 
+#PBS -q copperhead
+
+
+#Number of times to run this script
+##PBS -t 1-12
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/brassica/blast/file.txt)
+
+cd /nobackup/banana_genome/genesOfInterest/pectin/ 
+module load blast/2.3.0+ 
+
+
+
+#makeblastdb -in /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_prot.faa -dbtype prot
+
+blastx -db /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_prot.faa -out ./blastx-otherPectinVSpahangV2.txt -query /nobackup/banana_genome/genesOfInterest/pectin/otherPectinRelatedGenes.fna \
+-num_threads 6 \
+-evalue 1e-1 \
+-soft_masking true  -outfmt 6
+
+

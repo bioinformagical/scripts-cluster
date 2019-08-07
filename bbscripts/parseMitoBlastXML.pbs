@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+#PBS -q bigiron
+
+#PBS -N 4x4OffroadXmlParser
+##PBS -t 1-33
+#set -eux
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching XML Parser "
+
+#cd  ~/old/gm/fiber1/
+cd ~/blueberry/4-4exons/
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/fiber1/xmlNames.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+echo "${file}"
+#cd ~/old/gm/genes/almt1/blast/ 
+
+#for xmlfile in $(find ./ -iname "*.xml");
+#do
+
+	#mv ${file}.blastnt2.xml ${file}.blastnt.xml
+	perl ~/scripts/perl/xmlparser4-4.pl garron.blastx.xml ~/blueberry/garron/454Scaffolds.fna 
+	#done
+echo "fin"
+
+
+#done
+
+
+

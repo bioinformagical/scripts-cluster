@@ -1,0 +1,63 @@
+########################################################################
+PBS Prologue:	Thu Dec 19 18:50:46 EST 2013
+Job ID:		211059[6].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	makinitRain2-6
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron03[24] 
+########################################################################
+
+
+PATHS:
+CA_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/CA/Linux-amd64/bin/
+JELLYFISH_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+SR_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+
+Verifying PATHS...
+jellyfish ok
+runCA ok
+createSuperReadsForDirectory.perl ok
+
+PARAMETERS:
+GRAPH_KMER_SIZE = auto
+USE_LINKING_MATES = 1
+KMER_COUNT_THRESHOLD = 1
+LIMIT_JUMP_COVERAGE = 1000
+NUM_THREADS = 24
+JF_SIZE = 10000000000
+EXTEND_JUMP_READS = 0
+CA_PARAMETERS =  ovlMerSize=87 cgwErrorRate=0.1 ovlMemory=8GB 
+DO_HOMOPOLYMER_TRIM = 0
+
+DATA:
+PE:
+pe 7000 2500 /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/fastx/oat83-R1.fq /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/fastx/oat83-R2.fq 
+JUMP:
+OTHER:
+
+creating script file for the actions...done.
+execute assemble.sh to run the assembly
+processing PE library reads Thu Dec 19 18:50:48 EST 2013
+Average PE read length 99
+choosing kmer size of 31 for the graph
+running Jellyfish Thu Dec 19 18:50:48 EST 2013
+MIN_Q_CHAR: 33
+Error correction Poisson cutoff = 3
+error correct PE Thu Dec 19 19:27:12 EST 2013
+Estimated genome size: 14040
+computing super reads from PE Thu Dec 19 19:29:25 EST 2013
+Super reads failed, check super1.err and files in ./work1/
+All done Thu Dec 19 19:29:28 EST 2013
+
+
+########################################################################
+PBS Epilogue:	Thu Dec 19 19:29:33 EST 2013
+Job ID:		211059[6].login00.halcyon.local
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Resources:	cput=00:46:37,mem=121465936kb,vmem=126818700kb,walltime=00:38:42
+Account:	
+Exit Value:	0
+########################################################################

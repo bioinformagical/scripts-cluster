@@ -1,0 +1,71 @@
+########################################################################
+PBS Prologue:	Wed Dec 18 18:26:41 EST 2013
+Job ID:		211056[12].login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	makinitRain3-12
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron00[24] 
+########################################################################
+
+
+PATHS:
+CA_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/CA/Linux-amd64/bin/
+JELLYFISH_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+SR_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+
+Verifying PATHS...
+jellyfish ok
+runCA ok
+createSuperReadsForDirectory.perl ok
+
+PARAMETERS:
+GRAPH_KMER_SIZE = auto
+USE_LINKING_MATES = 1
+KMER_COUNT_THRESHOLD = 1
+LIMIT_JUMP_COVERAGE = 1000
+NUM_THREADS = 24
+JF_SIZE = 10000000000
+EXTEND_JUMP_READS = 0
+CA_PARAMETERS =  ovlMerSize=87 cgwErrorRate=0.1 ovlMemory=8GB 
+DO_HOMOPOLYMER_TRIM = 0
+
+DATA:
+PE:
+pe 7000 2500 /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/Sample_131029HiSeq_Run_UNCC_Schlueter_Sample_MN8_plate2/MN8_plate2-R1.fq /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/Sample_131029HiSeq_Run_UNCC_Schlueter_Sample_MN8_plate2/MN8_plate2-R2.fq 
+JUMP:
+OTHER:
+
+creating script file for the actions...done.
+execute assemble.sh to run the assembly
+processing PE library reads Wed Dec 18 18:26:43 EST 2013
+Average PE read length 40
+choosing kmer size of 31 for the graph
+running Jellyfish Wed Dec 18 18:28:58 EST 2013
+MIN_Q_CHAR: 33
+Error correction Poisson cutoff = 4
+error correct PE Wed Dec 18 19:13:44 EST 2013
+Estimated genome size: 15485902
+computing super reads from PE Wed Dec 18 19:20:19 EST 2013
+Linking PE reads 65432
+Celera Assembler Wed Dec 18 19:21:41 EST 2013
+ovlMerThreshold=75
+Overlap/unitig success
+Overlap/unitig success
+Unitig consensus success
+CA success
+Gap closing Wed Dec 18 19:29:51 EST 2013
+Gap close failed, you can still use pre-gap close files under CA/9-terminator/. Check gapClose.err for problems.
+All done Wed Dec 18 19:30:40 EST 2013
+
+
+########################################################################
+PBS Epilogue:	Wed Dec 18 19:30:45 EST 2013
+Job ID:		211056[12].login00.halcyon.local
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=490gb,walltime=180:30:00
+Resources:	cput=04:49:33,mem=123829492kb,vmem=126818700kb,walltime=01:03:59
+Account:	
+Exit Value:	0
+########################################################################

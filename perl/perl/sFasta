@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $fName= $ARGV[0] or die "sFasta bigFasta prefix Number\nI need A fasta file\n";
+my $pref= $ARGV[1] or die "sFasta bigFasta prefix Number\nI need a prefix for the small files\n";
+my $split_seqs= $ARGV[2] or die "sFasta bigFasta prefix Number\nI need to know how many seqs in each small file\n";
+
+my $out_template= $pref . "_NUMBER.fasta";
+my $count= 0;
+my $filenum= 0;
+my $len=0; 
+my $filename;
+
+open( INPUT, "<$fName" ) or die "error: cannot open $fName for reading: $!\n";
+while (<INPUT>)
+{ 
+s/\r?\n//; if (/^>/) 
+{
+if ($count % $split_seqs == 0) 
+{
+$filenum++; 
+$filename = $out_template;
+$filename =~ s/NUMBER/$filenum/g;
+if ($filenum > 1){ close SHORT } 
+open (SHORT, ">$filename") or die $!; 
+}
+$count++;} else { $len += length($_) } 
+print SHORT "$_\n";
+}
+close(SHORT);
+close(INPUT);
+
+warn "\nSplit $count FASTA records in $fName. lines, with total sequence length $len\nCreated $filenum files like $filename\n\n";
+

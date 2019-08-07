@@ -1,0 +1,73 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=6
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N BowtieGM 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-33
+
+# Bring in the module command
+ init="/lustre/sw/Modules/default/init/$(basename $SHELL)"
+ [[ -z "$(type -t module)" ]] && [[ -r "$init" ]] && . "$init"
+#
+# # Load bowtie
+# module load bowtie
+
+
+
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+##export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+
+
+#cd $HOME/blueberry/reads/454Sequences/bowtie/
+
+#bowtie-build ~/gm/db/PGSC_DM_v3_superscaffolds.fasta ~/blueberry/reads/454Sequences/bowtie/pot
+#bowtie-build ~/blueberry/db/vitisscaffolds.fa ~/blueberry/reads/454Sequences/bowtie/grape
+
+#bowtie -S -f -p 4 --al pot76.txt pot  $HOME/blueberry/reads/454Sequences/bowtie/s_2_2_sequence.r.fa
+#bowtie -S -f -p 4 grape --al grape76.txt $HOME/blueberry/reads/454Sequences/bowtie/s_2_2_sequence.r.fa
+
+
+#bowtie-build $HOME/blueberry/reads/454Sequences/2010_08_25_shotgun/GMRBSO102new.fasta
+
+#bowtie -S -f -p 10 contigs  $HOME/blueberry/reads/454Sequences/2010_08_25_shotgun/GMRBSO102new.fasta 454File.sam
+
+#Trying grape contigs to see what happens
+#bowtie-build $HOME/big9k/   contigs
+
+#bowtie -S -f -p 100 contigs -1 GAII_PE_1_sopra.fasta GAII_PE_2_sopra.fasta bothFiles.sam
+
+#bowtie-build /gpfs/fs3/home/rreid2/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa  contigs_sopra
+
+
+#bowtie -S -f -p 10 contigs_sopra -1 $HOME/blueberry/reads/illumina/091005Sequence1/s_1_1_sequence.trimmed.fasta -2 $HOME/blueberry/reads/illumina/091005Sequence1/s_1_2_sequence.trimmed.fasta  smalltest1.sam
+
+#bowtie -f  -p 10 bambusContigs  $HOME/scripts/s_1_1_sequence.f.fa   hiseqTest.sam
+
+
+cd ~/old/gm/cslf6/
+
+#/lustre/home/rreid2/sw/bowtie-0.12.7/bowtie-build ~/gm/genes/clsf6.fa ~/gm/clsf6/cls
+#mkdir ~/old/gm/assembly2/${file}/bowttmp/
+#l /lustre/home/rreid2/sw/bowtie-0.12.7/bowtie-build ~/old/gm/assembly2/${file}/Sequences ${file}bowtmp
+
+perl  ~/old/scripts/perl/fetchLongBowties.pl   ${file}out.txt
+
+
+

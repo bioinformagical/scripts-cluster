@@ -1,0 +1,142 @@
+########################################################################
+PBS Prologue:	Fri Jul  8 10:51:55 EDT 2011
+Job ID:		844360.mn
+Username:	rreid2
+Group:		brc
+Job Name:	AuxPairHunter
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=98:30:00
+Queue:		bigiron
+Account:	
+Nodes:		ananke[1] 
+########################################################################
+
+
+Launching Pair Finder
+./FTNE8KX02.fasta.clean.lucy
+All Done, Count is 0
+./FTNE8KX03.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7302.fasta.clean.lucy
+All Done, Count is 0
+./FTNFHLF01.fasta.clean.lucy
+All Done, Count is 0
+./FRK90FP02.fasta.clean.lucy
+All Done, Count is 0
+./FQ55CRL04.fasta.clean.lucy
+All Done, Count is 0
+./FQ55CRL02.fasta.clean.lucy
+All Done, Count is 0
+./GMEFJA402.fasta.clean.lucy
+All Done, Count is 0
+./GS2YPEZ01.fasta.clean.lucy
+All Done, Count is 0
+./GS2YPEZ02.fasta.clean.lucy
+All Done, Count is 0
+./FTNE8KX04.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7303.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7301.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7307.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7304.fasta.clean.lucy
+All Done, Count is 0
+./FSIT0PR02.fasta.clean.lucy
+All Done, Count is 0
+./FR6EAL407.fasta.clean.lucy
+All Done, Count is 0
+./GSIMZP102.fasta.clean.lucy
+All Done, Count is 0
+./GP69GPQ02.fasta.clean.lucy
+All Done, Count is 0
+./GSIMZP101.fasta.clean.lucy
+All Done, Count is 0
+./FQ55CRL03.fasta.clean.lucy
+All Done, Count is 0
+./FQ55CRL01.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7313.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7306.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7311.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7315.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7314.fasta.clean.lucy
+All Done, Count is 0
+./FUORSTX01.fasta.clean.lucy
+All Done, Count is 0
+./FUORSTX02.fasta.clean.lucy
+All Done, Count is 0
+./FTNE8KX01.fasta.clean.lucy
+All Done, Count is 0
+./FR6EAL408.fasta.clean.lucy
+All Done, Count is 0
+./FR6EAL406.fasta.clean.lucy
+All Done, Count is 0
+./FTNFHLF03.fasta.clean.lucy
+All Done, Count is 0
+./GMRBSO102.fasta.clean.lucy
+All Done, Count is 0
+./FTNFHLF04.fasta.clean.lucy
+All Done, Count is 0
+./GSC3R5O01.fasta.clean.lucy
+All Done, Count is 0
+./GSC3R5O02.fasta.clean.lucy
+All Done, Count is 0
+./GS6N4JD02.fasta.clean.lucy
+All Done, Count is 0
+./FUORSTX04.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7309.fasta.clean.lucy
+All Done, Count is 0
+./FUORSTX03.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7308.fasta.clean.lucy
+All Done, Count is 0
+./FR6EAL405.fasta.clean.lucy
+All Done, Count is 0
+./FSIT0PR01.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7305.fasta.clean.lucy
+All Done, Count is 0
+./FRK90FP01.fasta.clean.lucy
+All Done, Count is 0
+./GP69GPQ01.fasta.clean.lucy
+All Done, Count is 0
+./GQW7E7G02.fasta.clean.lucy
+All Done, Count is 0
+./FTNFHLF02.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7310.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7312.fasta.clean.lucy
+All Done, Count is 0
+./FTNMD7316.fasta.clean.lucy
+All Done, Count is 0
+./GS6N4JD01.fasta.clean.lucy
+All Done, Count is 0
+./GQW7E7G01.fasta.clean.lucy
+All Done, Count is 0
+./GMEFJA401.fasta.clean.lucy
+All Done, Count is 0
+./GMRBSO101.fasta.clean.lucy
+All Done, Count is 0
+
+
+########################################################################
+PBS Epilogue:	Fri Jul  8 11:04:19 EDT 2011
+Job ID:		844360.mn
+Username:	rreid2
+Group:		brc
+Job Name:	AuxPairHunter
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=98:30:00
+Resources:	cput=00:12:11,mem=15124kb,vmem=65904kb,walltime=00:12:19
+Queue:		bigiron
+Account:	
+Exit Value:	0
+Nodes:		ananke[1] 
+########################################################################
+4301 4319 4320 4321 17760 17778 17779 ananke: ignoring orphans (shared node)...4301 4319 4320 4321 17760 17778 17779 

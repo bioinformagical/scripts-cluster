@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=296:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90g
+
+#PBS -N tttrinot8-bj1 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-150
+##PBS -t 1-34
+
+bj=bj1
+cd /lustre/groups/janieslab/trinotate/
+mkdir $bj
+cd $bj 
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/splitFiles/xaa)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/splitFiles/xab)
+#module load iprscan
+#module load samtools
+
+#echo "We are in a split ${ssid}"
+
+#for i in 0 1 2 3 4 ; do
+#	 echo ${file}
+
+
+###############   Blast x First    ###########
+ module load ncbi-blast+
+blastx -query /lustre/groups/janieslab/contigs-trinity/${bj}tri.fna -db /lustre/home/rreid2/db/swissprot/uniprot_sprot.fasta -num_threads 12 -max_target_seqs 1 -outfmt 6 > blastx.outfmt6
+
+blastp -query /lustre/groups/janieslab/contigs-trinity/aa/${bj}tri/best_candidates.eclipsed_orfs_removed.pep -db /lustre/home/rreid2/db/swissprot/uniprot_sprot.fasta -num_threads 12 -max_target_seqs 1 -outfmt 6 > blastp.outfmt6
+
+blastx -query /lustre/groups/janieslab/contigs-trinity/${bj}tri.fna -db /lustre/home/rreid2/db/uniref/uniref90.fasta -num_threads 12 -max_target_seqs 1 -outfmt 6 > blastx-uniref.outfmt6
+
+blastp -query /lustre/groups/janieslab/contigs-trinity/aa/${bj}tri/best_candidates.eclipsed_orfs_removed.pep -db /lustre/home/rreid2/db/uniref/uniref90.fasta -num_threads 12 -max_target_seqs 1 -outfmt 6 > blastp-uniref.outfmt6
+
+##############   Hmmer Time ###############
+module load hmmer
+hmmscan --cpu 12 --domtblout TrinotatePFAM.out /lustre/home/rreid2/db/Pfam-A.hmm /lustre/groups/janieslab/contigs-trinity/aa/${bj}tri/best_candidates.eclipsed_orfs_removed.pep > pfam.log
+
+
+###########  SignalP,   tmHMM    &   rnaMMer     ######
+#signalp -f short -n signalp.out transdecoder.pep
+
+#tmhmm --short < transdecoder.pep > tmhmm.out
+
+perl ./rnammer_support/RnammerTranscriptome.pl --transcriptome /lustre/groups/janieslab/contigs-trinity/${bj}tri.fna --path_to_rnammer /lustre/home/rreid2/sw/rnamer/rnammer
+
+
+############# Load data into SQL lite DB
+#		usage: ./Trinotate <sqlite.db> <command> <input> [...]
+#/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate
+#### first we make some map.
+/lustre/home/rreid2/sw/trinityrnaseq_r20140717/util/support_scripts/get_Trinity_gene_to_trans_map.pl  /lustre/groups/janieslab/contigs-trinity/${bj}tri.fna >  Trinity.fasta.gene_trans_map
+
+### copy DB to local area
+cp /lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate.sqlite ${bj}.sqlite
+#### Now load stuff into DB
+##  assembly, map, and transdecoder aa
+/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite init --gene_trans_map Trinity.fasta.gene_trans_map --transcript_fasta /lustre/groups/janieslab/contigs-trinity/${bj}tri.fna --transdecoder_pep /lustre/groups/janieslab/contigs-trinity/aa/${bj}tri/best_candidates.eclipsed_orfs_removed.pep
+
+# next is swissprot blast results
+/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite LOAD_swissprot_blastp blastp.outfmt6
+/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite LOAD_swissprot_blastx blastx.outfmt6
+/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite LOAD_trembl_blastp blastp-uniref.outfmt6
+/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite LOAD_trembl_blastx blastx-uniref.outfmt6
+
+#load pfam entries
+/lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite LOAD_pfam TrinotatePFAM.out
+
+#load rnammer entry
+ /lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite LOAD_rnammer ${bj}tri.fna.rnammer.gff
+###### output report
+ /lustre/home/rreid2/sw/Trinotate_r20140708/Trinotate ${bj}.sqlite report -E 1 > trinotate_annotation_report-${bj}.xls
+echo `pwd`
+echo "Fin what big job for ${bj}."

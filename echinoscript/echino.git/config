@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "echino.git"]
+	url = git@github.com:supramap/EchinoBank.git
+	fetch = +refs/heads/*:refs/remotes/echino.git/*
+[remote "origin"]
+	url = git@github.com:supramap/EchinoBank.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

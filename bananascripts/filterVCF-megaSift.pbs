@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8gb
+#PBS -j oe
+#PBS -N fffilterVCF-banana
+#PBS -q copperhead
+##PBS -t 1-20
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/banana/filter/trimgalore/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching mega 3cols."
+
+#module load java8 
+#module load samtools
+#module load bwa
+#module load bcftools
+
+
+cd /scratch/rreid2/banana/align/run3 
+
+#python /users/rreid2/scripts/python/filterVCF-bygene-banana.py ${file}-filth-byDP.vcf musa_acuminata_v2-mRNA.gff3
+
+#awk '{print $1 "\t" $2 "\t" $5 }' ${file}-filth-byDP-byGeneLocation-v2.vcf > ${file}-just3cols.txt
+
+#python ~/scripts/python/filterVCF-megaCount-banana.py  ./mega-3cols.txt
+python ~/scripts/python/filterVCF-megaCount-banana.py mega-3cols.txt
+
+
+
+

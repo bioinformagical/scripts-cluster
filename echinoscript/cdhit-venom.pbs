@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=268:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90gb
+
+#PBS -N ccccdhit-venom
+
+##PBS -t 1-9
+umask 007
+set -eux
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/brassica/map/chromosome/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching CDHIT "
+module load ncbi-blast+
+
+#cd $home
+
+cd /lustre/groups/janieslab/venom/cdhit/
+
+/home/rreid2/sw/cd-hit-v4.6.1-2012-08-27/cd-hit -i ../ortho/ortho.faa -T 24 -M 0 -o cdhit  
+
+echo `pwd`
+#echo ${file}
+
+echo "Fin"

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=196:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=79gb
+#PBS -N boomGoesCar
+##PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+#PBS -t 1-18
+
+
+cd /lustre/groups/bioservices/p2ep/SOAPdenovo/
+
+file=$(sed -n -e "${PBS_ARRAYID}p" run2file.txt)
+
+echo   ${file};
+
+cp ${file}/asm.scafSeq ./scaffolds/${file}-scaffold.fna 
+
+
+#grep "TotalScaffolds=" ${file}/CA/9-terminator/genome.qc
+#grep "TotalBasesInScaffolds" ${file}/CA/9-terminator/genome.qc
+#grep "TotalSpanOfScaffolds" ${file}/CA/9-terminator/genome.qc
+#grep "MaxBasesInScaffolds" ${file}/CA/9-terminator/genome.qc
+#grep "TotalDegenContigs" ${file}/CA/9-terminator/genome.qc
+#grep "DegenContigLength=" ${file}/CA/9-terminator/genome.qc
+
+echo "finished job"
+
+#done
+
+#mv ${file}.fastq.adapt.dup ${file}/
+

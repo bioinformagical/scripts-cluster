@@ -1,0 +1,45 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=66:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N aaaace2afgeee 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-9
+
+##home=/gpfs/fs3/home/rreid2
+cd ~/blueberry/mira/bbrep_bambus/ 
+
+
+#export PATH=/sw/velvet/bin:$PATH
+
+
+
+
+
+
+
+
+#/lustre/sw/amos/3.0.1/bin/toAmos -ace ~/blueberry/mira/bbrep2_assembly/bbrep2_d_results/bbrep2_out.ace -m ~/blueberry/mira/bbrep_bambus/pairlibrary.txt -o ~/blueberry/mira/bbrep_bambus/bbrep2-nohiseq.afg
+
+#/lustre/sw/amos/3.0.1/bin/toAmos -ace ~/blueberry/mira/bbrep2_assembly/bbrep2_d_results/bbrep2_out.ace -m ~/blueberry/mira/bbrep_bambus/pairLibrary.txt -o ~/blueberry/mira/bbrep_bambus/bbrep2-nohiseq.afg
+
+# /lustre/sw/amos/3.0.1/bin/toAmos -ace ~/blueberry/mira/bbrep2_assembly/bbrep2_d_results/bbrep2_out.ace -m ~/blueberry/mira/bbrep_bambus/pairlibrary2.txt.filtered -o ~/blueberry/mira/bbrep_bambus/bbrep3.afg
+
+#/lustre/sw/amos/3.0.1/bin/bank-transact -cf -b bbrep.bnk -m bbrep3.afg 
+
+/lustre/sw/amos/3.0.1/bin/toAmos \
+ -s ~/blueberry/mira/bbrep2_in.454.fastq \
+ -c ~/blueberry/mira/bbrep2_assembly/bbrep2_d_results/bbrep2_out.contig \
+ -m ~/blueberry/mira/bbrep_bambus/pairlibrary2.txt.filtered \
+ -o ~/blueberry/mira/bbrep_bambus/bbrepViaContig.afg

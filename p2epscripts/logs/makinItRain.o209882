@@ -1,0 +1,70 @@
+########################################################################
+PBS Prologue:	Wed Oct  2 13:57:57 EDT 2013
+Job ID:		209882.login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	makinItRain
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=499gb,walltime=1480:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron00[24] 
+########################################################################
+
+
+PATHS:
+CA_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/CA/Linux-amd64/bin/
+JELLYFISH_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+SR_PATH = /lustre/home/rreid2/sw/MaSuRCA-2.0.3.1/bin/
+
+Verifying PATHS...
+jellyfish ok
+runCA ok
+createSuperReadsForDirectory.perl ok
+
+PARAMETERS:
+GRAPH_KMER_SIZE = 89
+USE_LINKING_MATES = 1
+KMER_COUNT_THRESHOLD = 2
+LIMIT_JUMP_COVERAGE = 300
+NUM_THREADS = 24
+JF_SIZE = 10000000000
+EXTEND_JUMP_READS = 0
+CA_PARAMETERS =  ovlMerSize=87 cgwErrorRate=0.1 ovlMemory=8GB 
+DO_HOMOPOLYMER_TRIM = 0
+
+DATA:
+PE:
+pe 5000 2000 /lustre/groups/bioservices/p2ep/dhmri/Project_UNCC_Schlueter/Sample_UNCC_Schlueter_130909HiSeq_Run_Sample_3_070/UNCC_Schlueter_130909HiSeq_Run_Sample_3_070_GTCCGC_L006_R1_001.cutadapt.fastq /lustre/groups/bioservices/p2ep/dhmri/Project_UNCC_Schlueter/Sample_UNCC_Schlueter_130909HiSeq_Run_Sample_3_070/UNCC_Schlueter_130909HiSeq_Run_Sample_3_070_GTCCGC_L006_R2_001.cutadapt.fastq 
+JUMP:
+OTHER:
+
+creating script file for the actions...done.
+execute assemble.sh to run the assembly
+processing PE library reads Wed Oct  2 13:57:58 EDT 2013
+Average PE read length 100
+running Jellyfish Wed Oct  2 13:57:58 EDT 2013
+MIN_Q_CHAR: 33
+Error correction Poisson cutoff = 4
+error correct PE Wed Oct  2 15:14:34 EDT 2013
+Estimated genome size: 276901638
+computing super reads from PE Wed Oct  2 16:08:44 EDT 2013
+Linking PE reads 2261966
+Celera Assembler Wed Oct  2 16:23:42 EDT 2013
+ovlMerThreshold=75
+Overlap/unitig success
+Overlap/unitig success
+Unitig consensus success
+CA success
+Gap closing Wed Oct  2 18:00:07 EDT 2013
+Gap close failed, you can still use pre-gap close files under CA/9-terminator/. Check gapClose.err for problems.
+All done Wed Oct  2 18:09:52 EDT 2013
+
+
+########################################################################
+PBS Epilogue:	Wed Oct  2 18:09:57 EDT 2013
+Job ID:		209882.login00.halcyon.local
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=499gb,walltime=1480:30:00
+Resources:	cput=42:54:25,mem=123951148kb,vmem=126818676kb,walltime=04:11:55
+Account:	
+Exit Value:	0
+########################################################################

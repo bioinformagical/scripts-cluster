@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N cluckNorris
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+export PATH=$HOME/bin:$PATH
+cd $HOME/blueberry/clc/
+
+#/gpfs/fs3/home/rreid2/bin/clc/clc-assembly-cell-4.0.1beta-linux_64/clc_novo_assemble -o betarun1.fasta \
+# --cpus 8 -p fb ss 100 200 -q \
+#  -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_1_1_sequence.r.fa $HOME/blueberry/reads/hiseq/s_1_2_sequence.r.fa \
+# -p fb ss 100 200 -q  -i $HOME/blueberry/reads/hiseq/s_2_1_sequence.r.fa /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_2_2_sequence.r.fa \
+#-p d bf ss 2500 3500 -q   /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/3kbFinal.fasta \
+#-m 0.5 \
+#-f beatrunGFF.gff \ 
+#-p d bf ss 6000 8000  -q  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/8kbFinal.fasta \
+#-p d bf ss 16000 24000 -q  /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/20kbFinal.fasta 
+
+
+
+# ^ /gpfs/fs3/home/rreid2/bin/clc/clc-assembly-cell-4.0.1beta-linux_64/clc_novo_assemble \
+# ^ -o betarun1.fasta \
+# ^ -m 100 \
+# ^ --cpus 8 \
+# ^ -p ff ss 2500 3500 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/3kb.fa \
+# ^ -p ff ss 7000 9000 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/8kb.fa \
+# ^ -p ff ss 18000 22000 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/20kb.fa \
+# ^ -p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_2_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_2_2_sequence.r.fa \
+# ^ -p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_1_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_1_2_sequence.r.fa \
+# ^ -p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_3_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_3_2_sequence.r.fa \
+# ^ -p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_4_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_4_2_sequence.r.fa \
+# ^ -p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_5_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_5_2_sequence.r.fa 
+ 
+#/gpfs/fs3/home/rreid2/bin/clc/clc-assembly-cell-4.0.1beta-linux_64/clc_novo_assemble \
+#-o betarun2.fasta \
+#-m 100 \
+#--cpus 8 \
+#-p ff ss 2500 3500 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/3kb.fa \
+#-p ff ss 7000 9000 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/8kb.fa \
+#-p ff ss 18000 22000 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/20kb.fa 
+#-p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_5_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_5_2_sequence.r.fa 
+#-p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_3_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_3_2_sequence.r.fa \
+#-p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_4_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_4_2_sequence.r.fa 
+
+
+#/gpfs/fs3/home/rreid2/bin/clc/clc-assembly-cell-3.2.0-linux_64/clc_novo_assemble -o dupe.fasta --cpus 8 -p fb ss 2800 3200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/trimmedDupOnly/s_5_1_sequence.txt.trimmed1 /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/trimmedDupOnly/s_5_2_sequence.txt.trimmed1
+
+#/gpfs/fs3/home/rreid2/bin/clc/clc-assembly-cell-3.2.0-linux_64/clc_novo_assemble -o dupeQual.fasta --cpus 8 -p fb ss 2800 3200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/trimmedDupQual/s_5_1_sequence.txt.trimmed20 /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/trimmedDupQual/s_5_2_sequence.txt.trimmed20
+
+
+/gpfs/fs3/home/rreid2/bin/clc/clc-assembly-cell-3.2.0-linux_64/clc_novo_assemble \
+-o betarun4.fasta \
+-m 100 \
+--cpus 8 \
+-p ff ss 2500 3500 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/3kb.fa \
+-p ff ss 7000 9000 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/8kb.fa \
+-p ff ss 18000 22000 -q /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/all/20kb.fa \
+-p fb ss 200 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_4_2_sequence.txt.trimmedkmer7520 $HOME/blueberry/reads/hiseq/s_4_2_sequence.txt.trimmedkmer7520 
+#-p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_3_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_3_2_sequence.r.fa \
+#-p fb ss 100 200 -q -i /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/s_4_1_sequence.f.fa $HOME/blueberry/reads/hiseq/s_4_2_sequence.r.fa 
+

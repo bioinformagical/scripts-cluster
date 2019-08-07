@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=138:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8gb
+
+#PBS -N aaalign2GigaS10
+
+#PBS -t 1-12
+##PBS -t 13-24 
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /group/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching Pair align on S12 Giga "
+
+#cd $home
+
+module load bowtie
+module load htslib samtools
+
+cd /group/lorainelab/data/illumina/sweet_potato/cdhit/gigaS10
+
+#mkdir readcount-${file}
+cd readcount-${file}
+#rm -r bowtie_out
+
+echo `pwd`
+
+ ~/sw/trinityrnaseq_r2013-02-25/util/alignReads.pl \
+ --left  /group/lorainelab/data/illumina/sweet_potato/filtered/concat/${file}_R1_fastx-cliptrim.fq_matched.fq --right /group/lorainelab/data/illumina/sweet_potato/filtered/concat/${file}_R2_fastx-cliptrim.fq_matched.fq  \
+ --seqType fq --target /group/lorainelab/data/illumina/sweet_potato/cdhit/gigaS10/S10-cdhit --aligner bowtie --retain_intermediate_files
+
+cd bowtie_out
+~/sw/trinityrnaseq_r2013-02-25/util/SAM_nameSorted_to_uniq_count_stats.pl bowtie_out.nameSorted.sam > ../qc-${file}.txt
+ samtools idxstats bowtie_out.coordSorted.bam > ../readspercontig-${file}.txt
+
+
+
+
+############### Trying also htseq   #######################
+export PATH=$HOME/sw/HTSeq-0.6.1p1/scripts:$PATH
+export PATH=/lustre/home/rreid2/anaconda/bin:$PATH
+
+## Need gtf and a bam file.....
+
+
+echo "fin"

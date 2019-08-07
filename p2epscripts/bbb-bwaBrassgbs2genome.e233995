@@ -1,0 +1,47 @@
+[bwa_index] Pack FASTA... 4.79 sec
+[bwa_index] Construct BWT for the packed sequence...
+[BWTIncCreate] textLength=977245014, availableWord=80762220
+[BWTIncConstructFromPacked] 10 iterations done. 99999990 characters processed.
+[BWTIncConstructFromPacked] 20 iterations done. 199999990 characters processed.
+[BWTIncConstructFromPacked] 30 iterations done. 299999990 characters processed.
+[BWTIncConstructFromPacked] 40 iterations done. 394350006 characters processed.
+[BWTIncConstructFromPacked] 50 iterations done. 478204566 characters processed.
+[BWTIncConstructFromPacked] 60 iterations done. 552730678 characters processed.
+[BWTIncConstructFromPacked] 70 iterations done. 618965686 characters processed.
+[BWTIncConstructFromPacked] 80 iterations done. 677831494 characters processed.
+[BWTIncConstructFromPacked] 90 iterations done. 730147574 characters processed.
+[BWTIncConstructFromPacked] 100 iterations done. 776642214 characters processed.
+[BWTIncConstructFromPacked] 110 iterations done. 817962758 characters processed.
+[BWTIncConstructFromPacked] 120 iterations done. 854684534 characters processed.
+[BWTIncConstructFromPacked] 130 iterations done. 887318918 characters processed.
+[BWTIncConstructFromPacked] 140 iterations done. 916320390 characters processed.
+[BWTIncConstructFromPacked] 150 iterations done. 942092934 characters processed.
+[BWTIncConstructFromPacked] 160 iterations done. 964995638 characters processed.
+[bwa_index] 386.03 seconds elapse.
+[bwa_index] Update BWT... 2.93 sec
+[bwa_index] Pack forward-only FASTA... 3.03 sec
+[bwa_index] Construct SA from BWT and Occ... 120.75 sec
+[main] Version: 0.7.4-r385
+[main] CMD: bwa index -p SASKREF.idx -a bwtsw /lustre/groups/p2ep/brassica/Boleracea.v1.genome.fasta
+[main] Real time: 524.206 sec; CPU: 517.548 sec
+[bwa_aln] 17bp reads: max_diff = 2
+[bwa_aln] 38bp reads: max_diff = 3
+[bwa_aln] 64bp reads: max_diff = 4
+[bwa_aln] 93bp reads: max_diff = 5
+[bwa_aln] 124bp reads: max_diff = 6
+[bwa_aln] 157bp reads: max_diff = 7
+[bwa_aln] 190bp reads: max_diff = 8
+[bwa_aln] 225bp reads: max_diff = 9
+[bwa_aln_core] calculate SA coordinate... 12.46 sec
+[bwa_aln_core] write to the disk... 0.00 sec
+[bwa_aln_core] 120472 sequences have been processed.
+[main] Version: 0.7.4-r385
+[main] CMD: bwa aln -t 12 SASKREF.idx /lustre/groups/p2ep/brassica/gbs/VI158xBNC-gbs.fasta
+[main] Real time: 1.707 sec; CPU: 12.785 sec
+[bwa_aln_core] convert to sequence coordinate... 0.39 sec
+[bwa_aln_core] refine gapped alignments... 0.12 sec
+[bwa_aln_core] print alignments... 0.14 sec
+[bwa_aln_core] 120472 sequences have been processed.
+[main] Version: 0.7.4-r385
+[main] CMD: bwa samse SASKREF.idx gbs.aln.sai /lustre/groups/p2ep/brassica/gbs/VI158xBNC-gbs.fasta
+[main] Real time: 0.840 sec; CPU: 0.808 sec

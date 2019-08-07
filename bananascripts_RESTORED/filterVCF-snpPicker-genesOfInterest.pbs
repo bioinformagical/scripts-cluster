@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=36gb
+#PBS -j oe
+#PBS -N fffilterVCF-banana
+#PBS -q copperhead
+#PBS -t 1-11
+umask 007
+set -eu
+
+chr=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/banana_genome/snppicker/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching SNP PIcker for genes of interest"
+
+#module load java8 
+#module load samtools
+#module load bwa
+#module load bcftools
+
+
+cd /nobackup/banana_genome/snppicker
+
+#python /users/rreid2/scripts/python/snpPicker.py $file ${file}.vcf /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna-justchr.fasta 397008016
+
+#python /users/rreid2/scripts/python/snpPicker-v2.py $file ${file}.vcf /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna-justchr.fasta 397008016
+
+#python /users/rreid2/scripts/python/snpPicker-venki.py $file ${file}.vcf /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna-justchr.fasta 397008016
+
+# python /users/rreid2/scripts/python/snpPickerGenedesc.py $file ${file}.vcf /scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna-justchr.fasta 397008016
+
+python ~/scripts/python/snpPicker-genesOfInterest-v1.py $chr ./${chr}.vcf /nobackup/banana_genome/genesOfInterest/allansGeneListHits-jUSTNO.txt /nobackup/banana_genome/snppicker/chrfasta/${chr}.fna
+
+

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblast-univec
+
+#PBS -t 1-42
+umask 007
+set -eux
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /group/janieslab/ncbi-submit/numbers.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching Blastn "
+module load ncbi-blast+
+
+#cd $home
+
+cd /group/janieslab/ncbi-submit
+
+#makeblastdb -in ../genomic/newblerAssembly.fna -dbtype nucl
+#makeblastdb -in ../garm/mas2newb/bothScafBin.fna -dbtype nucl
+echo `pwd`
+echo ${file}
+
+blastn -task blastn -db univec-nov2015.fasta  -query BJ${file}-renamed.fsa  -out ./blastn-${file}VsUnivec.out -num_threads 12 -outfmt 6 -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust yes -soft_masking true -evalue 700 -searchsp 1750000000000
+perl ~/scripts/perl/filterFastaOfUNivecBlast.pl blastn-${file}VsUnivec.out BJ${file} 
+
+./linux64.tbl2asn -j "[tech=TSA] [moltype=mRNA]"   -t BJ${file}-template.sbt  -i BJ${file}-univecked.fsa  -M t
+
+echo "Fin"

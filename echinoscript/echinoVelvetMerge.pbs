@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=390gb
+#perl ~/old/scripts/perl/nucmerCoordParserBlueberry.pl $ssid.mito.coords  /lustre/home/rreid2/old/blueberry/reads//$ssid
+
+#PBS -N velveeeetaOptimus
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+module load velvet
+module load oases
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+cd ~/echinoderms/dl/first6/velvetbj1/
+
+velveth ../../mergedbj1 27 -long bj1-transcripts.fa
+velvetg ../../mergedbj1 -read_trkg yes -conserveLong yes
+oases ../../mergedbj1 -merge
+
+
+export PATH=/sw/velvet/bin:$PATH
+#/sw/velvet/bin/velveth velvet31 31 -fastq -long s_1_sequence.txt.trimmedkmer7520 
+
+#/sw/velvet/bin/velvetg velvet31 -exp_cov auto -min_contig_lgth 100 -unused_reads yes -cov_cutoff auto 
+
+#/sw/velvet/bin/velvetg velvet17 -exp_cov auto -min_contig_lgth 100 -unused_reads yes -cov_cutoff auto
+
+#/sw/velvet/bin/shuffleSequences_fastq.pl s_1_1_sequence.txt.trimmedkmer75v120 s_1_2_sequence.txt.trimmedkmer75v120 sequencev2.shuffled
+
+#echo Starting velvetH
+#/sw/velvet/contrib/VelvetOptimiser-2.1.7/VelvetOptimiser.pl -s 45 -e 65 -f ' -fastq -shortPaired /gpfs/fs3/home/rreid2/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled'
+#/sw/velvet-1.1.03/bin/velveth velvet63trimmed 63 -fastq -shortPaired $HOME/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled
+
+#/sw/velvet-1.1.03/bin/velveth velvet63trimmed 63 -fastq -shortPaired $HOME/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled
+
+#/sw/velvet-1.1.03/bin/velveth velvet63trimmed 63 -fastq -shortPaired $HOME/blueberry/reads/illumina/091005Sequence1/sequencev2.shuffled
+
+#echo Starting VelvetG
+#/sw/velvet-1.1.03/bin/velvetg velvet63trimmed -exp_cov auto -min_contig_lgth 100 -cov_cutoff auto -ins_length 100 
+
+#echo Starting VelvetG
+#/sw/velvet-1.1.03/bin/velvetg velvet31trimmed -exp_cov auto -min_contig_lgth 100 -cov_cutoff auto -ins_length 94 
+
+#/sw/velvet/bin/shuffleSequences_fastq.pl s_1_1_sequence.txt.trimmedkmer7520 s_1_2_sequence.txt.trimmedkmer7520 sequenceHiseq1.shuffled
+
+##/sw/velvet/contrib/VelvetOptimiser-2.1.7/VelvetOptimiser.pl -s 45 -e 75 -f ' -fastq -shortPaired /gpfs/fs3/home/rreid2/blueberry/reads/hiseq/sequenceHiseq1.shuffled'
+
+cd ~/echinoderms/
+echo `pwd`
+
+#/lustre/sw/velvet/1.1.05/bin/shuffleSequences_fastq.pl bj9.1.fastq.adapt.trimmed bj9.2.fastq.adapt.trimmed bj9.fastq.adapt.trimmed.shuffled
+
+#perl /lustre/sw/velvet/1.2.07/contrib/VelvetOptimiser-2.2.0/VelvetOptimiser.pl -s 21 -e 85 -c Lcon -f ' -fastq -shortPaired bj9.1.fastq.adapt.trimmed bj9.1.fastq.adapt.trimmed'
+
+#velveth velvet21 21 -fastq -shortPaired bj9.fastq.adapt.trimmed.shuffled  
+
+#velveth velvet55 55 -fastq -shortPaired bj9.fastq.adapt.trimmed.shuffled
+
+#velvetg velvet21 -exp_cov auto -min_contig_lgth 100 -cov_cutoff auto -ins_length 100
+
+#velvetg velvet55 -exp_cov auto -min_contig_lgth 100 -cov_cutoff auto -ins_length 100
+
+#velveth mergedAssembly55 27 -long covTemp/velvet55-*/transcripts.fa
+#velvetg mergedAssembly55 -read_trkg yes -conserveLong yes
+#oases mergedAssembly55 -merge
+
+#velveth mergedAssembly21 27 -long covTemp/velvet21-*/transcripts.fa
+#velvetg mergedAssembly21 -read_trkg yes -conserveLong yes
+#oases mergedAssembly21 -merge
+
+#velveth mergedAssembly85 27 -long covTemp/kmer85-*/transcripts.fa
+#velvetg mergedAssembly85 -read_trkg yes -conserveLong yes
+#oases mergedAssembly85 -merge
+
+#velveth mergedAssemblyAll 27 -long mergedAssembly*/contigs.fa
+#velvetg mergedAssemblyAll -read_trkg yes -conserveLong yes
+#oases mergedAssemblyAll -merge
+
+

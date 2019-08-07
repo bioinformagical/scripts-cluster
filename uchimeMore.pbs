@@ -1,0 +1,192 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+#Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=96600mb
+
+#PBS -N uuuuuuchime 
+##PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+set -x
+
+cd ~/mel/uchime/
+#cd ~/mel/merge/
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../max450/lucymax450.fasta \
+#-db /lustre/home/rreid2/mel/uchime/rRNA16S.gold.NAST_ALIGNED.fasta 	\
+#-chimeras 450-db-chimeras.fa 	\
+#-nonchimeras 450-db-nonchim.fa 	\
+#-uchimeout results450db.uchime
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../merge/mergemax280.fasta \    
+#-db /lustre/home/rreid2/mel/uchime/rRNA16S.gold.NAST_ALIGNED.fasta	\
+#-chimeras 280-db-chimeras.fa	\
+#-nonchimeras 280-db-nonchim.fa	\
+#-uchimeout results280db.uchime
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../max450/lucymax450.fasta \
+#-chimeras 450-novo-chimeras.fa    \
+#-nonchimeras 450-novo-nonchim.fa  \
+#-uchimeout results450Novo.uchime
+
+#~/sw/usearch5.1.221_i86linux32 -uchime ../merge/mergemax280.fasta \    
+#-chimeras 280-novo-chimeras.fa   \
+#-nonchimeras 280-novo-nonchim.fa \
+#-uchimeout results280novo.uchime
+
+# Trying the OTU pipeline method......
+#/lustre/home/rreid2/sw/otupipe1.1.9/otupipe.bash lucymax450.fasta ./test2-450
+
+#u=/lustre/home/rreid2/sw/usearch5.1.221_i86linux32
+#UCHIME_REFDB=/lustre/home/rreid2/mel/rRNA16S.gold.NAST_ALIGNED.fasta
+
+#t=~/mel/uchime
+
+#$u --uchime $t/lucymax450.fasta --chimeras $t/chimeras_denovo.fa --nonchimeras $t/nonchimeras_denovo.fa --uchimeout $t/denovo.uchime --log $t/uchimedn.log
+#cat ./chimeras_denovo.fa ./chimeras_ref.fa > ./ch.fa
+
+#if [ $? != 0 ] ; then
+#       	exit 1
+#fi
+#ls -l $t/nonchimeras_denovo.fa
+
+#/lustre/home/rreid2/sw/otupipe1.1.9/otupipe.bash lucymax450.fasta ./otupipeline450
+#/lustre/home/rreid2/sw/usearch5.1.221_i86linux32 --uchime ./lucymax450Headed.fasta --chimeras ./chimeras_denovo.fa --nonchimeras ./tmp1.fa --uchimeout ./denovo.uchime --log ./uchimedn.log
+
+
+
+#/lustre/home/rreid2/sw/usearch5.1.221_i86linux32 --uchime ./mergemax280.fasta --chimeras ./chimeras280_denovo.fa --nonchimeras ./nonchimeras280.fa --uchimeout ./denovo280.uchime --log ./uchimedn280.log
+u=/lustre/home/rreid2/sw/usearch5.1.221_i86linux32
+input=./mergemax280.fasta
+t=.
+nseqs_input=`grep ">" $input | wc -l`
+echo $nseqs_input reads
+
+echo
+echo =========================================================================
+echo "Sort by length, $nseqs_input sequences"
+echo =========================================================================
+$u --sort $input --output ./input.sortlen --log ./sortlen.log
+if [ $? != 0 ] ; then
+	exit 1
+fi
+	ls -l ./input.sortlen
+
+	echo
+	echo =========================================================================
+	echo "Dereplicate exact sub-sequences"
+	echo =========================================================================
+$u --cluster ./input.sortlen --derep_subseq --uc ./derep.uc --seedsout ./derep.fa --minlen 64 --w 64 --slots 16769023 --log ./derep.log --sizeout --maxrejects 64
+if [ $? != 0 ] ; then
+	exit 1
+fi
+ls -l derep.fa
+
+nseqs_derep=`grep -c ">" ./derep.fa`
+echo $nseqs_derep seqs after derep
+
+echo
+echo =========================================================================
+echo "Sort by abundance, output to derep.fas."
+echo =========================================================================
+$u --sortsize ./derep.fa --output ./derep.fas --log ./sortsize1.log --sizein --sizeout
+if [ $? != 0 ] ; then
+        exit 1
+fi
+ls -l ./derep.fas
+
+echo
+echo =========================================================================
+echo "Cluster for err. corr. at $PCTID_ERR pct, output consensus to cons.fa."
+echo =========================================================================
+$u --cluster ./derep.fas --consout ./cons.fa --id 0.$PCTID_ERR --log ./cluster_err.log --w 20 --slots 16769023 --maxrejects 64 --sizein --sizeout --usersort
+if [ $? != 0 ] ; then
+        exit 1
+fi
+ls -l ./cons.fa
+nseqs_cons=`grep ">" ./cons.fa | wc -l`
+echo $nseqs_cons consensus seqs
+
+echo
+echo =========================================================================
+echo "Chimera filter de novo, output tmp1.fa."
+echo =========================================================================
+$u --uchime ./cons.fa --chimeras ./chimeras_denovo.fa --nonchimeras ./tmp1.fa --uchimeout ./denovo.uchime --log ./uchimedn.log --abskew 2
+if [ $? != 0 ] ; then
+	 exit 1
+fi
+ls -l ./tmp1.fa
+nseqs_dn=`grep ">" ./tmp1.fa | wc -l`
+echo $nseqs_dn seqs after de novo chimera filter
+
+echo
+echo =========================================================================
+echo "Chimera filter ref. db., output tmp2.fa"
+echo =========================================================================
+$u --uchime ./tmp1.fa --db /lustre/home/rreid2/mel/rRNA16S.gold.NAST_ALIGNED.fasta --rev --uchimeout ./refdb.uchime --chimeras ./chimeras_ref.fa --nonchimeras ./tmp2.fa --log ./uchimedb.log
+if [ $? != 0 ] ; then
+        exit 1
+fi
+ls -l ./tmp2.fa
+nseqs_db=`grep ">" ./tmp2.fa | wc -l`
+echo $nseqs_db seqs after ref db chimera filter
+
+cat ./chimeras_denovo.fa ./chimeras_ref.fa > ./ch.fa
+
+
+echo
+echo =========================================================================
+echo "Sort chimeric sequences by abundance, output tmp2c.fa"
+echo =========================================================================
+
+# Bug in usearch v4.2.66, crashes if input file is empty
+if [ -s $t/ch.fa ] ; then
+       $u --sortsize $t/ch.fa --output $t/tmp2c.fas --log $t/sort2c.log
+else
+       rm -f $t/tmp2c.fas
+       touch $t/tmp2c.fas
+fi
+
+if [ $? != 0 ] ; then
+       exit 1
+fi
+ls -l $t/tmp2c.fas
+
+echo
+echo =========================================================================
+echo "Cluster chimeras at $PCTID_OTU, output in tmp3c.fa"
+echo =========================================================================
+$u --cluster $t/tmp2c.fas --id 0.$PCTID_OTU --uc $t/otu1.uc --seedsout $t/tmp3c.fa --w 20 --slots 16769023 --log $t/cluster2c.log --sizein --sizeout --maxrejects 64 --usersort
+
+echo
+echo =========================================================================
+echo "Assign sequential numbers to chimeric OTUs"
+echo =========================================================================
+fasta_number.py $t/tmp3c.fa ${CHIMPREFIX} > $outdir/chimeras.fa
+if [ $? != 0 ] ; then
+      exit 1
+fi
+ls -l $outdir/chimeras.fa
+nchimotus=`grep ">" $outdir/chimeras.fa | wc -l`
+echo $nchimotus chimeras
+
+echo
+echo =========================================================================
+echo "Sort chimera-filtered seqs by abundance, output to tmp2.fas."
+echo "Discard clusters < MINSIZE=$MINSIZE."
+echo =========================================================================
+$u --sortsize $t/tmp2.fa --output $t/tmp2.fas --minsize $MINSIZE --log $t/sort2.log
+if [ $? != 0 ] ; then
+        exit 1
+fi
+ls -l $t/tmp2.fas
+
+

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=6:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8500mb
+
+#PBS -N sssomeStats
+##PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-228
+
+set eu
+umask 007
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/oat/badassay/fastq/file.txt)
+
+#module load bwa
+
+cd /lustre/groups/p2ep/oat/badassay/bwa/
+
+#perl /lustre/home/rreid2/scripts/perl/parseVCF4GoodQual.pl ${file}
+#perl /lustre/home/rreid2/scripts/perl/parseVCF4Position.pl ${file}
+
+for i in `find  -name "*-pos.txt"`; do perl /lustre/home/rreid2/scripts/perl/makeColumns-badassay.pl seq__pos.txt ${i}  mv seq__pos.txt.tmp seq__pos.txt ; done
+

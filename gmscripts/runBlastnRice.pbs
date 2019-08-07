@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:00:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=24gb
+
+##PBS -q bigiron
+
+#PBS -N friedRiiicer 
+#PBS -t 1-33
+
+#set -eux
+
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Blastn "
+
+cd ~/old/gm/assembly2/
+#/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/makeblastdb -in ../db/Oryza_sativa_Japonica_Group.mRNA.PLN.fasta -dbtype nucl
+
+
+
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/fileSmall.txt)
+
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+echo "${file}"
+
+
+/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/makeblastdb -in ${file}/tmp/tribach4.xml.e10noMatch.fasta -dbtype nucl 
+
+#/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastx -db ~/old/db/swissprot/uniprot_sprot.fasta -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/oasesE50.xml -num_threads 2 -evalue 1e-50 -outfmt 5
+
+#/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastx -db ~/old/db/swissprot/uniprot_sprot.fasta -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/oasesE50.out.Table -num_threads 2 -evalue 1e-50 -outfmt 6
+
+#/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastx -db ~/old/gm/db/uniprot_trembl.fasta -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/blastxUniprotE10.xml -num_threads 2 -evalue 1e-10 -outfmt 5
+	  echo "Working file $i "
+#	  /lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastn -db ~/old/gm/db/refseqrna/refseq_rna.00 -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/blastnRefseqRnaE10-00.xml -num_threads 2 -evalue 1e-10 -outfmt 5
+#	/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastn -db ~/old/gm/db/refseqrna/refseq_rna.01 -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/blastnRefseqRnaE10-01.xml -num_threads 2 -evalue 1e-10 -outfmt 5
+#/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastn -db ~/old/gm/db/refseq/refseq_genomic.$count -query  ${file}/tmp/oases_asm.afg.contigSeq.fasta -out ${file}/tmp/blastnRefseqE10-$count.xml -num_threads 2 -evalue 1e-10 -outfmt 5
+
+/lustre/home/rreid2/sw/ncbi-blast-2.2.25+/bin/blastn -db ~/old/gm/db/Oryza_sativa_Japonica_Group.mRNA.PLN.fasta -query  ${file}/tmp/tribach4.xml.e10noMatch.fasta -out ${file}/tmp/ricer.xml -num_threads 4 -evalue 1e-10 -outfmt 5
+
+echo `pwd`
+
+#done
+
+
+
+

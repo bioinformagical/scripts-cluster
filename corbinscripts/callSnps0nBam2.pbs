@@ -1,0 +1,67 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N Bwaaaaacholine 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-37
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/corbin/filepair2.txt)
+
+module load bwa
+module load samtools
+
+#mkdir ${ssid}
+
+cd /lustre/groups/bioservices/hockeypuck/corbin/
+
+#create index of reference
+#bwa index -p allBWAidx -a bwtsw ../humandb/all.fna
+
+#create index of RNA Seqs
+#bwa index -p ${ssid}BWAidx -a bwtsw ${ssid}.fastq.adapt.dup
+
+#convert to SAM
+
+echo "Starting samtools mpileup on many BAM files"
+####
+#
+# The following 6 commands worked and are temporarily blocked out for mipleup purposes.....
+###
+#
+#bwa aln -I -t 4 allBWAidx ./${ssid}_1_filtered.fastq > ${ssid}-1.aln.sai
+#bwa aln -I -t 4 allBWAidx ./${ssid}_2_filtered.fastq > ${ssid}-2.aln.sai
+#bwa sampe allBWAidx ${ssid}-1.aln.sai ${ssid}-2.aln.sai ./${ssid}_1_filtered.fastq ./${ssid}_2_filtered.fastq   > ${ssid}.sam
+
+#samtools import ../humandb/all.fna ${ssid}.sam ${ssid}.bam
+#samtools sort ${ssid}.bam ${ssid}.srt
+#samtools index ${ssid}.srt.bam
+
+#samtools mpileup -vcf ./humandb/all.fna ${ssid}.srt.bam > ${ssid}.raw.pileup 
+#perl samtools.pl varFilter ${ssid}.raw.pileup | awk '$6>=20' > ${ssid}.final.pileup
+
+
+samtools mpileup -E -ugf ./humandb/all.fna ./09_SL23009/09_SL23009.srt.bam ./10_SL23001/10_SL23001.srt.bam ./11_SL22994/11_SL22994.srt.bam ./12_SL22986/12_SL22986.srt.bam ./20_SL23016/20_SL23016.srt.bam ./21_SL23008/21_SL23008.srt.bam ./22_SL23000/22_SL23000.srt.bam ./23_SL22993/23_SL22993.srt.bam ./24_SL22985/24_SL22985.srt.bam ./32_SL23015/32_SL23015.srt.bam ./33_SL23007/33_SL23007.srt.bam ./34_SL22999/34_SL22999.srt.bam ./35_SL22992/35_SL22992.srt.bam ./36_SL22984/36_SL22984.srt.bam ./44_SL23014/44_SL23014.srt.bam ./45_SL23006/45_SL23006.srt.bam ./46_SL22998/46_SL22998.srt.bam ./47_SL22991/47_SL22991.srt.bam ./48_SL22983/48_SL22983.srt.bam ./56_SL23013/56_SL23013.srt.bam ./57_SL23005/57_SL23005.srt.bam ./58_SL22997/58_SL22997.srt.bam ./59_SL22990/59_SL22990.srt.bam ./60_SL22982/60_SL22982.srt.bam ./68_SL23012/68_SL23012.srt.bam ./69_SL23004/69_SL23004.srt.bam ./70_SL22996/70_SL22996.srt.bam ./71_SL22989/71_SL22989.srt.bam ./72_SL22981/72_SL22981.srt.bam ./80_SL23011/80_SL23011.srt.bam ./81_SL23003/81_SL23003.srt.bam ./83_SL22988/83_SL22988.srt.bam ./84_SL22980/84_SL22980.srt.bam ./92_SL23010/92_SL23010.srt.bam ./93_SL23002/93_SL23002.srt.bam ./94_SL22995/94_SL22995.srt.bam ./95_SL22987/95_SL22987.srt.bam | bcftools view -bvcg - > all.srt.bam.bcf
+bcftools view all.srt.bam.bcf > all.srt.bam.vcf 
+
+#samtools flagstat ${ssid}.srt.bam > ${ssid}.srt.bam.stats
+
+#samtools view -ub ${ssid}.srt.bam | ~/sw/samstat/src/samstat -f bam -n ${ssid}.srt.bam.samstat
+
+echo " fin "
+

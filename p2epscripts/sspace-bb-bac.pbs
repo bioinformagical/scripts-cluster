@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90GB
+
+#PBS -N SsspaceManSpiff 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+cd /lustre/groups/p2ep/blueberry/bac/sspace/
+#module load bwa
+module load samtools/0.1.19
+#1st try
+#perl /home/rreid2/sw/SSPACE-BASIC-2.0_linux-x86_64/SSPACE_Basic_v2.0.pl -l libraries2.txt -s /lustre/groups/p2ep/blueberry/garm/mas2newb/bothbinContigs.fna  -v 0 -x 1 -p 1 -k 1 -T 12  -b sspace2
+
+
+#2nd try
+#cd /lustre/groups/bioservices/p2ep/blueberry/bac/sspace/take2
+#perl /home/rreid2/sw/SSPACE-BASIC-2.0_linux-x86_64/SSPACE_Basic_v2.0.pl -l libraries.txt -s /lustre/groups/p2ep/blueberry/garm/mas2newb/bothScafBin.fna  -v 0 -x 1 -p 1 -k 1 -T 12  -b sspace2
+
+#cd /lustre/groups/bioservices/p2ep/blueberry/bac/sspace/take3.5
+#perl /home/rreid2/sw/sspace/SSPACE-LongRead_v1-1/SSPACE-LongRead.pl -c /lustre/groups/p2ep/blueberry/garm/mas2newb/bothbinContigs.fna -p /lustre/groups/p2ep/blueberry/bac/raw/trimmed/vector/combined100K.fasta -t 12 -l 1 -o 30 -k
+
+cd /lustre/groups/p2ep/blueberry/bac/sspace/take9
+#perl /home/rreid2/sw/sspace/BiSD_SSPACE-STANDARD-3.0_linux-x86_64/SSPACE_Standard_v3.0.pl  -l libraries.txt -s /lustre/groups/p2ep/blueberry/garm/mas2newb/bothScafBin.fna  -v 0 -x 1 -o 3 -k 2 -n 15 -T 1 -p 1 -z 0 -v 3   -b bisdspace-V3
+
+perl /home/rreid2/sw/sspace/BiSD_SSPACE-STANDARD-3.0_linux-x86_64/SSPACE_Standard_v3.0.pl  -l libraries.txt -x 1 -o 3 -k 1 -n 15 -T 1 -p 1 -z 1000 -v 3 -s /lustre/groups/p2ep/blueberry/garm/mas2newb/bothScafBin.fna -b bisdtake3
+
+
+echo "FIN"
+
+#done

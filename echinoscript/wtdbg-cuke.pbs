@@ -1,0 +1,42 @@
+#!/bin/bash
+#PBS -l walltime=696:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=63     # Number of nodes and processors per node requested by job
+#PBS -l mem=1800GB           # Maximum physical memory to use for jobi
+#PBS -N wwwtdgb-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+#module list
+echo "WTF"
+
+cd /nobackup/echinotol/wtdbg
+
+#/nobackup/echinotol/smartDenovo/cuke-lordec/cuke.fa.gz
+
+
+#wtdbg-1.2.8 -t 63 -i /nobackup/echinotol/smartDenovo/cuke-lordec/cuke.fa.gz --aln-noskip --rescue-low-cov-edges --tidy-reads 5000 -fo cuke-lordec 2>&1 | tee log.wtdbg
+name=cuke
+
+wtdbg-1.2.8 -t 63 \
+ -i /nobackup/echinotol/smartDenovo/cuke-lordec/cuke.fa.gz  --tidy-reads 1000 \
+ --aln-noskip --rescue-low-cov-edges  -fo ${name}-lordec 2>&1 | tee log.wtdbg
+
+wtdbg-cns -t 63 -i cuke-lordec.ctg.lay -o dbg.ctg.lay.fa
+
+
+
+

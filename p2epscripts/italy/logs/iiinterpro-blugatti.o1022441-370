@@ -1,0 +1,69 @@
+########################################################################
+PBS Prologue:	Fri Jul 21 16:20:05 EDT 2017
+Job ID:		1022441[370].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	iiinterpro-blugatti-370
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=8gb,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=248:30:00
+Queue:		hammerhead
+Nodes:		cph-bm4.uncc.edu[1] 
+########################################################################
+/scratch/rreid2/italy/aa/interpro
+21/07/2017 16:20:11:254 Welcome to InterProScan-5.25-64.0
+21/07/2017 16:20:44:383 Running InterProScan v5 in STANDALONE mode... on Linux
+21/07/2017 16:20:58:024 Loading file /scratch/rreid2/italy/aa/originalTrinitycontigs.fna.transdecoder_dir/splitty/boo-of
+21/07/2017 16:20:58:029 Running the following analyses:
+[CDD-3.16,Coils-2.2.1,Gene3D-4.1.0,Hamap-201701.18,MobiDBLite-1.0,Pfam-31.0,PIRSF-3.02,PRINTS-42.0,ProDom-2006.1,ProSitePatterns-20.132,ProSiteProfiles-20.132,SFLD-2,SMART-7.1,SUPERFAMILY-1.75,TIGRFAM-15.0]
+Available matches will be retrieved from the pre-calculated match lookup service.
+
+Matches for any sequences that are not represented in the lookup service will be calculated locally.
+2017-07-21 16:25:12,825 [amqEmbeddedWorkerJmsContainer-8] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 16:25:12,829 [amqEmbeddedWorkerJmsContainer-8] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:315] WARN - Problem with lookup service while on the step: Checking lookup client and server are in sync
+2017-07-21 16:25:12,830 [amqEmbeddedWorkerJmsContainer-8] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:317] WARN - 
+
+The following problem was encountered by the pre-calculated match lookup service:
+Connect to www.ebi.ac.uk:80 [www.ebi.ac.uk/193.62.193.80] failed: Connection timed out
+Pre-calculated match lookup service failed - analysis proceeding to run locally
+============================================================
+
+The pre-calculated match lookup service has been configured in the interproscan.properties file.  
+  precalculated match lookup service url : http://www.ebi.ac.uk/interpro/match-lookup
+  precalculated match lookup service proxy host :   proxy port : 3128
+
+Unfortunately the web service has failed. Check the configuration of this service
+in the interproscan.properties file and, if necessary, set the following property to look like this:
+
+precalculated.match.lookup.service.url=
+
+If the problem persists, check if this is a firewall or proxy issue. If it is a proxy issue, then setting 
+the following property in the interproscan.properties file should work:
+
+precalculated.match.lookup.service.proxy.host=
+precalculated.match.lookup.service.proxy.port=
+
+If this still does not work please inform the InterPro team of this error
+by sending an email to:
+
+interhelp@ebi.ac.uk
+
+In the meantime, the analysis will continue to run locally.
+
+
+2017-07-21 16:29:27,288 [amqEmbeddedWorkerJmsContainer-8] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 16:33:41,753 [amqEmbeddedWorkerJmsContainer-8] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+21/07/2017 16:34:59:512 25% completed
+21/07/2017 16:47:11:976 51% completed
+21/07/2017 16:56:24:147 77% completed
+21/07/2017 16:58:13:904 90% completed
+21/07/2017 17:04:59:571 97% completed
+21/07/2017 17:05:09:069 100% done:  InterProScan analyses completed
+FIN
+
+
+########################################################################
+PBS Epilogue:	Fri Jul 21 17:05:09 EDT 2017
+Job ID:		1022441[370].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=8gb,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=248:30:00
+Resources:	cput=00:30:34,energy_used=0,mem=4379856kb,vmem=15085088kb,walltime=00:45:04
+Exit Value:	0
+########################################################################

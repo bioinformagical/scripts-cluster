@@ -1,0 +1,36 @@
+########################################################################
+PBS Prologue:	Tue Sep 19 10:21:52 EDT 2017
+Job ID:		1215725.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	aaabyssmal-mam44
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[64] 
+########################################################################
+core file size          (blocks, -c) 10240
+data seg size           (kbytes, -d) 8388608
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 8254442
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) 8388608
+open files                      (-n) 65535
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 8254442
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+make: *** No rule to make target `MAM44'.  Stop.
+
+
+########################################################################
+PBS Epilogue:	Tue Sep 19 10:21:52 EDT 2017
+Job ID:		1215725.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:00
+Exit Value:	2
+########################################################################

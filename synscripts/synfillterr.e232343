@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/rreid2/sw/cutadapt/cutadapt-1.4.1/bin/cutadapt", line 9, in <module>
+    from cutadapt.scripts import cutadapt
+  File "/home/rreid2/sw/cutadapt/cutadapt-1.4.1/cutadapt/scripts/cutadapt.py", line 74, in <module>
+    from cutadapt.adapters import Adapter, ColorspaceAdapter, BACK, FRONT, PREFIX, ANYWHERE
+  File "/home/rreid2/sw/cutadapt/cutadapt-1.4.1/cutadapt/adapters.py", line 4, in <module>
+    from cutadapt import align, colorspace
+  File "/home/rreid2/sw/cutadapt/cutadapt-1.4.1/cutadapt/align.py", line 225, in <module>
+    from cutadapt._align import globalalign_locate, compare_prefixes
+ImportError: /home/rreid2/sw/cutadapt/cutadapt-1.4.1/cutadapt/_align.so: undefined symbol: PyUnicodeUCS4_DecodeUTF8

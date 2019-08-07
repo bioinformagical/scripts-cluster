@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N zzzoomboom-bb
+
+##PBS -t 1-5
+umask 007
+set -eu
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/old/blueberry/reads/hiseq/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/filedir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load exonerate
+
+cd /lustre/groups/p2ep/strawberry/annot/
+
+
+exonerate --querytype dna --targettype dna --model est2genome --percent 70 ../fromGDR/ncbi-ests-fvesca.fna ../fromGDR/fvesca_v1.1_scaffolds.fna  > est2fragGenome-exo70.txt
+
+
+
+
+

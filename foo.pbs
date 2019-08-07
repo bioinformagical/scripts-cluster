@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -eu
+
+cd ${PBS_O_WORKDIR}
+
+# Step 1
+MYSQLD=$(qsub -W depend=afterok:${BLASTA} tasks/mysqld.pbs)
+
+# Steps 3 (configure) and 4
+INITDB=$(qsub -W depend=after:${MYSQLD}   tasks/initdb.pbs)
+
+# Steps 5 and 6
+FIXFAS=$(qsub tasks/fix-fasta.pbs)
+
+# Step 7
+BLASTA=$(qsub -W depend=afterok:${FIXFAS} tasks/blast-all.pbs)
+
+# Steps 8 and 9
+LOADBL=$(qsub -W depend=afterok:${INITDB}:${BLASTA} tasks/load-blast.pbs)
+
+# Step 10
+PAIRUP=$(qsub -W depend=afterok:${LOADBL} tasks/pairs.pbs)
+
+# Steps 11-13
+MCLMCL=$(qsub -W depend=afterok:${PAIRUP} tasks/run-mcl.pbs)

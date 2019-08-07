@@ -1,0 +1,32 @@
+########################################################################
+PBS Prologue:	Thu Aug 25 15:27:30 EDT 2011
+Job ID:		845277.mn
+Username:	rreid2
+Group:		brc
+Job Name:	SeqcleanChloro
+Limits:		neednodes=1:ppn=4,nodes=1:ppn=4,walltime=98:30:00
+Queue:		bigiron
+Account:	
+Nodes:		ananke[4] 
+########################################################################
+
+
+./3.TCA.454Reads.fna
+./4.TCA.454Reads.fna
+./1.TCA.454Reads.fna
+./2.TCA.454Reads.fna
+
+
+########################################################################
+PBS Epilogue:	Thu Aug 25 15:28:07 EDT 2011
+Job ID:		845277.mn
+Username:	rreid2
+Group:		brc
+Job Name:	SeqcleanChloro
+Limits:		neednodes=1:ppn=4,nodes=1:ppn=4,walltime=98:30:00
+Resources:	cput=00:00:25,mem=12348kb,vmem=95564kb,walltime=00:00:32
+Queue:		bigiron
+Account:	
+Exit Value:	0
+Nodes:		ananke[4] 
+########################################################################

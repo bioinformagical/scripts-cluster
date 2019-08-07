@@ -1,0 +1,373 @@
+########################################################################
+PBS Prologue:	Fri Sep 23 13:29:05 EDT 2011
+Job ID:		972.login00.halycon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	GMVelvetBand
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=68:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron02[1] 
+########################################################################
+
+
+
+[0.000000] Reading FastQ file ../jb3.fastq.trim20
+[61.537552] 41805116 reads found.
+[61.537556] Done
+[61.736323] Reading read set file jb3/Sequences;
+[68.718179] 41805116 sequences found
+[107.138013] Done
+[107.138023] 41805116 sequences in total.
+[107.192029] Writing into roadmap file jb3/Roadmaps...
+[119.422864] Inputting sequences...
+[119.423779] Inputting sequence 0 / 41805116
+[120.630379] Inputting sequence 7000000 / 41805116
+[121.398779] Inputting sequence 14000000 / 41805116
+[122.059173] Inputting sequence 21000000 / 41805116
+[122.106228] Inputting sequence 28000000 / 41805116
+[122.165204] Inputting sequence 35000000 / 41805116
+[124.953860] Inputting sequence 37000000 / 41805116
+[125.131416] Inputting sequence 23000000 / 41805116
+[125.171464] Inputting sequence 30000000 / 41805116
+[125.410897] Inputting sequence 16000000 / 41805116
+[125.451716] Inputting sequence 9000000 / 41805116
+[126.115126] Inputting sequence 2000000 / 41805116
+[128.410635] Inputting sequence 39000000 / 41805116
+[128.762923] Inputting sequence 32000000 / 41805116
+[129.428234] Inputting sequence 25000000 / 41805116
+[129.661292] Inputting sequence 18000000 / 41805116
+[130.499930] Inputting sequence 41000000 / 41805116
+[131.205611] Inputting sequence 4000000 / 41805116
+[131.420957] Inputting sequence 11000000 / 41805116
+[131.973969] Inputting sequence 34000000 / 41805116
+[132.113301] Inputting sequence 27000000 / 41805116
+[132.741049] Inputting sequence 20000000 / 41805116
+[132.908404] Inputting sequence 13000000 / 41805116
+[133.984873] Inputting sequence 36000000 / 41805116
+[134.853816] Inputting sequence 29000000 / 41805116
+[135.592178] Inputting sequence 6000000 / 41805116
+[136.817767] Inputting sequence 22000000 / 41805116
+[137.585356] Inputting sequence 38000000 / 41805116
+[139.229950] Inputting sequence 15000000 / 41805116
+[139.264220] Inputting sequence 31000000 / 41805116
+[139.404530] Inputting sequence 24000000 / 41805116
+[140.035917] Inputting sequence 8000000 / 41805116
+[141.028299] Inputting sequence 40000000 / 41805116
+[143.296684] Inputting sequence 33000000 / 41805116
+[143.337134] Inputting sequence 17000000 / 41805116
+[144.945883] Inputting sequence 1000000 / 41805116
+[145.708836] Inputting sequence 26000000 / 41805116
+[145.761250] Inputting sequence 10000000 / 41805116
+[147.011211] Inputting sequence 19000000 / 41805116
+[150.521866] Inputting sequence 3000000 / 41805116
+[151.792020] Inputting sequence 12000000 / 41805116
+[153.591448] Inputting sequence 5000000 / 41805116
+[162.164906]  === Sequences loaded in 45.914083 s
+[162.180100] Done inputting sequences
+[162.180103] Destroying splay table
+[162.306297] Splay table destroyed
+[0.000000] Reading roadmap file jb3/Roadmaps
+[46.662909] 41805116 roadmaps read
+[46.713958] Creating insertion markers
+[62.493737] Ordering insertion markers
+[64.344922] Counting preNodes
+[68.233846] 18108152 preNodes counted, creating them now
+[71.135924] Sequence 1000000 / 41805116
+[73.514596] Sequence 2000000 / 41805116
+[75.316987] Sequence 3000000 / 41805116
+[77.607760] Sequence 4000000 / 41805116
+[79.183165] Sequence 5000000 / 41805116
+[81.273025] Sequence 6000000 / 41805116
+[82.968253] Sequence 7000000 / 41805116
+[84.752703] Sequence 8000000 / 41805116
+[86.594770] Sequence 9000000 / 41805116
+[88.002986] Sequence 10000000 / 41805116
+[89.754643] Sequence 11000000 / 41805116
+[91.061944] Sequence 12000000 / 41805116
+[92.824317] Sequence 13000000 / 41805116
+[94.315694] Sequence 14000000 / 41805116
+[95.780686] Sequence 15000000 / 41805116
+[97.371517] Sequence 16000000 / 41805116
+[98.607596] Sequence 17000000 / 41805116
+[100.199872] Sequence 18000000 / 41805116
+[101.356325] Sequence 19000000 / 41805116
+[102.932113] Sequence 20000000 / 41805116
+[104.276401] Sequence 21000000 / 41805116
+[105.543451] Sequence 22000000 / 41805116
+[107.029403] Sequence 23000000 / 41805116
+[108.164117] Sequence 24000000 / 41805116
+[109.632554] Sequence 25000000 / 41805116
+[110.688361] Sequence 26000000 / 41805116
+[112.185228] Sequence 27000000 / 41805116
+[113.503180] Sequence 28000000 / 41805116
+[114.683756] Sequence 29000000 / 41805116
+[116.093298] Sequence 30000000 / 41805116
+[117.139561] Sequence 31000000 / 41805116
+[118.546177] Sequence 32000000 / 41805116
+[119.536455] Sequence 33000000 / 41805116
+[120.906202] Sequence 34000000 / 41805116
+[122.198600] Sequence 35000000 / 41805116
+[123.320831] Sequence 36000000 / 41805116
+[124.700979] Sequence 37000000 / 41805116
+[125.693013] Sequence 38000000 / 41805116
+[127.048137] Sequence 39000000 / 41805116
+[127.998111] Sequence 40000000 / 41805116
+[129.382815] Sequence 41000000 / 41805116
+[130.152080] Adjusting marker info...
+[133.849134] Connecting preNodes
+[135.282833] Connecting 21000000 / 41805116
+[136.598654] Connecting 37000000 / 41805116
+[136.681988] Connecting 16000000 / 41805116
+[137.729631] Connecting 32000000 / 41805116
+[138.676566] Connecting 27000000 / 41805116
+[138.748950] Connecting 11000000 / 41805116
+[139.711583] Connecting 22000000 / 41805116
+[140.537077] Connecting 38000000 / 41805116
+[140.853538] Connecting 6000000 / 41805116
+[142.092994] Connecting 17000000 / 41805116
+[142.120673] Connecting 33000000 / 41805116
+[143.195697] Connecting 28000000 / 41805116
+[144.286709] Connecting 23000000 / 41805116
+[144.295567] Connecting 1000000 / 41805116
+[144.359541] Connecting 39000000 / 41805116
+[145.013368] Connecting 12000000 / 41805116
+[146.007606] Connecting 34000000 / 41805116
+[147.179017] Connecting 18000000 / 41805116
+[147.526718] Connecting 29000000 / 41805116
+[147.940504] Connecting 7000000 / 41805116
+[148.245698] Connecting 40000000 / 41805116
+[148.679218] Connecting 24000000 / 41805116
+[149.992666] Connecting 35000000 / 41805116
+[150.788958] Connecting 13000000 / 41805116
+[151.490131] Connecting 30000000 / 41805116
+[151.643893] Connecting 41000000 / 41805116
+[151.926184] Connecting 19000000 / 41805116
+[152.673457] Connecting 25000000 / 41805116
+[152.952477] Connecting 2000000 / 41805116
+[153.739516] Connecting 36000000 / 41805116
+[154.347195] Connecting 8000000 / 41805116
+[155.160469] Connecting 31000000 / 41805116
+[155.596358] Connecting 14000000 / 41805116
+[155.764900] Connecting 20000000 / 41805116
+[155.769828] Connecting 26000000 / 41805116
+[157.262653] Connecting 9000000 / 41805116
+[157.537832] Connecting 3000000 / 41805116
+[157.560665] Connecting 15000000 / 41805116
+[159.482662] Connecting 10000000 / 41805116
+[160.432395] Connecting 4000000 / 41805116
+[162.965177] Connecting 5000000 / 41805116
+[163.568848] Cleaning up memory
+[163.739992] Done creating preGraph
+[163.740002] Concatenation...
+[172.820519] Renumbering preNodes
+[172.820525] Initial preNode count 18108152
+[174.167544] Destroyed 13785511 preNodes
+[174.167630] Concatenation over!
+[174.167631] Clipping short tips off preGraph
+[179.550558] Concatenation...
+[183.110966] Renumbering preNodes
+[183.110973] Initial preNode count 4322641
+[183.265536] Destroyed 4004086 preNodes
+[183.265545] Concatenation over!
+[183.265546] 2279946 tips cut off
+[183.265547] 318555 nodes left
+[183.266483] Writing into pregraph file jb3/PreGraph...
+[186.930285] Reading read set file jb3/Sequences;
+[193.997068] 41805116 sequences found
+[233.733647] Done
+[242.815748] Reading pre-graph file jb3/PreGraph
+[245.982993] Graph has 318555 nodes and 41805116 sequences
+[247.770507] Scanning pre-graph file jb3/PreGraph for k-mers
+[248.847505] 41294050 kmers found
+[252.533303] Sorting kmer occurence table ... 
+[293.517962] Sorting done.
+[294.487987] Ghost Threading through reads 0 / 41805116
+[294.863666] Ghost Threading through reads 7000000 / 41805116
+[295.288811] Ghost Threading through reads 14000000 / 41805116
+[295.518268] Ghost Threading through reads 21000000 / 41805116
+[295.700380] Ghost Threading through reads 28000000 / 41805116
+[295.892811] Ghost Threading through reads 35000000 / 41805116
+[297.948355] Ghost Threading through reads 30000000 / 41805116
+[297.973645] Ghost Threading through reads 37000000 / 41805116
+[298.050008] Ghost Threading through reads 23000000 / 41805116
+[298.241859] Ghost Threading through reads 16000000 / 41805116
+[298.589356] Ghost Threading through reads 9000000 / 41805116
+[299.682020] Ghost Threading through reads 2000000 / 41805116
+[299.999983] Ghost Threading through reads 39000000 / 41805116
+[300.184462] Ghost Threading through reads 32000000 / 41805116
+[300.265192] Ghost Threading through reads 41000000 / 41805116
+[300.501205] Ghost Threading through reads 25000000 / 41805116
+[300.584578] Ghost Threading through reads 34000000 / 41805116
+[300.889817] Ghost Threading through reads 18000000 / 41805116
+[300.993785] Ghost Threading through reads 27000000 / 41805116
+[301.487601] Ghost Threading through reads 20000000 / 41805116
+[301.955438] Ghost Threading through reads 11000000 / 41805116
+[303.672775] Ghost Threading through reads 4000000 / 41805116
+[304.402351] Ghost Threading through reads 36000000 / 41805116
+[304.474619] Ghost Threading through reads 13000000 / 41805116
+[304.878255] Ghost Threading through reads 29000000 / 41805116
+[305.429413] Ghost Threading through reads 22000000 / 41805116
+[306.122152] Ghost Threading through reads 38000000 / 41805116
+[306.588808] Ghost Threading through reads 8000000 / 41805116
+[306.672082] Ghost Threading through reads 6000000 / 41805116
+[306.836726] Ghost Threading through reads 31000000 / 41805116
+[307.243631] Ghost Threading through reads 15000000 / 41805116
+[307.980575] Ghost Threading through reads 40000000 / 41805116
+[308.052466] Ghost Threading through reads 24000000 / 41805116
+[308.786402] Ghost Threading through reads 33000000 / 41805116
+[309.597853] Ghost Threading through reads 17000000 / 41805116
+[309.967298] Ghost Threading through reads 26000000 / 41805116
+[310.681151] Ghost Threading through reads 1000000 / 41805116
+[311.607027] Ghost Threading through reads 19000000 / 41805116
+[312.192366] Ghost Threading through reads 10000000 / 41805116
+[314.949249] Ghost Threading through reads 12000000 / 41805116
+[315.591104] Ghost Threading through reads 3000000 / 41805116
+[319.620985] Ghost Threading through reads 5000000 / 41805116
+[323.818192]  === Ghost-Threaded in 29.347441 s
+[323.818266] Threading through reads 0 / 41805116
+[324.435530] Threading through reads 7000000 / 41805116
+[324.781025] Threading through reads 14000000 / 41805116
+[325.021909] Threading through reads 21000000 / 41805116
+[325.223272] Threading through reads 28000000 / 41805116
+[325.438255] Threading through reads 35000000 / 41805116
+[327.651419] Threading through reads 30000000 / 41805116
+[327.675564] Threading through reads 37000000 / 41805116
+[327.765637] Threading through reads 23000000 / 41805116
+[327.971103] Threading through reads 16000000 / 41805116
+[328.347188] Threading through reads 9000000 / 41805116
+[329.521449] Threading through reads 2000000 / 41805116
+[329.866610] Threading through reads 39000000 / 41805116
+[330.060412] Threading through reads 32000000 / 41805116
+[330.206002] Threading through reads 41000000 / 41805116
+[330.399101] Threading through reads 25000000 / 41805116
+[330.545025] Threading through reads 34000000 / 41805116
+[330.833883] Threading through reads 18000000 / 41805116
+[330.986429] Threading through reads 27000000 / 41805116
+[331.528766] Threading through reads 20000000 / 41805116
+[331.975330] Threading through reads 11000000 / 41805116
+[332.443142] Threading through reads 13000000 / 41805116
+[333.939079] Threading through reads 4000000 / 41805116
+[334.632728] Threading through reads 36000000 / 41805116
+[335.127186] Threading through reads 29000000 / 41805116
+[335.718612] Threading through reads 22000000 / 41805116
+[336.464961] Threading through reads 38000000 / 41805116
+[337.115950] Threading through reads 6000000 / 41805116
+[337.235730] Threading through reads 31000000 / 41805116
+[337.689186] Threading through reads 15000000 / 41805116
+[338.474929] Threading through reads 40000000 / 41805116
+[338.554114] Threading through reads 24000000 / 41805116
+[339.332114] Threading through reads 33000000 / 41805116
+[340.215089] Threading through reads 8000000 / 41805116
+[340.220719] Threading through reads 17000000 / 41805116
+[340.602874] Threading through reads 26000000 / 41805116
+[341.837786] Threading through reads 1000000 / 41805116
+[342.391092] Threading through reads 19000000 / 41805116
+[343.014339] Threading through reads 10000000 / 41805116
+[345.979601] Threading through reads 12000000 / 41805116
+[347.686840] Threading through reads 5000000 / 41805116
+[349.907782] Threading through reads 3000000 / 41805116
+[359.802984]  === Threaded in 35.984781 s
+[363.017549] Correcting graph with cutoff 0.200000
+[363.087984] Determining eligible starting points
+[363.747376] Done listing starting nodes
+[363.747385] Initializing todo lists
+[363.911519] Done with initilization
+[363.911528] Activating arc lookup table
+[364.271898] Done activating arc lookup table
+[364.972737] 10000 / 318555 nodes visited
+[365.241498] 20000 / 318555 nodes visited
+[365.488924] 30000 / 318555 nodes visited
+[365.663291] 40000 / 318555 nodes visited
+[365.860104] 50000 / 318555 nodes visited
+[366.020619] 60000 / 318555 nodes visited
+[366.167752] 70000 / 318555 nodes visited
+[366.298507] 80000 / 318555 nodes visited
+[366.422741] 90000 / 318555 nodes visited
+[366.545819] 100000 / 318555 nodes visited
+[366.671753] 110000 / 318555 nodes visited
+[366.784260] 120000 / 318555 nodes visited
+[366.888671] 130000 / 318555 nodes visited
+[366.990381] 140000 / 318555 nodes visited
+[367.090981] 150000 / 318555 nodes visited
+[367.197555] 160000 / 318555 nodes visited
+[367.290144] 170000 / 318555 nodes visited
+[367.376759] 180000 / 318555 nodes visited
+[367.464101] 190000 / 318555 nodes visited
+[367.552452] 200000 / 318555 nodes visited
+[367.630753] 210000 / 318555 nodes visited
+[367.705222] 220000 / 318555 nodes visited
+[367.772103] 230000 / 318555 nodes visited
+[367.833376] 240000 / 318555 nodes visited
+[367.883351] 250000 / 318555 nodes visited
+[367.918205] 260000 / 318555 nodes visited
+[367.944737] 270000 / 318555 nodes visited
+[367.970519] 280000 / 318555 nodes visited
+[367.983761] 290000 / 318555 nodes visited
+[367.992863] 300000 / 318555 nodes visited
+[368.002032] 310000 / 318555 nodes visited
+[368.011148] 320000 / 318555 nodes visited
+[368.020226] 330000 / 318555 nodes visited
+[368.026883] Concatenation...
+[368.093246] Renumbering nodes
+[368.093253] Initial node count 318555
+[368.160825] Removed 64975 null nodes
+[368.166033] Concatenation over!
+[368.166039] Clipping short tips off graph, drastic
+[369.161013] Concatenation...
+[369.413903] Renumbering nodes
+[369.413909] Initial node count 253580
+[369.457217] Removed 46483 null nodes
+[369.457224] Concatenation over!
+[369.457226] 207097 nodes left
+[369.506368] Writing into graph file jb3/Graph2...
+[380.697240] WARNING: NO COVERAGE CUTOFF PROVIDED
+[380.697244] Velvet will probably leave behind many detectable errors
+[380.697245] See manual for instructions on how to set the coverage cutoff parameter
+[380.697246] Removing contigs with coverage < -1.000000...
+[380.740715] Concatenation...
+[380.791578] Renumbering nodes
+[380.791584] Initial node count 207097
+[380.792204] Removed 0 null nodes
+[380.792205] Concatenation over!
+[380.822814] Concatenation...
+[380.873682] Renumbering nodes
+[380.873688] Initial node count 207097
+[380.874277] Removed 0 null nodes
+[380.874278] Concatenation over!
+[380.874372] Clipping short tips off graph, drastic
+[380.910047] Concatenation...
+[380.960510] Renumbering nodes
+[380.960517] Initial node count 207097
+[380.961661] Removed 0 null nodes
+[380.961662] Concatenation over!
+[380.961663] 207097 nodes left
+[380.961664] WARNING: NO EXPECTED COVERAGE PROVIDED
+[380.961665] Velvet will be unable to resolve any repeats
+[380.961666] See manual for instructions on how to set the expected coverage parameter
+[380.961669] Concatenation...
+[381.011514] Renumbering nodes
+[381.011521] Initial node count 207097
+[381.012168] Removed 0 null nodes
+[381.012170] Concatenation over!
+[381.012171] Removing reference contigs with coverage < -1.000000...
+[381.045468] Concatenation...
+[381.096375] Renumbering nodes
+[381.096382] Initial node count 207097
+[381.097021] Removed 0 null nodes
+[381.097022] Concatenation over!
+[381.148711] Writing contigs into jb3/contigs.fa...
+[384.911197] Writing into stats file jb3/stats.txt...
+[387.993628] Writing into graph file jb3/LastGraph...
+Final graph has 207097 nodes and n50 of 403, max 8452, total 39114318, using 13569430/41805116 reads
+/lustre/home/rreid2/old/gm/assembly2
+
+
+########################################################################
+PBS Epilogue:	Fri Sep 23 13:38:36 EDT 2011
+Job ID:		972.login00.halycon.local
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=68:30:00
+Resources:	cput=00:38:36,mem=7464872kb,vmem=8026356kb,walltime=00:09:25
+Account:	
+Exit Value:	0
+########################################################################

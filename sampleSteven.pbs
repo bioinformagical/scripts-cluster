@@ -1,0 +1,77 @@
+#!/bin/bash
+########################################################################
+# Example cluster submit script                                        #
+#                                                                      #
+# To submit:                                                           #
+#     qsub example.pbs                                                 #
+#                                                                      #
+# Output (in current directory):                                       #
+#     e_coli_*-hits.sam  - Reads mapped by bowtie                      #
+#     e_coli_*-miss.fq   - Unmapped reads (if any)                     #
+#     example.oXXXX      - output from this script (XXXX is job id)    #
+#     example.eXXXX      - error from this scriot (XXXX is job id)     #
+#                                                                      #
+########################################################################
+
+# Scheduler Resource Requests
+########################################################################
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !! Any line beginning with a '#PBS' is not a comment but a          !!
+# !! directive to the scheduler.  This allows you to write submit     !!
+# !! scripts in any scripting language that accepts # as a comment    !!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# Name the job 'example'.  This shows up in 'qstat' output and is the
+# name used for the output and error files
+#PBS -N example
+
+# Request 10 minutes for the job
+#PBS -l walltime=0:10:00
+
+# Request one node and four processors from that node
+#PBS -l nodes=1:ppn=4
+
+# Request 500MB memory per processor (2000MB total)
+#PBS -l pvmem=500m
+
+
+# Environment Setup
+########################################################################
+
+# Change to the directory where this script was submitted from
+[[ -n "$PBS_O_WORKDIR" ]] && cd $PBS_O_WORKDIR
+
+# Bring in the module command
+init="/lustre/sw/Modules/default/init/$(basename $SHELL)"
+[[ -z "$(type -t module)" ]] && [[ -r "$init" ]] && . "$init"
+
+# Load bowtie
+module load bowtie
+
+# Show loaded modules. This will document loaded software and their
+# version numbers in the output.
+module list
+
+# Running commands 
+########################################################################
+
+# Input file name.  
+INPUT="/lustre/sw/bowtie/0.12.7/reads/e_coli_10000snp.fq"
+
+# Name to use for output.  This strips the .fq and removes the path from
+# the input file specified above
+NAME=$(basename ${INPUT%.fq})
+
+# Run bowtie
+#
+# -p 4               : use 4 threads. Must match ppn resource request
+#                    :   specified to scheduler above
+# -t                 : report how long the search phase takes
+# -S                 : output to sam format
+# --un $NAME-miss.fq : save unmapped reads to the specified file
+# e_coli             : database to query
+# $INPUT             : input file name
+# $NAME-hits.sam     : output file name
+bowtie -p 4 -t -S --un $NAME-miss.fq /lustre/sw/bowtie/0.12.7/indexes/e_coli $INPUT $NAME-hits.sam
+

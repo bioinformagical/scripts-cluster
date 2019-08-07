@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=148:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l mem=64gb
+#PBS -N aaalign-blugatti
+#PBS -j oe
+#PBS -q hammerhead
+#Number of times to run this script
+#PBS -t 1-24
+set -eu
+umask 007
+#-j oe
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/italy/fastx/file.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+
+#module load trinity/2.4.0
+module load bowtie2 
+module load samtools  
+#source ~/.bashrc
+
+cd /scratch/rreid2/italy/align/
+
+echo `pwd`
+
+/apps/pkg/trinity-2.4.0/util/align_and_estimate_abundance.pl --seqType fq \
+--transcripts /scratch/rreid2/italy/aa/originalTrinitycontigs.fna.transdecoder_dir/boop.fna \
+--single /scratch/rreid2/italy/fastx/${file}.fastq_fastxqual.fastq \
+--coordsort_bam \
+--est_method eXpress \
+--output_dir ${file} \
+--aln_method bowtie2 \
+--thread_count 8  
+#--trinity_mode 
+#--prep_reference
+
+
+#~/sw/trinityrnaseq_r2013-02-25/util/alignReads.pl \
+# --left  /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/${file}_R1_fastx-cliptrim.fq_matched.fq --right /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/${file}_R2_fastx-clip    trim.fq_matched.fq  \
+# --seqType fq --target /lustre/groups/lorainelab/data/illumina/sweet_potato/cdhit/S12-cdhit --aligner bowtie --retain_intermediate_files
+
+#cd bowtie_out
+#~/sw/trinityrnaseq_r2013-02-25/util/SAM_nameSorted_to_uniq_count_stats.pl bowtie_out.nameSorted.sam > ../qc-${file}.txt
+#samtools idxstats bowtie_out.coordSorted.bam > ../readspercontig-${file}.txt
+
+
+
+echo "FIN"
+
+

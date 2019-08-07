@@ -1,0 +1,49 @@
+########################################################################
+PBS Prologue:	Tue Jul 12 13:17:28 EDT 2011
+Job ID:		844393.mn
+Username:	rreid2
+Group:		brc
+Job Name:	LucySkyDiamonds
+Limits:		neednodes=1:ppn=4,nodes=1:ppn=4,walltime=98:30:00
+Queue:		bigiron
+Account:	
+Nodes:		ananke[4] 
+########################################################################
+
+
+./GQW7E7G02.fasta.clean
+./FTNE8KX04.fasta.clean
+./GSIMZP101.fasta.clean
+./GS6N4JD01.fasta.clean
+./FTNFHLF02.fasta.clean
+./GSIMZP102.fasta.clean
+./G0M7GE101.fasta.clean
+./FTNE8KX01.fasta.clean
+./FTNE8KX03.fasta.clean
+./GS2YPEZ02.fasta.clean
+./GSC3R5O02.fasta.clean
+./GSC3R5O01.fasta.clean
+./GS6N4JD02.fasta.clean
+./FUORSTX03.fasta.clean
+./FTNFHLF03.fasta.clean
+./FTNFHLF04.fasta.clean
+./FTNE8KX02.fasta.clean
+./FUORSTX04.fasta.clean
+./GS2YPEZ01.fasta.clean
+./G0M7GE102.fasta.clean
+
+
+########################################################################
+PBS Epilogue:	Tue Jul 12 13:17:34 EDT 2011
+Job ID:		844393.mn
+Username:	rreid2
+Group:		brc
+Job Name:	LucySkyDiamonds
+Limits:		neednodes=1:ppn=4,nodes=1:ppn=4,walltime=98:30:00
+Resources:	cput=00:00:00,mem=0kb,vmem=0kb,walltime=00:00:00
+Queue:		bigiron
+Account:	
+Exit Value:	99
+Nodes:		ananke[4] 
+########################################################################
+17760 17778 17779 ananke: ignoring orphans (shared node)...17760 17778 17779 

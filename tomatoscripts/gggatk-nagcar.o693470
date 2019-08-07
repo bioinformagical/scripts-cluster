@@ -1,0 +1,413 @@
+########################################################################
+PBS Prologue:	Fri Jan  4 15:21:57 EST 2019
+Job ID:		693470.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	gggatk-nagcar
+Limits:		pmem=2147483648b,walltime=468:30:00,nodes=1:ppn=64,mem=464gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=64
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[64] 
+########################################################################
+Launching GATK haplotyper
+INFO  15:21:59,811 HelpFormatter - ---------------------------------------------------------------------------------- 
+INFO  15:21:59,813 HelpFormatter - The Genome Analysis Toolkit (GATK) v3.8-0-ge9d806836, Compiled 2017/07/28 21:26:50 
+INFO  15:21:59,813 HelpFormatter - Copyright (c) 2010-2016 The Broad Institute 
+INFO  15:21:59,813 HelpFormatter - For support and documentation go to https://software.broadinstitute.org/gatk 
+INFO  15:21:59,813 HelpFormatter - [Fri Jan 04 15:21:59 EST 2019] Executing on Linux 3.10.0-957.1.3.el7.x86_64 amd64 
+INFO  15:21:59,814 HelpFormatter - Java HotSpot(TM) 64-Bit Server VM 1.8.0_192-b12 
+INFO  15:21:59,816 HelpFormatter - Program Args: --analysis_type HaplotypeCaller -R /nobackup/banana_genome/tomato/publicData/cornell-wholegenome/S_lycopersicum_chromosomes.3.00.fa -I /nobackup/banana_genome/tomato/align/readgrouped-nagcarlang-sorted.bam -o nagcarlang-gatk-test.vcf --defaultBaseQualities 20 --min_base_quality_score 15 -nct 64 
+INFO  15:21:59,819 HelpFormatter - Executing as rreid2@cph-bm2.uncc.edu on Linux 3.10.0-957.1.3.el7.x86_64 amd64; Java HotSpot(TM) 64-Bit Server VM 1.8.0_192-b12. 
+INFO  15:21:59,819 HelpFormatter - Date/Time: 2019/01/04 15:21:59 
+INFO  15:21:59,820 HelpFormatter - ---------------------------------------------------------------------------------- 
+INFO  15:21:59,820 HelpFormatter - ---------------------------------------------------------------------------------- 
+ERROR StatusLogger Unable to create class org.apache.logging.log4j.core.impl.Log4jContextFactory specified in jar:file:/apps/pkg/gatk-3.8/GenomeAnalysisTK.jar!/META-INF/log4j-provider.properties
+ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+INFO  15:21:59,921 GenomeAnalysisEngine - Deflater: IntelDeflater 
+INFO  15:21:59,921 GenomeAnalysisEngine - Inflater: IntelInflater 
+INFO  15:21:59,922 GenomeAnalysisEngine - Strictness is SILENT 
+INFO  15:22:00,038 GenomeAnalysisEngine - Downsampling Settings: Method: BY_SAMPLE, Target Coverage: 500 
+INFO  15:22:00,045 SAMDataSource$SAMReaders - Initializing SAMRecords in serial 
+INFO  15:22:00,066 SAMDataSource$SAMReaders - Done initializing BAM readers: total time 0.02 
+INFO  15:22:00,075 HCMappingQualityFilter - Filtering out reads with MAPQ < 20 
+INFO  15:22:00,085 MicroScheduler - Running the GATK in parallel mode with 64 total threads, 64 CPU thread(s) for each of 1 data thread(s), of 64 processors available on this machine 
+INFO  15:22:00,136 GenomeAnalysisEngine - Preparing for traversal over 1 BAM files 
+INFO  15:22:00,186 GenomeAnalysisEngine - Done preparing for traversal 
+INFO  15:22:00,186 ProgressMeter - [INITIALIZATION COMPLETE; STARTING PROCESSING] 
+INFO  15:22:00,186 ProgressMeter -                 |      processed |    time |         per 1M |           |   total | remaining 
+INFO  15:22:00,187 ProgressMeter -        Location | active regions | elapsed | active regions | completed | runtime |   runtime 
+INFO  15:22:00,187 HaplotypeCaller - Disabling physical phasing, which is supported only for reference-model confidence output 
+INFO  15:22:00,221 StrandBiasTest - SAM/BAM data was found. Attempting to use read data to calculate strand bias annotations values. 
+WARN  15:22:00,221 InbreedingCoeff - Annotation will not be calculated. InbreedingCoeff requires at least 10 unrelated samples. 
+INFO  15:22:00,221 StrandBiasTest - SAM/BAM data was found. Attempting to use read data to calculate strand bias annotations values. 
+INFO  15:22:00,267 HaplotypeCaller - Using global mismapping rate of 45 => -4.5 in log10 likelihood units 
+INFO  15:22:00,268 PairHMM - Performance profiling for PairHMM is disabled because the program is being run with multiple threads (-nct>1) option
+Profiling is enabled only when running in single thread mode
+ 
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+[INFO] Available threads: 64
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,075 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,087 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,097 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,141 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+WARN  15:22:01,144 HaplotypeScore - Annotation will not be calculated, must be called from UnifiedGenotyper, not HaplotypeCaller 
+INFO  15:22:01,166 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,168 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,194 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,194 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,195 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,207 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,217 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,253 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,272 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,307 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,313 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,331 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,346 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,353 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,361 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,399 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,461 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,464 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,469 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,482 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,485 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,486 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,573 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,573 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,574 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,585 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,598 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,625 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,663 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,676 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,695 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,704 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,729 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,741 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,757 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,790 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,790 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,806 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,833 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,841 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,860 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:01,902 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,020 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,067 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,194 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,368 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,503 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,525 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,546 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:02,678 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:22:30,195 ProgressMeter - SL3.0ch00:11487659              0.0    30.0 s           49.6 w        1.4%    36.0 m      35.5 m 
+WARN  15:22:38,432 HaplotypeCallerGenotypingEngine - location SL3.0ch00:4277134: too many alternative alleles found (10) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AAAAAAACC, AAAAC, AAAATAAC, ACAATTCTACCCACAACATCTATGTAAAAAAAC. 
+INFO  15:23:00,199 ProgressMeter - SL3.0ch01:4344853      2.0852292E7    60.0 s            2.0 s        3.0%    32.9 m      31.9 m 
+INFO  15:23:30,200 ProgressMeter - SL3.0ch01:16459404      2.0852292E7    90.0 s            4.0 s        4.5%    33.3 m      31.8 m 
+INFO  15:24:00,202 ProgressMeter - SL3.0ch01:29795349      2.0852292E7   120.0 s            5.0 s        6.1%    32.7 m      30.7 m 
+INFO  15:24:30,204 ProgressMeter - SL3.0ch01:48163515      2.0852292E7     2.5 m            7.0 s        8.3%    30.0 m      27.5 m 
+INFO  15:25:00,206 ProgressMeter - SL3.0ch01:63641862      2.0852292E7     3.0 m            8.0 s       10.2%    29.4 m      26.4 m 
+INFO  15:25:30,208 ProgressMeter - SL3.0ch01:78422621      2.0852292E7     3.5 m           10.0 s       12.0%    29.2 m      25.7 m 
+WARN  15:25:56,452 HaplotypeCallerGenotypingEngine - location SL3.0ch01:84555138: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CTTGT. 
+INFO  15:26:00,210 ProgressMeter - SL3.0ch01:92665190      2.0852292E7     4.0 m           11.0 s       13.7%    29.2 m      25.2 m 
+INFO  15:26:30,211 ProgressMeter - SL3.0ch02:6720122     1.19308161E8     4.5 m            2.0 s       15.2%    29.6 m      25.1 m 
+WARN  15:26:57,407 HaplotypeCallerGenotypingEngine - location SL3.0ch02:14188443: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TTTTTTC. 
+INFO  15:27:00,213 ProgressMeter - SL3.0ch02:22811960     1.19308161E8     5.0 m            2.0 s       17.2%    29.1 m      24.1 m 
+WARN  15:27:08,835 HaplotypeCallerGenotypingEngine - location SL3.0ch02:14185538: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AACGAC, AT. 
+INFO  15:27:30,215 ProgressMeter - SL3.0ch02:38107078     1.19308161E8     5.5 m            2.0 s       19.0%    28.9 m      23.4 m 
+INFO  15:28:00,216 ProgressMeter - SL3.0ch02:51787881     1.19308161E8     6.0 m            3.0 s       20.7%    29.0 m      23.0 m 
+INFO  15:28:30,218 ProgressMeter - SL3.0ch03:3589207     1.75285741E8     6.5 m            2.0 s       21.6%    30.1 m      23.6 m 
+INFO  15:29:00,219 ProgressMeter - SL3.0ch03:23352283     1.75285741E8     7.0 m            2.0 s       24.0%    29.2 m      22.2 m 
+INFO  15:29:30,221 ProgressMeter - SL3.0ch03:37096278     1.75285741E8     7.5 m            2.0 s       25.6%    29.2 m      21.7 m 
+INFO  15:30:00,223 ProgressMeter - SL3.0ch03:51033531     1.75285741E8     8.0 m            2.0 s       27.3%    29.3 m      21.3 m 
+INFO  15:30:30,224 ProgressMeter - SL3.0ch03:65980656     1.75285741E8     8.5 m            2.0 s       29.1%    29.2 m      20.7 m 
+INFO  15:31:00,226 ProgressMeter - SL3.0ch03:72290146     1.75285741E8     9.0 m            3.0 s       29.9%    30.1 m      21.1 m 
+INFO  15:31:30,227 ProgressMeter - SL3.0ch04:7067666     2.47575887E8     9.5 m            2.0 s       30.8%    30.9 m      21.4 m 
+INFO  15:32:00,229 ProgressMeter - SL3.0ch04:19748493     2.47575887E8    10.0 m            2.0 s       32.3%    31.0 m      21.0 m 
+INFO  15:32:30,230 ProgressMeter - SL3.0ch04:33008010     2.47575887E8    10.5 m            2.0 s       33.9%    31.0 m      20.5 m 
+INFO  15:33:00,232 ProgressMeter - SL3.0ch04:46235058     2.47575887E8    11.0 m            2.0 s       35.5%    31.0 m      20.0 m 
+INFO  15:33:30,234 ProgressMeter - SL3.0ch04:61695418     2.47575887E8    11.5 m            2.0 s       37.3%    30.8 m      19.3 m 
+INFO  15:34:00,236 ProgressMeter - SL3.0ch04:66557038     2.47575887E8    12.0 m            2.0 s       37.9%    31.6 m      19.6 m 
+INFO  15:34:30,238 ProgressMeter - SL3.0ch05:4602922     3.14132925E8    12.5 m            2.0 s       38.5%    32.5 m      20.0 m 
+INFO  15:35:00,241 ProgressMeter - SL3.0ch05:18714192     3.14132925E8    13.0 m            2.0 s       40.2%    32.3 m      19.3 m 
+INFO  15:35:30,242 ProgressMeter - SL3.0ch05:32767710     3.14132925E8    13.5 m            2.0 s       41.9%    32.2 m      18.7 m 
+INFO  15:36:00,246 ProgressMeter - SL3.0ch05:46419826     3.14132925E8    14.0 m            2.0 s       43.5%    32.2 m      18.2 m 
+INFO  15:36:30,248 ProgressMeter - SL3.0ch05:60926863     3.14132925E8    14.5 m            2.0 s       45.3%    32.0 m      17.5 m 
+INFO  15:37:00,251 ProgressMeter - SL3.0ch06:3147329     3.80856492E8    15.0 m            2.0 s       46.4%    32.3 m      17.3 m 
+INFO  15:37:30,253 ProgressMeter - SL3.0ch06:18755708     3.80856492E8    15.5 m            2.0 s       48.3%    32.1 m      16.6 m 
+INFO  15:38:00,257 ProgressMeter - SL3.0ch06:32912995     3.80856492E8    16.0 m            2.0 s       50.0%    32.0 m      16.0 m 
+INFO  15:38:30,259 ProgressMeter - SL3.0ch06:46790769     3.80856492E8    16.5 m            2.0 s       51.6%    31.9 m      15.4 m 
+INFO  15:39:00,261 ProgressMeter - SL3.0ch07:1386370     4.30650768E8    17.0 m            2.0 s       52.2%    32.6 m      15.6 m 
+INFO  15:39:30,263 ProgressMeter - SL3.0ch07:15390399     4.30650768E8    17.5 m            2.0 s       53.9%    32.5 m      15.0 m 
+INFO  15:40:00,265 ProgressMeter - SL3.0ch07:29017180     4.30650768E8    18.0 m            2.0 s       55.5%    32.4 m      14.4 m 
+INFO  15:40:30,268 ProgressMeter - SL3.0ch07:44495476     4.30650768E8    18.5 m            2.0 s       57.4%    32.2 m      13.7 m 
+INFO  15:41:00,270 ProgressMeter - SL3.0ch07:58488821     4.30650768E8    19.0 m            2.0 s       59.1%    32.2 m      13.2 m 
+INFO  15:41:30,271 ProgressMeter - SL3.0ch08:1104391     4.98826467E8    19.5 m            2.0 s       60.4%    32.3 m      12.8 m 
+INFO  15:42:00,273 ProgressMeter - SL3.0ch08:15800657     4.98826467E8    20.0 m            2.0 s       62.1%    32.2 m      12.2 m 
+INFO  15:42:30,275 ProgressMeter - SL3.0ch08:29340453     4.98826467E8    20.5 m            2.0 s       63.8%    32.1 m      11.6 m 
+INFO  15:43:00,277 ProgressMeter - SL3.0ch08:43011444     4.98826467E8    21.0 m            2.0 s       65.4%    32.1 m      11.1 m 
+INFO  15:43:30,279 ProgressMeter - SL3.0ch08:57778355     4.98826467E8    21.5 m            2.0 s       67.2%    32.0 m      10.5 m 
+INFO  15:44:00,281 ProgressMeter - SL3.0ch08:65987440     4.98826467E8    22.0 m            2.0 s       68.2%    32.3 m      10.3 m 
+INFO  15:44:30,283 ProgressMeter - SL3.0ch09:11351451     5.64813907E8    22.5 m            2.0 s       69.6%    32.3 m       9.8 m 
+INFO  15:45:00,286 ProgressMeter - SL3.0ch09:27001157     5.64813907E8    23.0 m            2.0 s       71.5%    32.2 m       9.2 m 
+INFO  15:45:30,287 ProgressMeter - SL3.0ch09:41386705     5.64813907E8    23.5 m            2.0 s       73.2%    32.1 m       8.6 m 
+INFO  15:46:00,289 ProgressMeter - SL3.0ch09:54208526     5.64813907E8    24.0 m            2.0 s       74.8%    32.1 m       8.1 m 
+INFO  15:46:30,291 ProgressMeter - SL3.0ch09:68107289     5.64813907E8    24.5 m            2.0 s       76.4%    32.1 m       7.6 m 
+INFO  15:47:00,293 ProgressMeter - SL3.0ch09:72906345     5.64813907E8    25.0 m            2.0 s       77.0%    32.5 m       7.5 m 
+INFO  15:47:30,296 ProgressMeter - SL3.0ch10:5831704     6.37720252E8    25.5 m            2.0 s       77.7%    32.8 m       7.3 m 
+INFO  15:48:00,300 ProgressMeter - SL3.0ch10:18494638     6.37720252E8    26.0 m            2.0 s       79.2%    32.8 m       6.8 m 
+WARN  15:48:13,648 HaplotypeCallerGenotypingEngine - location SL3.0ch10:8576131: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: GTAA. 
+INFO  15:48:30,303 ProgressMeter - SL3.0ch10:31680073     6.37720252E8    26.5 m            2.0 s       80.8%    32.8 m       6.3 m 
+INFO  15:49:00,305 ProgressMeter - SL3.0ch10:44498696     6.37720252E8    27.0 m            2.0 s       82.4%    32.8 m       5.8 m 
+INFO  15:49:30,319 ProgressMeter - SL3.0ch10:58988490     6.37720252E8    27.5 m            2.0 s       84.1%    32.7 m       5.2 m 
+INFO  15:50:00,321 ProgressMeter - SL3.0ch11:5400307     7.03353645E8    28.0 m            2.0 s       85.6%    32.7 m       4.7 m 
+INFO  15:50:30,322 ProgressMeter - SL3.0ch11:18867376     7.03353645E8    28.5 m            2.0 s       87.2%    32.7 m       4.2 m 
+INFO  15:51:00,324 ProgressMeter - SL3.0ch11:33010107     7.03353645E8    29.0 m            2.0 s       88.9%    32.6 m       3.6 m 
+INFO  15:51:30,326 ProgressMeter - SL3.0ch11:45188315     7.03353645E8    29.5 m            2.0 s       90.4%    32.6 m       3.1 m 
+INFO  15:52:00,328 ProgressMeter - SL3.0ch11:56597135     7.03353645E8    30.0 m            2.0 s       91.8%    32.7 m       2.7 m 
+INFO  15:52:30,329 ProgressMeter - SL3.0ch12:12069773      7.5995078E8    30.5 m            2.0 s       93.2%    32.7 m       2.2 m 
+INFO  15:53:00,331 ProgressMeter - SL3.0ch12:25547688      7.5995078E8    31.0 m            2.0 s       94.9%    32.7 m     100.0 s 
+INFO  15:53:30,333 ProgressMeter - SL3.0ch12:39137894      7.5995078E8    31.5 m            2.0 s       96.5%    32.6 m      68.0 s 
+WARN  15:53:45,570 HaplotypeCallerGenotypingEngine - location SL3.0ch12:27458064: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CA. 
+INFO  15:54:00,335 ProgressMeter - SL3.0ch12:51391716      7.5995078E8    32.0 m            2.0 s       98.0%    32.7 m      39.0 s 
+WARN  15:54:02,869 HaplotypeCallerGenotypingEngine - location SL3.0ch12:44506991: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AAGG. 
+WARN  15:54:10,708 HaplotypeCallerGenotypingEngine - location SL3.0ch12:51076341: too many alternative alleles found (12) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TAGAATAAAGAATTAGAA, TGGAATTAAGAATTAGAA, TCGAATTAAGAATTAGAA, TAGCATTAAGAATTAGAA, TAGAATTGAGAATTAGAA, TAGAATCAAGAATTAGAA. 
+INFO  15:54:30,336 ProgressMeter - SL3.0ch12:65702440      7.5995078E8    32.5 m            2.0 s       99.7%    32.6 m       5.0 s 
+INFO  15:54:41,240 VectorLoglessPairHMM - Using OpenMP multi-threaded AVX-accelerated native PairHMM implementation 
+[INFO] Available threads: 64
+[INFO] Requested threads: 1
+[INFO] Using 1 threads
+INFO  15:54:41,243 HaplotypeCaller - Ran local assembly on 294881 active regions 
+INFO  15:54:41,371 ProgressMeter -            done     8.28076956E8    32.7 m            2.0 s      100.0%    32.7 m       0.0 s 
+INFO  15:54:41,372 ProgressMeter - Total runtime 1961.19 secs, 32.69 min, 0.54 hours 
+INFO  15:54:41,372 MicroScheduler - 17510316 reads were filtered out during the traversal out of approximately 67884226 total reads (25.79%) 
+INFO  15:54:41,372 MicroScheduler -   -> 0 reads (0.00% of total) failing BadCigarFilter 
+INFO  15:54:41,372 MicroScheduler -   -> 0 reads (0.00% of total) failing DuplicateReadFilter 
+INFO  15:54:41,372 MicroScheduler -   -> 0 reads (0.00% of total) failing FailsVendorQualityCheckFilter 
+INFO  15:54:41,372 MicroScheduler -   -> 17510316 reads (25.79% of total) failing HCMappingQualityFilter 
+INFO  15:54:41,373 MicroScheduler -   -> 0 reads (0.00% of total) failing MalformedReadFilter 
+INFO  15:54:41,373 MicroScheduler -   -> 0 reads (0.00% of total) failing MappingQualityUnavailableFilter 
+INFO  15:54:41,373 MicroScheduler -   -> 0 reads (0.00% of total) failing NotPrimaryAlignmentFilter 
+INFO  15:54:41,373 MicroScheduler -   -> 0 reads (0.00% of total) failing UnmappedReadFilter 
+------------------------------------------------------------------------------------------
+Done. There were 10 WARN messages, the first 10 are repeated below.
+WARN  15:22:00,221 InbreedingCoeff - Annotation will not be calculated. InbreedingCoeff requires at least 10 unrelated samples. 
+WARN  15:22:01,144 HaplotypeScore - Annotation will not be calculated, must be called from UnifiedGenotyper, not HaplotypeCaller 
+WARN  15:22:38,432 HaplotypeCallerGenotypingEngine - location SL3.0ch00:4277134: too many alternative alleles found (10) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AAAAAAACC, AAAAC, AAAATAAC, ACAATTCTACCCACAACATCTATGTAAAAAAAC. 
+WARN  15:25:56,452 HaplotypeCallerGenotypingEngine - location SL3.0ch01:84555138: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CTTGT. 
+WARN  15:26:57,407 HaplotypeCallerGenotypingEngine - location SL3.0ch02:14188443: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TTTTTTC. 
+WARN  15:27:08,835 HaplotypeCallerGenotypingEngine - location SL3.0ch02:14185538: too many alternative alleles found (8) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AACGAC, AT. 
+WARN  15:48:13,648 HaplotypeCallerGenotypingEngine - location SL3.0ch10:8576131: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: GTAA. 
+WARN  15:53:45,570 HaplotypeCallerGenotypingEngine - location SL3.0ch12:27458064: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: CA. 
+WARN  15:54:02,869 HaplotypeCallerGenotypingEngine - location SL3.0ch12:44506991: too many alternative alleles found (7) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: AAGG. 
+WARN  15:54:10,708 HaplotypeCallerGenotypingEngine - location SL3.0ch12:51076341: too many alternative alleles found (12) larger than the maximum requested with -maxAltAlleles (6), the following will be dropped: TAGAATAAAGAATTAGAA, TGGAATTAAGAATTAGAA, TCGAATTAAGAATTAGAA, TAGCATTAAGAATTAGAA, TAGAATTGAGAATTAGAA, TAGAATCAAGAATTAGAA. 
+------------------------------------------------------------------------------------------
+
+
+########################################################################
+PBS Epilogue:	Fri Jan  4 15:54:41 EST 2019
+Job ID:		693470.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=468:30:00,nodes=1:ppn=64,mem=464gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=64
+Resources:	cput=06:08:10,vmem=44116024kb,walltime=00:32:44,mem=16281584kb,energy_used=0
+Exit Value:	0
+########################################################################

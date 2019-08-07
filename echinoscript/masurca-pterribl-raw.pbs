@@ -1,0 +1,45 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=180:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=890gb
+
+#PBS -N fffroggyWentACourtin 
+#PBS -q bigiron
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+set -eu
+umask 007
+
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+#file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/fileheader.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+#mkdir /lustre/groups/p2ep/masurca/round3/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#rm -r ~/p2ep/masurca/$file/*
+#cd /group/p2ep/brassica/filterAssembly/masurca2/
+cd /group/janieslab/masurca/pterribilraw/
+#mkdir ${file}
+#cd ${file}
+#cp ../config-run3.txt ./
+
+#sed -i.orig -e "s/foo/${file}/g" config-run3.txt
+
+
+#module load masurca/3.1.3-1
+module load curl/7.47.0-1 gcc/4.9.1-1 python/2.7.12-1 boost/1.62.0-1 masurca
+masurca config.txt
+./assemble.sh
+
+
+echo -n 'All done ';date;

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=296:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=87g
+
+#PBS -N rrrepeatMyself
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-37
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/cosmid/repeat/ 
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/oat/transcript/aa/leggett1/splitfile/file.txt)
+
+
+#PBS -N RRRepeatMaskeritis
+##PBS -q bigiron
+
+##home=/gpfs/fs3/home/rreid2
+module load repeatmasker
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+echo "Launching Repeat Masker"
+
+#perl /gpfs/fs3/home/rreid2/bin/RepeatMasker/RepeatMasker -pa 4 -s -lib /gpfs/fs3/home/rreid2/db/blueberry/blueRScout.out -cutoff 350 -dir /gpfs/fs3/home/rreid2/db/blueberry -ace -gff /gpfs/fs3/home/rreid2/db/blueberry/ConsensusSequences.fna 
+
+#perl /lustre/sw/repeatmasker/3.3.0/bin/RepeatMasker -pa 3 -q -lib /lustre/home/rreid2/old/db/repbase/bigRepeats.fasta -cutoff 175 -dir ~/blueberry/repeat -ace -gff ~/old/blueberry/reads/454Sequences/3kb_paired_12.22.10/GS6N4JD01.fasta 
+
+#perl /lustre/sw/repeatmasker/3.3.0/bin/RepeatMasker -pa 3 -q -lib /lustre/home/rreid2/old/db/repbase/bigRepeats.fasta -cutoff 175 -dir ~/blueberry/repeat -ace -gff ~/blueberry/mira/bambus/BB3scaffold.fasta
+
+#perl /lustre/sw/repeatmasker/3.3.0/bin/RepeatMasker -pa 3 -q -lib /lustre/home/rreid2/old/db/repbase/bigRepeats.fasta -cutoff 175 -dir ~/blueberry/repeat -ace -gff ~/old/blueberry/soap/run3/graph3scaf.fa
+
+#perl /lustre/sw/repeatmasker/3.3.0/bin/RepeatMasker -pa 3 -q -lib /lustre/home/rreid2/old/db/repbase/bigRepeats.fasta -cutoff 175 -dir ~/blueberry/repeat -ace -gff ~/old/blueberry/clc/betarun3.fasta
+
+RepeatMasker -pa 3 -s -lib /lustre/groups/bioservices/hockeypuck/old/db/repbase/bigRepeats.fasta -cutoff 175 -dir ./ -ace -gff  ../HF050.fna 
+RepeatMasker -pa 3 -s -lib /lustre/groups/bioservices/hockeypuck/old/db/repbase/bigRepeats.fasta -cutoff 175 -dir ./ -ace -gff  ../HF051.fna
+

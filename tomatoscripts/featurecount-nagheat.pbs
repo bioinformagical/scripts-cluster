@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=88gb
+#PBS -N fffeat-nagheat
+#PBS -j oe
+#PBS -q steelhead
+
+#PBS -t 1-12
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p"  /nobackup/banana_genome/tomato/nagheat/files.txt)
+
+echo "Launching tophat on ${file}"
+
+#cd $home
+module load tophat
+module load bowtie2
+module load cufflinks
+
+cd /nobackup/banana_genome/tomato/nagheat/featurecount
+
+echo ${file}
+#ln -s ../${file}-R1-clip.fq_matched.fq $file-R1-filtered.fastq
+#ln -s ../${file}-R2-clip.fq_matched.fq $file-R2-filtered.fastq
+
+~/sw/subread-1.6.4-Linux-x86_64/bin/featureCounts -T 12 -t exon -a /nobackup/banana_genome/tomato/publicData/cornell-other/ITAG3.2_gene_models.gtf -o ${file}-featcount.txt ../bwa/${file}-sorted.bam  
+
+
+
+
+
+
+
+
+
+

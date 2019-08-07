@@ -1,0 +1,26 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=48:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N  coralReef
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+cd $HOME/blueberry/reads/454Sequences/mira7/
+
+
+coral -f ~/blueberry/reads/454Sequences/mira7/BB_in.454.fasta -o ~/blueberry/reads/454Sequences/mira7/BB_in.454.fasta.coral -454 
+

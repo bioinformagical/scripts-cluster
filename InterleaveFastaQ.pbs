@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N Interleaver 
+##PBS -q bigiron
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+
+
+
+
+/sw/velvet/bin/shuffleSequences_fastq.pl $HOME/blueberry/reads/hiseq/s_1_1_sequence.txt.trimmedkmer7520 \
+$HOME/blueberry/reads/hiseq/s_1_2_sequence.txt.trimmedkmer7520 \
+$HOME/blueberry/reads/454Sequences/allpaths/s1Hiseq.fastq 

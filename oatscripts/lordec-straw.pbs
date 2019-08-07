@@ -1,0 +1,37 @@
+#!/bin/bash
+#PBS -l walltime=296:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=4     # Number of nodes and processors per node requested by job
+#PBS -l mem=40GB           # Maximum physical memory to use for jobi
+#PBS -N lllordec-straw          # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q steelhead        # Job queue to submit this script to
+#PBS -t 1-2
+##PBS -t 1-201
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/oat_genome/octoStrawberry/srafiles.txt)
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+#module list
+echo "WTF"
+
+cd /nobackup/oat_genome/octoStrawberry/LORDEC/
+
+module load lordec
+
+lordec-correct -T 4 -k 19 -s 3 -i /nobackup/oat_genome/octoStrawberry/fastq/${file}.fastq -o ${file}-lordec.fastq
+
+
+

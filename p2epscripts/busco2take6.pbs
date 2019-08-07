@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90GB
+
+#PBS -N bbbusco-take6 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+cd /group/p2ep/blueberry/busco/ 
+#module load emboss/6.5.7
+#module load hmmer/3.1b1-1
+#module load ncbi-blast+
+# ~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 400 -minmatch 40 --coords -prefix newblerVSmirarep2 garrons454Scaffolds.fna mirarep.fa 
+
+
+
+#PATH=$PATH:/path/to/software/bin
+
+export AUGUSTUS_CONFIG_PATH=~/sw/augustus-3.2.1/config/
+#module load ncbi-blast+
+module load python3
+#module load bamtools lpsolve sqlite suitesparse gcc/4.9.1-1 python/2.7.10-1 boost augustus
+#python3 ~/sw/busco/BUSCO_v1.1b1/plant_early_release/BUSCO_plants.py -f  -o take6 -in  /group/p2ep/blueberry/genomic/sspace-take6.fna -l ~/sw/busco/BUSCO_v1.1b1/plant_early_release/sample_data/example -m genome -sp rice
+
+
+
+python3 ~/sw/busco/BUSCO_v1.1b1/plant_early_release/BUSCO_plants.py -f  -o take6-fungi -in  /group/p2ep/blueberry/genomic/sspace-take6.fna -l ~/sw/busco/BUSCO_v1.1b1/profiles/fungi -m genome -sp rice
+
+
+
+
+#done

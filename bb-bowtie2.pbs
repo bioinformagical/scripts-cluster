@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+#PBS -N bbbbbad2theBone 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-6
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#fyle=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/mouse_erb2/filesmarch.txt)
+#fyle=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/mouse_erb2/april/files.txt)
+
+module load bowtie2
+
+
+#cd /lustre/groups/bioservices/mouse_erb2/march/
+cd ~/blueberry/everdance/
+
+#bowtie2-build 454Scaffolds.fna newbler
+
+bowtie2 -x ./newbler \
+ -U ill.fna -f \
+--fast \
+--no-unal \
+--all \
+-p 12 > reads-newbler.sam
+
+#bowtie2-build bbrep_out.unpadded.fasta mira
+
+bowtie2 -x ./mira \
+	-U ill.fna -f \
+	--fast \
+	--no-unal \
+	--all \
+	-p 12 > reads-mira.sam
+
+
+
+bowtie2 -x ./mira \
+        -U everdance.fna -f \
+         --fast \
+         --no-unal \
+         --all \
+         -p 12 > everdance-mira.sam
+
+bowtie2 -x ./newbler \
+         -U everdance.fna -f \
+         --fast \
+         --no-unal \
+         --all \
+         -p 12 > everdance-newbler.sam
+
+

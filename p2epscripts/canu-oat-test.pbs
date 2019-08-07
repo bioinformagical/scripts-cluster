@@ -1,0 +1,82 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=480:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=990gb
+
+#PBS -N cccanu
+#PBS -q bigiron
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+set -eu
+umask 007
+
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+#file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/fileheader.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+#mkdir /lustre/groups/p2ep/masurca/round3/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#rm -r ~/p2ep/masurca/$file/*
+
+module load java8
+
+
+cd /group/jschlueterlab/canu/
+
+#canu -correct \
+#  -p ecoli -d ecoli \
+#  genomeSize=4.8m \
+#  useGrid=false \
+#  -pacbio-raw  ./ecoli/ecoli_p6_25x.filtered.fastq
+
+#canu -trim \
+#  -p ecoli -d ecoli \
+#  genomeSize=4.8m \
+#  useGrid=false \
+#  -pacbio-corrected ecoli/ecoli.correctedReads.fasta.gz
+
+canu -assemble \
+  -p ecoli -d ecoli-erate-0.013 \
+  genomeSize=4.8m \
+  errorRate=0.013 \
+  useGrid=false \
+  -pacbio-corrected ecoli/ecoli.trimmedReads.fasta.gz
+
+canu -assemble \
+  -p ecoli -d ecoli-erate-0.025 \
+  genomeSize=4.8m \
+  errorRate=0.025 \
+  useGrid=false \
+  -pacbio-corrected ecoli/ecoli.trimmedReads.fasta.gz
+
+
+
+
+
+
+
+
+
+
+#mkdir ${file}
+#cd ${file}
+#cp ../config-run3.txt ./
+
+#sed -i.orig -e "s/foo/${file}/g" config-run3.txt
+
+
+
+#perl /lustre/home/rreid2/sw/MaSuRCA-2.3.2/bin/runSRCA.pl config.txt
+
+
+echo -n 'All done ';date;

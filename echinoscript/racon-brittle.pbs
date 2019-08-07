@@ -1,0 +1,95 @@
+#!/bin/bash
+#PBS -l walltime=196:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=64     # Number of nodes and processors per node requested by job
+#PBS -l mem=1900GB           # Maximum physical memory to use for jobi
+#PBS -N rrracon-brittle         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+#i#PBS -t 7
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+file=$(sed -n -e "${PBS_ARRAYID}p"  /projects/echinotol/genome/brittlestar/files.txt)
+
+#module list
+echo "WTF"
+
+cd /nobackup/echinotol/racon/brittle
+
+module load pacbio
+
+
+#module load bamtools
+#module load augustus
+#module load blast
+#module load busco/3.0.2
+
+#export AUGUSTUS_CONFIG_PATH=/users/rreid2/sw/augustus.2.5.5/config
+#cp /nobackup/oat_genome/pacbio/dhmri/2017-09-11/m54116_170602_231301.subreads.fasta.gz ./
+#gunzip m54116_170602_231301.subreads.fasta.gz
+
+#blasr /nobackup/oat_genome/pacbio/dhmri/2017-09-11/m54116_170602_231301.subreads.fasta /nobackup/oat_genome/wtdbg/oat6-dovetail-masurcacontigs.ctg.lay.fa  --bam --clipping soft --out test1.bam --nproc 64
+
+#rm m54116_170602_231301.subreads.fasta
+
+module load samtools
+module load bwa
+module load bcftools
+
+echo "Starting RECON"
+
+module load racon/1.3.1
+
+racon 
+
+
+/nobackup/echinotol/wtdbg/britmasurca.ctg.lay.fa 
+
+
+#name=$(echo $file | cut -d"/" -f8 | cut -d"." -f1)
+
+#echo ${file}
+#echo ${name}
+
+#bwa index -p BRITWTDBG.idx -a bwtsw /nobackup/echinotol/wtdbg/britmasurca.ctg.lay.fa 
+#bwa mem -t 8  -B 2 -O 5   \
+#        ./BRITWTDBG.idx \
+#       ${file}   > ${name}.sam
+#samtools view -bS ${name}.sam | samtools sort -T ${name} -o ${name}-sorted.bam
+#samtools index ${name}-sorted.bam
+
+#samtools merge allMerged.bam *sorted.bam
+#samtools sort -T allMerged.bam -o allMerged-sorted.bam
+#samtools index allMerged-sorted.bam
+
+java -Xmx1800G -jar /users/rreid2/sw/pilon/pilon-1.22.jar --genome /nobackup/echinotol/wtdbg/britmasurca.ctg.lay.fa \
+ --unpaired allMerged-sorted.bam \
+ --output pilon-brit \
+ --vcf \
+ --tracks \
+ --threads 64
+
+
+
+
+#pbalign --nproc 8 ${name}-sorted.bam /nobackup/oat_genome/wtdbg/oat6-dovetail-masurcacontigs.ctg.lay.fa align-${name}.bam
+
+
+
+
+######    CUKE    #######
+#bwa index -p CUKEWTDBG.idx -a bwtsw /nobackup/echinotol/wtdbg/cuke-lordec.ctg.lay.fa
+
+

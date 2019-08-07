@@ -1,0 +1,40 @@
+#!/bin/bash
+# Request a run time
+#PBS -l walltime=20:00:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=50gb
+##PBS -l pmem=8gb
+#PBS -j oe
+#PBS -N sssnp-rogers
+#PBS -q hammerhead
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu
+umask 007
+#shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+#ulimit -c 10240
+#ulimit -a
+
+###Start DOING STUFF
+
+cd /nobackup/rogers_research/rob/mayotte
+
+#module load mpiblast/1.6.0
+#module load abyss/1.9.0
+#ABYSS-P -k28 -q 3 -o mam28 ../ERR852028.fastq.gz
+
+#abyss-pe np=32  k=23 se='/nobackup/rogers_research/DeNovoMammoth/ERR852028.fastq.gz' name="m28"
+
+######   Read each VCF file. AWK to get 2 columns for ID, write to master table.
+
+for file in /nobackup/rogers_research/rob/mayotte/gatk/*.vcf
+
+do
+
+awk '{ print $1 "-" $2 }' ${file} >> masterTemplate.orig 
+
+done

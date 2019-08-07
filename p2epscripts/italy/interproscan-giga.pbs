@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=248:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l mem=8gb
+#PBS -N iiinterpro-blugatti
+#PBS -j oe
+#PBS -q hammerhead
+#Number of times to run this script
+#PBS -t 2-666
+set eu
+umask 007
+#-j oe
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/italy/aa/originalTrinitycontigs.fna.transdecoder_dir/splitty/file.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+
+#module load trinity/2.4.0
+#module load bowtie2/2.2.9 
+module load blast/2.5.0+  
+
+cd /scratch/rreid2/italy/aa/interpro
+
+echo `pwd`
+
+/nobackup/bisd/sw/interproscan-5.25-64.0/interproscan.sh -i /scratch/rreid2/italy/aa/originalTrinitycontigs.fna.transdecoder_dir/splitty/${file} -o ${file}-iprscan.out  -goterms -iprlookup -seqtype p -pa  -f tsv
+
+#appl PANTHE    R,Pfam,PrositeProfiles
+
+echo "FIN"
+
+
+
+
+
+
+#/users/rreid2/sw/hmmer/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan --cpu 64 --domtblout ./pfam.all.domtblout /nobackup/bisd/db/Pfam-A.hmm ./originalTrinitycontigs.fna.transdecoder_dir/longest_orfs.pep
+#########   3.   Run Transdecoder   ############
+#/users/rreid2/sw/transdecoder/TransDecoder-3.0.1/TransDecoder.Predict -t ./originalTrinitycontigs.fna --cpu 64  --retain_pfam_hits ./pfamstuff/allpfam.out --single_best_orf 

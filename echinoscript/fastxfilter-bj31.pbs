@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N fffastzoomzoomboombj31
+
+##PBS -t 1-4
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/cephalo/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load fastx-toolkit
+
+cd /group/janieslab/redobj31ANDbj32/
+
+#Copy the following line as many times as the number of samples you are analyzing, then
+#replace "YOURFILE" with the names of your samples e.g. "1_Hot":
+#mkdir ${dir}
+#cd fastx 
+#for i in 2 1;
+#do
+	#mv ../UNCC_Schlueter_130909HiSeq_Run_Sample_${ssid}_R${i}_001.cutadapt.fastq ./
+#	echo "${file}"
+#	gunzip ../${dir}/${file}.fastq.gz
+	fastq_quality_trimmer -Q33 -v -t 20 -i ./BJ31-R1.fastq -o BJ31-R1_fastxqual.fastq
+	fastq_quality_trimmer -Q33 -v -t 20 -i ./BJ31-R2.fastq -o BJ31-R2_fastxqual.fastq
+#	fastx_clipper -Q33 -a ATTGGCTTTGGGCAT -a AGTCAA -a CTTGTA -a CAGATC -a GCCAAT -a TGACCA -a ACAGTG -l 40 -n -v -i ${ssid}_R${i}_trimmed.fastq -o ${ssid}_R${i}_trimmed_clipped.fastq
+       # fastx_collapser -Q33 -v -i  ${ssid}_trimmed_clipped.fastq -o ${ssid}_collapsed.txt
+        #/lustre/home/rreid2/scripts/stan/Scripts for SFG/fastqduplicatecounter.py ${ssid}_collapsed.txt ${ssid}_collapsed_headers.txt >> ${ssid}_R${i}_duplicateCount.txt
+        fastx_quality_stats -Q33 -i BJ31-R1_fastxqual.fastq -o BJ31-R1_fastxqual_qualstats.txt
+	fastx_quality_stats -Q33 -i BJ31-R2_fastxqual.fastq -o BJ31-R2_fastxqual_qualstats.txt
+#done
+
+####  Validate Mate pairs   ######
+perl ~/scripts/perl/validateHiseqPairs.pl BJ31-R1_fastxqual.fastq BJ31-R2_fastxqual.fastq
+
+
+
+
+
+
+

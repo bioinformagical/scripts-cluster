@@ -1,0 +1,6 @@
+  source /lustre/sw/Modules/default/init/$(basename $SHELL)
+
+module avail
+module list
+module load velvet
+module unload amos

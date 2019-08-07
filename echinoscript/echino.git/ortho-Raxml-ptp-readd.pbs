@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=4gb
+
+#PBS -N ooortho4AddingSpurp
+
+#PBS -t 1-263
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/process4ptp/append/file.txt)
+
+
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Making Fatso files "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/home/rreid2/echinoderms/ortho/process4ptp/append/
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+
+
+## ALIGN
+
+#module load mafft
+linsi --localpair --maxiterate 1000 ${ssid} > ${ssid}.aln
+
+
+## relax alignment to Phylip format
+perl /lustre/home/rreid2/sw/phyloTreePruner/fasta2relaxedphylip.pl ${ssid}.aln
+mv ${ssid}.aln.phylip ${ssid}.phy
+## RAXML to a tree....
+RANDOMNUM=$RANDOM
+raxmlHPC-SSE3 -s ${ssid}.phy -n ${ssid}.phy.out -f a -N 100 -x $RANDOMNUM -m "PROTCATDAYHOFF"
+cp RAxML_bipartitions.${ssid}.phy.out ${ssid}.tre
+
+####    PTP time
+CLASS_PATH=~/sw/phyloTreePruner/
+#cp ${FILENAME}.tabbed.fasta ${FILENAME}.fa
+#java -Xmx4000M -cp $CLASS_PATH PhyloTreePruner tree_file.rooted.lowerSomebranches.newick 3 ./15-NP_001229582.fasta 0.3 u
+
+
+
+#cp PhyloTreePruner RAxML_bestTree.${ssid}.raxml PhyloTreePruner RAxML_bestTree.${ssid}
+#cp ${ssid}.fasta ${ssid}
+
+java -Xmx2000M -cp $CLASS_PATH PhyloTreePruner ${ssid}.tre  3 ${ssid} -0.9 u
+perl ~/scripts/perl/reAdderOfPhylogroups.pl ${ssid} ${ssid}_pruned.fa
+
+

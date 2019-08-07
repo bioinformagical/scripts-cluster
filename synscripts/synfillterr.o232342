@@ -1,0 +1,23 @@
+########################################################################
+PBS Prologue:	Thu Oct  1 11:44:50 EDT 2015
+Job ID:		232342.login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	synfillterr
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=79gb,walltime=196:30:00
+Queue:		compute
+Account:	
+Nodes:		compute03[1] 
+########################################################################
+
+
+
+
+########################################################################
+PBS Epilogue:	Thu Oct  1 11:44:56 EDT 2015
+Job ID:		232342.login00.halcyon.local
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,vmem=79gb,walltime=196:30:00
+Resources:	cput=00:00:00,mem=0kb,vmem=0kb,walltime=00:00:02
+Account:	
+Exit Value:	1
+########################################################################

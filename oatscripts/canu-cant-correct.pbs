@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#PBS -N cccanu-cccant-cccorrect
+#PBS -l nodes=1:ppn=4
+#PBS -l vmem=32G
+#PBS -l walltime=120:00:00
+#PBS -j oe -o /group/jschlueterlab/canu/oat4/correction/2-correction/correctReads-sgb.$PBS_ARRAYID.out
+#PBS -t 16,146,156
+
+set -eux
+IFS=$'\n'
+umask 022
+
+cd "/group/jschlueterlab/canu/oat4/correction/2-correction"
+
+export PBS_ARRAYID
+./correctReads.sh

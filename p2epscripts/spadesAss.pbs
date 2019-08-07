@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=196:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=954gb
+#PBS -N bobBarkerSpayedMyDog
+#PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+##PBS -t 1-188
+
+
+cd ~/p2ep/spades
+
+##file=$(sed -n -e "${PBS_ARRAYID}p" files.txt)
+
+
+#barcodes=Fla4BxW85
+#barcodes=broccoxBNC
+barcodes=DraperJewel
+#echo   ${file};
+
+#cd ~/p2ep/${barcodes}/
+#file=$(sed -n -e "${PBS_ARRAYID}p" ./files.txt)
+
+#mv ${file}.fna ${file}.fasta 
+#~/sw/SPAdes-2.5.0-Linux/bin/spades.py -s ${file}.fasta [options] -o ./${file} --only-assembler --disable-gzip-output -t 12 -m 93 -k 21,33,55,67,77  
+
+
+######   TEST RUN   ###########
+#cd ~/p2ep
+~/sw/SPAdes-2.5.1-Linux/bin/spades.py --pe1-1 /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/Sample_131029HiSeq_Run_UNCC_Schlueter_Sample_110/131029HiSeq_Run_UNCC_Schlueter_Sample_110_CAGATC_L004_R1_001.fastq \
+--pe1-2 /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/Sample_131029HiSeq_Run_UNCC_Schlueter_Sample_110/131029HiSeq_Run_UNCC_Schlueter_Sample_110_CAGATC_L004_R2_001.fastq \
+-o ./oat110 \
+--disable-gzip-output \
+-t 24 \
+-m 954 \
+-k 25,45,65,93 \
+--careful \
+ 
+
+
+echo "finished job"
+

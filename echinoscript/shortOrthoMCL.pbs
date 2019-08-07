@@ -1,0 +1,36 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=75500mb
+
+#PBS -N oooorthoPolo 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-18
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/ortho/files.txt)
+
+
+cd ~/echinoderms/ortho/aa/ 
+
+#perl ~/sw/transdecoder_r2012-08-15/transcripts_to_best_scoring_ORFs.pl -t SOMETRANSCRIPT.fna -m 100 --CPU 15 --search_pfam ~/db/Pfam-B.hmm
+#mkdir $ssid
+#cd $ssid
+
+#perl ~/sw/orthomcl/orthomcl.pl --mode 1 --fa_files "bj10.nostar.fa,bj11.nostar.fa,bj12.nostar.fa,bj13.nostar.fa,bj14.nostar.fa,bj19.nostar.fa,bj1.nostar.fa,bj20.nostar.fa,bj21.nostar.fa,bj22.nostar.fa,bj23.nostar.fa,bj2.nostar.fa,bj4.nostar.fa,bj5.nostar.fa,bj6.nostar.fa,bj7.nostar.fa,bj8.nostar.fa,bj9.nostar.fa"
+
+perl ~/sw/orthomcl/orthomcl.pl --mode 4 --usr_bpo_file all.bpo --usr_gg_file all.gg
+
+

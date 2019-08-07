@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90gb
+
+#PBS -N ccccdhit-aa-cote
+
+#PBS -t 1-18
+umask 007
+set -eux
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/file4.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching cd-hit "
+module load ncbi-blast+
+
+#cd $home
+
+cd /lustre/groups/bioservices/gregory/HSMS_104_Cote/cdhit/
+
+/home/rreid2/sw/cd-hit-v4.6.1-2012-08-27/cd-hit -i /lustre/groups/bioservices/gregory/HSMS_104_Cote/trinity/aa/aa${file}/best_candidates.eclipsed_orfs_removed.pep -T 24 -M 0 -o aa${file}-cdhit  
+
+echo `pwd`
+#echo ${file}
+
+echo "Fin"

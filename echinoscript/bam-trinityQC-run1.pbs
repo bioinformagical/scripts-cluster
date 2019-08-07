@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=85500mb
+
+#PBS -N tttritties-qc-run1 
+##PBS -q bigiron
+
+#Number of times to run this script
+#PBS -t 1-15
+
+umask 007
+#set eu
+
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+ssid=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/janieslab/contigs-trinity/bam/file.txt)
+
+module load bowtie
+#cd ~/echinoderms/ortho/test 
+
+#for ssid in  bj10    bj11    bj12    bj13    bj14    bj19    bj1     bj20    bj21    bj22    bj23    bj2     bj4     bj5     bj6     bj7     bj8     bj9 
+#do
+cd /lustre/groups/janieslab/contigs-trinity/bam/
+
+#mkdir ${ssid}
+
+
+cd ${ssid}
+echo `pwd`
+
+~/sw/trinityrnaseq_r2013-02-25/util/alignReads.pl \
+--left  /lustre/groups/janieslab/trimmed/2012runs/${ssid}_R1.fastq.adapt.trimmed --right /lustre/groups/janieslab/trimmed/2012runs/${ssid}_R2.fastq.adapt.trimmed  \
+--seqType fq --target /lustre/groups/janieslab/contigs-trinity/${ssid}tri.fna --aligner bowtie --retain_intermediate_files
+
+cd bowtie_out
+~/sw/trinityrnaseq_r2013-02-25/util/SAM_nameSorted_to_uniq_count_stats.pl bowtie_out.nameSorted.sam > ../../qc-${ssid}.txt
+samtools idxstats bowtie_out.coordSorted.bam > ../../readspercontig-${ssid}.txt
+
+#done
+
+
+echo "fin"
+

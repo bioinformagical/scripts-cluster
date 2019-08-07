@@ -1,0 +1,34 @@
+#!/bin/bash
+#PBS -l walltime=75:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=1     # Number of nodes and processors per node requested by job
+#PBS -l mem=8GB           # Maximum physical memory to use for jobi
+#PBS -N iiinterpro-test          # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+##PBS -t 1-11
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/interpro/forgreg/file.txt)
+
+#module load java8
+module load anaconda3
+module load interproscan
+
+cd /scratch/rreid2/
+
+interproscan.sh -i /scratch/rreid2/bugatti-dp -o bug-iprscan.out  -goterms -iprlookup -seqtype p  -pa  -f tsv
+#mv ${file}-iprscan.out ../results
+#clean1648
+#~/sw/interproscan/interproscan-5.21-60.0/interproscan.sh -i testX.faa -o testX-iprscan.out  -goterms -iprlookup -seqtype p -appl Pfam-30.0 -pa  -f tsv

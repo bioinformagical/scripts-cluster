@@ -1,0 +1,31 @@
+#!/bin/sh
+
+
+
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+
+#PBS -N GnnnnnFkitSrsly
+
+##PBS -t 1-12
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+
+
+echo "Launching BlastN "
+
+cd /lustre/home/rreid2/echinoderms/ortho
+
+#~/sw/orthov2.0/orthomclSoftware-v2.0.3/bin/orthomclBlastParser aa/test.blastp.txt aa >> similarSeq.txt
+#cat similarSeq.txt | sort | uniq > similarSeq.sort.uniq.txt
+
+~/sw/orthov2.0/orthomclSoftware-v2.0.3/bin/orthomclInstallSchema 

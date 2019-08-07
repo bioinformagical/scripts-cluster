@@ -1,0 +1,8 @@
+fastx_collapser: failed to open input file '130924HiSeq_Run_Sample_95_ACAGTG_L007_trimmed_clipped.fastq': No such file or directory
+fastx_quality_stats: Invalid quality score value (char '0' ord 48 quality value -16) on line 64
+fastx_collapser: failed to open input file '130924HiSeq_Run_Sample_95_ACAGTG_L007_trimmed_clipped.fastq': No such file or directory
+fastx_quality_stats: Invalid quality score value (char '#' ord 35 quality value -29) on line 4
+
+ read pairs not found for @DDNCJ9K1:129:C2NJPACXX:7:1101:1401:2235 and @DDNCJ9K1:129:C2NJPACXX:7:1101:2371:2236
+
+ mate-pair files are not ordered

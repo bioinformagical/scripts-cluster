@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N goHTCGoooo 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+source /lustre/sw/Modules/default/init/$(basename $SHELL)
+
+#module load bambus
+#echo "PERL5LIB=$PERL5LIB"
+
+
+#htseq-count [options] <sam_file> <gff_file>
+#
+#
+cd /lustre/groups/bioservices/boneym/
+
+
+file="metal"
+
+echo $file  
+htseq-count --stranded=no $file.sorted.sam ./db/Mus_musculus.NCBIM37.67.gtf > $file.sorted.htseq.table
+
+ 

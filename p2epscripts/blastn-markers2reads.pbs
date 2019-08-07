@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=368:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblastmarkers
+
+#PBS -t 1-21
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/Project_UNCC_Schlueter/file.txt)
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastP "
+
+#cd $home
+#module load ncbi-blast+
+
+#cd /lustre/groups/bioservices/p2ep/brassica/orthocluster/splitty
+cd /lustre/groups/bioservices/p2ep/oat/markers/blast
+
+#makeDB
+#file=/lustre/home/rreid2/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_${ssid}/CA/9-terminator/genome.scf.fasta
+file=/lustre/groups/bioservices/p2ep/dhmri/Project_UNCC_Schlueter/UNCC_Schlueter_130909HiSeq_Run_Sample_${ssid}_R1_001.cutadapt.fastq
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in all-rnaseq-modelgenes-refgenes.faa -dbtype prot
+echo $file
+
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in 2ndquarter.faa -dbtype prot
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in 3rdquarter.faa -dbtype prot
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in 4rthquarter.faa -dbtype prot
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -input_type fastq -in ${file} -dbtype nucl
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastp -db all.fasta -query all.fasta  -out out.blastp.format0.txt -num_threads 24  -evalue 1e-5 -soft_masking false  -outfmt 0
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastp -db all.fasta -query all.fasta  -out blastp-e25.format0.out -num_threads 24  -evalue 1e-25 -soft_masking false  -outfmt 0
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastp -db all-rnaseq-modelgenes-refgenes.faa -query all-rnaseq-modelgenes-refgenes.faa  -out blastp-e40.format0.out -num_threads 24  -evalue 1e-40 -soft_masking false  -outfmt 0
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query ${file} -db /lustre/groups/bioservices/p2ep/oat/markers/oatmarker-doubled.fna  -out blastn-e10-marker2Reads-${ssid}.out -num_threads 24  -evalue 1e-10 -word_size 5 -soft_masking true  -outfmt 6
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query ${file} -db /lustre/groups/bioservices/p2ep/oat/markers/oatmarker-doubled.fna  -out blastn-e10-${ssid}vs-mark.out -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6

@@ -1,0 +1,49 @@
+########################################################################
+PBS Prologue:	Fri Jul  8 10:01:41 EDT 2011
+Job ID:		844357.mn
+Username:	rreid2
+Group:		brc
+Job Name:	AuxPairHunter
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=98:30:00
+Queue:		bigiron
+Account:	
+Nodes:		ananke[1] 
+########################################################################
+
+
+Launching Pair Finder
+./BB2.fasta.lucy
+MATCH # 0	G0M7GE102H64XB.f	G0M7GE102H64XB
+MATCH # 20000	G0M7GE102GMUY1.f	G0M7GE102GMUY1
+MATCH # 40000	G0M7GE102GML4P.f	G0M7GE102GML4P
+MATCH # 60000	G0M7GE102JZXUO.f	G0M7GE102JZXUO
+MATCH # 80000	G0M7GE102FHDS5.f	G0M7GE102FHDS5
+MATCH # 100000	G0M7GE102H2LTF.f	G0M7GE102H2LTF
+MATCH # 120000	G0M7GE102HXECF.f	G0M7GE102HXECF
+MATCH # 140000	G0M7GE102JZNG7.f	G0M7GE102JZNG7
+All Done, Count is 140344
+./BB1.fasta.lucy
+MATCH # 0	G0M7GE102H64XB.f	G0M7GE102H64XB
+MATCH # 20000	G0M7GE102IJRIX.f	G0M7GE102IJRIX
+MATCH # 40000	G0M7GE102IGZF6.f	G0M7GE102IGZF6
+MATCH # 60000	G0M7GE102I1EYC.f	G0M7GE102I1EYC
+MATCH # 80000	G0M7GE102GE5DM.f	G0M7GE102GE5DM
+MATCH # 100000	G0M7GE102IBP3W.f	G0M7GE102IBP3W
+MATCH # 120000	G0M7GE102IRYP7.f	G0M7GE102IRYP7
+All Done, Count is 139928
+
+
+########################################################################
+PBS Epilogue:	Fri Jul  8 10:02:55 EDT 2011
+Job ID:		844357.mn
+Username:	rreid2
+Group:		brc
+Job Name:	AuxPairHunter
+Limits:		neednodes=1:ppn=1,nodes=1:ppn=1,walltime=98:30:00
+Resources:	cput=00:01:07,mem=15128kb,vmem=65904kb,walltime=00:01:09
+Queue:		bigiron
+Account:	
+Exit Value:	0
+Nodes:		ananke[1] 
+########################################################################
+4301 4319 4320 4321 17760 17778 17779 ananke: ignoring orphans (shared node)...4301 4319 4320 4321 17760 17778 17779 

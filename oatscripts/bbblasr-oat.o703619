@@ -1,0 +1,22 @@
+########################################################################
+PBS Prologue:	Fri Jan 18 09:54:11 EST 2019
+Job ID:		703619.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	bbblasr-oat
+Limits:		pmem=2147483648b,walltime=336:00:00,nodes=1:ppn=64,mem=1024gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=64
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[64] 
+########################################################################
+Starting aligning of sequences
+[INFO] 2019-01-18T09:54:13 [blasr] started.
+ERROR, mixed query file types is not allowed.
+
+
+########################################################################
+PBS Epilogue:	Fri Jan 18 09:54:14 EST 2019
+Job ID:		703619.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=336:00:00,nodes=1:ppn=64,mem=1024gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=64
+Resources:	cput=00:00:00,vmem=0kb,walltime=00:00:02,mem=0kb,energy_used=0
+Exit Value:	1
+########################################################################

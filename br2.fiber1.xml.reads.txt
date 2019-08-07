@@ -1,0 +1,5 @@
+Locus_2865_Transcript_5/5_Confidence_0.667
+Locus_2865_Transcript_3/5_Confidence_0.667
+Locus_2865_Transcript_2/5_Confidence_0.667
+Locus_2865_Transcript_1/5_Confidence_0.667
+Locus_2865_Transcript_4/5_Confidence_0.667

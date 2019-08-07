@@ -1,0 +1,439 @@
+########################################################################
+PBS Prologue:	Thu Oct 19 09:53:48 EDT 2017
+Job ID:		1245469[13].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	gggalore-banana-13
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=68:30:00
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[12] 
+########################################################################
+Launching fastx
+Working on 654_S10_L003
+No quality encoding type selected. Assuming that the data provided uses Sanger encoded Phred scores (default)
+
+Path to Cutadapt set as: 'cutadapt' (default)
+1.13
+Cutadapt seems to be working fine (tested command 'cutadapt --version')
+
+
+AUTO-DETECTING ADAPTER TYPE
+===========================
+Attempting to auto-detect adapter type from the first 1 million sequences of the first file (>> /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R1_001.fastq <<)
+
+Found perfect matches for the following adapter sequences:
+Adapter type	Count	Sequence	Sequences analysed	Percentage
+Illumina	1505	AGATCGGAAGAGC	1000000	0.15
+smallRNA	2	TGGAATTCTCGG	1000000	0.00
+Nextera	2	CTGTCTCTTATA	1000000	0.00
+Using Illumina adapter for trimming (count: 1505). Second best hit was smallRNA (count: 2)
+
+Writing report to '654_S10_L003_R1_001.fastq_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R1_001.fastq
+Trimming mode: paired-end
+Trim Galore version: 0.4.4
+Cutadapt version: 1.13
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; auto-detected)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+Running FastQC on the data once trimming has completed
+
+Writing final adapter and quality trimmed output to 654_S10_L003_R1_001_trimmed.fq
+
+
+  >>> Now performing quality (cutoff 20) and adapter trimming in a single pass for the adapter sequence: 'AGATCGGAAGAGC' from file /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R1_001.fastq <<< 
+10000000 sequences processed
+20000000 sequences processed
+30000000 sequences processed
+40000000 sequences processed
+50000000 sequences processed
+60000000 sequences processed
+70000000 sequences processed
+80000000 sequences processed
+90000000 sequences processed
+This is cutadapt 1.13 with Python 2.7.5
+Command line parameters: -f fastq -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R1_001.fastq
+Trimming 1 adapter with at most 10.0% errors in single-end mode ...
+Finished in 1295.31 s (14 us/read; 4.17 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:              90,040,592
+Reads with adapters:                33,814,223 (37.6%)
+Reads written (passing filters):    90,040,592 (100.0%)
+
+Total basepairs processed: 9,094,099,792 bp
+Quality-trimmed:               7,588,297 bp (0.1%)
+Total written (filtered):  9,035,325,289 bp (99.4%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 33814223 times.
+
+No. of allowed errors:
+0-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 35.4%
+  C: 21.4%
+  G: 17.8%
+  T: 25.4%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	24874934	22510148.0	0	24874934
+2	5850644	5627537.0	0	5850644
+3	1952271	1406884.2	0	1952271
+4	550132	351721.1	0	550132
+5	159864	87930.3	0	159864
+6	63095	21982.6	0	63095
+7	46938	5495.6	0	46938
+8	38480	1373.9	0	38480
+9	36773	343.5	0	33923 2850
+10	34351	85.9	1	30056 4295
+11	28296	21.5	1	25918 2378
+12	24000	5.4	1	22839 1161
+13	20802	1.3	1	20018 784
+14	17488	1.3	1	16883 605
+15	15357	1.3	1	14767 590
+16	13101	1.3	1	12601 500
+17	11621	1.3	1	11131 490
+18	9751	1.3	1	9369 382
+19	8191	1.3	1	7878 313
+20	7132	1.3	1	6846 286
+21	5949	1.3	1	5647 302
+22	5068	1.3	1	4838 230
+23	4068	1.3	1	3842 226
+24	3523	1.3	1	3313 210
+25	2901	1.3	1	2712 189
+26	2384	1.3	1	2215 169
+27	2091	1.3	1	1923 168
+28	1799	1.3	1	1605 194
+29	1468	1.3	1	1311 157
+30	1348	1.3	1	1180 168
+31	1019	1.3	1	885 134
+32	1039	1.3	1	882 157
+33	779	1.3	1	649 130
+34	698	1.3	1	555 143
+35	638	1.3	1	515 123
+36	573	1.3	1	431 142
+37	552	1.3	1	416 136
+38	475	1.3	1	361 114
+39	577	1.3	1	403 174
+40	427	1.3	1	311 116
+41	487	1.3	1	368 119
+42	294	1.3	1	190 104
+43	376	1.3	1	242 134
+44	260	1.3	1	154 106
+45	339	1.3	1	232 107
+46	376	1.3	1	242 134
+47	423	1.3	1	264 159
+48	292	1.3	1	180 112
+49	341	1.3	1	209 132
+50	306	1.3	1	187 119
+51	342	1.3	1	229 113
+52	305	1.3	1	177 128
+53	434	1.3	1	270 164
+54	208	1.3	1	105 103
+55	322	1.3	1	191 131
+56	290	1.3	1	158 132
+57	291	1.3	1	169 122
+58	273	1.3	1	156 117
+59	243	1.3	1	143 100
+60	254	1.3	1	146 108
+61	305	1.3	1	189 116
+62	221	1.3	1	121 100
+63	297	1.3	1	174 123
+64	324	1.3	1	203 121
+65	267	1.3	1	153 114
+66	225	1.3	1	116 109
+67	240	1.3	1	149 91
+68	207	1.3	1	121 86
+69	266	1.3	1	170 96
+70	233	1.3	1	136 97
+71	270	1.3	1	175 95
+72	232	1.3	1	125 107
+73	347	1.3	1	188 159
+74	507	1.3	1	346 161
+75	376	1.3	1	252 124
+76	269	1.3	1	164 105
+77	228	1.3	1	135 93
+78	193	1.3	1	96 97
+79	161	1.3	1	67 94
+80	118	1.3	1	46 72
+81	136	1.3	1	47 89
+82	104	1.3	1	27 77
+83	119	1.3	1	40 79
+84	101	1.3	1	25 76
+85	84	1.3	1	20 64
+86	81	1.3	1	19 62
+87	90	1.3	1	18 72
+88	80	1.3	1	11 69
+89	79	1.3	1	10 69
+90	65	1.3	1	8 57
+91	76	1.3	1	10 66
+92	79	1.3	1	5 74
+93	68	1.3	1	6 62
+94	69	1.3	1	2 67
+95	82	1.3	1	5 77
+96	67	1.3	1	6 61
+97	74	1.3	1	5 69
+98	86	1.3	1	4 82
+99	77	1.3	1	9 68
+100	84	1.3	1	7 77
+101	183	1.3	1	11 172
+
+
+RUN STATISTICS FOR INPUT FILE: /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R1_001.fastq
+=============================================
+90040592 sequences processed in total
+The length threshold of paired-end sequences gets evaluated later on (in the validation step)
+
+Writing report to '654_S10_L003_R2_001.fastq_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R2_001.fastq
+Trimming mode: paired-end
+Trim Galore version: 0.4.4
+Cutadapt version: 1.13
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; auto-detected)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+Running FastQC on the data once trimming has completed
+
+Writing final adapter and quality trimmed output to 654_S10_L003_R2_001_trimmed.fq
+
+
+  >>> Now performing quality (cutoff 20) and adapter trimming in a single pass for the adapter sequence: 'AGATCGGAAGAGC' from file /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R2_001.fastq <<< 
+10000000 sequences processed
+20000000 sequences processed
+30000000 sequences processed
+40000000 sequences processed
+50000000 sequences processed
+60000000 sequences processed
+70000000 sequences processed
+80000000 sequences processed
+90000000 sequences processed
+This is cutadapt 1.13 with Python 2.7.5
+Command line parameters: -f fastq -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R2_001.fastq
+Trimming 1 adapter with at most 10.0% errors in single-end mode ...
+Finished in 1358.85 s (15 us/read; 3.98 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:              90,040,592
+Reads with adapters:                33,662,343 (37.4%)
+Reads written (passing filters):    90,040,592 (100.0%)
+
+Total basepairs processed: 9,094,099,792 bp
+Quality-trimmed:              30,300,322 bp (0.3%)
+Total written (filtered):  9,011,132,484 bp (99.1%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 33662343 times.
+
+No. of allowed errors:
+0-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 35.9%
+  C: 21.2%
+  G: 17.6%
+  T: 25.3%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	24647839	22510148.0	0	24647839
+2	5934512	5627537.0	0	5934512
+3	1925526	1406884.2	0	1925526
+4	532128	351721.1	0	532128
+5	159041	87930.3	0	159041
+6	63512	21982.6	0	63512
+7	47469	5495.6	0	47469
+8	38303	1373.9	0	38303
+9	37166	343.5	0	33983 3183
+10	35068	85.9	1	30575 4493
+11	28218	21.5	1	25956 2262
+12	24694	5.4	1	23438 1256
+13	20451	1.3	1	19691 760
+14	21008	1.3	1	20142 866
+15	13044	1.3	1	12536 508
+16	13466	1.3	1	12897 569
+17	14489	1.3	1	13841 648
+18	7611	1.3	1	7186 425
+19	9626	1.3	1	9117 509
+20	6484	1.3	1	6214 270
+21	5881	1.3	1	5592 289
+22	5363	1.3	1	5061 302
+23	4602	1.3	1	4220 382
+24	4903	1.3	1	4264 639
+25	3044	1.3	1	2731 313
+26	2718	1.3	1	2496 222
+27	2321	1.3	1	2100 221
+28	2374	1.3	1	2047 327
+29	1579	1.3	1	1379 200
+30	2185	1.3	1	1825 360
+31	1006	1.3	1	815 191
+32	1681	1.3	1	1332 349
+33	1149	1.3	1	919 230
+34	997	1.3	1	769 228
+35	1377	1.3	1	977 400
+36	990	1.3	1	721 269
+37	830	1.3	1	604 226
+38	1097	1.3	1	770 327
+39	656	1.3	1	462 194
+40	824	1.3	1	579 245
+41	958	1.3	1	624 334
+42	1469	1.3	1	985 484
+43	504	1.3	1	318 186
+44	961	1.3	1	616 345
+45	1649	1.3	1	1092 557
+46	615	1.3	1	375 240
+47	832	1.3	1	552 280
+48	1018	1.3	1	640 378
+49	933	1.3	1	604 329
+50	883	1.3	1	577 306
+51	2168	1.3	1	1459 709
+52	835	1.3	1	496 339
+53	853	1.3	1	579 274
+54	618	1.3	1	361 257
+55	1018	1.3	1	663 355
+56	721	1.3	1	478 243
+57	778	1.3	1	516 262
+58	835	1.3	1	546 289
+59	832	1.3	1	577 255
+60	777	1.3	1	524 253
+61	897	1.3	1	606 291
+62	834	1.3	1	555 279
+63	878	1.3	1	590 288
+64	853	1.3	1	581 272
+65	836	1.3	1	593 243
+66	924	1.3	1	657 267
+67	943	1.3	1	664 279
+68	1736	1.3	1	1382 354
+69	1149	1.3	1	861 288
+70	743	1.3	1	483 260
+71	642	1.3	1	368 274
+72	700	1.3	1	415 285
+73	609	1.3	1	335 274
+74	578	1.3	1	315 263
+75	567	1.3	1	314 253
+76	582	1.3	1	352 230
+77	454	1.3	1	245 209
+78	484	1.3	1	251 233
+79	397	1.3	1	181 216
+80	341	1.3	1	164 177
+81	328	1.3	1	128 200
+82	276	1.3	1	105 171
+83	228	1.3	1	90 138
+84	213	1.3	1	69 144
+85	168	1.3	1	48 120
+86	160	1.3	1	44 116
+87	116	1.3	1	38 78
+88	119	1.3	1	30 89
+89	120	1.3	1	20 100
+90	88	1.3	1	9 79
+91	98	1.3	1	9 89
+92	73	1.3	1	5 68
+93	71	1.3	1	8 63
+94	56	1.3	1	2 54
+95	62	1.3	1	2 60
+96	78	1.3	1	3 75
+97	64	1.3	1	2 62
+98	72	1.3	1	3 69
+99	56	1.3	1	2 54
+100	93	1.3	1	2 91
+101	168	1.3	1	9 159
+
+
+RUN STATISTICS FOR INPUT FILE: /scratch/rreid2/banana/fromCornell/run2-5/Allen5220_2017_10_13/654_S10_L003_R2_001.fastq
+=============================================
+90040592 sequences processed in total
+The length threshold of paired-end sequences gets evaluated later on (in the validation step)
+
+Validate paired-end files 654_S10_L003_R1_001_trimmed.fq and 654_S10_L003_R2_001_trimmed.fq
+file_1: 654_S10_L003_R1_001_trimmed.fq, file_2: 654_S10_L003_R2_001_trimmed.fq
+
+
+>>>>> Now validing the length of the 2 paired-end infiles: 654_S10_L003_R1_001_trimmed.fq and 654_S10_L003_R2_001_trimmed.fq <<<<<
+Writing validated paired-end read 1 reads to 654_S10_L003_R1_001_val_1.fq
+Writing validated paired-end read 2 reads to 654_S10_L003_R2_001_val_2.fq
+
+Total number of sequences analysed: 90040592
+
+Number of sequence pairs removed because at least one read was shorter than the length cutoff (20 bp): 109063 (0.12%)
+
+
+  >>> Now running FastQC on the validated data 654_S10_L003_R1_001_val_1.fq<<<
+
+Started analysis of 654_S10_L003_R1_001_val_1.fq
+Approx 5% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 10% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 15% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 20% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 25% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 30% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 35% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 40% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 45% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 50% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 55% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 60% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 65% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 70% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 75% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 80% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 85% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 90% complete for 654_S10_L003_R1_001_val_1.fq
+Approx 95% complete for 654_S10_L003_R1_001_val_1.fq
+Analysis complete for 654_S10_L003_R1_001_val_1.fq
+
+  >>> Now running FastQC on the validated data 654_S10_L003_R2_001_val_2.fq<<<
+
+Started analysis of 654_S10_L003_R2_001_val_2.fq
+Approx 5% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 10% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 15% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 20% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 25% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 30% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 35% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 40% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 45% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 50% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 55% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 60% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 65% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 70% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 75% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 80% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 85% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 90% complete for 654_S10_L003_R2_001_val_2.fq
+Approx 95% complete for 654_S10_L003_R2_001_val_2.fq
+Analysis complete for 654_S10_L003_R2_001_val_2.fq
+Deleting both intermediate output files 654_S10_L003_R1_001_trimmed.fq and 654_S10_L003_R2_001_trimmed.fq
+
+====================================================================================================
+
+
+
+########################################################################
+PBS Epilogue:	Thu Oct 19 11:05:07 EDT 2017
+Job ID:		1245469[13].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=68:30:00
+Resources:	cput=01:17:12,energy_used=0,mem=240716kb,vmem=3966200kb,walltime=01:11:19
+Exit Value:	0
+########################################################################

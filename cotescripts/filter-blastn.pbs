@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8gb
+
+#PBS -N filthyFilter-cote
+
+#PBS -t 1-18
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/gregory/HSMS_104_Cote/file2.txt)
+
+echo "Launching tophat on ${file}"
+
+#cd $home
+module load ncbi-blast+
+
+cd /lustre/groups/bioservices/gregory/HSMS_104_Cote/blastn/
+
+#ln -s ../${file}-R1-clip.fq_matched.fq $file-R1-filtered.fastq
+#ln -s ../${file}-R2-clip.fq_matched.fq $file-R2-filtered.fastq
+#awk 'BEGIN{P=1}{if(P==1||P==2){gsub(/^[@]/,">");print}; if(P==4)P=0; P++}' ../tophat/${file}/s_${file}_1_extracted_reads.fastq > ${file}_1.fasta
+#awk 'BEGIN{P=1}{if(P==1||P==2){gsub(/^[@]/,">");print}; if(P==4)P=0; P++}' ../tophat/${file}/s_${file}_2_extracted_reads.fastq > ${file}_2.fasta
+
+
+#blastn -db ~/db/nt.fna -query ${file}_1.fasta -out ${file}-1VSnt.blastn.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+#blastn -db ~/db/nt.fna -query ${file}_2.fasta -out ${file}-2VSnt.blastn.txt -num_threads 24  -evalue 1e-10 -soft_masking false  -outfmt 6
+
+#rm ${file}_1.fasta
+#rm ${file}_2.fasta
+
+#perl ~/scripts/perl/filterOutBlastsByScoreAndHitType.pl ${file}-1VSnt.blastn.txt
+
+#sort -t $'\t' -k 2,2 -V ${file}-1VSnt.blastn.txt-filter.txt > ${file}-sorted.txt
+
+#perl ~/scripts/perl/justACC.pl ${file}-1VSnt.blastn.txt 
+
+perl ~/scripts/perl/justACCPlusTaxa.pl ${file}-1VSnt.blastn.txt
+
+
+
+

@@ -1,0 +1,57 @@
+#!/bin/bash
+#PBS -l walltime=672:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=1     # Number of nodes and processors per node requested by job
+#PBS -l mem=32GB           # Maximum physical memory to use for jobi
+#PBS -N eeexonerate-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+##PBS -t 1-63
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+
+cd /nobackup/oatgenome/exonerate/
+
+
+QUERY=/nobackup/oat_genome/racon/allReads
+MODEL_OUT=oat_exonerate_prediction
+PATH_TO_IDS=/nobackup/echinotol/racon/cuke/split_subreads/
+TARGET=/projects/oat_genome/dovetail-round2/oat_08Oct2018_80uBt.fasta
+
+
+#id=$(sed -n -e "${PBS_ARRAYID}p" ${PATH_TO_IDS}ids.txt)
+id=
+
+
+
+
+		DID NOT RUN THIS !!  STOPPED AND CAME UP WITH A BETTER PLAN
+
+
+
+
+
+
+
+###align sequences using exonerate
+printf "Building alignment using exonerate\n"
+start=$(date +%s)
+if [ ! -f ${id}.gff ]; then
+	/nobackup/echinotol/exonerate/exonerate-2.2.0/pkg/bin/exonerate	--querytype dna --targettype dna \
+	--showtargetgff TRUE --model est2genome --percent 70 \
+	 -t ${TARGET} -q ${id} > ${id}.gff
+#	-t ${TARGET} -q ${PATH_TO_IDS}${id} > ${id}.gff
+	printf "Model written for ${id}\n"
+else
+	printf "Model detected for ${id}, passing\n"
+fi
+end=$(date +%s)
+printf "Done for ${id}, took $((${end}-${start})) seconds\n\n"

@@ -1,0 +1,69 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=10
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N SopraWinfrey 
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+
+
+#perl $HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_prep_contigAseq_v1.4.3.pl -contig ~/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb/454LargeContigs.fna -mate $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb/GAII_PE_1.fasta $HOME/bin/sspace/SSPACE-1.1_linux-x86_64/big8kb/GAII_PE_2.fasta -a big9k
+
+
+#cd /gpfs/fs3/home/rreid2/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/big8k/
+cd $HOME/
+
+#bowtie-build $HOME/F2K_ROBMIRA6_bambus_scaffold.fasta  bambusContigs
+
+#bowtie -S -f -p 10 bambusContigs -1 big9k/GAII_PE_1_sopra.fasta -2 big9k/GAII_PE_2_sopra.fasta  bambus.sam
+
+#perl /gpfs/fs3/home/rreid2/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_parse_sam_v1.4.3.pl -sam big9k/9kb.sam -a big9k
+
+#perl /gpfs/fs3/home/rreid2/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_read_parsed_sam_v1.4.3.pl -parsed $HOME/big9k/9kb.sam_parsed -d 100 -a big9k
+
+#perl /gpfs/fs3/home/rreid2/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_scaf_v1.4.3.pl -o $HOME/big9k/orientdistinfo_c5 -a big9k
+
+
+
+cd $HOME/blueberry/reads/illumina/sopra/
+projectname=sopra1
+
+
+#perl $HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_prep_contigAseq_v1.4.3.pl -contig /gpfs/fs3/home/rreid2/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa -mate $HOME/blueberry/reads/illumina/091005Sequence1/s_1_1_sequence.trimmed.fasta $HOME/blueberry/reads/illumina/091005Sequence1/s_1_2_sequence.trimmed.fasta -a ${projectname}
+
+
+#cd /gpfs/fs3/home/rreid2/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/big8k/
+
+
+#bowtie-build /gpfs/fs3/home/rreid2/blueberry/reads/illumina/091005Sequence1/auto_data_63/contigs.fa  contigs_sopra
+
+
+#bowtie -S -f -p 10 contigs_sopra -1 $HOME/blueberry/reads/illumina/sopra/sopra1/s_1_1_sequence.trimmed_sopra.fasta -2 $HOME/blueberry/reads/illumina/sopra/sopra1/s_1_2_sequence.trimmed_sopra.fasta ${projectname}.sam
+
+
+
+perl $HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_parse_sam_v1.4.3.pl -sam $HOME/blueberry/reads/illumina/sopra/${projectname}.sam -a ${projectname}
+
+#perl $HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_read_parsed_sam_v1.4.3.pl -parsed smalltest1.sam_parsed -d 100 -a ${projectname}
+
+#perl $HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs/s_scaf_v1.4.3.pl -o orientdistinfo_c5 -a ${projectname}
+
+
+
+

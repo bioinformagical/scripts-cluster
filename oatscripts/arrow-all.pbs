@@ -1,0 +1,63 @@
+#!/bin/bash
+#PBS -l walltime=696:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=8     # Number of nodes and processors per node requested by job
+#PBS -l mem=50GB           # Maximum physical memory to use for jobi
+#PBS -N aaarow-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+##PBS -t 1-1283
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /nobackup/oat_genome/pacbio/input.fofn)
+
+#module list
+echo "WTF"
+
+cd /nobackup/oat_genome/arrow
+
+module load pacbio
+
+
+#module load bamtools
+#module load augustus
+#module load blast
+#module load busco/3.0.2
+
+module load samtools
+module load bwa
+module load bcftools
+
+#name=$(echo $file | cut -d"/" -f7 | cut -d"." -f1)
+
+
+
+samtools merge
+
+
+variantCaller --algorithm=arrow
+
+
+
+#bwa index -p OATDOVECANU.idx -a bwtsw /nobackup/oat_genome/wtdbg/oat6-dovetail-masurcacontigs.ctg.lay.fa 
+#bwa mem -t 8 -P -k 11 -B 2 -O 5 -U 5   \
+#        ./OATDOVECANU.idx \
+#        /nobackup/oat_genome/pacbio/dhmri/2017-09-11/m54116_170602_231301.subreads.fasta.gz  > ${name}.sam
+#samtools view -bS ${name}.sam | samtools sort -T ${name} -o ${name}-sorted.bam
+#samtools index ${name}-sorted.bam
+#
+#pbalign --nproc 8 ${name}-sorted.bam /nobackup/oat_genome/wtdbg/oat6-dovetail-masurcacontigs.ctg.lay.fa align-${name}.bam
+
+

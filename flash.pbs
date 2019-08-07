@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N ffflashJumpingJack 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-2
+
+set eu
+umask 007
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/kohlmeier/5kregion/filtered/file7-14.txt)
+
+#cd  /lustre/groups/p2ep/rnaseq/BAM100-2_rawRNAseq
+cd /lustre/groups/p2ep/rnaseq/GS7_rawRNAseq
+
+
+
+
+
+  ################# SAMPLES BELOW WERE NOT PAIRED FILES   ###########   ABORT !
+
+
+
+
+#/lustre/home/rreid2/sw/FLASH-1.2.9/flash -t 12 /lustre/groups/p2ep/rnaseq/BAM100-2_rawRNAseq/BA004_S1_L001_R1_001.fastq.gz /lustre/groups/p2ep/rnaseq/BAM100-2_rawRNAseq/BA004_S1_L001_R2_001.fastq.gz | tee flash.log
+
+/lustre/home/rreid2/sw/FLASH-1.2.9/flash -t 12 /lustre/groups/p2ep/rnaseq/GS7_rawRNAseq/G007_S2_L001_R1_001.fastq /lustre/groups/p2ep/rnaseq/GS7_rawRNAseq/G007_S2_L001_R1_001.fastq | tee flash.log

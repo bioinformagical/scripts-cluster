@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#PBS -l walltime=380:30:00
+#PBS -l nodes=1:ppn=24
+#PBS -l vmem=990gb
+#PBS -N soap
+#PBS -q bigiron
+#PBS -j oe -o soap.log
+
+set -eux
+ulimit -c unlimited
+umask 007
+IFS="
+"
+
+cd /lustre/scratch/soap
+export PATH="/lustre/scratch/soap:${PATH}"
+
+SOAPdenovo-127mer pregraph -s config.txt -K 61 -p 1 -R -o graph_prefix
+SOAPdenovo-127mer contig -p 24 -g graph_prefix -R
+SOAPdenovo-127mer map -p 24 -s config.txt -g graph_prefix
+SOAPdenovo-127mer scaff -p 24 -g graph_prefix -F

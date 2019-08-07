@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=18:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=8gb
+
+#PBS -N tttrimitGud-bbts
+
+#PBS -t 1-25
+umask 007
+set -eu
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/p2ep/blueberry/rnaseq/sra-srr118/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching Pair repair after Fastx"
+
+#cd $home
+module load fastx-toolkit
+
+cd /lustre/groups/p2ep/blueberry/rnaseq/sra-srr118/fastx
+
+#################  Filter via adapter     #############
+echo "${file}_fastxqual.fastq "
+#~/sw/ea-utils-read-only/clipper/fastq-mcf -o ${file}_R1_fastx-clip.fq -o ${file}_R2_fastx-clip.fq -q 20 -l 20 -P 33 -x 10 -w 4 adapters.fa ${file}_R1_fastx_matched.fq ${file}_R2_fastx_matched.fq &>r.log
+
+
+############# Trim the 1st 20 to remove adapter   #####################
+fastx_trimmer -f 15 -Q33  -i ${file}_fastxqual.fastq -o ${file}_fastx-trim.fq
+#fastx_trimmer -f 20 -Q33  -i ${file}_R2_fastx-clip.fq -o ${file}_R2_fastx-cliptrim.fq
+
+#perl /lustre/home/rreid2/scripts/filter/PE_FIX_POSTQC.pl --pe1 ${file}_R1_fastx-cliptrim.fq --pe2 ${file}_R2_fastx-cliptrim.fq
+
+
+#done
+
+####  Validate Mate pairs   ######
+#perl ~/scripts/perl/validateHiseqPairs.pl ${ssid}_R1_trimmed_clipped.fastq ${ssid}_R2_trimmed_clipped.fastq
+#perl /lustre/home/rreid2/scripts/perl/validateHiseqPairs.pl ${file}_R1_fastx-cliptrim_matched.fq ${file}_R1_fastx-cliptrim_matched.fq
+

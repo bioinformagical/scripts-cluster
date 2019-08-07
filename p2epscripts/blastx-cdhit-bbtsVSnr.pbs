@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblast-bbts-nr
+
+##PBS -t 1-9
+umask 007
+set -eux
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/brassica/map/chromosome/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching Blastn "
+module load ncbi-blast+
+
+#cd $home
+
+cd /group/p2ep/blueberry/rnaseq/blastx2nr/
+
+#makeblastdb -in ../genomic/newblerAssembly.fna -dbtype nucl
+#makeblastdb -in ../garm/mas2newb/bothScafBin.fna -dbtype nucl
+echo `pwd`
+#echo ${file}
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fasta  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/brassica/130924HiSeq_Run_Sample_V_158_NoIndex_L002_R2_001-clip.fasta -query ../chromosome/${file}.fna  -out ./blastn-${file}vsv158-r2.out -num_threads 12  -evalue 1 -soft_masking false  -outfmt 6
+
+
+
+
+
+#All markers
+#blastn -db ../../genomic/asurca-nextera454.fna  -query ../blueberryMarkers.fna  -out ./blastn-markerVsnextera454.out -num_threads 12  -evalue 1e-25 -soft_masking true  -outfmt 6 -word_size 78
+
+
+#only markers that were used, aka 394(?0
+#blastn -db ../../Boleracea.v1.genome.fasta  -query bot1.fna  -out ./blastn-bot1VsRef.out -num_threads 12  -evalue 1 -soft_masking true  -outfmt 6 
+
+# ~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix smarkersOnNewb marker-remade.fna  ../../genomic/newblerAssembly.fna
+
+# ~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 100 -minmatch 10 --coords -prefix smarkersOnNextera marker-remade.fna  ../../genomic/masurca-nextera454.fna
+
+#module load bowtie
+
+#bowtie-build ../../genomic/masurca-nextera454.fna  NEX
+#bowtie-build ../../genomic/newblerAssembly.fna NEWB
+
+#bowtie -S -f  -p 12 --al susan2nex-bowtie  NEX  marker-remade.fna bow-nex.sam
+#bowtie -S -f  -p 12 --al susan2newb-bowtie NEWB  marker-remade.fna bow-newb.sam
+#makeblastdb -in ../../Boleracea.v1.pep.fasta -dbtype prot
+
+blastx -db ~/db/nr/nr.faa  -query /lustre/groups/p2ep/blueberry/rnaseq/sra-srr118/cdhit/all/all-cdhit.fna  -out ./blastx-bbtsVsNR.out -num_threads 12  -evalue 0.00005  -soft_masking true  -outfmt 6 
+
+echo "Fin"

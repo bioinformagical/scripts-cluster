@@ -1,0 +1,37 @@
+#!/bin/bash
+#PBS -N geeeeBS
+#PBS -q bigiron
+#PBS -l walltime=150:00:00
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=250g
+
+#[[ -n "$PBS_O_WORKDIR" ]] && cd $PBS_O_WORKDIR
+
+cd ~/p2ep/gbs/Fla4BxW85_5_299pt54
+
+module load velvet/1.2.07
+module load oases/0.2.08
+export PATH=/lustre/sw/oases/0.2.08/scripts:$PATH
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest01 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 1 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest02 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 2 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest03 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 3 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest04 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 4 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest05 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 5 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest06 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 6 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest07 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 7 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest08 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 8 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest09 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 9 -min_trans_lgth 80 "
+
+oases_pipeline.py -m 21 -M 69 -s 2 -o gbstest10 -d " -fasta -short ../Fla4BxW85_5_299pt54.fasta " -p " -cov_cutoff 10 -min_trans_lgth 80 "
+
+
+

@@ -1,0 +1,36 @@
+########################################################################
+PBS Prologue:	Thu Oct 19 13:13:14 EDT 2017
+Job ID:		1247484[1].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	tttrimit-postGalore-1
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=168:30:00
+Queue:		hammerhead
+Nodes:		cph-bm3.uncc.edu[12] 
+########################################################################
+Launching fastx
+TrimmomaticPE: Started with arguments:
+ -threads 24 ../../trimgalore/109_S36_L008_R1_001_val_1.fq ../../trimgalore/109_S36_L008_R2_001_val_2.fq output_109_S36_L008-R1_paired.fq output_109_S36_L008-R1_unpaired.fq output_109_S36_L008-R2_paired.fq output_109_S36_L008-R2_unpaired.fq ILLUMINACLIP:TruSeq2-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50
+java.io.FileNotFoundException: /scratch/rreid2/banana/filter/trimmomatic/trimgalored/TruSeq2-PE.fa (No such file or directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.usadellab.trimmomatic.fasta.FastaParser.parse(FastaParser.java:54)
+	at org.usadellab.trimmomatic.trim.IlluminaClippingTrimmer.loadSequences(IlluminaClippingTrimmer.java:110)
+	at org.usadellab.trimmomatic.trim.IlluminaClippingTrimmer.makeIlluminaClippingTrimmer(IlluminaClippingTrimmer.java:71)
+	at org.usadellab.trimmomatic.trim.TrimmerFactory.makeTrimmer(TrimmerFactory.java:32)
+	at org.usadellab.trimmomatic.Trimmomatic.createTrimmers(Trimmomatic.java:59)
+	at org.usadellab.trimmomatic.TrimmomaticPE.run(TrimmomaticPE.java:536)
+	at org.usadellab.trimmomatic.Trimmomatic.main(Trimmomatic.java:80)
+Quality encoding detected as phred33
+Input Read Pairs: 118202645 Both Surviving: 112909366 (95.52%) Forward Only Surviving: 4656127 (3.94%) Reverse Only Surviving: 360482 (0.30%) Dropped: 276670 (0.23%)
+TrimmomaticPE: Completed successfully
+
+
+########################################################################
+PBS Epilogue:	Thu Oct 19 13:25:02 EDT 2017
+Job ID:		1247484[1].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12,nodes=1:ppn=12,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=88gb,walltime=168:30:00
+Resources:	cput=00:42:17,energy_used=0,mem=10540708kb,vmem=41013216kb,walltime=00:11:48
+Exit Value:	0
+########################################################################

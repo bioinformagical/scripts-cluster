@@ -1,0 +1,50 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N yankSff  
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+
+module load mira
+
+cd ~/old/gm/data/454reads/
+
+
+#sff_extract -o BB    -l linker.fa -i "insert_size:8000,insert_stdev:3000" ../8kb/G0M7GE101.sff
+#sff_extract -o BB -a -l linker.fa -i "insert_size:8000,insert_stdev:3000" ../8kb/G0M7GE102.sff
+#sff_extract -o BB -a -l linker.fa -i "insert_size:20000,insert_stdev:6000" ../2009_04_02_20kb/FTNE8KX01.sff
+#sff_extract -o BB -a -l linker.fa -i "insert_size:20000,insert_stdev:6000" ../2009_04_02_20kb/FTNE8KX03.sff
+#sff_extract -o BB -a -l linker.fa -i "insert_size:3000,insert_stdev:1500" ../3kb_paired_12.09.10/GSIMZP101.sff
+#sff_extract -o BB -a -l linker.fa -i "insert_size:3000,insert_stdev:1500" ../3kb_paired_12.09.10/GSIMZP102.sff
+#sff_extract -o BB -a  ../2010_08_18_shotgun/GMEFJA401.sff  ../2010_08_18_shotgun/GMEFJA402.sff
+
+#--min_left_clip=39 -c 
+
+#~/sw/sff_extract -o rl1 --fastq 454Reads.RL1.sff
+#~/sw/sff_extract -o rl2 --fastq 454Reads.RL2.sff
+#~/sw/sff_extract -o rl3 --fastq 454Reads.RL3.sff
+#~/sw/sff_extract -o rl4 --fastq 454Reads.RL4.sff
+#~/sw/sff_extract -o rl5 --fastq 454Reads.RL5.sff
+#~/sw/sff_extract -o rl6 --fastq 454Reads.RL6.sff
+
+~/sw/sff_extract  --min_left_clip=39 -c -o rl1Clipped  454Reads.RL1.sff
+~/sw/sff_extract  --min_left_clip=39 -c -o rl2Clipped  454Reads.RL2.sff
+~/sw/sff_extract  --min_left_clip=39 -c -o rl3Clipped  454Reads.RL3.sff
+~/sw/sff_extract  --min_left_clip=39 -c -o rl4Clipped  454Reads.RL4.sff
+~/sw/sff_extract  --min_left_clip=39 -c -o rl5Clipped  454Reads.RL5.sff
+~/sw/sff_extract  --min_left_clip=39 -c -o rl6Clipped  454Reads.RL6.sff

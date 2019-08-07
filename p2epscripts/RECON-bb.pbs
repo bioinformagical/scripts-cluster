@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=328:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=90gb
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+
+
+#PBS -N RRRRECON-HO-bb
+#PBS -q bigiron
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+#echo "Launching Repeat Masker"
+#export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/bin/RepeatMasker:$PATH
+#export PATH=$HOME/bin/rmblast-1.2-ncbi-blast-2.2.23+-src/c++/GCC412-ReleaseMT64/bin:$PATH
+
+set eu
+umask 007
+
+#module load trf/4.04-1
+#module load ncbi-rmblast/2.2.28-1
+#module load hmmer/3.1b1-1
+#RM="/sw/packages/repeatmasker/4.0.5-1/"
+export PATH="~/sw/RECON-1.08/bin:${PATH}"
+#module load repeatmasker
+cd /lustre/groups/p2ep/blueberry/repeat/
+#mkdir rscout
+
+cd recon
+#module load trf nseg repeatscout
+
+
+~/sw/RECON-1.08/scripts/recon.pl justnames20k.txt blasttable4recon.txt 1
+
+************     The fasta file used must have very simple naming convention to start with   ********
+
+echo "Fin"
+
+

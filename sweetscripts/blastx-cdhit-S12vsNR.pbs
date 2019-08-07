@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N bbblastx-2-NR-S12
+
+#PBS -t 1-4
+umask 007
+set -eux
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/cdhit/gigaS12/splitty/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching Blastn "
+module load ncbi-blast+
+
+#cd $home
+
+cd /lustre/groups/lorainelab/data/illumina/sweet_potato/cdhit/blastx/
+
+#makeblastdb -in ../genomic/newblerAssembly.fna -dbtype nucl
+#makeblastdb -in /lustre/home/rreid2/db/aribid/TAIR10_pep_20101214.faa -dbtype prot
+echo `pwd`
+#echo ${file}
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fasta  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/brassica/130924HiSeq_Run_Sample_V_158_NoIndex_L002_R2_001-clip.fasta -query ../chromosome/${file}.fna  -out ./blastn-${file}vsv158-r2.out -num_threads 12  -evalue 1 -soft_masking false  -outfmt 6
+
+#      ******************    USING XML FORMAT !!!!!    **************************
+
+blastx -db /lustre/home/rreid2/db/nr/nr.faa -query ../gigaS12/splitty/${file}  -out ./blastx-s12-${file}vsNR.out -num_threads 12  -max_target_seqs 5 -evalue 1e-10 -soft_masking false  -outfmt 5
+
+
+
+echo "Fin"

@@ -1,0 +1,53 @@
+#!/bin/bash
+# Request a run time
+#PBS -l walltime=720:00:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=12gb
+##PBS -l pmem=8gb
+#PBS -j oe
+#PBS -N sssnp-passin17
+#PBS -q steelhead
+##PBS -t 1-95
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu
+umask 007
+#shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+#ulimit -c 10240
+#ulimit -a
+
+#id=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/rogers_research/rob/inbred/vcf-megatable/ids.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /nobackup/rogers_research/rob/inbred/vcf-megatable/file.txt)
+
+###Start DOING STUFF
+
+cd /nobackup/rogers_research/rob/inbred/vcf-megatable/perlrun
+echo "Starting the Inbred Run"
+while read id;
+do
+	echo ${id}
+	perl ~/scripts/perl/inbredTableMaker17-v2.pl ${id} ../masterTrimmed.orig
+done < /nobackup/rogers_research/rob/gatk/nick-gatk/vcfFiles/file.txt
+######    
+#for file in /nobackup/rogers_research/rob/gatk/gatk-dsant/vcf_emit_all_sites_files/*.raw.vcf
+
+#do
+
+#python /users/rreid2/scripts/python/vcf-add2table.py  ${file}  masterTrimmed.current
+#mv masterTrimmed.new masterTrimmed.now
+
+#done
+
+#for file in /nobackup/rogers_research/rob/gatk/gatk-dsant/vcf_emit_all_sites_files/*.raw.vcf
+#while read id
+#do
+#id=oran_14_6_S12_L005
+
+#python /users/rreid2/scripts/python/inbred-makeColumns4Table.py  ${id} ${chunk} 
+
+#mv masterTrimmed.new masterTrimmed.now
+	echo $id
+#done < ids.txt

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=400gb
+
+#PBS -N triiiBJ312
+#PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-24
+
+set eu
+umask 007
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/concat/file.txt)
+
+module load bowtie
+#module load oases
+
+cd /group/janieslab/redobj31ANDbj32/trinity
+echo `pwd`
+
+#perl ~/sw/trinityrnaseq_r2013-02-25/Trinity.pl --seqType fq --JM 400G --output V012-trinity \
+# --left /lustre/groups/p2ep/rnaseq/raw/merge-V012_CTTGTA_L002_R1.fastq \
+# --right /lustre/groups/p2ep/rnaseq/raw/merge-V012_CTTGTA_L002_R2.fastq --CPU 8
+for file in BJ31 BJ32
+do
+
+perl ~/sw/trinityrnaseq_r2013-02-25/Trinity.pl --seqType fq --JM 400G --output ${file}-trinity-trimmo \
+ --left  /group/janieslab/redobj31ANDbj32/filter/output_${file}-R1_paired.fq \
+ --right /group/janieslab/redobj31ANDbj32/filter/output_${file}-R2_paired.fq  --CPU 8
+
+done

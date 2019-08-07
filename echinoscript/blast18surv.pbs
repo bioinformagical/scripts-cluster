@@ -1,0 +1,58 @@
+#!/bin/sh
+
+
+
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+
+#PBS -N GnnnnnFkitSrsly
+
+##PBS -t 1-12
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+
+
+echo "Launching BlastN "
+
+#cd $home
+
+#/sw/ncbi-blast/bin/blastn -outfmt 6 -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitisgenome-mega.out -task megablast -evalue 0.00001 -soft_masking false
+
+
+#module load ncbi-blast+
+
+#cd /lustre/home/rreid2/echinoderms/strongyl/
+#cd /lustre/home/rreid2/echinoderms/db/
+cd /lustre/home/rreid2/echinoderms/spurps
+#cd /lustre/home/rreid2/echinoderms/dl/first6/
+
+
+#for i in 1 2 3 4 5 6 7 8 9 10
+#do
+
+#	echo "Starting iteration ${i} "
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/covTemp/velvet21-$i/transcripts.fa -dbtype nucl 
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/covTemp/velvet55-$i/transcripts.fa -dbtype nucl
+
+#lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/covTemp/kmer85-$i/transcripts.fa -dbtype nucl
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/covTemp/$ssid/transcripts.fa -db ~/echinoderms/db/ophioAll.fasta  -out ./$ssid.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/covTemp/$ssid/transcripts.fa -db ~/echinoderms/strongyl/refseqStrongylTrim.fasta  -out ./$ssid.strongyl.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/db/18survivelist.txt.fa -dbtype nucl
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query 18survivelist.txt.fa -db 18survivelist.txt.fa  -out 18survBlastout.txt -num_threads 12 -task blastn -evalue 1e-20 -soft_masking false  -outfmt 6
+/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/spurps/refseqStrongylTrim.fasta.bigtrim -dbtype nucl
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query refseqStrongylTrim.fasta.bigtrim -db refseqStrongylTrim.fasta.bigtrim  -out refseqStrongy.bigtrim.blast -num_threads 12 -task blastn -evalue 1e-20 -soft_masking false  -outfmt 6
+
+

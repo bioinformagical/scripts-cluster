@@ -1,0 +1,19 @@
+########################################################################
+PBS Prologue:	Tue Nov  6 14:06:30 EST 2018
+Job ID:		469511.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	sssnp-passin-dyak
+Limits:		pmem=2147483648b,walltime=720:00:00,nodes=1:ppn=1,mem=12gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1
+Queue:		steelhead
+Nodes:		sth-c1.uncc.edu[1] 
+########################################################################
+
+
+########################################################################
+PBS Epilogue:	Wed Nov  7 10:07:42 EST 2018
+Job ID:		469511.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=720:00:00,nodes=1:ppn=1,mem=12gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1
+Resources:	cput=00:45:20,vmem=25625196kb,walltime=20:01:12,mem=12582912kb,energy_used=0
+Exit Value:	271
+########################################################################

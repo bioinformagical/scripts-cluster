@@ -1,0 +1,85 @@
+########################################################################
+PBS Prologue:	Tue Sep 19 10:19:50 EDT 2017
+Job ID:		1215724.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	aaabyssmal-mam44
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[64] 
+########################################################################
+core file size          (blocks, -c) 10240
+data seg size           (kbytes, -d) 8388608
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 8254442
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) 8388608
+open files                      (-n) 65535
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 8254442
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+/apps/pkg/openmpi-1.10.0/rhel7_u2-x86_64/gnu/bin/mpirun -np 32 ABYSS-P -k23 -q3    --coverage-hist=coverage.hist -s MAM44-bubbles.fa  -o MAM44-1.fa  M44
+26: Running on host cph-bm2.uncc.edu
+27: Running on host cph-bm2.uncc.edu
+28: Running on host cph-bm2.uncc.edu
+29: Running on host cph-bm2.uncc.edu
+30: Running on host cph-bm2.uncc.edu
+31: Running on host cph-bm2.uncc.edu
+ABySS 1.9.0
+ABYSS-P -k23 -q3 --coverage-hist=coverage.hist -s MAM44-bubbles.fa -o MAM44-1.fa M44
+Running on 32 processors
+0: Running on host cph-bm2.uncc.edu
+1: Running on host cph-bm2.uncc.edu
+2: Running on host cph-bm2.uncc.edu
+3: Running on host cph-bm2.uncc.edu
+4: Running on host cph-bm2.uncc.edu
+5: Running on host cph-bm2.uncc.edu
+6: Running on host cph-bm2.uncc.edu
+7: Running on host cph-bm2.uncc.edu
+8: Running on host cph-bm2.uncc.edu
+9: Running on host cph-bm2.uncc.edu
+10: Running on host cph-bm2.uncc.edu
+11: Running on host cph-bm2.uncc.edu
+12: Running on host cph-bm2.uncc.edu
+13: Running on host cph-bm2.uncc.edu
+14: Running on host cph-bm2.uncc.edu
+15: Running on host cph-bm2.uncc.edu
+16: Running on host cph-bm2.uncc.edu
+17: Running on host cph-bm2.uncc.edu
+18: Running on host cph-bm2.uncc.edu
+19: Running on host cph-bm2.uncc.edu
+20: Running on host cph-bm2.uncc.edu
+21: Running on host cph-bm2.uncc.edu
+22: Running on host cph-bm2.uncc.edu
+23: Running on host cph-bm2.uncc.edu
+24: Running on host cph-bm2.uncc.edu
+25: Running on host cph-bm2.uncc.edu
+0: Reading `M44'...
+error: `M44': No such file or directory
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[8209,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+make: *** [MAM44-1.fa] Error 1
+
+
+########################################################################
+PBS Epilogue:	Tue Sep 19 10:19:53 EDT 2017
+Job ID:		1215724.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:03
+Exit Value:	2
+########################################################################

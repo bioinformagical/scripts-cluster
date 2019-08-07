@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=18:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=24gb
+
+#PBS -N BubblesisDaMan
+
+##PBS -t 1-12
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Big table maker "
+
+#cd $home
+
+
+#cd /lustre/home/rreid2/echinoderms/strongyl/
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+cd /lustre/home/rreid2/echinoderms/tables/
+
+
+for i in 1 2 4 5 6 9
+#for i in 9
+#for i in 1 2 3 4 6 7 8 9 10 11 12 13 14 19 20 21 22 23
+do
+
+#perl /lustre/home/rreid2/old/scripts/perl/loadStrongylTable.pl ../dl/first6/bj${i}.strongyl.out22.table bj${i}
+perl /lustre/home/rreid2/old/scripts/perl/loadStrongylTable.pl ../dl/xmltables/bj${i}.strongyl.xml2.table bj${i}
+
+cp refseq34kMasterTable.txt.tmp refseq34kMasterTable.txt
+
+done
+
+
+
+for i in 7 8 10 11 12 13 14 19 20 21 22 23
+do
+
+	#perl /lustre/home/rreid2/old/scripts/perl/loadStrongylTable.pl ../dl/first6/bj${i}.strongyl.out22.table bj${i}
+	perl /lustre/home/rreid2/old/scripts/perl/loadStrongylTable12.pl ../dl/xmltables/bj${i}.strongyl.xml2.table bj${i}
+
+	cp refseq34kMasterTable.txt.tmp refseq34kMasterTable.txt
+
+done
+

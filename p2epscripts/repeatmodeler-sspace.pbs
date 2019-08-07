@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=328:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=92gb
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+
+
+#PBS -N Imamodelyouknowhatimean-bb
+#PBS -q bigiron
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+#echo "Launching Repeat Masker"
+#export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/bin/RepeatMasker:$PATH
+#export PATH=$HOME/bin/rmblast-1.2-ncbi-blast-2.2.23+-src/c++/GCC412-ReleaseMT64/bin:$PATH
+
+set eu
+umask 007
+
+#module load trf/4.04-1
+#module load ncbi-rmblast/2.2.28-1
+#module load hmmer/3.1b1-1
+#RM="/sw/packages/repeatmasker/4.0.5-1/"
+#export PATH="${RM}:${PATH}"
+export PATH="~/sw/RepeatModeler:${PATH}"
+#module load repeatmasker
+cd /lustre/groups/p2ep/blueberry/repeat/rmodel/
+#mkdir newb
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/newb -lib /sw/packages/repeatmasker/4.0.5-1/Libraries/RepeatMasker.lib  -ace -gff /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna 
+
+#mkdir garm
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/garm -lib /sw/packages/repeatmasker/4.0.5-1/Libraries/RepeatMasker.lib -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna
+
+#mkdir test-hmm
+#epeatMasker -pa 12 -s -e hmmer  -dir /lustre/groups/p2ep/blueberry/repeat/test -gc 39 -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna 
+#-lib /home/rreid2/sw/RepeatMasker/repbase/Libraries/RepeatMaskerLib.embl
+
+#cd ~/sw/RepeatModeler/
+
+#~/sw/RepeatModeler/BuildDatabase -name bb-garm20k-rep -engine ncbi ./garm20k.fna
+#~/sw/RepeatModeler/RepeatModeler -database bb-garm20k-rep  >& bbgarm3.out
+
+~/sw/RepeatModeler/BuildDatabase -name bb-sspace -engine ncbi ../../genomic/sspace-take6.fna
+~/sw/RepeatModeler/RepeatModeler -pa 12 -database bb-sspace  >& bb-sspace.out
+
+echo "Fin"
+
+#perl /gpfs/fs3/home/rreid2/bin/RepeatMasker/RepeatMasker -pa 4 -s -lib /gpfs/fs3/home/rreid2/db/vitis/vitisRScout.out -cutoff 350 -dir /gpfs/fs3/home/rreid2/db/vitis -ace -gff /gpfs/fs3/home/rreid2/db/vitis/vitisscaffolds.fa 
+

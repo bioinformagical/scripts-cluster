@@ -1,0 +1,102 @@
+#!/bin/bash
+#PBS -N flanMerger
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=6:00:00
+#PBS -l vmem=95g
+##PBS -t 1-6
+
+cd $PBS_O_WORKDIR
+
+export PATH=/lustre/home/lheater/sw/metaphlan/1.7.6/metaphlan:$PATH
+
+module load metaphlan
+module load bowtie2
+
+FILE=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/syn/concat_filtered/files.txt)
+
+
+#cd /lustre/home/rreid2/syn/metaphlan/merge
+cd /lustre/home/rreid2/syn/metaphlan/raw/
+
+#####   ALL      ######
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-all.mtphln.rel_ab.txt > mergedAll_relabundance_table.txt
+
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-all-count.txt > mergedAll_rawreadsmap_table.txt
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedAll_relabundance_table.txt --out images/relabundance_heatmap-all25.png 
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedAll_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-all25.png
+
+##### PHYLUM ########
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-phylum.mtphln.rel_ab.txt > mergedPhylum_relabundance_table.txt
+ 
+~/sw/metaphlan/utils/merge_metaphlan_tables.py ./*-phylum-count.txt > ../merge/mergedPhylum_rawreadsmap_table.txt
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedPhylum_relabundance_table.txt --out images/relabundance_heatmap-phy25.png
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedPhylum_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-phy25.png
+
+##### CLASS ########
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-class.mtphln.rel_ab.txt > mergedClass_relabundance_table.txt
+
+~/sw/metaphlan/utils/merge_metaphlan_tables.py ./*-class-count.txt > ../merge/mergedClass_rawreadsmap_table.txt
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedClass_relabundance_table.txt --out images/relabundance_heatmap-cla25.png
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedClass_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-cla25.png
+
+
+
+##### Family ########
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-family.mtphln.rel_ab.txt > mergedFamily_relabundance_table.txt
+ 
+~/sw/metaphlan/utils/merge_metaphlan_tables.py ./*-family-count.txt > ../merge/mergedFamily_rawreadsmap_table.txt
+ 
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedFamily_relabundance_table.txt --out images/relabundance_heatmap-fam25.png
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedFamily_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-fam25.png
+
+##### Order ########
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-order.mtphln.rel_ab.txt > mergedOrder_relabundance_table.txt
+ 
+~/sw/metaphlan/utils/merge_metaphlan_tables.py ./*-order-count.txt > ../merge/mergedOrder_rawreadsmap_table.txt
+ 
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedOrder_relabundance_table.txt --out images/relabundance_heatmap-ord25.png
+ 
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedOrder_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-ord25.png
+
+##### Genus ########
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-genus.mtphln.rel_ab.txt > mergedGenus_relabundance_table.txt
+ 
+~/sw/metaphlan/utils/merge_metaphlan_tables.py ./*-genus-count.txt > ../merge/mergedGenus_rawreadsmap_table.txt
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedGenus_relabundance_table.txt --out images/relabundance_heatmap-gen25.png
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedGenus_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-gen25.png
+
+##### Species ########
+#~/sw/metaphlan/utils/merge_metaphlan_tables.py ../*-species.mtphln.rel_ab.txt > mergedSpecies_relabundance_table.txt
+
+~/sw/metaphlan/utils/merge_metaphlan_tables.py ./*-species-count.txt > ../merge/mergedSpecies_rawreadsmap_table.txt
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedSpecies_relabundance_table.txt --out images/relabundance_heatmap-spe25.png
+
+#~/sw/metaphlan/plotting_scripts/metaphlan_hclust_heatmap.py -c bbcry --top 25 --minv 0.001 -s log --in mergedSpecies_rawreadsmap_table.txt --out images/rawreadsmap_heatmap-spe25.png
+
+
+
+
+######		Teenage Graphlan          #######
+
+#mkdir tmp
+
+for i in 1 2 3 4 6 7 
+do
+	for level in species genus order family all class phylum
+	do
+		~/sw/metaphlan/plotting_scripts/metaphlan2graphlan.py ../seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.txt --tree_file ./tmp/seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.tree.txt --annot_file ./tmp/seq${i}.txt.gz.adapt-${level}.mtphln.rel_ab.annot.txt
+	done
+done
+#graphlan_annotate.py --annot tmp/BM_SRS013506.annot.txt tmp/BM_SRS013506.tree.txt tmp/BM_SRS013506.xml
+#$ graphlan.py --dpi 200 tmp/BM_SRS013506.xml output_images/BM_SRS013506.png
+

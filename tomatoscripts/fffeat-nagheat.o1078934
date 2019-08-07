@@ -1,0 +1,155 @@
+########################################################################
+PBS Prologue:	Wed May  1 13:10:22 EDT 2019
+Job ID:		1078934.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	fffeat-nagheat
+Limits:		pmem=2147483648b,walltime=168:30:00,nodes=1:ppn=12,mem=88gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12
+Queue:		steelhead
+Nodes:		sth-c1.uncc.edu[12] 
+########################################################################
+
+        ==========     _____ _    _ ____  _____  ______          _____  
+        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+	  v1.6.4
+
+//========================== featureCounts setting ===========================\\
+||                                                                            ||
+||             Input files : 12 BAM files                                     ||
+||                           P 6-NG-6_S6-sorted.bam                           ||
+||                           P 5-NG-7_S7-sorted.bam                           ||
+||                           P 6-NG-1_S2-sorted.bam                           ||
+||                           P 6-NG-7_S8-sorted.bam                           ||
+||                           P 3-NG-11_S10-sorted.bam                         ||
+||                           P 5-NG-5_S5-sorted.bam                           ||
+||                           P 3-NG-1_S1-sorted.bam                           ||
+||                           P 2-NG-2_S3-sorted.bam                           ||
+||                           P 6-NG-12_S12-sorted.bam                         ||
+||                           P 2-NG-12_S11-sorted.bam                         ||
+||                           P 2-NG-5_S4-sorted.bam                           ||
+||                           P 3-NG-8_S9-sorted.bam                           ||
+||                                                                            ||
+||             Output file : all-featcount.txt                                ||
+||                 Summary : all-featcount.txt.summary                        ||
+||              Annotation : ITAG3.2_gene_models.gtf (GTF)                    ||
+||      Dir for temp files : ./                                               ||
+||                                                                            ||
+||                 Threads : 12                                               ||
+||                   Level : meta-feature level                               ||
+||              Paired-end : no                                               ||
+||      Multimapping reads : not counted                                      ||
+|| Multi-overlapping reads : not counted                                      ||
+||   Min overlapping bases : 1                                                ||
+||                                                                            ||
+\\============================================================================//
+
+//================================= Running ==================================\\
+||                                                                            ||
+|| Load annotation file ITAG3.2_gene_models.gtf ...                           ||
+||    Features : 176550                                                       ||
+||    Meta-features : 35768                                                   ||
+||    Chromosomes/contigs : 13                                                ||
+||                                                                            ||
+|| Process BAM file 6-NG-6_S6-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 124698664                                            ||
+||    Successfully assigned alignments : 109165657 (87.5%)                    ||
+||    Running time : 0.80 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 5-NG-7_S7-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 125782548                                            ||
+||    Successfully assigned alignments : 108889889 (86.6%)                    ||
+||    Running time : 0.82 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 6-NG-1_S2-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 132296008                                            ||
+||    Successfully assigned alignments : 115932717 (87.6%)                    ||
+||    Running time : 0.86 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 6-NG-7_S8-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 138218229                                            ||
+||    Successfully assigned alignments : 120915355 (87.5%)                    ||
+||    Running time : 0.90 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 3-NG-11_S10-sorted.bam...                                 ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 138779818                                            ||
+||    Successfully assigned alignments : 121789803 (87.8%)                    ||
+||    Running time : 0.95 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 5-NG-5_S5-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 150346981                                            ||
+||    Successfully assigned alignments : 131493033 (87.5%)                    ||
+||    Running time : 0.98 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 3-NG-1_S1-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 156879935                                            ||
+||    Successfully assigned alignments : 137373129 (87.6%)                    ||
+||    Running time : 1.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 2-NG-2_S3-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 148090942                                            ||
+||    Successfully assigned alignments : 129698667 (87.6%)                    ||
+||    Running time : 1.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 6-NG-12_S12-sorted.bam...                                 ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 161824180                                            ||
+||    Successfully assigned alignments : 142084056 (87.8%)                    ||
+||    Running time : 1.09 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 2-NG-12_S11-sorted.bam...                                 ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 153227522                                            ||
+||    Successfully assigned alignments : 134551871 (87.8%)                    ||
+||    Running time : 1.05 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 2-NG-5_S4-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 166857753                                            ||
+||    Successfully assigned alignments : 146447380 (87.8%)                    ||
+||    Running time : 1.12 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 3-NG-8_S9-sorted.bam...                                   ||
+||    Paired-end reads are included.                                          ||
+||    Assign alignments to features...                                        ||
+||    Total alignments : 171584496                                            ||
+||    Successfully assigned alignments : 150188646 (87.5%)                    ||
+||    Running time : 1.14 minutes                                             ||
+||                                                                            ||
+||                                                                            ||
+|| Summary of counting results can be found in file "all-featcount.txt.summa  ||
+|| ry"                                                                        ||
+||                                                                            ||
+\\============================================================================//
+
+
+
+########################################################################
+PBS Epilogue:	Wed May  1 13:22:08 EDT 2019
+Job ID:		1078934.cph-m1.uncc.edu
+Limits:		pmem=2147483648b,walltime=168:30:00,nodes=1:ppn=12,mem=88gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=12
+Resources:	cput=00:30:42,vmem=1683468kb,walltime=00:11:46,mem=358676kb,energy_used=0
+Exit Value:	0
+########################################################################

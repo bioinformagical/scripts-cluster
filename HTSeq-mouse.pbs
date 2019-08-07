@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+#PBS -N eeechteeseek
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-6
+
+month=april
+
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#fyle=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/mouse_erb2/filesmarch.txt)
+fyle=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/mouse_erb2/${month}/file.txt)
+
+module load samtools 
+
+
+#cd /lustre/groups/bioservices/mouse_erb2/rr-bow2/march/
+cd /lustre/groups/bioservices/mouse_erb2/${month}
+
+#####   Sort the SAM files ###
+#samtools import /lustre/groups/bioservices/christine_richardson_mouse/iGenomes_Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome.fa ${fyle}.fastq.gz.sam ${fyle}.bam
+
+#samtools view -F 0x04 -b ${fyle}.bam > ${fyle}.rmd.bam
+#samtools sort ${fyle}.rmd.bam ${fyle}.rmd.bam.srt
+#samtools index ${fyle}.rmd.bam.srt.bam
+
+samtools view -h ${fyle}.rmd.bam.srt.bam > ${fyle}.srt.sam
+
+source /lustre/sw/Modules/default/init/$(basename $SHELL)
+
+#
+#
+#htseq-count [options] <sam_file> <gff_file>
+#
+#
+
+
+#file="metal"
+
+echo $fyle  
+
+#htseq-count --stranded=no $fyle.sorted.sam /lustre/groups/bioservices/christine_richardson_mouse/iGenomes_Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf > $fyle.htseq.table
+htseq-count --stranded=no ${fyle}.srt.sam /lustre/groups/bioservices/christine_richardson_mouse/iGenomes_Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf > $fyle.htseq.table
+

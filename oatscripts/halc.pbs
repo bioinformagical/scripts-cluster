@@ -1,0 +1,37 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=720:00:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=64
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=1950gb
+##PBS -l pmem=8gb
+#PBS -j oe
+#PBS -l hhhalc-oat  
+#PBS -q hammerhead
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu
+umask 007
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+ulimit -c 10240
+ulimit -a
+
+
+cd /nobackup/oat_genome/halc/
+
+#mv /scratch/rreid2/masurca-mega-gs7/* ./
+
+ echo -n 'Starting ';date;
+module load halc
+#module load curl/7.47.0-1 gcc/4.9.1-1 python/2.7.12-1 boost/1.62.0-1 masurca/3.2.2-rc1 
+
+halc 
+
+echo -n 'All done ';date;

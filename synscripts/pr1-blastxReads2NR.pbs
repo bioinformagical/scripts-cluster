@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=38gb
+
+#PBS -N bbblastxreads
+
+#PBS -t 1-18
+
+set -eux
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project1/file.txt )
+#home=/gpfs/fs3/home/rreid2
+
+
+echo "Launching BlastX ";
+
+#cd $home
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/project1/
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in spurpsTranscripts-29K-trim.fasta -dbtype nucl
+echo `pwd`
+echo ${file}
+
+#/lustre/home/rreid2/sw/seqtk-master/seqtk seq -L 30  -a ../flashmerged/${file}.fastq > ${file}.fasta
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastx -db ~/db/nr/nr.faa -query ${file}.fastq  -out ./blastx-${file}vsnr.out -num_threads 12  -evalue 1e-10 -soft_masking true  -outfmt 0
+
+
+echo "Fin"

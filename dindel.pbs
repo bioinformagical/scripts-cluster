@@ -1,0 +1,53 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=15500mb
+
+#PBS -N dindlersssList 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-12
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+#export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa/files.txt)
+
+module load bwa
+
+cd /lustre/groups/bioservices/kohlmeier/rawReads/dup/bwa/
+
+#create index of reference
+#bwa index -p dhfrBWAidx -a bwtsw /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa
+
+#create index of RNA Seqs
+#bwa index -p ${ssid}BWAidx -a bwtsw ./$ssid
+
+#run alignment
+#bwa aln -t 4 dhfrBWAidx $ssid >  $ssid.bwa
+
+#convert to SAM
+#bwa samse dhfrBWAidx $ssid.bwa $ssid > $ssid-bwa.sam
+
+module load samtools
+#Convert to Bam
+#samtools faidx /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa                # creates index file wg.fa.fai
+
+#samtools import /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa $ssid-bwa.sam $ssid-bwa.bam   # bam= binary alignment/map format
+#nalysis getCIGARindels --bamFile sample.bam \
+#--outputFile sample.dindel_output --ref ref.fasamtools sort $ssid-bwa.bam $ssid-bwa.srt       # sort by coordinate to streamline data processing
+#samtools index $ssid-bwa.srt  
+
+
+~/sw/dindel/binaries/dindel-1.01-linux-64bit --analysis getCIGARindels --bamFile  test.rmvd.srt.bam --outputFile test.dindel_output  --ref DHFR.fa
+

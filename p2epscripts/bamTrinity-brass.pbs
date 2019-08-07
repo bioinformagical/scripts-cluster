@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7500mb
+
+#PBS -N tttritties-qc 
+##PBS -q bigiron
+
+#Number of times to run this script
+##PBS -t 1-15
+
+umask 007
+set eu
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+ssid=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/janieslab/contigs-trinity/bam/file.txt)
+
+module load bowtie
+module load samtools
+#cd ~/echinoderms/ortho/test 
+
+#for ssid in BJ30 BJ31 BJ34 BJ35 BJ36 BJ37 BJ38 BJ41 BJ44 BJ39 BJ40 BJ42 BJ46 BJ43 BJ45 BJ47 BJ48 BJ32 BJ33 BJ25 BJ26 BJ27 BJ28 BJ29 
+#do
+cd /lustre/groups/p2ep/brassica/rnas/trinity/F007-trinity/bam/
+
+#mkdir ${ssid}
+~/sw/trinityrnaseq_r2013-02-25/util/alignReads.pl \
+ --left  /lustre/groups/p2ep/rnaseq/raw/merge-F007_CAGATC_L002_R1.fastq --right /lustre/groups/p2ep/rnaseq/raw/merge-F007_CAGATC_L002_R1.fastq  \
+ --seqType fq --target /lustre/groups/p2ep/brassica/rnas/trinity/F007-trinity/Trinity.fasta --aligner bowtie --retain_intermediate_files
+
+cd ./bowtie_out
+echo `pwd`
+
+~/sw/trinityrnaseq_r2013-02-25/util/SAM_nameSorted_to_uniq_count_stats.pl bowtie_out.nameSorted.sam > ./qc-F007.txt
+samtools idxstats bowtie_out.coordSorted.bam > readspercontig-F007.txt
+
+################ V012   ######################
+cd /lustre/groups/p2ep/brassica/rnas/trinity/V012-trinity/bam/
+
+#mkdir ${ssid}
+~/sw/trinityrnaseq_r2013-02-25/util/alignReads.pl \
+ --left  /lustre/groups/p2ep/rnaseq/raw/merge-V012_CTTGTA_L002_R1.fastq --right /lustre/groups/p2ep/rnaseq/raw/merge-V012_CTTGTA_L002_R1.fastq  \
+ --seqType fq --target /lustre/groups/p2ep/brassica/rnas/trinity/V012-trinity/Trinity.fasta --aligner bowtie --retain_intermediate_files
+
+cd ./bowtie_out
+echo `pwd`
+
+~/sw/trinityrnaseq_r2013-02-25/util/SAM_nameSorted_to_uniq_count_stats.pl bowtie_out.nameSorted.sam > ./qc-V012.txt
+samtools idxstats bowtie_out.coordSorted.bam > readspercontig-V012.txt
+
+
+
+echo "fin"
+

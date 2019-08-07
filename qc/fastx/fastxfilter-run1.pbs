@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# Request a run time of x hours and x minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request x  megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=95gb
+
+#PBS -N followthewhiterabbit
+
+#PBS -t 1-20
+umask 007
+set -eu
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run1-oat-blue-oct-2013/raw_reads/file.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load fastx-toolkit
+
+cd /lustre/groups/bioservices/p2ep/dhmri/run1-oat-blue-oct-2013/raw_reads/
+
+#Copy the following line as many times as the number of samples you are analyzing, then
+#replace "YOURFILE" with the names of your samples e.g. "1_Hot":
+#mkdir ${dir}
+#cd fastx 
+#for i in 2 1;
+#do
+	#mv ../UNCC_Schlueter_130909HiSeq_Run_Sample_${ssid}_R${i}_001.cutadapt.fastq ./
+	echo "${ssid}"
+	#gunzip ../${ssid}_R${i}_001.fastq.gz
+	fastq_quality_trimmer -Q33 -v -t 20 -l 20 -i ./UNCC_Schlueter_130909HiSeq_Run_Sample_${ssid}_001.fastq -o ${ssid}_trimmed.fastq
+	fastx_clipper -Q33 -a ATTGGCTTTGGGCAT -a AGTCAA -a CTTGTA -a CAGATC -a GCCAAT -a TGACCA -a ACAGTG -l 40 -n -v -i ${ssid}_trimmed.fastq -o ${ssid}_trimmed_clipped.fastq
+	mv ${ssid}_trimmed_clipped.fastq ../trimmed_clipped/
+       # fastx_collapser -Q33 -v -i  ${ssid}_trimmed_clipped.fastq -o ${ssid}_collapsed.txt
+        #/lustre/home/rreid2/scripts/stan/Scripts for SFG/fastqduplicatecounter.py ${ssid}_collapsed.txt ${ssid}_collapsed_headers.txt >> ${ssid}_R${i}_duplicateCount.txt
+        #fastx_quality_stats -Q33 -i ${ssid}_R${i}_trimmed_clipped.fastq -o ${ssid}_R${i}_qualstats.txt
+
+#done
+
+
+#####  Need perl correction script here
+
+
+
+
+
+####  Validate Mate pairs   ######
+###  This will not work withthe script as currently configured.  Because we need to 2 files.
+#perl ~/scripts/perl/validateHiseqPairs.pl ${ssid}_R1_trimmed_clipped.fastq ${ssid}_R2_trimmed_clipped.fastq
+
+
+
+
+
+
+
+#Adapter clipping:
+#Matches to potential adapter sequences at the end of reads, then removes reads shorter than 20 bases. 
+
+#For the next step, copy the line as many times as the number of samples, then 
+#add the sequences of your adapters after the -a flag (e.g. -a ATTGGCTTTGGGCAT), as well as changing the sample names:
+#The sequences of Illumina's TruSeq adapters are proprietary information, but can be recieved by emailing Illumina customer support at info@illumina.com 
+#for i in 1 2;
+#do
+#      AGTCAA
+ #     AGTTCC
+  #    ATGTCA
+   #   CAGATC
+    #  CCGTCC
+     # CTTGTA
+  #    GCCAAT
+  #    GTCCGC
+
+#	fastx_clipper -Q33 -a ATTGGCTTTGGGCAT -a AGTCAA -a CTTGTA -a CAGATC -a GCCAAT -a TGACCA -a ACAGTG -l 40 -n -v -i ${ssid}_R${i}_trimmed.fastq -o ${ssid}_R${i}_trimmed_clipped.fastq
+#	fastx_collapser -Q33 -v -i  ${ssid}_trimmed_clipped.fastq -o ${ssid}_collapsed.txt
+	#/lustre/home/rreid2/scripts/stan/Scripts for SFG/fastqduplicatecounter.py ${ssid}_collapsed.txt ${ssid}_collapsed_headers.txt >> ${ssid}_R${i}_duplicateCount.txt
+#	fastx_quality_stats -i ${ssid}_R${i}_trimmed_clipped.fastq -o ${ssid}_R${i}qualstats.txt
+#done
+
+
+echo "fin"
+

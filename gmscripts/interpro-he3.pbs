@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=296:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7g
+
+#PBS -N iiinterproOATS
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-6
+
+
+name=he3
+cd /group/bioservices/hockeypuck/gm/aa/${name}/split/ 
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /group/bioservices/hockeypuck/gm/aa/${name}/split/file.txt)
+#module load iprscan
+#module load samtools
+
+#echo "We are in a split ${ssid}"
+
+#for i in 0 1 2 3 4 ; do
+	 echo ${file}
+#cd ${file}
+#mkdir split
+#cd split
+
+#python /lustre/home/rreid2/scripts/python/oneline.py ../best_candidates.eclipsed_orfs_removed.pep >tmp.faa
+#split -l 1000 tmp.faa ${file}
+
+
+~/sw/interproscan-5.7-48.0/interproscan.sh -i /group/bioservices/hockeypuck/gm/aa/${name}/split/${file} -o ${file}-iprscan.out  -goterms -iprlookup -seqtype p -pa -appl Panther-9.0,PfamA-27.0,PrositeProfiles-20.97 -f tsv
+#cp *out ../all-S12-interpro.txt
+
+#~/sw/interproscan-5.7-48.0/interproscan.sh -cli -i ./all1-48.fasta${file}.faa -o ${file}.iprscan.out \
+#	-format raw \
+#	-pa \
+#	-goterms -iprlookup \
+#	-seqtype p \
+#	-appl hmmpanther hmmpfam superfamily
+#	-appl profilescan \
+#	-appl hmmpfam \
+#	-appl superfamily
+#done
+
+
+#module load iprscan
+#iprscan -cli -i ./${ssid}.fna -o ${ssid}.iprscan.out -format raw -goterms -iprlookup
+
+echo `pwd`
+

@@ -1,0 +1,9 @@
+
+#Must ssh 1st using the -X option
+#  ssh -X 204.84.7.100
+# THEN you can start an interactive session.
+#if below fails, just -X instead pf -CY
+
+qsub -I -YC -q bigiron -l nodes=1:ppn=30 -l walltime=48:30:00
+
+

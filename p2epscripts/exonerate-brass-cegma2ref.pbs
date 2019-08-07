@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+#PBS -q bigiron
+#PBS -N eeexoner8-rnaseq-brassRef
+
+##PBS -t 1-5
+umask 007
+set -eu
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/hockeypuck/old/blueberry/reads/hiseq/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/filedir.txt)
+
+echo "Launching fastx"
+
+#cd $home
+module load exonerate
+#mkdir /lustre/groups/p2ep/blueberry/markers/exonerate
+cd /lustre/groups/p2ep/brassica/cegma/
+
+
+#exonerate --querytype dna --targettype dna --model est2genome --percent 70 ../../Boleracea.v1.genome.fasta all-aop.fna  > aop2Genome-exo70.txt
+
+#exonerate --querytype dna --targettype dna --model est2genome --percent 90 ../../Boleracea.v1.genome.fasta all-aop.fna  > aop2Genome-exo90.txt
+
+#exonerate --querytype dna --targettype dna --model est2genome --percent 50 ../../Boleracea.v1.genome.fasta all-aop.fna  > aop2Genome-exo50.txt
+
+exonerate --querytype protein --targettype dna --model protein2genome --percent 50  ~/sw/cegma/CEGMA_v2.5/data/A.thaliana.aa  ../Boleracea.v1.genome.fasta  > cegma2brassRef-exo50.txt
+
+exonerate --querytype protein --targettype dna --model protein2genome --percent 90  ~/sw/cegma/CEGMA_v2.5/data/A.thaliana.aa  ../Boleracea.v1.genome.fasta > cegma2brassRef-exo90.txt
+
+exonerate --querytype protein --targettype dna --model protein2genome --percent 90  ~/sw/cegma/CEGMA_v2.5/data/A.thaliana.aa ../masurca-v158/CA/9-terminator/genome.scf.fasta  > cegma2masurca-exo90.txt
+exonerate --querytype protein --targettype dna --model protein2genome --percent 50  ~/sw/cegma/CEGMA_v2.5/data/A.thaliana.aa ../masurca-v158/CA/9-terminator/genome.scf.fasta  > cegma2masurca-exo50.txt
+
+#exonerate --querytype dna --targettype dna --model cdna2genome --percent 90  ../../genomic/masurca-nextera454.fna ../mahkah394.txt-mahkas.fna  > marker2nextera-exocdna.txt

@@ -1,0 +1,62 @@
+#!/bin/bash
+#PBS -l walltime=336:00:00  # Maximum amount of real time for the job to run in HH:MM:SS
+#PBS -l nodes=1:ppn=64     # Number of nodes and processors per node requested by job
+#PBS -l mem=1024GB           # Maximum physical memory to use for jobi
+#PBS -N nnnglmr-oat         # User-defined name for job
+#PBS -j oe                # Write STDERR to STDOUT output file
+#PBS -q hammerhead        # Job queue to submit this script to
+
+# User prologue.  Must be owned by user, not writable by group or other
+##PBS -l prologue=/projects/oat_genome/scripts/prologue.sh
+# User epilogue.  Must be owned by user, not writable by group or other
+##PBS -l epilogue=/projects/oat_genome/scripts/epilogue.sh
+##PBS -t 7
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu            # e - Exit on error
+                   # u - Undefined variable is an error
+                   # x - enable trace (print commands before running)
+umask 007          # user  - all permissions
+                   # group - all permissions
+                   # other - no permissions
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+
+cd /nobackup/oat_genome/align
+
+
+SEQUENCES=/nobackup/oat_genome/racon/allReads
+ALIGNMENT=/nobackup/oat_genome/racon/aligned
+GENOME_FASTA=/projects/oat_genome/dovetail-round2/oat_08Oct2018_80uBt.fasta
+file=ngmlrAligned2reference
+THREADS=64
+
+module load bwa
+module load samtools
+
+###Index the reference genome
+#printf "Indexing the refrence \n"
+
+start=$(date +%s)
+
+#bwa index -p reference.idx -a bwtsw ${GENOME_FASTA}
+
+#end=$(date +%s)
+#printf "Done, took $((${end}-${start})) seconds\n\n"
+
+### BWA ALign reads to reference
+printf "Aligning to refrence \n"
+
+#~/sw/ngmlr/ngmlr-0.2.7/ngmlr -t 64 -r ${GENOME_FASTA} -q ${SEQUENCES}.fq -o ${file} 
+
+#samtools view -bS ${file}.sam | samtools sort -T ${file} -o ${file}-sorted.bam
+#samtools index ${file}-sorted.bam
+
+#### MAKE VCF     ######
+samtools mpileup  --skip-indeçls --output ${file}.bcf  \
+        -uf ${GENOME_FASTA}  ${file}-sorted.bam
+bcftools view ${file}.bcf > ${file}.vcf
+
+
+end=$(date +%s)
+printf "Done, took $((${end}-${start})) seconds\n\n"

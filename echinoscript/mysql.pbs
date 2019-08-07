@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+#PBS -N mysql
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=95g
+#PBS -l walltime=30:00:00:00
+
+# WARNING: this will only remove mysql's data directory if the job runs
+#          to completion.  This is 30 days, as configured
+
+set -eu
+
+module load mysql
+
+[ ! -d /scratch/${USER} ] && mkdir /scratch/${USER}
+[ ! -d /lustre/scratch/${USER} ] && mkdir /lustre/scratch/${USER}
+
+chmod 700 {,/lustre}/scratch/${USER}
+
+# port to run mysql on. 3306 is mysql's default port
+MYSQL_PORT=3306
+
+BASEDIR=$(dirname $(dirname $(which mysqld_safe)))
+MYSQL=$(mktemp -d --tmpdir=/scratch/${USER} mysql.XXXXXX)
+MYSQL_CNF=$(mktemp --tmpdir=/lustre/scratch/${USER} mysql.XXXXXX.cnf)
+
+# mysqld_safe must be started from mysql's installation directory
+cd ${BASEDIR}
+
+# my.cnf template
+########################################################################
+cat > ${MYSQL_CNF} <<EOF
+[client]
+
+port=${MYSQL_PORT}
+socket=${MYSQL}/mysql.sock
+
+
+[mysqld]
+
+basedir=${BASEDIR}
+datadir=${MYSQL}/data
+
+port=${MYSQL_PORT}
+socket=${MYSQL}/mysql.sock
+
+key_buffer_size=64M
+myisam_sort_buffer_size=4G
+myisam_max_sort_file_size=200G
+read_buffer_size=2G
+
+EOF
+########################################################################
+
+${BASEDIR}/scripts/mysql_install_db --defaults-file=${MYSQL_CNF}
+
+mysqld_safe --defaults-file=${MYSQL_CNF} --pid-file=${MYSQL}/mysql.pid &
+
+# write bash variables about this server in /lustre/scratch/$USER/
+########################################################################
+cat > /lustre/scratch/${USER}/mysql.${PBS_JOBID} <<EOF
+MYSQL_CNF=${MYSQL_CNF}
+MYSQL_HOST=$(hostname -s)
+MYSQL_PORT=${MYSQL_PORT}
+EOF
+########################################################################
+
+# sleep for 30 days - 1 hour
+sleep 729h
+
+MYSQL_PID=$(cat ${MYSQL}/mysql.pid)
+if [ -n ${MYSQL_PID:-} ]; then
+	kill ${MYSQL_PID}
+fi
+
+rm -f ${MYSQL}
+rm -f ${MYSQL_CNF}

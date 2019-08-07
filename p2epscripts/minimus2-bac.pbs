@@ -1,0 +1,38 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=180:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+#PBS -q bigiron
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=990gb
+
+#PBS -N mmminimus2-bb 
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+set -eu
+umask 007
+
+
+cd /lustre/groups/p2ep/blueberry/bac/minimus/
+
+module load amos
+module load mummer
+
+#cat /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna  /lustre/groups/p2ep/blueberry/genomic/masurca-nextera454.fna  > newbler-nexter.seq
+#toAmos -s newbler-nexter.seq -o newbler-nexter.afg
+
+#minimus2 newbler-nexter -D REFCOUNT=13757 -D OVERLAP=90
+
+cat /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna ../bb-011215/all6.fna >garm-all6.seq
+toAmos -s garm-all6.seq -o all6.afg
+minimus2 all6 -D REFCOUNT=106111 
+
+
+
+echo -n 'All done ';date;

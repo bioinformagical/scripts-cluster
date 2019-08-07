@@ -1,0 +1,59 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=180:30:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=24
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=909gb
+
+
+#PBS -N mmmakinitSoapy
+#PBS -q bigiron
+#Number of times to run this script
+##PBS -t 3 
+
+umask 007
+set -eu
+
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/file.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/file1.txt)
+#mkdir /lustre/groups/p2ep/masurca/$file
+#cd ~/p2ep/masurca/UNCC_Schlueter_130909HiSeq_Run_Sample_3_059_AGTCAA_L003
+#rm -r ~/p2ep/masurca/$file/*
+cd /lustre/groups/p2ep/blueberry/bac/soap/
+
+#mkdir ${dir}
+
+#cp config.orig ./${dir}/config.txt
+#sed -i.orig "s/foo/${dir}\/${file}/" ./${dir}/config.txt
+#cd ${dir}
+
+#echo " file is ${file}"
+
+###############				STILL NEED TO FINISH WRITING THIOS SCRIPT !!!!!!!!!! ###########################
+
+#module load soapdenovo2
+
+#SOAPdenovo-63mer all -K 51 \
+# -p 12 -s config.txt \
+# -o bac6pair >> SOAPdenovo.log
+
+#module load abyss
+
+#abyss-pe k=64 name=abyssBac lib='pe1 pe2 pe3 pe4 pe5 pe6' \
+#    pe1='/lustre/groups/p2ep/blueberry/bac/bb-011215/hind-1-f.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/hind-1-r.fna' \
+#    pe2='/lustre/groups/p2ep/blueberry/bac/bb-011215/hind-2-f.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/hind-2-r.fna' \
+#    pe3='/lustre/groups/p2ep/blueberry/bac/bb-011215/hind-3-f.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/hind-3-r.fna' \
+#    pe4='/lustre/groups/p2ep/blueberry/bac/bb-011215/bam-1-f.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/bam-1-r.fna' \
+#    pe5='/lustre/groups/p2ep/blueberry/bac/bb-011215/bam-2-f.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/bam-2-r.fna' \
+#    pe6='/lustre/groups/p2ep/blueberry/bac/bb-011215/bam-3-f.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/bam-3-r.fna' \
+
+
+#/Convert-fasta-to-v2.pl
+/lustre/sw/wgs/6.1/bin/convert-fasta-to-v2.pl
+
+
+echo -n 'All done ';date;

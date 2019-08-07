@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+#PBS -q bigiron
+
+#PBS -N ppparselToungue
+#PBS -t 1-12
+#set -eux
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching XML Parser "
+
+#cd  ~/old/gm/fiber1/
+#cd ~/echinoderms/ophio/
+#cd ~/echinoderms/strongyl/
+#cd ~/echinoderms/dl/first6/
+cd ~/echinoderms/dl/120727B2/ 
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/fiber1/xmlNames.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/ophio/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+echo "${file}"
+#cd ~/old/gm/genes/almt1/blast/ 
+
+#for xmlfile in $(find ./ -iname "*.xml");
+#do
+
+	#mv ${file}.blastnt2.xml ${file}.blastnt.xml
+	perl ~/old/scripts/perl/xmlParseBlastEchino.pl ./${file}.strongyl.xml2 
+	#perl ~/old/scripts/perl/xmlParseBlastEchino.pl ./velvet${file}/${file}.strongyl.xml
+	#cp ./velvet${file}/${file}.strongyl.xml.table ./
+	#done
+echo "fin"
+
+
+#done
+
+
+

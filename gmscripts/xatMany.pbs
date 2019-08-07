@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N MeHotTubWhileRaadworks
+#PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-68
+
+##home=/gpfs/fs3/home/rreid2
+
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+#echo "Launching Repeat Masker"
+#source /sw/functions.sh
+#prepend_dir PATH $HOME/bin
+#prepend_dir PATH $HOME/scripts
+#prepend_dir PATH $HOME/bin/RepeatMasker
+
+export PATH=$HOME/bin:$PATH
+
+
+cd $HOME/gm/assembly/
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ./filedir.txt)
+
+#for file in $(find ./ -name "*.fastq");
+#do
+        echo   ${file};
+	
+	 $HOME/sw/bin/xat /gpfs/fs3/home/rreid2/gm/assembly/${file}/transcripts.fa \
+/gpfs/fs3/home/rreid2/gm/db/Brachypodium_distachyon_Bd21.main_genome.scaffolds.fasta xcat$file.cigar matrix=DEFAULT_MATRIX outflag=5 searchflag=2 result=1
+
+#done
+
+
+

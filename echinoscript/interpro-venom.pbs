@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=7550mb
+
+#PBS -N iiinterpro-venom 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-25
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/venom/file.txt)
+
+
+cd /lustre/groups/janieslab/venom/aa/ 
+
+#perl ~/sw/transdecoder_r2012-08-15/transcripts_to_best_scoring_ORFs.pl -t SOMETRANSCRIPT.fna -m 100 --CPU 15 --search_pfam ~/db/Pfam-B.hmm
+#mkdir $ssid
+cd $ssid
+
+#perl ~/sw/transdecoder_r2012-08-15/transcripts_to_best_scoring_ORFs.pl -t ../../${ssid}.Trinity.fasta -m 100 --CPU 12 --search_pfam /home/rreid2/db/Pfam-B.hmm 
+
+#mkdir split
+cd split
+#python /home/rreid2/scripts/python/oneline.py ../best_candidates.eclipsed_orfs_removed.pep >tmp.faa
+#sed "s/>/>${ssid}@/g" tmp.faa > tmp2.faa
+#/home/rreid2/sw/cd-hit-v4.6.1-2012-08-27/cd-hit -i tmp2.faa -T 24 -M 0 -o cdhit-$ssid
+
+
+split -l 1000 ./tmp2.faa $ssid
+
+for file in $ssid*
+do
+	~/sw/interproscan-5.7-48.0/interproscan.sh -i ${file} -o ${file}-iprscan.out  -goterms -iprlookup -seqtype p -pa -appl Panther-9.0,PfamA-27.0,PrositeProfiles-20.97 -f tsv
+
+done
+
+
+
+cat *-iprscan.out > all-$ssid-iprscan.out
+cp all-$ssid-iprscan.out ../../../interpro

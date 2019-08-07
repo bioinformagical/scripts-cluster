@@ -1,0 +1,44 @@
+#!/bin/bash
+#PBS -N flanBakedat400
+#PBS -l nodes=1:ppn=12
+#PBS -l walltime=96:00:00
+#PBS -l vmem=95g
+#PBS -t 1-6
+
+cd $PBS_O_WORKDIR
+
+export PATH=/lustre/home/lheater/sw/metaphlan/1.7.6/metaphlan:$PATH
+
+module load metaphlan
+module load bowtie2
+
+FILE=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/syn/concat_filtered/files.txt)
+
+#metaphlan.py --bowtie2out /lustre/home/lheater/syn/meta/$FILE.out.vs.txt -o /lustre/home/lheater/syn/meta/$FILE.s.mtphln.vs.txt --input_type automatic --bowtie2db /lustre/home/lheater/sw/metaphlan/1.7.6/metaphlan/bowtie2db/mpa --nproc 12 -t 'reads_map' --tax_lev 's' /lustre/home/lheater/bin/$FILE
+
+ANALYSIS=reads_map
+
+#~/sw/metaphlan/metaphlan.py --bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/${FILE}-genus.mtphln.${ANALYSIS}.txt --input_type automatic --bowtie2db /lustre/home/rreid2/sw/metaphlan/bowtie2db/mpa --bt2_ps sensitive --nproc 12 -t 'reads_map' --tax_lev 'g' /lustre/home/rreid2/syn/concat_filtered/$FILE
+
+~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-family.mtphln.${ANALYSIS}.txt --nproc 12 -t 'reads_map' --tax_lev 'f' 
+
+~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-species.mtphln.${ANALYSIS}.txt --nproc 12 -t 'reads_map' --tax_lev 's' 
+
+~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-order.mtphln.${ANALYSIS}.txt --nproc 12 -t 'reads_map' --tax_lev 'o' 
+
+ANALYSIS=rel_ab
+
+ ~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-order.mtphln.${ANALYSIS}.txt --nproc 12 -t 'rel_ab' --tax_lev 'o' 
+
+~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-family.mtphln.${ANALYSIS}.txt --nproc 12 -t 'rel_ab' --tax_lev 'f' 
+
+~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-genus.mtphln.${ANALYSIS}.txt --nproc 12 -t 'rel_ab' --tax_lev 'g' 
+
+~/sw/metaphlan/metaphlan.py --input_type bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-species.mtphln.${ANALYSIS}.txt --nproc 12 -t 'rel_ab' --tax_lev 's' 
+
+
+#####  Testing bowtie sensitvity   ######
+
+#~/sw/metaphlan/metaphlan.py --bowtie2out /lustre/home/rreid2/syn/metaphlan/$FILE.bt2-vsensLocal.txt -o /lustre/home/rreid2/syn/metaphlan/$FILE-species.mtphln.${ANALYSIS}-vsenslocal.txt --input_type automatic --bowtie2db /lustre/home/rreid2/sw/metaphlan/bowtie2db/mpa --bt2_ps very-sensitive-local --nproc 12 -t 'rel_ab' --tax_lev 's' /lustre/home/rreid2/syn/concat_filtered//$FILE
+
+

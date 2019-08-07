@@ -1,0 +1,30 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=2
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N singlesPartyWoo
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/454Sequences/mira7big/
+#cd $HOME/blueberry/reads/archana/GAII_trimmed_reads/
+
+
+#perl removeSinglesWrite3.pl gaii_pe1_all_clipped2.fasta gaii_pe2_all_clipped2.fasta
+
+cd $HOME/blueberry/reads/archana/HiSeq_trimmed_reads/
+
+perl removeSinglesWrite3.pl hiseq_pe1_clipped.fasta hiseq_pe2_clipped.fasta
+ 

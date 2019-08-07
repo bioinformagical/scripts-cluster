@@ -1,0 +1,48 @@
+########################################################################
+PBS Prologue:	Tue May 23 15:42:19 EDT 2017
+Job ID:		927641.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	fewCrazyFrog
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[64] 
+########################################################################
+Starting Tue May 23 15:42:20 EDT 2017
+Verifying PATHS...
+jellyfish OK
+runCA OK
+createSuperReadsForDirectory.perl OK
+creating script file for the actions...done.
+execute assemble.sh to run assembly
+[Tue May 23 15:42:20 EDT 2017] Processing pe library reads
+[Tue May 23 15:42:20 EDT 2017] Processing sj library reads
+Average PE read length 95
+choosing kmer size of 49 for the graph
+cat: write error: Broken pipe
+MIN_Q_CHAR: 33
+WARNING: JF_SIZE set too low, increasing JF_SIZE to at least 2106873608, this automatic increase may be not enough!
+[Tue May 23 15:42:21 EDT 2017] Estimating genome size.
+Estimated genome size: 580243878
+[Tue May 23 15:42:55 EDT 2017] Computing super reads from PE 
+Using linking mates
+[Tue May 23 15:43:56 EDT 2017] Celera Assembler
+ovlMerThreshold=75
+Overlap/unitig success
+recomputing A-stat for super-reads
+Unitig consensus success
+recomputing A-stat for super-reads
+CA success
+[Thu May 25 05:20:39 EDT 2017] Gap closing
+Gap close success. Output sequence is in CA/10-gapclose/genome.{ctg,scf}.fasta
+[Thu May 25 05:58:39 EDT 2017] All done
+All done Thu May 25 05:58:39 EDT 2017
+
+
+########################################################################
+PBS Epilogue:	Thu May 25 05:58:39 EDT 2017
+Job ID:		927641.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1950gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Resources:	cput=1198:20:17,energy_used=0,mem=183617488kb,vmem=199581440kb,walltime=38:16:20
+Exit Value:	0
+########################################################################

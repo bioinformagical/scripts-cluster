@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=90GB
+
+#PBS -N bbblataBAC 
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+set eu
+umask 007
+
+cd /group/p2ep/blueberry/bac/blat/2take6nolength/ 
+module load blat
+# ~/sw/MUMmer3.22/nucmer --maxmatch -mincluster 50 -b 400 -minmatch 40 --coords -prefix newblerVSmirarep2 garrons454Scaffolds.fna mirarep.fa 
+
+
+#blat -minIdentity=92  /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna /lustre/groups/p2ep/blueberry/bac/bb-011215/all6.fna  blat-bb-bac2garm.psl
+#~/scripts/perl/blat2gff.pl < blat-bb-bac2garm.psl > blat-bb-bac2garm.gff
+
+
+
+
+
+
+######   MAKING PSL and GFF files.
+
+#blat -minIdentity=92  -tileSize=12 -extendThroughN -t=dna -q=dna /group/p2ep/blueberry/rnaseq/bigbamtheory/V_corymbosum_Aug_2015.fa /group/p2ep/blueberry/bac/blat/2take6nolength/renamedboth-hvc.fasta blat-bacHVC2take6.psl
+#~/scripts/perl/blat2gff.pl < blat-bacHVC2take6.psl > blat-HVC2take6.gff
+
+#blat -minIdentity=92  -tileSize=12 -extendThroughN -t=dna -q=dna /group/p2ep/blueberry/rnaseq/bigbamtheory/V_corymbosum_Aug_2015.fa /group/p2ep/blueberry/bac/blat/2take6nolength/renamedboth-bvc.fasta blat-bacBVC2take6.psl
+#~/scripts/perl/blat2gff.pl < blat-bacBVC2take6.psl > blat-BVC2take6.gff
+
+
+
+
+#####     MAING PSLX files
+
+blat -minIdentity=92  -tileSize=12 -extendThroughN -t=dna -q=dna -out=pslx /group/p2ep/blueberry/rnaseq/bigbamtheory/V_corymbosum_Aug_2015.fa /group/p2ep/blueberry/bac/blat/2take6nolength/renamedboth-hvc.fasta blat-bacHVC2take6.pslx
+
+blat -minIdentity=92  -tileSize=12 -extendThroughN -t=dna -q=dna -out=pslx /group/p2ep/blueberry/rnaseq/bigbamtheory/V_corymbosum_Aug_2015.fa /group/p2ep/blueberry/bac/blat/2take6nolength/renamedboth-bvc.fasta blat-bacBVC2take6.pslx

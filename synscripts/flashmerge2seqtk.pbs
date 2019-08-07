@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=196:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=24gb
+#PBS -N jumpinjackFlash
+##PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+#PBS -t 1-6
+
+cd /lustre/groups/bioservices/secure/syngenta/working/rob/project2/
+
+file=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/secure/syngenta/working/rob/project2/file2.txt )
+
+echo   ${file};
+
+~/sw/FLASH-1.2.7/flash -t 12 --suffix ${file}Merge -p 64 -r 150 -o ${file}Flash ${file}_1_sequence.cutadapt.fastq  ${file}_2_sequence.cutadapt.fastq  
+#~/sw/FLASH-1.2.7/flash -t 12 --suffix ${file}Merge -p 64 -r 150 -o ${file}Flash ${file}_1_sequence.fastq  ${file}_2_sequence.fastq
+echo "finished job"
+
+#done
+
+

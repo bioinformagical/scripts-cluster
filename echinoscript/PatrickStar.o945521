@@ -1,0 +1,62 @@
+########################################################################
+PBS Prologue:	Tue Jun  6 08:32:48 EDT 2017
+Job ID:		945521.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	PatrickStar
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Queue:		hammerhead
+Nodes:		cph-bm2.uncc.edu[64] 
+########################################################################
+core file size          (blocks, -c) 10240
+data seg size           (kbytes, -d) 8388608
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 8254442
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) 8388608
+open files                      (-n) 65535
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) unlimited
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 8254442
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+Starting Tue Jun  6 08:32:48 EDT 2017
+Verifying PATHS...
+jellyfish OK
+runCA OK
+createSuperReadsForDirectory.perl OK
+creating script file for the actions...done.
+execute assemble.sh to run assembly
+[Tue Jun  6 08:32:49 EDT 2017] Processing pe library reads
+Average PE read length 200
+choosing kmer size of 127 for the graph
+cat: write error: Broken pipe
+MIN_Q_CHAR: 33
+[Tue Jun  6 08:32:50 EDT 2017] Estimating genome size.
+Estimated genome size: 2020240918
+[Tue Jun  6 08:34:27 EDT 2017] Computing super reads from PE 
+Using linking mates
+[Tue Jun  6 10:13:56 EDT 2017] Celera Assembler
+ovlMerThreshold=75
+Overlap/unitig success
+recomputing A-stat for super-reads
+Unitig consensus success
+recomputing A-stat for super-reads
+CA success
+[Thu Jun  8 16:27:11 EDT 2017] Gap closing
+Gap close success. Output sequence is in CA/10-gapclose/genome.{ctg,scf}.fasta
+[Thu Jun  8 22:46:43 EDT 2017] All done
+All done Thu Jun  8 22:46:43 EDT 2017
+
+
+########################################################################
+PBS Epilogue:	Thu Jun  8 22:46:43 EDT 2017
+Job ID:		945521.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=8gb,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=720:00:00
+Resources:	cput=1876:11:48,energy_used=0,mem=427180124kb,vmem=428723560kb,walltime=62:13:55
+Exit Value:	0
+########################################################################

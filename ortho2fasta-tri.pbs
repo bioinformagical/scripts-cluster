@@ -1,0 +1,35 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+
+#PBS -N ooortho2fatso
+
+##PBS -t 1-12
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+
+
+echo "Launching BlastN "
+
+#cd $home
+
+
+#cd /lustre/home/rreid2/echinoderms/strongyl/
+#cd /lustre/home/rreid2/echinoderms/db/
+cd ~/sw/orthomcl/Jun_6/
+
+for i in 15 16 17 18
+do
+
+	perl ~/old/scripts/perl/ortho2fasta.pl /lustre/groups/janieslab/contigs-trinity/aa/aa-ortho/adjusted/all.fasta all${i}-ortho.out
+	mv *faa /lustre/groups/janieslab/contigs-trinity/ortho/all${i}/
+done

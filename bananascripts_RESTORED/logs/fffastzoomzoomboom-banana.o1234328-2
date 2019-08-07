@@ -1,0 +1,28 @@
+########################################################################
+PBS Prologue:	Tue Oct 10 10:43:12 EDT 2017
+Job ID:		1234328[2].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	fffastzoomzoomboom-banana-2
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=8gb,walltime=168:30:00
+Queue:		cph_cpu
+Nodes:		cph-c15.uncc.edu[1] 
+########################################################################
+Launching fastx
+109_S36_L008_R2_001
+Minimum Quality Threshold: 20
+No minimum Length
+Input: 118457076 reads.
+Output: 118457037 reads.
+discarded 39 (0%) too-short reads.
+seq: invalid floating point argument: 109_S36_L008_R2_001_fastx.fastq
+Try 'seq --help' for more information.
+
+
+########################################################################
+PBS Epilogue:	Tue Oct 10 11:42:52 EDT 2017
+Job ID:		1234328[2].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,vmem=8gb,walltime=168:30:00
+Resources:	cput=00:59:04,energy_used=0,mem=13036kb,vmem=243028kb,walltime=00:59:40
+Exit Value:	1
+########################################################################

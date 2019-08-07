@@ -1,0 +1,184 @@
+#!/usr/bin/python
+
+from __future__ import division
+import re
+import sys
+import die
+
+
+######      This will read in a sub population frequency table and calculate theta. For a list of rows, we need to determine the # of segregating sites. 
+#	USAGE:		 python /users/rreid2/scripts/python/rogers-theta.py ./pos-green-cols-freqall.txt
+####				subgroups-col.txt is a file that contains only 1 subgroup (e.g. all d.sants) Plus chrom-pos as 1st column..
+####				We need to get segregating sites per row, AND get them per 10K sliding window (1-10K, 1K-11K,2K-12K.....)
+####				Expect a W-theta of 0.015 ??
+###				
+Prefix = ""
+print sys.argv[1]
+print "The number of sys.argv given were; ",len(sys.argv),"\n"
+if (len(sys.argv) > 2 or len(sys.argv) < 2 ):
+	sys.exit("Exiting due to wrong # of arguments !!! ")
+	#die.Die("Must specify 1 ARG. LaST ARG WAS ",str(sys.argv)," ")
+	#Prefix = sys.argv[2]
+
+###  Read Table in, parse the line.
+file1 = open(sys.argv[1])
+print sys.argv[1]
+tmp=sys.argv[1]
+tmparray=tmp.split(".")
+front=tmparray[0]
+### Load hash with chrom-position
+outname = front+"-wtheta.txt"
+outfile = open(outname, 'w')
+
+def getA(n):
+        a=0.0
+        i=1.0
+        while i < n:
+                tmp=float(i)
+                a+=(1.0/tmp)
+                i+=1
+        return a
+
+def getSegregatingSites(rowarray):
+        ##      Returns whether segregating sites exists for this set of SNPs.
+        ## 	0/0	0/1	0/2	"1/0"	"2/0"	"1*/1"	"1/1"	"1/2"	"2/2"   
+	##	0	1	2	3	4	5	6	7	8	
+        returnray=[0,0,0,0,0,0,0,0,0,0,0,0]
+	segsite=0
+	has1=0
+	has2=0
+	has0=0
+	#size=len(rowarray)
+	#secray=rowarray.copy()
+	#secray.pop(0)
+	for j in rowarray:
+		if ("0/0" in j):
+			has0=1
+		if ("0/1" in j):
+                        returnray[1]+=1
+                        has0=1
+                if ("0/2" in j):
+                        returnray[2]+=1
+                        has0=1
+                if ("1/0" in j):
+                        returnray[3]+=1
+                        has1=1
+		if ("2/0" in j):
+			returnray[4]+=1
+			has2=1
+		if ("1*/1" in j):
+			returnray[5]+=1
+		if ("1/1" in j):
+			returnray[6]+=1
+			has1=1
+		if ("1/2" in j):
+			returnray[7]+=1
+			has1=1
+		if ("2/2" in j):
+		 	returnray[8]+=1
+			has2=1
+	if (has0==1 and has1==1):
+		return 1
+	elif (has0==1 and has2==1):
+		return 1
+	elif (has1==1 and has2==1):
+		return 1
+	else:
+		return 0
+	
+
+#####  Printing a Header
+#outfile.write("Chrom-Position\t0/0\t0/1\t0/2\t1/0\t2/0\t1*/1\t1/1\t1/2\t2/2")
+#outfile.write("\n")
+
+#####    Read in Master table, 
+filemaster = open(sys.argv[1])
+startcount=0
+stopcount=10000
+currentcount=0
+chrom = "2L"
+tenkarray = []
+## Write header to file and add freq and theta
+header=filemaster.readline()
+outfile.write("%s\t"%header)
+outfile.write("all-freq\tall-freq-AsFraction\tw-theta\t")
+
+while 1:
+	line = filemaster.readline()
+	line = line.strip('\n')
+	if len(line) == 0:
+		print "Done reading master file, We out !!"
+		break
+	#write original values to line
+	outfile.write("%s\t"%line)
+	ray=line.split()
+	pos=ray[0]
+	ray.pop(0)
+	length=len(ray)
+	#N=2.0*length
+	outfile.write("%s\t"%pos)
+	fractionray=ray[-1].split('/')
+	numerator=float(fractionray[0])
+	denominator=float(fractionray[1])
+	for j in ray:
+        	if ("0/1" in j):
+                        denominator+=1
+        	if ("0/2" in j):
+                        denominator+=2
+                #if ("1/0" in j):
+                #        numerator+=1
+                #if ("2/0" in j):
+                #        denominator+=1
+                if ("1*/1" in j):
+			numerator+=1
+			denominator+=1
+                if ("1/1" in j):
+                        numerator+=1
+			denominator+=1
+                if ("1/2" in j):
+                        numerator+=1
+			denominator+=2
+                if ("2/2" in j):
+                        numerator+=1
+			denominator+=2
+	
+	
+	freq=0.0
+	if denominator == 0:
+		freq=0.0
+	else:
+		freq=numerator/denominator
+	#print "Total homo = %i"%totalhomo
+	#print "Total hetero = %i"%denominator
+	a=1.0
+	for i in xrange(len(ray)-1):
+		tmp=float(i)+1.0
+		a+=(1.0/tmp)
+	theta=freq/a
+	#print "Total homo = %f"%homofreq
+	outfile.write("%f\t"%freq)
+	outfile.write("%i/%i\t"% (numerator,denominator))
+	#heterofreq=denominator/N
+	#print "Total hetero = %f"%heterofreq
+	outfile.write("%f\n"%theta)
+
+print "done\n"
+
+
+def search(values, searchFor,fpkm):
+	for k in values:
+        	for v in values[k]:
+	    		if searchFor in v:
+				return max(k,fpkm)
+	return None
+
+
+def GetSize(Label):
+	Fields = Label.split(";")
+	for Field in Fields:
+		if Field.startswith("size="):
+			return int(Field[5:])
+	print >> sys.stderr
+	print >> sys.stderr, "Size not found in label: " + Label
+	sys.exit(1)
+

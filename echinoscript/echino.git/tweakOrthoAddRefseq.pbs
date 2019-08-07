@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=4gb
+
+#PBS -N ortho4AddingSpurpsss
+
+#PBS -t 1-263
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/process4ptp/file.txt)
+
+
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Making Fatso files "
+
+#cd $home
+#module load ncbi-blast+
+
+cd /lustre/home/rreid2/echinoderms/ortho/process4ptp
+#cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+
+
+
+perl ~/scripts/perl/fastaChangeHeaderAndAddrefseq.pl ${ssid} /lustre/home/rreid2/echinoderms/spurps/ncbiProt/protein.fa
+
+mv ${ssid}.appended.fasta ./append/
+

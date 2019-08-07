@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=96:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+#PBS -l vmem=79gb
+#PBS -N fillyterr
+##PBS -q bigiron
+#export TMPDIR=$HOME/tmp
+
+#Number of times to run this script
+##PBS -t 1-148
+
+##home=/gpfs/fs3/home/rreid2
+
+
+
+cd ~/syn/
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" file.txt)
+
+#for file in $(find ./ -name "*.fastq");
+#do
+ #       echo   ${file};
+
+#mkdir ${file}
+#mv  ${file}.fastq.gz ${file}/
+#gunzip ${file}/${file}.fastq.gz
+
+
+#cut adapter
+#~/sw/cutadapt-1.0/cutadapt -a GATCGGAAGAGCGGT ${file}/${file}.fastq > ${file}/${file}.fastq.adapt
+
+#dynamically trim
+#perl ~/scripts/perl/dynatrim.pl -h 20 
+#cd ${file}
+perl ~/scripts/perl/trimdup.pl -h 20 /lustre/groups/bioservices/secure/syngenta/source/s_1_1_sequence.txt
+#perl ~/old/scripts/perl/raadTrim.pl -h 20 ${file}.adapt
+
+echo "finished dup job"
+#done
+
+#mv ${file}.fastq.adapt.dup ${file}/
+

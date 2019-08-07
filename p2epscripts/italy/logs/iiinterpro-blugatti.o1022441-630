@@ -1,0 +1,71 @@
+########################################################################
+PBS Prologue:	Fri Jul 21 17:58:13 EDT 2017
+Job ID:		1022441[630].cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	iiinterpro-blugatti-630
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=8gb,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=248:30:00
+Queue:		hammerhead
+Nodes:		cph-bm4.uncc.edu[1] 
+########################################################################
+/scratch/rreid2/italy/aa/interpro
+21/07/2017 17:58:16:177 Welcome to InterProScan-5.25-64.0
+21/07/2017 17:58:39:488 Running InterProScan v5 in STANDALONE mode... on Linux
+21/07/2017 17:58:53:037 Loading file /scratch/rreid2/italy/aa/originalTrinitycontigs.fna.transdecoder_dir/splitty/boo-yf
+21/07/2017 17:58:53:040 Running the following analyses:
+[CDD-3.16,Coils-2.2.1,Gene3D-4.1.0,Hamap-201701.18,MobiDBLite-1.0,Pfam-31.0,PIRSF-3.02,PRINTS-42.0,ProDom-2006.1,ProSitePatterns-20.132,ProSiteProfiles-20.132,SFLD-2,SMART-7.1,SUPERFAMILY-1.75,TIGRFAM-15.0]
+Available matches will be retrieved from the pre-calculated match lookup service.
+
+Matches for any sequences that are not represented in the lookup service will be calculated locally.
+2017-07-21 18:03:07,769 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 18:03:07,774 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:315] WARN - Problem with lookup service while on the step: Checking lookup client and server are in sync
+2017-07-21 18:03:07,774 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:317] WARN - 
+
+The following problem was encountered by the pre-calculated match lookup service:
+Connect to www.ebi.ac.uk:80 [www.ebi.ac.uk/193.62.193.80] failed: Connection timed out
+Pre-calculated match lookup service failed - analysis proceeding to run locally
+============================================================
+
+The pre-calculated match lookup service has been configured in the interproscan.properties file.  
+  precalculated match lookup service url : http://www.ebi.ac.uk/interpro/match-lookup
+  precalculated match lookup service proxy host :   proxy port : 3128
+
+Unfortunately the web service has failed. Check the configuration of this service
+in the interproscan.properties file and, if necessary, set the following property to look like this:
+
+precalculated.match.lookup.service.url=
+
+If the problem persists, check if this is a firewall or proxy issue. If it is a proxy issue, then setting 
+the following property in the interproscan.properties file should work:
+
+precalculated.match.lookup.service.proxy.host=
+precalculated.match.lookup.service.proxy.port=
+
+If this still does not work please inform the InterPro team of this error
+by sending an email to:
+
+interhelp@ebi.ac.uk
+
+In the meantime, the analysis will continue to run locally.
+
+
+2017-07-21 18:07:22,232 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 18:11:36,696 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 18:15:51,160 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+2017-07-21 18:20:05,626 [amqEmbeddedWorkerJmsContainer-5] [uk.ac.ebi.interpro.scan.business.sequence.BerkeleyPrecalculatedProteinLookup:421] WARN - lookupUp service at http://www.ebi.ac.uk/interpro/match-lookup is not avaliable, ConnectException : Connection timed out,  using proxy: false
+21/07/2017 18:27:01:202 25% completed
+21/07/2017 18:39:10:519 51% completed
+21/07/2017 18:45:52:967 75% completed
+21/07/2017 18:56:28:752 90% completed
+21/07/2017 18:56:32:015 97% completed
+21/07/2017 18:56:41:567 100% done:  InterProScan analyses completed
+FIN
+
+
+########################################################################
+PBS Epilogue:	Fri Jul 21 18:56:42 EDT 2017
+Job ID:		1022441[630].cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=8gb,neednodes=1:ppn=1,nodes=1:ppn=1,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=248:30:00
+Resources:	cput=00:39:38,energy_used=0,mem=5747024kb,vmem=26969952kb,walltime=00:58:29
+Exit Value:	0
+########################################################################

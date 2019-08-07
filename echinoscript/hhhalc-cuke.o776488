@@ -1,0 +1,24 @@
+########################################################################
+PBS Prologue:	Fri Jul  6 15:08:15 EDT 2018
+Job ID:		776488.cph-m1.uncc.edu
+Username:	rreid2
+Group:		rreid2
+Job Name:	hhhalc-cuke
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=296:00:00
+Queue:		hammerhead
+Nodes:		cph-bm4.uncc.edu[64] 
+########################################################################
+WTF
+usage: runHALC.py [-h] [-o ORDINARY] [-r] [-b BOUNDARY] [-a] [-c COVERAGE]
+                  [-w WIDTH] [-k KMER] [-t THREADS] [-l]
+                  long_read.fa contig.fa
+runHALC.py: error: unrecognized arguments: /nobackup/echinotol/smartDenovo/cuke/all.fna-header.fasta /projects/echinotol/testrun/CA/10-gapclose/genome.scf.fasta
+
+
+########################################################################
+PBS Epilogue:	Fri Jul  6 15:08:15 EDT 2018
+Job ID:		776488.cph-m1.uncc.edu
+Limits:		epilogue=/users/rreid2/.pbs-scripts/epilogue.sh,mem=1800gb,neednodes=1:ppn=64,nodes=1:ppn=64,pmem=2147483648b,prologue=/users/rreid2/.pbs-scripts/prologue.sh,walltime=296:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:01
+Exit Value:	2
+########################################################################

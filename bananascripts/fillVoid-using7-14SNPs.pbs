@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=64gb
+#PBS -j oe
+#PBS -N vvvvoidSNPFetch
+#PBS -q copperhead
+##PBS -t 1-20
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/banana/filter/trimgalore/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching GATK haplotyper"
+
+#module load java8 
+#module load samtools
+#module load bwa
+#module load bcftools
+#module load gatk
+
+
+cd /nobackup/banana_genome/snppicker/master/fillvoid
+
+count=(489 490 508 495 696 499 685 448 579 278 586)
+chr=("chr01" "chr02" "chr03" "chr04" "chr05" "chr06" "chr07" "chr08" "chr09" "chr10" "chr11")
+
+
+for (( i=0; i<11; i++))
+do
+
+echo ${chr[$i]}
+
+echo  ${count[${i}]}
+#python ~/scripts/python/snpPicker-venki-fillthevoid.py ${chr[$i]} /nobackup/banana_genome/filterbyDP/noplantain-byDP-byGeneLocation-v2.vcf /nobackup/banana_genome/snppicker/pahang-ref-just11chr.fna   331812599 /nobackup/banana_genome/snppicker/master/just7-14-locations.txt /nobackup/banana_genome/snppicker/master/3master.txt-just7-14.txt ${count[$i]}
+
+#### re-running with different FASTA file of banana reference
+#/scratch/rreid2/banana/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna-justchr.fasta
+
+for (( i=0; i<11; i++)); do python ~/scripts/python/snpPicker-venki-fillthevoid.py ${chr[$i]} /nobackup/banana_genome/filterbyDP/noplantain-byDP-byGeneLocation-v2.vcf /nobackup/banana_genome/scratch/db/bananagenomehub/pahang-v2/musa_acuminata_v2_pseudochromosome.fna-justchr.fasta 397008016 /nobackup/banana_genome/snppicker/master/just7-14-locations.txt /nobackup/banana_genome/snppicker/master/3master.txt-just7-14.txt ${count[$i]} ; done
+
+
+done
+

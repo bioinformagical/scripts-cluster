@@ -1,0 +1,25 @@
+########################################################################
+PBS Prologue:	Thu Oct  1 15:46:15 EDT 2015
+Job ID:		232360.login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	bbblastnreads
+Limits:		neednodes=1:ppn=12,nodes=1:ppn=12,vmem=88gb,walltime=168:30:00
+Queue:		compute
+Account:	
+Nodes:		compute04[12] 
+########################################################################
+
+
+Launching BlastN  on NT
+/home/rreid2/syn/sept2015
+
+
+########################################################################
+PBS Epilogue:	Sat Oct  3 12:22:56 EDT 2015
+Job ID:		232360.login00.halcyon.local
+Limits:		neednodes=1:ppn=12,nodes=1:ppn=12,vmem=88gb,walltime=168:30:00
+Resources:	cput=177:09:44,mem=84853112kb,vmem=91692724kb,walltime=44:36:35
+Account:	
+Exit Value:	255
+########################################################################

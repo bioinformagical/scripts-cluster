@@ -1,0 +1,38 @@
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=480:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=15
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N repeats2BigMira
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+
+##home=/gpfs/fs3/home/rreid2
+cd $HOME/blueberry/mira/
+#cd $HOME/blueberry/reads/454Sequences/mira9/mira2/
+
+#sff_extract_0_2_8 -o BB GMRBSO102.sff.sff
+#sff_extract_0_2_8 -o BB -a -l linker.fa -i "insert_size:20000,insert_stdev:6000" FTNE8KX04.sff
+#sff_extract_0_2_8 -o BB -a -l linker.fa -i "insert_size:3000,insert_stdev:1000" GP69GPQ02.sff
+
+#/sw/mira/bin/mira --project=BB --job=denovo,genome,accurate,454 -GE:not=10 -highlyrepetitive 
+#$HOME/sw/mira_3.4.0_prod_linux-gnu_x86_64_static/bin/mira --project=bbrep --job=denovo,genome,accurate,454,solexa -GE:not=15 -highlyrepetitive  
+
+$HOME/sw/mira_3.4.0_prod_linux-gnu_x86_64_static/bin/mira --project=bbrep2 --job=denovo,genome,accurate,454,solexa  -GE:not=15 -highlyrepetitive SOLEXA_SETTINGS -AS:bdq=33 -CL:msvs=no:pvlc=no:qc=no:bsqc=no:mbc=no:lcc=no:emlc=no:emrc=no:c3pp=no:cpat=no:mqtfer=0:ckar=no
+
+
+#cd $HOME/blueberry/reads/454Sequences/mira5/
+#/sw/mira/bin/mira --project=BB --job=denovo,genome,accurate,454 -GE:not=10 -highlyrepetitive
+
+#/sw/mira/bin/mira --job=denovo,genome, accurate, 454 --fasta /gpfs/fs3/home/rreid2/blueberry/reads/454Sequences/2009_04_02_20kb/
+

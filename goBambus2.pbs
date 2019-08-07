@@ -1,0 +1,86 @@
+
+#!/bin/sh
+
+
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=368:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=8
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N goGoBambus22222
+#PBS -q bigiron
+
+
+#Number of times to run this script
+##PBS -t 1-10
+##PBS -l pmem=7600mb
+
+source /lustre/sw/Modules/default/init/$(basename $SHELL)
+
+module load bambus
+echo "PERL5LIB=$PERL5LIB"
+
+
+
+##home=/gpfs/fs3/home/rreid2
+cd $HOME/blueberry/mira/bbrep_bambus/
+#mkdir bambus
+
+
+#$HOME/sw/bin/goBambus -c ~/blueberry/reads/454Sequences/mira7big/BB_assembly/BB_d_log/foo.contig \
+#-m ../mates.txt \
+#-C ../robMira7.conf \
+#-o bambus1 \
+
+
+#$HOME/sw/bin/goBambus -c ~/blueberry/reads/454Sequences/mira6/BB_assembly/BB_d_results/BB_out.caf \
+#-m ../../mira7big/mates.txt \
+#-C ../../mira7big/robMira7.conf \
+#-o bambus1 \
+
+#/lustre/sw/amos/3.0.1/bin/ace2contig /lustre/home/rreid2/blueberry/mira/BB_assembly/BB_d_results/ace2000.ace
+
+#goBambus -c /lustre/home/rreid2/blueberry/mira/BB_assembly/BB_d_results/ace2000.ace \
+#-m ~/blueberry/mira/bambus/pairLibrary.txt \
+#-x ~/blueberry/mira/BB_traceinfo_in.454.xml \
+#-o bambus2k \
+#-C ~/blueberry/mira/bambus/theconf.conf 
+
+
+
+#/lustre/sw/amos/3.0.1/bin/ace2contig /lustre/home/rreid2/blueberry/mira/bbrep2_assembly/bbrep2_d_results/bbrep2_out.ace
+
+#goBambus -c /lustre/home/rreid2/blueberry/mira/bbrep_assembly/bbrep_d_results/bbrep_out.contig \
+#-m ~/blueberry/mira/bbrep_bambus/pairlibrary2.txt \
+#-x ~/blueberry/mira/bbrep2_traceinfo_in.454.xml \
+#-o bbrep2-3k \
+#-C ~/blueberry/mira/bbrep_bambus/3k.conf 
+
+#/lustre/sw/amos/3.0.1/bin/clk -b bbrepbankHiseq
+
+#/lustre/sw/amos/3.0.1/bin/Bundler -b bbrepbankHiseq
+
+#/lustre/sw/amos/3.0.1/bin/MarkRepeats -b bbrepbankHiseq > ./bambusHi.rep
+
+/lustre/sw/amos/3.0.1/bin/clk -b bbrepbank
+
+/lustre/sw/amos/3.0.1/bin/Bundler -b bbrepbank
+
+/lustre/sw/amos/3.0.1/bin/MarkRepeats -b bbrepbank > ./bambusnothi.rep
+
+#/lustre/sw/amos/3.0.1/bin/OrientContigs -b bbrepbankHiseq -redundancy 20 -repeats ./bambusHi.rep -all -prefix reducedBBHi  
+
+#/lustre/sw/amos/3.0.1/bin/OrientContigs -b bbrepbankHiseq -redundancy 20 -repeats ./bambusHi.rep -all -prefix reducedBBHi -linearize
+ 
+
+/lustre/sw/amos/3.0.1/bin/OrientContigs -b bbrepbank -redundancy 20 -repeats ./bambusnothi.rep -all -prefix reducedBBNotHi
+
+/lustre/sw/amos/3.0.1/bin/OrientContigs -b bbrepbank -redundancy 20 -repeats ./bambusnothi.rep -all -prefix reducedBBNotHi -lineari
+ze
+

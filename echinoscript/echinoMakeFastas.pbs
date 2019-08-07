@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+##PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pvmem=7600mb
+#PBS -q bigiron
+
+#PBS -N ppparselEchino
+##PBS -t 1-12
+#set -eux
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching XML Parser "
+
+#cd  ~/old/gm/fiber1/
+#cd ~/echinoderms/ophio/
+#cd ~/echinoderms/strongyl/
+#cd ~/echinoderms/dl/first6/
+#cd ~/echinoderms/genes/ 
+cd ~/echinoderms/14up/
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/fiber1/xmlNames.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/ophio/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+#for file in $(find ./ -iname "*.fna");
+#do 
+
+#echo "${file}"
+#cd ~/old/gm/genes/almt1/blast/ 
+
+#for xmlfile in $(find ./ -iname "*.xml");
+#do
+
+#gene=elfDelta.fasta
+#gene=filaminBbeta.fasta
+#gene=XM_003731231.fasta
+
+	#mv ${file}.blastnt2.xml ${file}.blastnt.xml
+#	perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas.pl ../dl/tabbedtables/${file}.strongyl.tabbed ../dl/first6/velvet${file}/transcripts.fa $gene
+perl /lustre/home/rreid2/old/scripts/perl/echinoGetFastas2.pl 14up.list ../spurps/refseqStrongylTrim.fasta.bigtrim
+
+
+#done
+echo "fin"
+
+
+#done
+
+
+

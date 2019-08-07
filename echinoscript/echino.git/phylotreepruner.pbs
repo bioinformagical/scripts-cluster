@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=16:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=4
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=12gb
+
+#PBS -N cccutDaTreeDown
+
+#PBS -t 1-26
+##PBS -t 1-283
+##PBS -t 1-620
+##PBS -t 1-802
+##PBS -t 1-747
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/fruit/files.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/18tab/file.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/17tab/file.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/16tab/file.txt)
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/home/rreid2/echinoderms/ortho/blastdir/15tab/file.txt)
+
+
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching Making Fatso files "
+
+
+#cd ~/echinoderms/ortho/fruit/test/
+
+#FILENAME=${ssid}
+## Run PhyloTreePruner
+echo "Starting PTP for"
+
+#sequences=`grep -c \> ${FILENAME}.aln`
+#half_of_sequences=`expr $sequences * 10`
+#echo " Number of halfseq id ${half_of_sequences} "
+
+CLASS_PATH=~/sw/phyloTreePruner/
+#cp ${FILENAME}.tabbed.fasta ${FILENAME}.fa
+#java -Xmx4000M -cp $CLASS_PATH PhyloTreePruner tree_file.rooted.lowerSomebranches.newick 3 ./15-NP_001229582.fasta 0.3 u
+#java -Xmx4000M -cp $CLASS_PATH PhyloTreePruner tree_file.rooted.lowerSomebranches.newick 3 ./15-NP_001229582.fasta 0.01 u
+
+
+cd ~/echinoderms/ortho/fruit/raxml/
+
+cp PhyloTreePruner RAxML_bestTree.${ssid}.raxml PhyloTreePruner RAxML_bestTree.${ssid}
+cp ${ssid}.fasta ${ssid}
+
+java -Xmx2000M -cp $CLASS_PATH PhyloTreePruner RAxML_bestTree.${ssid}  3 ${ssid} -0.9 u
+perl ~/scripts/perl/reAdderOfPhylogroups.pl ${ssid} ${ssid}_pruned.fa

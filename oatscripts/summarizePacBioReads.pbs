@@ -1,0 +1,47 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=720:00:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=60gb
+##PBS -l pmem=30gb
+#PBS -j oe
+#PBS -N sssumary-reads
+#PBS -q hammerhead
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu
+umask 007
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+ulimit -c 10240
+ulimit -a
+
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+#file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/fileheader.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+cd /projects/oat_genome/canu/oat6/
+#cd /scratch/rreid2/masurca-mega-gs7
+#cd /projects/echinotol/masurtmp
+
+#mv /scratch/rreid2/masurca-mega-gs7/* ./
+
+ echo -n 'Starting ';date;
+while read file; do  echo $file ; \
+seq ${file} > summary.txt ; grep "Total" summary.txt >> bp-total.txt; \
+grep "^Number" summary.txt >> sequences-total.txt; \
+grep "Maximum" summary.txt >> maximum-total.txt; \
+rm temp.fasta; \
+done < oat6-fastq.fofn
+
+
+echo -n 'All done ';date;

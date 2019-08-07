@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=416:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+#PBS -q bigiron
+#PBS -N mmmeetYerMaker 
+#
+##PBS -t 1-26
+
+set -o nounset
+set -o errexit
+set -o noclobber
+IFS="
+"
+
+#. /lustre/sw/halcyon/scripts/debug.sh
+
+#FILENAME=18-ORTHOMCL13.faa.blastp.xml-XP_801828.1
+
+#module load mafft/6.864
+
+module load maker
+module load repeatmasker
+module load snap
+module load augustus
+cd ~/laura
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" ~/echino/files.txt)
+
+
+maker -nodatastore
+#perl -d:Trace $(which maker)
+
+

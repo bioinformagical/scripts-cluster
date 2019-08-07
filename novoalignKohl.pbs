@@ -1,0 +1,79 @@
+#!/bin/bash
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=86600mb
+
+#PBS -N NoooooVaaa 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-12
+##PBS -l pmem=7600mb
+
+
+
+#cd /lustre/groups/bioservices/boneym/
+#cd ~/mel/merge/
+#module load novoalign
+
+cd /lustre/groups/bioservices/kohlmeier/rawReads/dup/novo
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+file=$(sed -n -e "${PBS_ARRAYID}p" ../filepair.txt)
+
+#novoindex  mus-m37.nix  ../db/Mus_musculus.NCBIM37.67.dna.toplevel.fa
+
+#novoalign -d ../db/Mus_musculus.NCBIM37.67.dna.toplevel.nix -f metal.fastq.dupNoShrink.adapt.fa -o SAM 2> $file.stats.txt  1> $file.sam
+
+#~/sw/novocraft/novoalign -d ../db/Mus_musculus.NCBIM37.67.dna.toplevel.nix -f ../$file.fastq.adapt.trimmed -o SAM 2> $file.stats.txt  1> $file.sam
+
+#~/sw/novocraft/novoalign -d ./db/Mus_musculus.NCBIM37.67.dna.toplevel.nix -f ./$file.fastq.adapt.trimmed -o SAM 2> $file.stats.txt  1> $file.sam
+
+module load samtools
+
+#samtools import ../db/Mus_musculus.NCBIM37.67.dna.toplevel.fa.fai $file.sam $file.bam
+
+#samtools sort $file.bam $file.sorted.bam
+
+#/lustre/home/rreid2/sw/novocraft/novoindex  cranChloro130k  ../db/chloro130k.fasta
+
+#~/sw/novocraft/novoalign -d ./cranChloro130k -f ../mitochloro/allChloro130.fasta -o SAM 2> chloro130k.stats.txt  1> cranChloro130k.sam
+
+
+/lustre/home/rreid2/sw/novocraft/novoindex  dhfr  ../../../projectInfo/DHFR.fa
+
+~/sw/novocraft/novoalign -d dhfr -f ../${file}_uniq1.fastq.adapt.dup ../${file}_uniq2.fastq.adapt.dup -i PE 150,100 -o SAM 2> ${file}.stats.txt  1> ${file}.sam
+
+
+samtools import /lustre/groups/bioservices/kohlmeier/projectInfo/DHFR.fa ${file}.sam ${file}.bam   # bam= binary alignment/map format
+samtools sort ${file}.bam ${file}.bam.srt       # sort by coordinate to streamline data processing
+samtools index ${file}.bam.srt
+
+
+
+
+
+
+
+
+#samtools view -bS ${file}.sam | samtools sort - ${file}
+
+#samtools view -u -q 20 ${file}.bam | samtools mpileup -uD -f ../../projectInfo/DHFR.fa | bcftools view -bcv > ${file}.samtools.raw.bcf 
+
+#samtools faidx ../../projectInfo/DHFR.fa
+#samtools mpileup -uf ../../projectInfo/DHFR.fa ${file}.bam | bcftools view -bcvg - > ${file}.raw.bcf
+#bcftools view ${file}.raw.bcf | vcfutils.pl varFilter -D100 > ${file}.var.flt.vcf  
+
+#samtools sort ${file}.bam ${file}.sorted.bam
+
+#samtools mpileup -cv -uf ../../projectInfo/DHFR.fa ${file}.sorted.bam.bam
+
+#samtools.pl varFilter -D 1000 -G 50 > ${file}-variations.list

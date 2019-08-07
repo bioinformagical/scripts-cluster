@@ -1,0 +1,38 @@
+#!/bin/bash
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=720:00:00
+
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=64
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l mem=1950gb
+#PBS -j oe
+#PBS -N fewCrazyFrog 
+#PBS -q hammerhead
+#Number of times to run this script
+##PBS -t 1-17
+##PBS -t 12-22
+
+IFS=$'\n'          # Internal Field Separator is newline
+set -eu
+umask 007
+shopt -s nullglob  # Treat empty glob (*) as nothing instead of empty string
+
+
+#file=$(sed -n -e "${PBS_ARRAYID}p"  /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+#file2=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run3-nov25-13/fileheader.txt)
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R1_001.cutadapt.fastq
+#sed -i.orig 's/^$/N/' /lustre/groups/bioservices/p2ep/dhmri/run2-oat-brass-oct25-2013/${file}_R2_001.cutadapt.fastq
+
+cd /projects/echinotol/pterribl-fewer
+
+ echo -n 'Starting ';date;
+module load masurca
+#module load curl/7.47.0-1 gcc/4.9.1-1 python/2.7.12-1 boost/1.62.0-1 masurca/3.2.2-rc1 
+masurca config.txt
+./assemble.sh
+
+
+echo -n 'All done ';date;

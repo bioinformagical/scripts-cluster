@@ -1,0 +1,101 @@
+#!/bin/sh
+
+
+
+
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=48gb
+
+#PBS -N GnnnnnFkitSrsly
+
+#PBS -t 1-12
+
+#ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/first6/files.txt)
+ssid=$(sed -n -e "${PBS_ARRAYID}p" ~/echinoderms/dl/120727B2/files.txt)
+
+#home=/gpfs/fs3/home/rreid2
+
+
+# launching compare-to-gff.prl on a single node so it can run till the cows come home
+echo "Launching BlastN "
+
+#cd $home
+
+#/sw/ncbi-blast/bin/blastn -outfmt 6 -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitisgenome-mega.out -task megablast -evalue 0.00001 -soft_masking false
+
+# blasting against REPBASE
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/repbase/bigRepeats.fasta -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedRepbase/bbRscoutVSrepbase-blastncut05.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+# Blasting against grape
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/vitis/vitisscaffolds.fa  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastedVitisGenome/bbRscoutVSvitis-blastncut05.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+
+#Blasting against NT
+
+
+#/sw/ncbi-blast/bin/blastn -query ~/db/blueberry/blueRScout.out -db ~/db/nt/nt.01  -out /gpfs/fs3/home/rreid2/blueberry/bbBlastNT/bbRscoutVSnt01-blastncut05nomask.out -task blastn -evalue 0.05 -soft_masking false  -outfmt 6
+
+#module load ncbi-blast+
+
+#cd /lustre/home/rreid2/echinoderms/strongyl/
+cd /lustre/home/rreid2/echinoderms/dl/120727B2/
+#cd /lustre/home/rreid2/echinoderms/dl/first6/
+#makeDB
+#/sw/ncbi-blast/bin/makeblastdb -in $HOME/blueberry/reads/454Sequences/all/split/20kb_1.fasta
+#/sw/ncbi-blast/bin/makeblastdb -in $HOME/blueberry/soap/run3/soap2k.fa -dbtype nucl
+
+#/sw/ncbi-blast/bin/blastn -query $HOME/blueberry/soap/run3/soap2k.fa -db ~/db/nt/nt.fa  -out $HOME/blueberry/bbBlastNT/soap2k.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 5
+
+
+
+
+#/sw/ncbi-blast/bin/blastn -query $HOME/blueberry/reads/454Sequences/all/split/20kb_1.fasta -db ~/db/nt/nt.fa  -out $HOME/blueberry/bbBlastNT/20kb5.out -task blastn -evalue 0.00000000005 -soft_masking false  -outfmt 5
+
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/echinoderms/db/ophioAll.fasta -dbtype nucl
+#/sw/ncbi-blast/bin/makeblastdb -in ~/mel/Choline1BioRepOnlySamplesFasta.fasta -dbtype nucl
+
+
+#for i in 1 2 3 4 5 6 7 8 9 10
+#do
+
+#	echo "Starting iteration ${i} "
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/covTemp/velvet21-$i/transcripts.fa -dbtype nucl 
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/covTemp/velvet55-$i/transcripts.fa -dbtype nucl
+
+#lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in /lustre/home/rreid2/echinoderms/covTemp/kmer85-$i/transcripts.fa -dbtype nucl
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/covTemp/$ssid/transcripts.fa -db ~/echinoderms/db/ophioAll.fasta  -out ./$ssid.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/covTemp/$ssid/transcripts.fa -db ~/echinoderms/strongyl/refseqStrongylTrim.fasta  -out ./$ssid.strongyl.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+######  REverse BLASTING to test for Best hits !!!!!   #####
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db /lustre/home/rreid2/echinoderms/covTemp/$ssid/transcripts.fa -query ~/echinoderms/strongyl/refseqStrongylTrim.fasta  -out ./strongyl.reverse.$ssid.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/covTemp/velvet55-$i/transcripts.fa -db ~/echinoderms/db/ophioAll.fasta  -out ./velvet55-$i.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/covTemp/kmer85-$i/transcripts.fa -db ~/echinoderms/db/ophioAll.fasta  -out ./velvet85-$i.out -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+#done
+
+# /sw/ncbi-blast/bin/blastn -query ~/mel/HomopolymerBioRepOnlySamplesFastaGenusGrThan90.fasta -db ~/mel/Choline1BioRepOnlySamplesFasta.fasta  -out ~/mel/HomoGr90vsCholineRepOnly.out -task blastn -evalue 1e-20 -soft_masking false  -outfmt 5
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/echinoderms/dl/120727B2/velvet${ssid}/transcripts.fa -dbtype nucl
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -db ~/echinoderms/dl/120727B2/velvet${ssid}/transcripts.fa -query ~/echinoderms/strongyl/refseqStrongylTrim.fasta  -out ./$ssid.strongyl.xml -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+
+#/lustre/sw/ncbi-blast+/2.2.25/bin/makeblastdb -in ~/echinoderms/dl/first6/velvet${ssid}/transcripts.fa -dbtype nucl
+
+/lustre/sw/ncbi-blast+/2.2.25/bin/blastn -query /lustre/home/rreid2/echinoderms/dl/120727B2/velvet${ssid}/transcripts.fa -db /lustre/home/rreid2/echinoderms/strongyl/refseqStrongylTrim.fasta  -out ../first6/$ssid.strongyl.out22 -num_threads 12 -task blastn -evalue 1e-10 -soft_masking false  -outfmt 5
+

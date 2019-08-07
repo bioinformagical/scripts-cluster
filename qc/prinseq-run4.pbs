@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Request a run time of 168 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 12 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 88gytes memory.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N ppprinseeking-4
+
+#PBS -t 1-22
+umask 007
+set -eu
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/file.txt)
+
+echo "Launching prinseq"
+
+#cd $home
+
+cd /lustre/groups/bioservices/p2ep/dhmri/run4-Duke-Jan2-2014/Project_UNCC_930_131213A1/
+
+cd prinseq
+	
+echo "${ssid}_R${i}.fastq"
+
+perl prinseq-lite.pl -fastq ../${ssid}_R1.fastq -fastq2 ../${ssid}_R2.fastq -min_qual_score 20 -out_good ${ssid}-prinseq
+
+
+
+
+
+####  Validate Mate pairs   ######
+perl /lustre/groups/p2ep/sw/validateHiseqPairs.pl ${ssid}-prinseq_1.fastq ${ssid}-prinseq_2.fastq
+
+
+
+
+
+
+

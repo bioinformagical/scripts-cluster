@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=328:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+#PBS -l vmem=90gb
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+
+#PBS -N rrrepeatMasker-cran
+#PBS -q bigiron
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+#echo "Launching Repeat Masker"
+#export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/bin/RepeatMasker:$PATH
+#export PATH=$HOME/bin/rmblast-1.2-ncbi-blast-2.2.23+-src/c++/GCC412-ReleaseMT64/bin:$PATH
+
+set eu
+umask 007
+
+module load trf/4.04-1
+module load ncbi-rmblast/2.2.28-1
+module load hmmer/3.1b1-1
+RM="/sw/packages/repeatmasker/4.0.5-1/"
+export PATH="${RM}:${PATH}"
+#module load repeatmasker
+cd /lustre/groups/p2ep/blueberry/repeat/cran/
+#mkdir newb
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/newb -lib /sw/packages/repeatmasker/4.0.5-1/Libraries/RepeatMasker.lib  -ace -gff /lustre/groups/p2ep/blueberry/genomic/newblerAssembly.fna 
+
+#mkdir garm
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/garm -lib /sw/packages/repeatmasker/4.0.5-1/Libraries/RepeatMasker.lib -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna
+
+#mkdir withscoot
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/test -gc 39 -lib /lustre/groups/bioservices/hockeypuck/old/db/vitis/vitisRScout.out -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna 
+#-lib /home/rreid2/sw/RepeatMasker/repbase/Libraries/RepeatMaskerLib.embl
+
+
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/withscoot -gc 39 -lib /lustre/groups/p2ep/blueberry/repeat/rscout/scoot2.out -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/withscoot -gc 39 -lib /lustre/groups/p2ep/blueberry/repeat/rscout/scoot2.out -lib /sw/packages/repeatmasker/4.0.5-1/Libraries/RepeatMasker.lib -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna
+
+#mkdir using3lib
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/using3lib -gc 39 -lib /lustre/groups/p2ep/blueberry/repeat/rmodel/bbgarm.out -lib /lustre/groups/p2ep/blueberry/repeat/rscout/scoot2.out -lib /sw/packages/repeatmasker/4.0.5-1/Libraries/RepeatMasker.lib -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna
+
+#mkdir using7lib
+#RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/cran/ -gc 39 \
+#-lib /lustre/groups/p2ep/blueberry/repeat/8repeatmodels.fna
+#-ace -gff /lustre/groups/p2ep/cranberry/JOTO01.1.fsa_nt
+
+# -lib /lustre/groups/p2ep/blueberry/repeat/manyRep.fasta \
+
+
+RepeatMasker -pa 12 -s -e ncbi  -dir /lustre/groups/p2ep/blueberry/repeat/cranDefault/ -gc 39 \
+-ace -gff /lustre/groups/p2ep/cranberry/JOTO01.1.fsa_nt
+
+
+
+
+
+
+# -lib /lustre/groups/p2ep/blueberry/repeat/rmodel/RM_8811.ThuJan221335492015/consensi.fa.classified \
+# -lib /lustre/groups/p2ep/blueberry/repeat/rmodel/RM_24149.WedJan210908552015/consensi.fa.classified \
+# -lib ~/sw/RepeatMasker/Libraries/RepeatMasker.lib \
+# -lib ~/repeatmasker/RepBase19.06.fasta/allRepeats.fna \
+# -lib /lustre/groups/bioservices/hockeypuck/old/db/blueberry/blueRScout.out \
+# -lib /lustre/groups/bioservices/hockeypuck/old/db/vitis/vitisRScout.out \
+# -ace -gff /lustre/groups/p2ep/blueberry/genomic/garmAssembly.fna 
+
+
+
+
+
+
+#perl /gpfs/fs3/home/rreid2/bin/RepeatMasker/RepeatMasker -pa 4 -s -lib /gpfs/fs3/home/rreid2/db/vitis/vitisRScout.out -cutoff 350 -dir /gpfs/fs3/home/rreid2/db/vitis -ace -gff /gpfs/fs3/home/rreid2/db/vitis/vitisscaffolds.fa 
+

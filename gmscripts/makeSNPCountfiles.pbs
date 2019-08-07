@@ -1,0 +1,44 @@
+
+
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=68:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+##PBS -l pmem=7600mb
+
+#PBS -N SNPHunter 
+##PBS -q bigiron
+
+
+#Number of times to run this script
+#PBS -t 1-33
+
+# Bring in the module command
+ init="/lustre/sw/Modules/default/init/$(basename $SHELL)"
+ [[ -z "$(type -t module)" ]] && [[ -r "$init" ]] && . "$init"
+#
+# # Load bowtie
+# module load bowtie
+
+
+
+
+##home=/gpfs/fs3/home/rreid2
+#cd $HOME/blueberry/reads/illumina/091230Sequence1/
+##export PATH=/sw/bowtie/bin/:$HOME/bin/sopra/source_codes_v1.4.3/SOPRA_with_prebuilt_contigs:$PATH
+
+file=$(sed -n -e "${PBS_ARRAYID}p" ~/old/gm/assembly2/filedir.txt)
+
+
+
+cd ~/old/gm/cslf6/${file}
+
+
+perl ~/old/scripts/perl/bowtieParser.pl ${file}.consensFiltered.txt  ../positions.txt ../consensus.fna ../newSNPLocations.txt
+
+

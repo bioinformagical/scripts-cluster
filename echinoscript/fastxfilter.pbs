@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=168:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=12
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=88gb
+
+#PBS -N fffastzoomzoomboom
+
+#PBS -t 1-24
+
+ssid=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/janieslab/raw/2013runs/file.txt)
+
+
+echo "Launching fastx"
+
+#cd $home
+module load fastx-toolkit
+
+cd /lustre/groups/janieslab/trimmed/2013runs/
+
+#Copy the following line as many times as the number of samples you are analyzing, then
+#replace "YOURFILE" with the names of your samples e.g. "1_Hot":
+for i in 1 2;
+do
+	echo "${ssid}-R${i}.fastq"
+#	fastq_quality_trimmer -Q33 -v -t 20 -l 20 -i ../../raw/2013runs/${ssid}-R${i}.fastq -o ${ssid}_R${i}_trimmed.fastq
+done
+
+#Adapter clipping:
+#Matches to potential adapter sequences at the end of reads, then removes reads shorter than 20 bases. 
+
+#For the next step, copy the line as many times as the number of samples, then 
+#add the sequences of your adapters after the -a flag (e.g. -a ATTGGCTTTGGGCAT), as well as changing the sample names:
+#The sequences of Illumina's TruSeq adapters are proprietary information, but can be recieved by emailing Illumina customer support at info@illumina.com 
+for i in 1 2;
+do
+#	fastx_clipper -Q33 -a ATTGGCTTTGGGCAT -l 40 -n -v -i ${ssid}_R${i}_trimmed.fastq -o ${ssid}_R${i}_trimmed_clipped.fastq
+#	fastx_collapser -Q33 -v -i  ${ssid}_R${i}_trimmed_clipped.fastq -o ${ssid}_R${i}_collapsed.txt
+#	/lustre/home/rreid2/scripts/stan/Scripts for SFG/fastqduplicatecounter.py ${ssid}_R${i}_collapsed.txt ${ssid}_R${i}_collapsed_headers.txt >> ${ssid}_R${i}_duplicateCount.txt
+	fastx_quality_stats -Q33 -i ${ssid}_R${i}_trimmed_clipped.fastq -o ${ssid}_R${i}_qualstats.txt
+done
+
+
+
+

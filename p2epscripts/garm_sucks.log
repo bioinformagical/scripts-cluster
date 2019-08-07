@@ -1,0 +1,34 @@
+########################################################################
+PBS Prologue:	Thu Jan 29 14:54:08 EST 2015
+Job ID:		220607.login00.halcyon.local
+Username:	rreid2
+Group:		bioservices
+Job Name:	gggarmmmmergeViaGARM-bb
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=388gb,walltime=168:30:00
+Queue:		bigiron
+Account:	
+Nodes:		bigiron00[24] 
+########################################################################
+
+
+Launching fastx
+PERL5LIB=/lustre/sw/amos/3.1.0/lib
+GARMLIB=/home/rreid2/sw/GARM_v0.7.3/lib
+AMOSBIN=/lustre/sw/amos/3.1.0/bin
+MUMBIN=/lustre/sw/mummer/3.22/bin
+AMOSLIB=bin/lib
+GARMBIN=/home/rreid2/sw/GARM_v0.7.3/bin
+readline() on closed filehandle FILE at /home/rreid2/sw/GARM_v0.7.3/lib/GARM_main.pm line 123.
+Two genomes are required for the merging. Please, check your input info_genomes_file again
+GARM version 0.7.3 started: Thu Jan 29 14:54:10 EST 2015
+1.- PROCESSING INPUT FROM config.file ###
+
+
+########################################################################
+PBS Epilogue:	Thu Jan 29 14:54:15 EST 2015
+Job ID:		220607.login00.halcyon.local
+Limits:		neednodes=1:ppn=24,nodes=1:ppn=24,vmem=388gb,walltime=168:30:00
+Resources:	cput=00:00:00,mem=0kb,vmem=0kb,walltime=00:00:02
+Account:	
+Exit Value:	2
+########################################################################

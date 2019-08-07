@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=98:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=1
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+
+
+#PBS -N AuxPairHunter
+#PBS -q bigiron
+
+##home=/gpfs/fs3/home/rreid2
+
+
+# launching Launching build_lmer_table on a single node so it can run till the cows come home
+echo "Launching Pair Finder"
+export PATH=$HOME/bin:$PATH
+
+#cd $HOME/blueberry/reads/454Sequences/8kb/  
+cd $HOME/blueberry/reads/454Sequences/all/
+
+for file in $(find ./ -name "*.fasta.clean.lucy.paired");
+do
+        echo   ${file};
+	  perl $HOME/scripts/perl/shrinkpairs.pl ${file} 
+
+done
+
+

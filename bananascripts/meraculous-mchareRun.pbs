@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Request a run time of 5 hours and 30 minutes
+#PBS -l walltime=568:30:00
+
+# Request 1 processor in 1 node
+#PBS -l nodes=1:ppn=48
+
+# Request 7600 megabytes memory per processor.  ( 48 usable CPUs)
+#PBS -l vmem=1988gb
+#PBS -j oe
+#PBS -N mmmiracle-mchare
+#PBS -q hammerhead
+##PBS -t 1-20
+umask 007
+set -eu
+
+#file=$(sed -n -e "${PBS_ARRAYID}p" /scratch/rreid2/banana/filter/trimgalore/file.txt)
+#dir=$(sed -n -e "${PBS_ARRAYID}p" /lustre/groups/lorainelab/data/illumina/sweet_potato/filtered/dir.txt)
+
+echo "Launching BWA alignment"
+
+#module load java8 
+module load meraculous
+
+cd /scratch/rreid2/banana/denovo/meraculous
+
+
+#source ~/.bashrc 
+export PATH=~/sw/augustus-3.2.1/scripts:/users/rreid2/scripts/perl/pm/Log-Log4perl-1.44:$PATH
+
+run_meraculous.sh -c meraculous.config
+
+
+

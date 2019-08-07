@@ -1,0 +1,6 @@
+/lustre/home/rreid2/scripts/ref.fna /lustre/home/rreid2/scripts/query.fna
+NUCMER
+
+    [S1]     [E1]  |     [S2]     [E2]  |  [LEN 1]  [LEN 2]  |  [% IDY]  | [TAGS]
+=====================================================================================
+       1      480  |        1      480  |      480      480  |    99.79  | s1	q1
